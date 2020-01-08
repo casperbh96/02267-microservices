@@ -2,6 +2,8 @@ package com.calculator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 import dtu.ws.fastmoney.Bank;
 
 public class Calculator {
@@ -10,6 +12,18 @@ public class Calculator {
         System.out.println("Hello World");
         System.out.println(add("3,6\n15"));
         Bank b = new Bank();
+
+        
+    }
+
+    public static List<UUID> getTokens(int numTokens) {
+        List<UUID> tokens = new ArrayList<UUID>();
+        for (int i = 0; i < numTokens; i++) {
+            UUID token = UUID.randomUUID();
+            tokens.add(token);
+        }
+
+        return tokens;
     }
 
     public static int add(final String numbers) {
