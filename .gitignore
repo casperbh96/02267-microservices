@@ -1,3 +1,11 @@
+*.idea
+*.iml
+.DS_store
+*.lst
+/target
+/bank/doc
+/bank/*.settings
+
 # Compiled class file
 *.class
 

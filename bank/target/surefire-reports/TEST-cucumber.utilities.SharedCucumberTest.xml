@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite tests="98" failures="0" name="cucumber.utilities.SharedCucumberTest" time="0.013" errors="0" skipped="0">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="java.vm.version" value="12.0.2+10"/>
+    <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk-12.0.2.jdk/Contents/Home/lib"/>
+    <property name="maven.multiModuleProjectDirectory" value="/Users/casperbogeskovhansen/documents/github/bank"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="path.separator" value=":"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="/Users/casperbogeskovhansen/Documents/GitHub/bank"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="java.runtime.version" value="12.0.2+10"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
+    <property name="os.arch" value="x86_64"/>
+    <property name="java.io.tmpdir" value="/var/folders/7n/v8xjlkw14yl10ngd3r3c_kfw0000gn/T/"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="classworlds.conf" value="/usr/local/Cellar/maven/3.6.3/libexec/bin/m2.conf"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/Users/casperbogeskovhansen/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="maven.conf" value="/usr/local/Cellar/maven/3.6.3/libexec/conf"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="java.class.version" value="56.0"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="10.14.6"/>
+    <property name="library.jansi.path" value="/usr/local/Cellar/maven/3.6.3/libexec/lib/jansi-native"/>
+    <property name="user.home" value="/Users/casperbogeskovhansen"/>
+    <property name="user.timezone" value="Europe/Copenhagen"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.specification.version" value="12"/>
+    <property name="user.name" value="casperbogeskovhansen"/>
+    <property name="java.class.path" value="/usr/local/Cellar/maven/3.6.3/libexec/boot/plexus-classworlds-2.6.0.jar"/>
+    <property name="java.vm.specification.version" value="12"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher install"/>
+    <property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk-12.0.2.jdk/Contents/Home"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.version" value="12.0.2"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="maven.home" value="/usr/local/Cellar/maven/3.6.3/libexec"/>
+    <property name="file.separator" value="/"/>
+    <property name="java.version.date" value="2019-07-16"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="sun.cpu.endian" value="little"/>
+  </properties>
+  <testcase classname="Scenario: Create Account Success" name="Given a user with first name &quot;Christina M.&quot;, last name &quot;Koch&quot;, and CPR number &quot;271096-1002&quot;" time="0.001"/>
+  <testcase classname="Scenario: Create Account Success" name="When creating an account" time="0"/>
+  <testcase classname="Scenario: Create Account Success" name="Then a valid account id is assigned." time="0"/>
+  <testcase classname="Scenario: Create Account Success" name="Scenario: Create Account Success" time="0.001"/>
+  <testcase classname="Scenario: Creating the same account again" name="Given that I have created an account for user &quot;Amanda M.&quot;, &quot;Lassen&quot;, &quot;100475-1066&quot;" time="0"/>
+  <testcase classname="Scenario: Creating the same account again" name="When I create the account a second time" time="0"/>
+  <testcase classname="Scenario: Creating the same account again" name="Then I get the error message &quot;Account already exists&quot;" time="0"/>
+  <testcase classname="Scenario: Creating the same account again" name="Scenario: Creating the same account again" time="0.001"/>
+  <testcase classname="Scenario: " name="Given that I have created an account for user &quot;Amanda M.&quot;, &quot;Lassen&quot;, &quot;100475-1066&quot;" time="0"/>
+  <testcase classname="Scenario: " name="When I create an account for &quot;Amanda M.&quot;, &quot;Lassen&quot;, &quot;050945-3691&quot;" time="0"/>
+  <testcase classname="Scenario: " name="Then Then I have two accounts with differennt account id" time="0"/>
+  <testcase classname="Scenario: " name="Scenario: " time="0"/>
+  <testcase classname="Scenario: Create Account First Name empty" name="Given a user with first name &quot;&quot;, last name &quot;Koch&quot;, and CPR number &quot;271096-1002&quot;" time="0"/>
+  <testcase classname="Scenario: Create Account First Name empty" name="When creating an account" time="0"/>
+  <testcase classname="Scenario: Create Account First Name empty" name="Then I get the error message &quot;Missing first name&quot;" time="0"/>
+  <testcase classname="Scenario: Create Account First Name empty" name="Scenario: Create Account First Name empty" time="0"/>
+  <testcase classname="Scenario: Create Account Last Name empty" name="Given a user with first name &quot;Christina M.&quot;, last name &quot;&quot;, and CPR number &quot;271096-1002&quot;" time="0"/>
+  <testcase classname="Scenario: Create Account Last Name empty" name="When creating an account" time="0"/>
+  <testcase classname="Scenario: Create Account Last Name empty" name="Then I get the error message &quot;Missing last name&quot;" time="0"/>
+  <testcase classname="Scenario: Create Account Last Name empty" name="Scenario: Create Account Last Name empty" time="0"/>
+  <testcase classname="Scenario: Create Account CPR Number empty" name="Given a user with first name &quot;Christina M.&quot;, last name &quot;Koch&quot;, and CPR number &quot;&quot;" time="0"/>
+  <testcase classname="Scenario: Create Account CPR Number empty" name="When creating an account" time="0"/>
+  <testcase classname="Scenario: Create Account CPR Number empty" name="Then I get the error message &quot;Missing CPR number&quot;" time="0"/>
+  <testcase classname="Scenario: Create Account CPR Number empty" name="Scenario: Create Account CPR Number empty" time="0"/>
+  <testcase classname="Scenario: Create an account with negative balance" name="Given a user with first name &quot;Christina M.&quot;, last name &quot;Koch&quot;, and CPR number &quot;271096-1002&quot;" time="0"/>
+  <testcase classname="Scenario: Create an account with negative balance" name="When creating an account with balance -1" time="0"/>
+  <testcase classname="Scenario: Create an account with negative balance" name="Then I get the error message &quot;Initial balance must be 0 or positive&quot;" time="0"/>
+  <testcase classname="Scenario: Create an account with negative balance" name="Scenario: Create an account with negative balance" time="0.001"/>
+  <testcase classname="Scenario: Get account success" name="Given a user with first name &quot;Christina M.&quot;, last name &quot;Koch&quot;, and CPR number &quot;271096-1002&quot;" time="0"/>
+  <testcase classname="Scenario: Get account success" name="When creating an account" time="0"/>
+  <testcase classname="Scenario: Get account success" name="And getting the account by CPR number" time="0"/>
+  <testcase classname="Scenario: Get account success" name="Then the account has the correct account id" time="0"/>
+  <testcase classname="Scenario: Get account success" name="And the first name is &quot;Christina M.&quot;, last name is &quot;Koch&quot;, and CPR number is &quot;271096-1002&quot;" time="0"/>
+  <testcase classname="Scenario: Get account success" name="Scenario: Get account success" time="0"/>
+  <testcase classname="Scenario: Get non-existent account" name="When getting an account with CPR number &quot;123-non-existent&quot;" time="0"/>
+  <testcase classname="Scenario: Get non-existent account" name="Then I get the error message &quot;Account does not exist&quot;" time="0"/>
+  <testcase classname="Scenario: Get non-existent account" name="Scenario: Get non-existent account" time="0"/>
+  <testcase classname="Scenario: Get account infos" name="Given account &quot;Nikolaj K.&quot;, &quot;Bertelsen&quot;, &quot;220866-2859&quot; with start balance 1000" time="0"/>
+  <testcase classname="Scenario: Get account infos" name="And account &quot;Magnus F.&quot;, &quot;Andersen&quot;, &quot;050298-2419&quot; with start balance 0" time="0"/>
+  <testcase classname="Scenario: Get account infos" name="When I get all account infos" time="0"/>
+  <testcase classname="Scenario: Get account infos" name="Then account info include &quot;Nikolaj K.&quot;, &quot;Bertelsen&quot;, &quot;220866-2859&quot; and a valid account id" time="0"/>
+  <testcase classname="Scenario: Get account infos" name="And account info include &quot;Magnus F.&quot;, &quot;Andersen&quot;, &quot;050298-2419&quot; and a valid account id" time="0"/>
+  <testcase classname="Scenario: Get account infos" name="Scenario: Get account infos" time="0.001"/>
+  <testcase classname="Scenario: Retire existing account" name="Given an existent account &quot;Tosh A.&quot;, &quot;Petersen&quot;, &quot;130840-3897&quot;" time="0"/>
+  <testcase classname="Scenario: Retire existing account" name="When I retire that account" time="0"/>
+  <testcase classname="Scenario: Retire existing account" name="Then I can create a new account with the same information" time="0"/>
+  <testcase classname="Scenario: Retire existing account" name="And I don&apos;t get an error messsage" time="0.001"/>
+  <testcase classname="Scenario: Retire existing account" name="Scenario: Retire existing account" time="0.001"/>
+  <testcase classname="Scenario: Retire a non existing account" name="Given that account Id &quot;12345&quot; does not exist" time="0"/>
+  <testcase classname="Scenario: Retire a non existing account" name="When I retire that account" time="0.001"/>
+  <testcase classname="Scenario: Retire a non existing account" name="Then I get the error message &quot;Account does not exist&quot;" time="0"/>
+  <testcase classname="Scenario: Retire a non existing account" name="Scenario: Retire a non existing account" time="0"/>
+  <testcase classname="Scenario: Successful transfer" name="Given account &quot;Nikolaj K.&quot;, &quot;Bertelsen&quot;, &quot;220866-2859&quot; with start balance 1000" time="0"/>
+  <testcase classname="Scenario: Successful transfer" name="And account &quot;Magnus F.&quot;, &quot;Andersen&quot;, &quot;050298-2419&quot; with start balance 0" time="0"/>
+  <testcase classname="Scenario: Successful transfer" name="When I transfer 100 from the first account to the second account with description &quot;supermarket&quot;" time="0"/>
+  <testcase classname="Scenario: Successful transfer" name="Then the balance of the first account is 900" time="0"/>
+  <testcase classname="Scenario: Successful transfer" name="And the balance of the second account is 100" time="0"/>
+  <testcase classname="Scenario: Successful transfer" name="Scenario: Successful transfer" time="0"/>
+  <testcase classname="Scenario: Debitor account does not exist" name="Given account &quot;Nikolaj K.&quot;, &quot;Bertelsen&quot;, &quot;220866-2859&quot; with start balance 1000" time="0"/>
+  <testcase classname="Scenario: Debitor account does not exist" name="And a non existent account id &quot;not exists1&quot;" time="0"/>
+  <testcase classname="Scenario: Debitor account does not exist" name="When I transfer 100 from the first account to the second account with description &quot;sports&quot;" time="0"/>
+  <testcase classname="Scenario: Debitor account does not exist" name="Then I get the error message &quot;Creditor account does not exist&quot;" time="0"/>
+  <testcase classname="Scenario: Debitor account does not exist" name="Scenario: Debitor account does not exist" time="0"/>
+  <testcase classname="Scenario: Creditor account does not exist" name="Given a non existent account id &quot;not exists1&quot;" time="0"/>
+  <testcase classname="Scenario: Creditor account does not exist" name="And account &quot;Nikolaj K.&quot;, &quot;Bertelsen&quot;, &quot;220866-2859&quot; with start balance 1000" time="0"/>
+  <testcase classname="Scenario: Creditor account does not exist" name="When I transfer 100 from the first account to the second account with description &quot;car repair&quot;" time="0"/>
+  <testcase classname="Scenario: Creditor account does not exist" name="Then I get the error message &quot;Debtor account does not exist&quot;" time="0"/>
+  <testcase classname="Scenario: Creditor account does not exist" name="Scenario: Creditor account does not exist" time="0"/>
+  <testcase classname="Scenario: Debtor balance will get negative" name="Given account &quot;Nikolaj K.&quot;, &quot;Bertelsen&quot;, &quot;220866-2859&quot; with start balance 0" time="0"/>
+  <testcase classname="Scenario: Debtor balance will get negative" name="And account &quot;Magnus F.&quot;, &quot;Andersen&quot;, &quot;050298-2419&quot; with start balance 1000" time="0.001"/>
+  <testcase classname="Scenario: Debtor balance will get negative" name="When I transfer 100 from the first account to the second account with description &quot;car repair&quot;" time="0"/>
+  <testcase classname="Scenario: Debtor balance will get negative" name="Then I get the error message &quot;Debtor balance will be negative&quot;" time="0"/>
+  <testcase classname="Scenario: Debtor balance will get negative" name="Scenario: Debtor balance will get negative" time="0.001"/>
+  <testcase classname="Scenario: Transfer amount needs to be positive" name="Given account &quot;Nikolaj K.&quot;, &quot;Bertelsen&quot;, &quot;220866-2859&quot; with start balance 1000" time="0"/>
+  <testcase classname="Scenario: Transfer amount needs to be positive" name="And account &quot;Magnus F.&quot;, &quot;Andersen&quot;, &quot;050298-2419&quot; with start balance 0" time="0"/>
+  <testcase classname="Scenario: Transfer amount needs to be positive" name="When I transfer -100 from the first account to the second account with description &quot;car repair&quot;" time="0.001"/>
+  <testcase classname="Scenario: Transfer amount needs to be positive" name="Then I get the error message &quot;Amount must be positive&quot;" time="0"/>
+  <testcase classname="Scenario: Transfer amount needs to be positive" name="Scenario: Transfer amount needs to be positive" time="0"/>
+  <testcase classname="Scenario: Description is required" name="Given account &quot;Nikolaj K.&quot;, &quot;Bertelsen&quot;, &quot;220866-2859&quot; with start balance 1000" time="0"/>
+  <testcase classname="Scenario: Description is required" name="And account &quot;Magnus F.&quot;, &quot;Andersen&quot;, &quot;050298-2419&quot; with start balance 0" time="0"/>
+  <testcase classname="Scenario: Description is required" name="When I transfer 100 from the first account to the second account with description &quot;&quot;" time="0"/>
+  <testcase classname="Scenario: Description is required" name="Then I get the error message &quot;Description missing&quot;" time="0"/>
+  <testcase classname="Scenario: Description is required" name="Scenario: Description is required" time="0"/>
+  <testcase classname="Scenario: Successful transfer" name="Given account &quot;Nikolaj K.&quot;, &quot;Bertelsen&quot;, &quot;220866-2859&quot; with start balance 1000" time="0"/>
+  <testcase classname="Scenario: Successful transfer" name="And account &quot;Magnus F.&quot;, &quot;Andersen&quot;, &quot;050298-2419&quot; with start balance 0" time="0"/>
+  <testcase classname="Scenario: Successful transfer" name="When I transfer 100 from the first account to the second account with description &quot;supermarket&quot;" time="0"/>
+  <testcase classname="Scenario: Successful transfer" name="Then account 1 has transaction 1 of amount 100 with creditor account 2 and balance 900 and description &quot;supermarket&quot; and current Date/Time" time="0"/>
+  <testcase classname="Scenario: Successful transfer" name="And account 2 has transaction 1 of amount 100 with debtor account 1 and balance 100 and description &quot;supermarket&quot; and current Date/Time" time="0"/>
+  <testcase classname="Scenario: Successful transfer" name="Scenario: Successful transfer" time="0.001"/>
+  <testcase classname="Scenario: More than one transaction" name="Given account &quot;Nikolaj K.&quot;, &quot;Bertelsen&quot;, &quot;220866-2859&quot; with start balance 1000" time="0"/>
+  <testcase classname="Scenario: More than one transaction" name="And account &quot;Magnus F.&quot;, &quot;Andersen&quot;, &quot;050298-2419&quot; with start balance 0" time="0"/>
+  <testcase classname="Scenario: More than one transaction" name="When I transfer 100 from the first account to the second account with description &quot;supermarket&quot;" time="0"/>
+  <testcase classname="Scenario: More than one transaction" name="And I transfer 50 from the first account to the second account with description &quot;car repairs&quot;" time="0"/>
+  <testcase classname="Scenario: More than one transaction" name="Then account 1 has transaction 1 of amount 100 with creditor account 2 and balance 900 and description &quot;supermarket&quot; and current Date/Time" time="0"/>
+  <testcase classname="Scenario: More than one transaction" name="And account 1 has transaction 2 of amount 50 with creditor account 2 and balance 850 and description &quot;car repairs&quot; and current Date/Time" time="0"/>
+  <testcase classname="Scenario: More than one transaction" name="And account 2 has transaction 1 of amount 100 with debtor account 1 and balance 100 and description &quot;supermarket&quot; and current Date/Time" time="0"/>
+  <testcase classname="Scenario: More than one transaction" name="And account 2 has transaction 2 of amount 50 with debtor account 1 and balance 150 and description &quot;car repairs&quot; and current Date/Time" time="0"/>
+  <testcase classname="Scenario: More than one transaction" name="Scenario: More than one transaction" time="0.001"/>
+</testsuite>

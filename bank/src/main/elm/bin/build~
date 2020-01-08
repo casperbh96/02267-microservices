@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e
+pushd src/main/elm
+elm make src/track.elm --output=main.js
+cp index.html main.js ../webapp
+popd
