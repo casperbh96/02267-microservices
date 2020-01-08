@@ -9,6 +9,7 @@ import dtu.ws.fastmoney.Bank;
 public class Calculator {
 
     public static void main(String[] args) {
+
         System.out.println("Hello World");
         System.out.println(add("3,6\n15"));
         Bank b = new Bank();
@@ -16,14 +17,42 @@ public class Calculator {
         
     }
 
-    public static List<UUID> getTokens(int numTokens) {
-        List<UUID> tokens = new ArrayList<UUID>();
-        for (int i = 0; i < numTokens; i++) {
-            UUID token = UUID.randomUUID();
-            tokens.add(token);
-        }
+    public static UUID getToken(){
+        UUID token = UUID.randomUUID();
+        //database.system_tokens.add(token);
+        return token;
+    }
 
-        return tokens;
+    // The customer can request 1 to 5 tokens if he either has spent all tokens (or if it is the first time he
+    // requests tokens) or has only one unused token left. Overall, a customer can only have at most 6 unused tokens.
+    // If the user has more than 1 unused token and he requests again a set of tokens, his request will
+    // be denied
+    public static void customerGetTokens(Customer customer, int numTokens) {
+        if (customer.tokens.isEmpty() || customer.tokens.size() == 1) {
+            int pos = 0;
+            if (customer.tokens.size() == 1) pos = 1;
+            for (int i = pos; i < numTokens; i++) {
+                Token token = new Token();
+                token.id = getToken();
+                token.used = false;
+                customer.tokens.add(token);
+            }
+            return;
+        } else throw new RuntimeException("Customer " + customer.id + "can't request " + numTokens + " tokens");
+    }
+
+    // There is a function to use a token. That means, the software is provided with the number/string
+    // from one of the issued tokens and the application should accept the token if the token was not
+    // used before.
+    // If the token was already used before, e.g. presented before, then the function should reject the
+    // token.
+    // If the token is not known to the system (e.g. a fake token), then the again the function should
+    // reject the token
+    public static boolean use_token(Token token, DatabaseTokens database){
+        if (database.system_tokens.contains(token.id)){
+            return false;
+        }
+        return token.used;
     }
 
     public static int add(final String numbers) {
