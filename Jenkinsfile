@@ -1,18 +1,20 @@
-pipeline {
-    agent any
-    stages {
-        stage('build') {
-            steps {
-                checkout scm
-                sh 'javac src/main/java/com/calculator/Calculator.java'
-                sh 'cd src/main/java/ && java com.calculator.Calculator'
-            }
+node {
+    stage ('Build') {
+        checkout scm
+        withEnv(["CLASSPATH=/var/lib/jenkins/.m2/repository/dtu/fastmoney/bank/2.0.0/bank-2.0.0.jar:src/main/java/"]) {
+            sh 'javac src/main/java/com/calculator/Calculator.java'
+            sh 'java com.calculator.Calculator'
         }
+    }
 
-        stage('test') {
-        	steps {
-                sh 'mvn test'
-        	}
-        }
+    stage ('JUnit tests') {
+        checkout scm
+        sh 'mvn -D test=CalculatorTest test'
+    }
+
+    stage ('Cucumber tests') {
+        checkout scm
+        // sh 'mvn -D test=CucumberTest test'
+        echo "Skipping for now..."
     }
 }
