@@ -13,6 +13,37 @@ public class Calculator {
         System.out.println("Hello World");
         System.out.println(add("3,6\n15"));
         Bank b = new Bank();
+/*
+        Customer c = new Customer();
+        c.setName("Test");
+        c.setId(1);
+
+        ArrayList<Token> t = new ArrayList<>();
+
+        //New unused token
+        Token t1 = new Token();
+        t1.setId(UUID.randomUUID());
+        t1.setUsed(false);
+
+        //new used token
+        Token t2 = new Token();
+        t2.setId(UUID.randomUUID());
+        t2.setUsed(true);
+
+        t.add(t1);
+        t.add(t2);
+
+        c.setTokens(t);
+
+        customerGetTokens(c, 4);
+
+
+        for (Token to: c.tokens) {
+            System.out.println("TokenId: " + to.id + " Used: " + to.used);
+        }
+
+        System.out.println("Number of tokens: " + c.tokens.size());
+        */
 
     }
 
@@ -40,6 +71,10 @@ public class Calculator {
     }
 
     public static boolean CanCustomerGetTokens(Customer customer, int numTokens) {
+        if(numTokens > 5){
+            throw new RuntimeException("Too many token request: " + numTokens);
+        }
+
         if (customer.tokens.isEmpty()) {
             return true;
         }
@@ -51,7 +86,7 @@ public class Calculator {
                 unusedToken++;
             }
         }
-        return unusedToken == 1 && unusedToken + numTokens <= 6;
+        return unusedToken == 1;
     }
 
     // There is a function to use a token. That means, the software is provided with the number/string
