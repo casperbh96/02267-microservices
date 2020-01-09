@@ -1,10 +1,11 @@
 package com.calculator.database;
 
-import java.util.List;
+import com.calculator.database.exceptions.*;
+
 import java.util.UUID;
 
 public interface ITokenAccess {
-    List<UUID> getListOfUnusedTokensByCustomerId(int id);
+    UUID getUnusedTokenByCustomerId(int id) throws CustomerHasNoUnusedToken, CustomerDoesNotExist;
     UUID createTokenByCustomerId(int id);
     void getAccessByToken(UUID token) throws TokenAlreadyUsed, FakeToken;
 }

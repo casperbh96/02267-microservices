@@ -1,4 +1,4 @@
-package com.calculator.database;
+package com.calculator.database.exceptions;
 
 public class TokenAlreadyUsed extends Exception {
     public TokenAlreadyUsed(String errorMessage) {
