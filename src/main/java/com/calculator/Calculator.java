@@ -14,7 +14,6 @@ public class Calculator {
         System.out.println(add("3,6\n15"));
         Bank b = new Bank();
 
-        
     }
 
     public static UUID getToken(){
@@ -28,17 +27,31 @@ public class Calculator {
     // If the user has more than 1 unused token and he requests again a set of tokens, his request will
     // be denied
     public static void customerGetTokens(Customer customer, int numTokens) {
-        if (customer.tokens.isEmpty() || customer.tokens.size() == 1) {
-            int pos = 0;
-            if (customer.tokens.size() == 1) pos = 1;
-            for (int i = pos; i < numTokens; i++) {
+        if (CanCustomerGetTokens(customer, numTokens)) {
+            for (int i = 0; i < numTokens; i++) {
                 Token token = new Token();
                 token.id = getToken();
                 token.used = false;
                 customer.tokens.add(token);
             }
-            return;
-        } else throw new RuntimeException("Customer " + customer.id + "can't request " + numTokens + " tokens");
+        } else {
+            throw new RuntimeException("Customer is unable to receive new tokens");
+        }
+    }
+
+    public static boolean CanCustomerGetTokens(Customer customer, int numTokens) {
+        if (customer.tokens.isEmpty()) {
+            return true;
+        }
+
+        int unusedToken = 0;
+
+        for (Token t : customer.tokens) {
+            if (!t.used) {
+                unusedToken++;
+            }
+        }
+        return unusedToken == 1 && unusedToken + numTokens <= 6;
     }
 
     // There is a function to use a token. That means, the software is provided with the number/string
