@@ -7,6 +7,13 @@ public class Customer {
     int id;
     List<Token> tokens;
 
+    public Customer () {}
+
+    public Customer(int _id, String _name) {
+        id = _id;
+        name = _name;
+    }
+
     public int getId() {
         return id;
     }
