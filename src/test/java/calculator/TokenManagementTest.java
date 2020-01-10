@@ -23,7 +23,7 @@ public class TokenManagementTest {
     public void Setup(){
     tm = new TokenManagement();
     customer = new Customer(1, "Test");
-    token1 = new Token(UUID.randomUUID(), false);
+    token1 = new Token(UUID.randomUUID(), 1);
     }
 
     @Test
