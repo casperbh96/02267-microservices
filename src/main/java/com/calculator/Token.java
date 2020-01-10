@@ -4,7 +4,16 @@ import java.util.UUID;
 
 public class Token {
     UUID id;
+    int customerId;
     boolean used;
+
+    public void setCustomerId(int id) {
+        this.customerId = id;
+    }
+
+    public int getCustomerId() {
+        return this.customerId;
+    }
 
     public boolean getUsed() {
         return used;

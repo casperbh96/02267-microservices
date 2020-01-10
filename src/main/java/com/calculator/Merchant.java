@@ -7,6 +7,13 @@ public class Merchant {
     int id;
     List<Token> tokens;
 
+    public Merchant () {}
+
+    public Merchant(int _id, String _name) {
+        id = _id;
+        name = _name;
+    }
+
     public String getName() {
         return name;
     }
