@@ -9,7 +9,7 @@ node {
 
     stage ('JUnit tests') {
         checkout scm
-        sh 'mvn -D test=CalculatorTest test'
+        sh 'mvn -D test=CalculatorTest, CustomerAdapterTest, TokenManagementTest test'
     }
 
     stage ('Cucumber tests') {
