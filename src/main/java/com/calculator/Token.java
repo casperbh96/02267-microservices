@@ -7,6 +7,13 @@ public class Token {
     int customerId;
     boolean used;
 
+    public Token() {}
+
+    public Token(UUID _id, int _customerId) {
+        id = _id;
+        customerId = _customerId;
+    }
+
     public void setCustomerId(int id) {
         this.customerId = id;
     }
