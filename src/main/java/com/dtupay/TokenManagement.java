@@ -1,6 +1,6 @@
-package com.calculator;
+package com.dtupay;
 
-import com.calculator.database.ITokenManagement;
+import com.dtupay.database.ITokenManagement;
 
 import java.util.UUID;
 

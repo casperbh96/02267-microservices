@@ -1,4 +1,4 @@
-package com.calculator.database.exceptions;
+package com.dtupay.database.exceptions;
 
 public class CustomerHasNoUnusedToken extends Exception {
     public CustomerHasNoUnusedToken(String errorMessage) {

@@ -1,6 +1,6 @@
-package com.calculator.database;
+package com.dtupay.database;
 
-import com.calculator.Customer;
+import com.dtupay.Customer;
 
 import java.util.UUID;
 

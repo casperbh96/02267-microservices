@@ -1,7 +1,7 @@
-package com.calculator.database;
+package com.dtupay.database;
 
-import com.calculator.Customer;
-import com.calculator.database.exceptions.CustomerDoesNotExist;
+import com.dtupay.Customer;
+import com.dtupay.database.exceptions.CustomerDoesNotExist;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;

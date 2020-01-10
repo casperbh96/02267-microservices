@@ -1,9 +1,9 @@
-package calculator;
+package com.dtupay;
 
-import com.calculator.Customer;
-import com.calculator.Token;
-import com.calculator.TokenManagement;
-import com.calculator.database.ITokenManagement;
+import com.dtupay.Customer;
+import com.dtupay.Token;
+import com.dtupay.TokenManagement;
+import com.dtupay.database.ITokenManagement;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;

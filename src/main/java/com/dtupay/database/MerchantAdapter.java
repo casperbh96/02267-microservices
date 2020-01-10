@@ -1,7 +1,7 @@
-package com.calculator.database;
+package com.dtupay.database;
 
-import com.calculator.Merchant;
-import com.calculator.database.exceptions.MerchantDoesNotExist;
+import com.dtupay.Merchant;
+import com.dtupay.database.exceptions.MerchantDoesNotExist;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;

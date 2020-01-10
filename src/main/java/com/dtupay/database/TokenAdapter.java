@@ -1,10 +1,10 @@
-package com.calculator.database;
+package com.dtupay.database;
 
-import com.calculator.Customer;
-import com.calculator.Token;
-import com.calculator.TokenManagement;
-import com.calculator.database.exceptions.CustomerDoesNotExist;
-import com.calculator.database.exceptions.CustomerHasNoUnusedToken;
+import com.dtupay.Customer;
+import com.dtupay.Token;
+import com.dtupay.TokenManagement;
+import com.dtupay.database.exceptions.CustomerDoesNotExist;
+import com.dtupay.database.exceptions.CustomerHasNoUnusedToken;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;

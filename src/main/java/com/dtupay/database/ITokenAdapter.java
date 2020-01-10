@@ -1,9 +1,7 @@
-package com.calculator.database;
+package com.dtupay.database;
 
-import com.calculator.Token;
-import com.calculator.database.exceptions.*;
-
-import java.util.UUID;
+import com.dtupay.Token;
+import com.dtupay.database.exceptions.*;
 
 public interface ITokenAdapter {
     Token getUnusedTokenByCustomerId(int id) throws CustomerHasNoUnusedToken, CustomerDoesNotExist;

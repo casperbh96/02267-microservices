@@ -1,7 +1,7 @@
-package com.calculator.database;
+package com.dtupay.database;
 
-import com.calculator.Merchant;
-import com.calculator.database.exceptions.*;
+import com.dtupay.Merchant;
+import com.dtupay.database.exceptions.*;
 
 public interface IMerchantAdapter {
     Merchant getMerchantByMerchantId(int id) throws MerchantDoesNotExist;

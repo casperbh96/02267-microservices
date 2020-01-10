@@ -1,9 +1,9 @@
-package calculator;
+package com.dtupay;
 
-import com.calculator.Customer;
-import com.calculator.database.CustomerAdapter;
-import com.calculator.database.ICustomerAdapter;
-import com.calculator.database.exceptions.CustomerDoesNotExist;
+import com.dtupay.Customer;
+import com.dtupay.database.CustomerAdapter;
+import com.dtupay.database.ICustomerAdapter;
+import com.dtupay.database.exceptions.CustomerDoesNotExist;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
