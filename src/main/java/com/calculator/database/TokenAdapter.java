@@ -1,18 +1,14 @@
 package com.calculator.database;
 
-import com.calculator.Calculator;
 import com.calculator.Customer;
 import com.calculator.Token;
 import com.calculator.TokenManagement;
 import com.calculator.database.exceptions.CustomerDoesNotExist;
 import com.calculator.database.exceptions.CustomerHasNoUnusedToken;
-import com.calculator.database.exceptions.FakeToken;
-import com.calculator.database.exceptions.TokenAlreadyUsed;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class TokenAdapter implements ITokenAdapter {
     List<Token> tokens;
