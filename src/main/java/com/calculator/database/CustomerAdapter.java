@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerAdapter implements ICustomerAdapter {
-    List<Customer> customers;
+    public List<Customer> customers;
 
     public CustomerAdapter() {
         customers = new ArrayList<>();
