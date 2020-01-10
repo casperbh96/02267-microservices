@@ -3,6 +3,7 @@ package com.calculator.database;
 import com.calculator.Calculator;
 import com.calculator.Customer;
 import com.calculator.Token;
+import com.calculator.TokenManagement;
 import com.calculator.database.exceptions.CustomerDoesNotExist;
 import com.calculator.database.exceptions.CustomerHasNoUnusedToken;
 import com.calculator.database.exceptions.FakeToken;
@@ -16,16 +17,17 @@ import java.util.UUID;
 public class TokenAdapter implements ITokenAdapter {
     List<Token> tokens;
     CustomerAdapter dbCustomer = new CustomerAdapter();
+    TokenManagement tokenManager = new TokenManagement();
 
     public TokenAdapter() {
         tokens = new ArrayList<>();
-        tokens.add(new Token(Calculator.getToken(), 1));
-        tokens.add(new Token(Calculator.getToken(), 2));
-        tokens.add(new Token(Calculator.getToken(), 3));
-        tokens.add(new Token(Calculator.getToken(), 4));
-        tokens.add(new Token(Calculator.getToken(), 5));
-        tokens.add(new Token(Calculator.getToken(), 6));
-        tokens.add(new Token(Calculator.getToken(), 7));
+        tokens.add(new Token(tokenManager.GetToken(), 1));
+        tokens.add(new Token(tokenManager.GetToken(), 2));
+        tokens.add(new Token(tokenManager.GetToken(), 3));
+        tokens.add(new Token(tokenManager.GetToken(), 4));
+        tokens.add(new Token(tokenManager.GetToken(), 5));
+        tokens.add(new Token(tokenManager.GetToken(), 6));
+        tokens.add(new Token(tokenManager.GetToken(), 7));
     }
 
     @Override
