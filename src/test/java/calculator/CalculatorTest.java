@@ -1,15 +1,8 @@
 package calculator;
 
 import com.calculator.Calculator;
-import com.calculator.Customer;
-import com.calculator.Token;
 import org.junit.Assert;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
-
-import java.util.ArrayList;
-import java.util.UUID;
 
 public class CalculatorTest {
 
@@ -57,104 +50,5 @@ public class CalculatorTest {
     @Test
     public final void whenSemicolonDelimiterIsSpecifiedThenItIsUsedToSeparateNumbers() {
         Assert.assertEquals(3+6+15, Calculator.add("//;\n3;6;15"));
-    }
-
-    @Test
-    public final void WhenCustomerOnlyHasOneUnusedTokenAndOneUsedTokenThenHeIsValidToGetNewTokens(){
-        //Arrange
-        Customer c = new Customer();
-        c.setName("Test");
-        c.setId(1);
-        ArrayList<Token> t = new ArrayList<>();
-
-        //New unused token
-        Token t1 = new Token();
-        t1.setId(UUID.randomUUID());
-        t1.setUsed(false);
-
-        //new used token
-        Token t2 = new Token();
-        t2.setId(UUID.randomUUID());
-        t2.setUsed(true);
-
-        t.add(t1);
-        t.add(t2);
-
-        c.setTokens(t);
-
-        //Act
-        boolean actual = Calculator.CanCustomerGetTokens(c, 3);
-
-        //Assert
-        Assert.assertTrue(actual);
-    }
-
-    @Test
-    public final void WhenCustomerHasTwoUnusedTokenThenHeIsNotValidToGetNewTokens(){
-        //Arrange
-        Customer c = new Customer();
-        c.setName("Test");
-        c.setId(1);
-        ArrayList<Token> t = new ArrayList<>();
-
-        //New unused token
-        Token t1 = new Token();
-        t1.setId(UUID.randomUUID());
-        t1.setUsed(false);
-
-        //new unused token
-        Token t2 = new Token();
-        t2.setId(UUID.randomUUID());
-        t2.setUsed(false);
-
-        t.add(t1);
-        t.add(t2);
-
-        c.setTokens(t);
-
-        //Act
-        boolean actual = Calculator.CanCustomerGetTokens(c, 3);
-
-        //Assert
-        Assert.assertFalse(actual);
-    }
-
-    @Test
-    public final void WhenCustomerOnlyHasNoTokensThenHeIsValidToGetNewTokens(){
-        //Arrange
-        Customer c = new Customer();
-        c.setName("Test");
-        c.setId(1);
-
-        ArrayList<Token> t = new ArrayList<>();
-        c.setTokens(t);
-
-        //Act
-        boolean actual = Calculator.CanCustomerGetTokens(c, 5);
-
-        //Assert
-        Assert.assertTrue(actual);
-    }
-
-    @Rule
-    public ExpectedException expectedEx = ExpectedException.none();
-
-    @Test
-    public final void WhenCustomerAskForTooManyTokensHeWillGetAnException() throws Exception{
-        //Arrange
-        expectedEx.expect(RuntimeException.class);
-
-        Customer c = new Customer();
-        c.setName("Test");
-        c.setId(1);
-
-        ArrayList<Token> t = new ArrayList<>();
-        c.setTokens(t);
-
-        int numTokens = 6;
-
-        //Act
-        expectedEx.expectMessage("Too many token request: " + numTokens);
-        Calculator.CanCustomerGetTokens(c, numTokens);
     }
 }
