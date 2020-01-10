@@ -1,6 +1,6 @@
 package com.dtupay;
 
-import com.dtupay.Customer;
+import com.dtupay.app.Customer;
 import com.dtupay.database.CustomerAdapter;
 import com.dtupay.database.ICustomerAdapter;
 import com.dtupay.database.exceptions.CustomerDoesNotExist;

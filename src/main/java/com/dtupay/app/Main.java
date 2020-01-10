@@ -1,4 +1,4 @@
-package com.dtupay;
+package com.dtupay.app;
 
 public class Main {
     public static void main(String[] args){

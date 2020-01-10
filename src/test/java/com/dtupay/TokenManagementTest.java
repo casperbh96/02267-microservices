@@ -1,9 +1,9 @@
 package com.dtupay;
 
-import com.dtupay.Customer;
-import com.dtupay.Token;
-import com.dtupay.TokenManagement;
-import com.dtupay.database.ITokenManagement;
+import com.dtupay.app.Customer;
+import com.dtupay.app.ITokenManagement;
+import com.dtupay.app.Token;
+import com.dtupay.app.TokenManagement;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;

@@ -1,8 +1,8 @@
 package com.dtupay.database;
 
-import com.dtupay.Customer;
-import com.dtupay.Token;
-import com.dtupay.TokenManagement;
+import com.dtupay.app.Customer;
+import com.dtupay.app.Token;
+import com.dtupay.app.TokenManagement;
 import com.dtupay.database.exceptions.CustomerDoesNotExist;
 import com.dtupay.database.exceptions.CustomerHasNoUnusedToken;
 

@@ -1,4 +1,4 @@
-package com.dtupay;
+package com.dtupay.app;
 
 import java.util.UUID;
 

@@ -1,6 +1,6 @@
 package com.dtupay.database;
 
-import com.dtupay.Merchant;
+import com.dtupay.app.Merchant;
 import com.dtupay.database.exceptions.*;
 
 public interface IMerchantAdapter {

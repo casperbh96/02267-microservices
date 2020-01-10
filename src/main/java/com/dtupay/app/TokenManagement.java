@@ -1,6 +1,4 @@
-package com.dtupay;
-
-import com.dtupay.database.ITokenManagement;
+package com.dtupay.app;
 
 import java.util.UUID;
 

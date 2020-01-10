@@ -1,6 +1,6 @@
 package com.dtupay.database;
 
-import com.dtupay.Token;
+import com.dtupay.app.Token;
 import com.dtupay.database.exceptions.*;
 
 public interface ITokenAdapter {
