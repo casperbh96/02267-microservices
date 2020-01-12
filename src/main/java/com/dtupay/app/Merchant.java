@@ -1,5 +1,6 @@
 package com.dtupay.app;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Merchant {
@@ -12,6 +13,7 @@ public class Merchant {
     public Merchant(int _id, String _name) {
         id = _id;
         name = _name;
+        tokens = new ArrayList<>();
     }
 
     public String getName() {

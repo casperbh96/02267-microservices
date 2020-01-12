@@ -6,9 +6,12 @@ import java.util.Set;
 
 import com.dtupay.app.Customer;
 import com.dtupay.app.ITokenManagement;
+import com.dtupay.app.Merchant;
 import com.dtupay.app.TokenManagement;
 import com.dtupay.database.CustomerAdapter;
 import com.dtupay.database.ICustomerAdapter;
+import com.dtupay.database.IMerchantAdapter;
+import com.dtupay.database.MerchantAdapter;
 import cucumber.api.java.After;
 import dtu.ws.fastmoney.Bank;
 import dtu.ws.fastmoney.User;
@@ -18,6 +21,7 @@ public class Helper {
 	public String errorMessage;	
     private Bank bank;
     private ICustomerAdapter customers;
+	private IMerchantAdapter merchants;
     private ITokenManagement tokenManager = new TokenManagement();
 	public boolean errorHasOccured = false;
     
@@ -25,6 +29,7 @@ public class Helper {
 
     	this.bank = factory.createBank();
     	this.customers = new CustomerAdapter();
+    	this.merchants = new MerchantAdapter();
     }
     
 	public Bank getBank() {
@@ -58,6 +63,12 @@ public class Helper {
 		return customer;
 	}
 
+	public Merchant createDtuPayMerchant(String name, int id, int tokens) {
+		Merchant merchant = new Merchant(id, name);
+		merchants.createMerchant(merchant);
+		return merchant;
+	}
+
 	@After
 	public void retireUsedAccounts() {
 		for (String id : usedAccounts) {
@@ -69,5 +80,6 @@ public class Helper {
 		}
 		usedAccounts = new HashSet<String>();
 	}
+
 
 }

@@ -1,6 +1,7 @@
 package com.dtupay.cucumber.steps;
 
 import com.dtupay.app.Customer;
+import com.dtupay.app.Merchant;
 import com.dtupay.cucumber.utils.Helper;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
@@ -16,6 +17,7 @@ public class BasicTransferSteps {
 
     List<String> accounts = new ArrayList<>();
     Customer customer;
+    Merchant merchant;
     Bank bank;
 
     public BasicTransferSteps(Helper helper) {
@@ -35,8 +37,7 @@ public class BasicTransferSteps {
 
     @Given("^merchant DTU Pay account \"([^\"]*)\", ID (\\d+), and (\\d+) tokens$")
     public void merchant_DTU_Pay_account_ID_and_tokens(String arg1, int arg2, int arg3) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        merchant = helper.createDtuPayMerchant(arg1, arg2, arg3);
     }
 
     @When("^the merchant scans the customer's token$")
