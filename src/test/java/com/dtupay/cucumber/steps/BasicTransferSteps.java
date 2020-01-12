@@ -7,6 +7,7 @@ import com.dtupay.app.Merchant;
 import com.dtupay.cucumber.utils.Helper;
 import com.dtupay.database.ICustomerAdapter;
 import com.dtupay.database.IMerchantAdapter;
+import com.dtupay.database.ITokenAdapter;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -28,6 +29,7 @@ public class BasicTransferSteps {
     Bank bank;
     ICustomerAdapter customers;
     IMerchantAdapter merchants;
+    ITokenAdapter tokens;
 
     boolean scanSuccessful;
 
@@ -37,6 +39,7 @@ public class BasicTransferSteps {
         this.bank = helper.getBank();
         this.customers = helper.getCustomers();
         this.merchants = helper.getMerchants();
+        this.tokens = helper.getTokens();
     }
 
     @Given("^bank account \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\" with start balance (\\d+)$")
@@ -56,7 +59,7 @@ public class BasicTransferSteps {
 
     @When("^the merchant scans the customer's token$")
     public void the_merchant_scans_the_customer_s_token() throws Throwable {
-        dtuPayApp = new DtuPayApp(bank, customers, merchants);
+        dtuPayApp = new DtuPayApp(bank, customers, merchants, tokens);
 
         Customer customer = customers.getCustomerByCustomerId(customerId);
         Merchant merchant = merchants.getMerchantByMerchantId(merchantId);

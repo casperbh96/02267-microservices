@@ -7,7 +7,8 @@ public class Token {
     int customerId;
     boolean used;
 
-    public Token() {}
+    public Token() {
+    }
 
     public Token(UUID _id, int _customerId) {
         id = _id;
@@ -38,4 +39,20 @@ public class Token {
     public void setId(UUID newId) {
         this.id = newId;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null || getClass() != other.getClass()) {
+            return false;
+        }
+        Token otherToken = (Token) other;
+        return customerId == otherToken.customerId &&
+                used == otherToken.used &&
+                id.equals(otherToken.id);
+    }
+
+
 }

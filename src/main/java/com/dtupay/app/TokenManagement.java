@@ -1,8 +1,13 @@
 package com.dtupay.app;
 
+import com.dtupay.database.ITokenAdapter;
+import com.dtupay.database.TokenAdapter;
+
 import java.util.UUID;
 
 public class TokenManagement implements ITokenManagement {
+
+
 
     @Override
     public UUID GetToken() {
@@ -17,6 +22,7 @@ public class TokenManagement implements ITokenManagement {
             for (int i = 0; i < numTokens; i++) {
                 Token token = new Token();
                 token.id = GetToken();
+                token.customerId = customer.getId();
                 token.used = false;
                 customer.tokens.add(token);
             }

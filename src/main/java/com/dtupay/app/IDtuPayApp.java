@@ -5,6 +5,6 @@ import com.dtupay.app.Token;
 import java.math.BigDecimal;
 
 public interface IDtuPayApp {
-//    void scanToken(Token token);
+    boolean checkTokenValidity(Token token);
     void transferMoney(String accountIdFrom, String accountIdTo, BigDecimal amount, String description);
 }

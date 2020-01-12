@@ -14,11 +14,21 @@ public class DtuPayApp implements IDtuPayApp {
     private ICustomerAdapter customers;
     private IMerchantAdapter merchants;
     private ITokenAdapter tokens;
+    private ITokenManagement tokenManager;
 
-    public DtuPayApp(Bank bank, ICustomerAdapter customers, IMerchantAdapter merchants) {
+    public DtuPayApp(Bank bank, ICustomerAdapter customers, IMerchantAdapter merchants, ITokenAdapter tokens) {
         this.bank = bank;
         this.customers = customers;
         this.merchants = merchants;
+        this.tokens = tokens;
+    }
+
+    @Override
+    public boolean checkTokenValidity(Token token){
+        // TODO: also check the customerID who provided the token?
+        if (tokens.checkExists(token) && !token.used)
+            return true;
+        return false;
     }
 
     @Override

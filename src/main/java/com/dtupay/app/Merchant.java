@@ -50,7 +50,6 @@ public class Merchant {
     }
 
     public boolean scanCustomerToken(Token customerToken){
-        // should return true if token is not used
-        return !customerToken.used;
+        return dtuPay.checkTokenValidity(customerToken);
     }
 }

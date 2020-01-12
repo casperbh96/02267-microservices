@@ -4,14 +4,8 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.dtupay.app.Customer;
-import com.dtupay.app.ITokenManagement;
-import com.dtupay.app.Merchant;
-import com.dtupay.app.TokenManagement;
-import com.dtupay.database.CustomerAdapter;
-import com.dtupay.database.ICustomerAdapter;
-import com.dtupay.database.IMerchantAdapter;
-import com.dtupay.database.MerchantAdapter;
+import com.dtupay.app.*;
+import com.dtupay.database.*;
 import cucumber.api.java.After;
 import dtu.ws.fastmoney.Bank;
 import dtu.ws.fastmoney.User;
@@ -22,6 +16,7 @@ public class Helper {
     private Bank bank;
     private ICustomerAdapter customers;
     private IMerchantAdapter merchants;
+    private ITokenAdapter tokens;
     private ITokenManagement tokenManager = new TokenManagement();
     public boolean errorHasOccured = false;
 
@@ -30,6 +25,7 @@ public class Helper {
         this.bank = factory.createBank();
         this.customers = new CustomerAdapter();
         this.merchants = new MerchantAdapter();
+        this.tokens = new TokenAdapter();
     }
 
     public Bank getBank() {
@@ -42,6 +38,10 @@ public class Helper {
 
     public IMerchantAdapter getMerchants() {
         return merchants;
+    }
+
+    public ITokenAdapter getTokens() {
+        return tokens;
     }
 
     User createUser(String arg1, String arg2, String arg3) {
@@ -67,6 +67,11 @@ public class Helper {
         Customer customer = new Customer(id, name);
         customers.createCustomer(customer);
         tokenManager.CustomerGetTokens(customer, tokens);
+
+        //TODO: this part should be taken care of by the token manager
+        for (Token token : customer.getTokens()){
+            this.tokens.createToken(token);
+        }
         return customer;
     }
 

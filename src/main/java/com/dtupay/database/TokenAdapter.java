@@ -45,6 +45,15 @@ public class TokenAdapter implements ITokenAdapter {
         return token;
     }
 
+    @Override
+    public boolean checkExists(Token token){
+        for(Token t : tokens){
+            if (t.equals(token))
+                return true;
+        }
+        return false;
+    }
+
     private void doesCustomerExist(int id) throws CustomerDoesNotExist {
         Customer customer = dbCustomer.getCustomerByCustomerId(id);
     }
