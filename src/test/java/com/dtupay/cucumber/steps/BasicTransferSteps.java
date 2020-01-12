@@ -1,14 +1,13 @@
 package com.dtupay.cucumber.steps;
 
+import com.dtupay.app.Customer;
 import com.dtupay.cucumber.utils.Helper;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import dtu.ws.fastmoney.Bank;
-import dtu.ws.fastmoney.User;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +15,7 @@ public class BasicTransferSteps {
     Helper helper;
 
     List<String> accounts = new ArrayList<>();
+    Customer customer;
     Bank bank;
 
     public BasicTransferSteps(Helper helper) {
@@ -25,13 +25,12 @@ public class BasicTransferSteps {
 
     @Given("^bank account \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\" with start balance (\\d+)$")
     public void bank_account_with_start_balance(String arg1, String arg2, String arg3, int arg4) throws Throwable {
-        accounts.add(helper.createAccount(arg1, arg2, arg3, arg4));
+        accounts.add(helper.createBankAccount(arg1, arg2, arg3, arg4));
     }
 
     @Given("^customer DTU Pay account \"([^\"]*)\", ID (\\d+), and (\\d+) unused token$")
     public void customer_DTU_Pay_account_ID_and_unused_token(String arg1, int arg2, int arg3) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        customer = helper.createDtuPayCustomer(arg1, arg2, arg3);
     }
 
     @Given("^merchant DTU Pay account \"([^\"]*)\", ID (\\d+), and (\\d+) tokens$")

@@ -4,6 +4,11 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.dtupay.app.Customer;
+import com.dtupay.app.ITokenManagement;
+import com.dtupay.app.TokenManagement;
+import com.dtupay.database.CustomerAdapter;
+import com.dtupay.database.ICustomerAdapter;
 import cucumber.api.java.After;
 import dtu.ws.fastmoney.Bank;
 import dtu.ws.fastmoney.User;
@@ -12,15 +17,20 @@ public class Helper {
 	public Set<String> usedAccounts = new HashSet<>();
 	public String errorMessage;	
     private Bank bank;
+    private ICustomerAdapter customers;
+    private ITokenManagement tokenManager = new TokenManagement();
 	public boolean errorHasOccured = false;
     
     public Helper(BankFactory factory) {
-    		this.bank = factory.createBank();
+
+    	this.bank = factory.createBank();
+    	this.customers = new CustomerAdapter();
     }
     
 	public Bank getBank() {
 		return bank;
 	}
+	public ICustomerAdapter getCustomerAdapter(){ return customers; }
 
 	User createUser(String arg1, String arg2, String arg3) {
 		User user = new User();
@@ -30,15 +40,22 @@ public class Helper {
 		return user;
 	}
 	
-	public String createAccount(String arg1, String arg2, String arg3, int balance) throws Exception {
+	public String createBankAccount(String arg1, String arg2, String arg3, int balance) throws Exception {
 		User user = createUser(arg1, arg2, arg3);
-		return createAccount(user, balance);
+		return createBankAccount(user, balance);
 	}
 
-	public String createAccount(User user, int balance) throws Exception {
+	public String createBankAccount(User user, int balance) throws Exception {
 		String accountId = getBank().createAccountWithBalance(user, new BigDecimal(balance));
 		usedAccounts.add(accountId);
 		return accountId;
+	}
+
+	public Customer createDtuPayCustomer(String name, int id, int tokens){
+    	Customer customer = new Customer(id, name);
+		customers.createCustomer(customer);
+		tokenManager.CustomerGetTokens(customer, tokens);
+		return customer;
 	}
 
 	@After
