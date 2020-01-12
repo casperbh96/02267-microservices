@@ -1,15 +1,31 @@
 package com.dtupay.cucumber.steps;
 
+import com.dtupay.cucumber.utils.Helper;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import dtu.ws.fastmoney.Bank;
+import dtu.ws.fastmoney.User;
 
-public class BasicTransferTest {
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
+public class BasicTransferSteps {
+    Helper helper;
+
+    List<String> accounts = new ArrayList<>();
+    Bank bank;
+
+    public BasicTransferSteps(Helper helper) {
+        this.helper = helper;
+        this.bank = helper.getBank();
+    }
+
     @Given("^bank account \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\" with start balance (\\d+)$")
     public void bank_account_with_start_balance(String arg1, String arg2, String arg3, int arg4) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        accounts.add(helper.createAccount(arg1, arg2, arg3, arg4));
     }
 
     @Given("^customer DTU Pay account \"([^\"]*)\", ID (\\d+), and (\\d+) unused token$")
