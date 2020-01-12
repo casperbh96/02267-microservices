@@ -7,6 +7,7 @@ public class Merchant {
     String name;
     int id;
     List<Token> tokens;
+    IDtuPayApp dtuPay;
 
     public Merchant () {}
 
@@ -38,5 +39,18 @@ public class Merchant {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public IDtuPayApp getDtuPay() {
+        return dtuPay;
+    }
+
+    public void setDtuPay(IDtuPayApp dtuPay) {
+        this.dtuPay = dtuPay;
+    }
+
+    public boolean scanCustomerToken(Token customerToken){
+        // should return true if token is not used
+        return !customerToken.used;
     }
 }
