@@ -14,7 +14,7 @@ node {
 
     stage ('Cucumber tests') {
         checkout scm
-        // sh 'mvn -D test=CucumberTest test'
-        echo "Skipping for now..."
+        sh 'mvn -D test=CucumberTest test'
+        // echo "Skipping for now..."
     }
 }
