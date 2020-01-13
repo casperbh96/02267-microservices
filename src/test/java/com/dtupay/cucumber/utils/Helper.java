@@ -56,7 +56,7 @@ public class Helper {
         return customer;
     }
 
-    public Merchant createDtuPayMerchant(String name, String id, int tokens) {
+    public Merchant createDtuPayMerchant(String name, String id) {
         Merchant merchant = new Merchant(id, name);
         merchants.createMerchant(merchant);
         return merchant;
