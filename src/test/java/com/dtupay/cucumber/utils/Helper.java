@@ -63,13 +63,7 @@ public class Helper {
     }
 
     public void createBankAccount(String name, String cpr, int initialBalance) throws Exception {
-        try {
-            Customer c = customers.getCustomerByCustomerId(cpr);
-            bank.createAccount(c, BigDecimal.valueOf(initialBalance));
-        } catch (CustomerDoesNotExist e) {
-            Merchant m = merchants.getMerchantByMerchantId(cpr);
-            bank.createAccount(m, BigDecimal.valueOf(initialBalance));
-        }
+        bank.createAccount(name, cpr, BigDecimal.valueOf(initialBalance));
         usedBankAccounts.add(cpr);
     }
 
