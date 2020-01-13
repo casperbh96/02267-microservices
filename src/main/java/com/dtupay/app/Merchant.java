@@ -1,5 +1,7 @@
 package com.dtupay.app;
 
+import dtu.ws.fastmoney.BankServiceException;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +56,7 @@ public class Merchant {
         return dtuPay.checkTokenValidity(customerToken);
     }
 
-    public void requestTransfer(Token token, BigDecimal amount, String description){
+    public void requestTransfer(Token token, BigDecimal amount, String description) throws BankServiceException {
         dtuPay.transferMoney(this.id, token, amount, description);
     }
 }

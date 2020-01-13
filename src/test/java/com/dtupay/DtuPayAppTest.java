@@ -4,10 +4,14 @@ import com.dtupay.app.*;
 import com.dtupay.database.*;
 import com.dtupay.database.exceptions.CustomerDoesNotExist;
 import com.dtupay.database.exceptions.CustomerHasNoUnusedToken;
+import com.dtupay.database.exceptions.MerchantDoesNotExist;
 import dtu.ws.fastmoney.Bank;
+import dtu.ws.fastmoney.BankServiceException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.math.BigDecimal;
 
 public class DtuPayAppTest {
     Bank bank;
@@ -53,7 +57,13 @@ public class DtuPayAppTest {
     }
 
     @Test
-    public void transferMoneyFromExistingCustomerToExistingMerchant() {
+    public void transferMoneyFromExistingCustomerToExistingMerchant() throws MerchantDoesNotExist, CustomerHasNoUnusedToken, CustomerDoesNotExist, BankServiceException {
+        Merchant merchant = merchants.getMerchantByMerchantId("1");
+        Token token = tokens.getUnusedTokenByCustomerId("1");
+        BigDecimal amount = new BigDecimal(200.0);
+        String description = "A proper meal";
+
+        dtupay.transferMoney(merchant.getId(), token, amount, description);
 
     }
 
