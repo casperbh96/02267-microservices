@@ -35,6 +35,11 @@ public class BankAdapterJar implements IBankAdapter {
     }
 
     @Override
+    public void removeAccountByCpr(String cpr) throws BankServiceException {
+        bank.retireAccount(cpr);
+    }
+
+    @Override
     public void makeTransaction(Customer from, Merchant to, BigDecimal amount, String comment) throws BankServiceException {
         String customerBankId = repo.readAccountByCpr(from.getId()).getId();
         String merchantBankId = repo.readAccountByCpr(to.getId()).getId();
@@ -46,6 +51,12 @@ public class BankAdapterJar implements IBankAdapter {
         String customerBankId = repo.readAccountByCpr(customerCpr).getId();
         String merchantBankId = repo.readAccountByCpr(merchantCpr).getId();
         bank.transferMoneyFromTo(customerBankId, merchantBankId, amount, comment);
+    }
+
+    @Override
+    public BigDecimal getBalanceByCPR(String cpr) throws BankServiceException {
+        BigDecimal balance = bank.getAccountByCprNumber(cpr).getBalance();
+        return balance;
     }
 
 //    public static void main(String[] args) throws Exception {
