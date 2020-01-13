@@ -7,11 +7,13 @@ import dtu.ws.fastmoney.BankServiceException;
 import java.math.BigDecimal;
 
 public interface IBankAdapter {
-    void createAccount(String name, String cpr, BigDecimal initialBalance) throws BankServiceException;
+    void createAccount(String name, String cpr, BigDecimal initialBalance) throws Exception;
 
-    void removeAccountByCpr(String cpr) throws BankServiceException;
+    void removeAccountByCpr(String cpr) throws Exception;
 
-    void makeTransaction(String customerCpr, String merchantCpr, BigDecimal amount, String comment) throws BankServiceException;
+    void makeTransaction(String customerCpr, String merchantCpr, BigDecimal amount, String comment) throws Exception;
 
-    BigDecimal getBalanceByCPR(String cpr) throws BankServiceException;
+    BigDecimal getBalanceByCPR(String cpr) throws Exception;
+
+    void deleteAllAccounts() throws Exception;
 }
