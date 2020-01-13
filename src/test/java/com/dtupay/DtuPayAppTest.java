@@ -93,14 +93,34 @@ public class DtuPayAppTest {
         dtupay.transferMoney("1", token, amount, description);
     }
 
-    @Test
-    public void transferMoneyFromExistingMerchantToExistingCustomer() {
+    @Test(expected=BankServiceException.class)
+    public void transferMoneyByNegativeAmountFromCustomerToMerchant() throws BankServiceException, MerchantDoesNotExist {
+        Merchant merchant = merchants.getMerchantByMerchantId("1");
+        Customer customer = customers.createCustomer(new Customer("99", "Casper2"));
 
+        Token token = new Token(tokenManager.GetToken(), customer.getId());
+        tokens.createToken(token);
+        BigDecimal amount = new BigDecimal(-200.0);
+        String description = "A proper meal";
+
+        bank.createAccount(merchant.getName(), merchant.getId(), new BigDecimal(200.0));
+        bank.createAccount(customer.getName(), customer.getId(), new BigDecimal(200.0));
+        dtupay.transferMoney(merchant.getId(), token, amount, description);
     }
 
-    @Test
-    public void transferMoneyByNegativeAmountFromCustomerToMerchant() {
+    @Test(expected=BankServiceException.class)
+    public void transferMoneyFromCustomerWithNegativeBalanceToMerchant() throws BankServiceException, MerchantDoesNotExist {
+        Merchant merchant = merchants.getMerchantByMerchantId("1");
+        Customer customer = customers.createCustomer(new Customer("99", "Casper2"));
 
+        Token token = new Token(tokenManager.GetToken(), customer.getId());
+        tokens.createToken(token);
+        BigDecimal amount = new BigDecimal(200.0);
+        String description = "A proper meal";
+
+        bank.createAccount(merchant.getName(), merchant.getId(), new BigDecimal(200.0));
+        bank.createAccount(customer.getName(), customer.getId(), new BigDecimal(-200.0));
+        dtupay.transferMoney(merchant.getId(), token, amount, description);
     }
 
 }
