@@ -1,4 +1,4 @@
-package com.dtupay;
+package com.dtupay.junit;
 
 import com.dtupay.app.Customer;
 import com.dtupay.app.ITokenManagement;

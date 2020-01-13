@@ -9,12 +9,11 @@ node {
 
     stage ('JUnit tests') {
         checkout scm
-        sh 'mvn test'
+        sh 'mvn -D test=com.dtupay.junit.** test'
     }
 
     stage ('Cucumber tests') {
         checkout scm
-        sh 'mvn -D test=CucumberTest test'
-        // echo "Skipping for now..."
+        sh 'mvn -D test=com.dtupay.cucumber.** test'
     }
 }
