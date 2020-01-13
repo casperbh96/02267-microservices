@@ -1,6 +1,7 @@
 package com.dtupay.cucumber.steps;
 
 import com.dtupay.app.*;
+import com.dtupay.bank.IBankAdapter;
 import com.dtupay.cucumber.utils.Helper;
 import com.dtupay.database.ICustomerAdapter;
 import com.dtupay.database.IMerchantAdapter;
@@ -8,7 +9,6 @@ import com.dtupay.database.ITokenAdapter;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import dtu.ws.fastmoney.Bank;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ public class UsedTokenSteps {
     String merchantId;
 
     IDtuPayApp dtuPayApp;
-    Bank bank;
+    IBankAdapter bank;
     ICustomerAdapter customers;
     IMerchantAdapter merchants;
     ITokenAdapter tokens;
@@ -43,20 +43,20 @@ public class UsedTokenSteps {
         this.tokens = helper.getTokens();
     }
 
-    @Given("^bank account \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\" with starting balance (\\d+)$")
-    public void bank_account_with_starting_balance(String arg1, String arg2, String arg3, int arg4) throws Throwable {
-        accounts.add(helper.createBankAccount(arg1, arg2, arg3, arg4));
+    @Given("^bank account \"([^\"]*)\", with ID \"([^\"]*)\" with starting balance (\\d+)$")
+    public void bank_account_with_starting_balance(String name, String cpr, int startingBalance) throws Throwable {
+        helper.createBankAccount(name, cpr, startingBalance);
     }
 
-    @Given("^customer DTU Pay account \"([^\"]*)\", ID \"([^\"]*)\", and (\\d+) used token$")
-    public void customerDTUPayAccountIDAndUsedToken(String arg1, String arg2, int arg3) throws Throwable {
-        customerId = helper.createDtuPayCustomerUsedToken(arg1, arg2, arg3).getId();
+    @Given("^customer DTU Pay account \"([^\"]*)\", with ID \"([^\"]*)\", and (\\d+) used token$")
+    public void customerDTUPayAccountIDAndUsedToken(String name, String cpr, int numOfTokens) throws Throwable {
+        customerId = helper.createDtuPayCustomerUsedToken(name, cpr, numOfTokens).getId();
 
     }
 
-    @Given("^merchant DTU Pay account \"([^\"]*)\", ID \"([^\"]*)\", and (\\d+) used tokens$")
-    public void merchantDTUPayAccountIDAndUsedTokens(String arg1, String arg2, int arg3) throws Throwable {
-        merchantId = helper.createDtuPayMerchant(arg1, arg2, arg3).getId();
+    @Given("^merchant DTU Pay account \"([^\"]*)\", with ID \"([^\"]*)\"")
+    public void merchantDTUPayAccountIDAndUsedTokens(String name, String cpr) throws Throwable {
+        merchantId = helper.createDtuPayMerchant(name, cpr).getId();
     }
 
     @When("^the merchant scans the customer's used token$")
