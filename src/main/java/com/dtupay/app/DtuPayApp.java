@@ -32,12 +32,12 @@ public class DtuPayApp implements IDtuPayApp {
     }
 
     @Override
-    public void transferMoney(String merchantId, Token merchantToken, BigDecimal amount, String description) {
+    public void transferMoney(String merchantId, Token customerToken, BigDecimal amount, String description) {
         // assumption that token is valid at this point..
 
         try {
             String merchantAccount = bank.getAccountByCprNumber(merchantId).getId();
-            String customerAccount = bank.getAccountByCprNumber(merchantToken.getCustomerId()).getId();
+            String customerAccount = bank.getAccountByCprNumber(customerToken.getCustomerId()).getId();
             bank.transferMoneyFromTo(customerAccount, merchantAccount, amount, description);
         } catch (BankServiceException e) {
             e.printStackTrace();
