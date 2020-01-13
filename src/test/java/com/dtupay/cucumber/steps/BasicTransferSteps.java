@@ -48,9 +48,9 @@ public class BasicTransferSteps {
         customerId = helper.createDtuPayCustomer(name, cpr, numOfTokens).getId();
     }
 
-    @Given("^merchant DTU Pay account \"([^\"]*)\", ID \"([^\"]*)\", and (\\d+) tokens$")
-    public void merchantDTUPayAccountIDAndTokens(String name, String cpr, int numOfTokens) throws Throwable {
-        merchantId = helper.createDtuPayMerchant(name, cpr, numOfTokens).getId();
+    @Given("^merchant DTU Pay account \"([^\"]*)\", ID \"([^\"]*)\"")
+    public void merchantDTUPayAccountIDAndTokens(String name, String cpr) throws Throwable {
+        merchantId = helper.createDtuPayMerchant(name, cpr).getId();
     }
 
     @Given("^bank account \"([^\"]*)\", \"([^\"]*)\" with start balance (\\d+)$")
