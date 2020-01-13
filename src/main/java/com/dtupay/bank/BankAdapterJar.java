@@ -43,9 +43,9 @@ public class BankAdapterJar implements IBankAdapter {
 
     @Override
     public void makeTransaction(Customer from, Merchant to, int amount, String comment) throws BankServiceException {
-        String idFrom = repo.readAccountByCpr(from.getId()).getId();
-        String idTo = repo.readAccount(String.valueOf(to.getId())).getId();
-        bank.transferMoneyFromTo(idFrom, idTo, BigDecimal.valueOf(amount), comment);
+        String customerBankId = repo.readAccountByCpr(from.getId()).getId();
+        String merchantBankId = repo.readAccount(String.valueOf(to.getId())).getId();
+        bank.transferMoneyFromTo(customerBankId, merchantBankId, BigDecimal.valueOf(amount), comment);
     }
 
 //    public static void main(String[] args) throws Exception {
