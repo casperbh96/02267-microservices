@@ -27,10 +27,7 @@ public class TokenAdapter implements ITokenAdapter {
     }
 
     @Override
-    public Token getUnusedTokenByCustomerId(String id) throws CustomerHasNoUnusedToken, CustomerDoesNotExist {
-        // if customer does not exist, throws a CustomerDoesNotExist exception
-        doesCustomerExist(id);
-
+    public Token getUnusedTokenByCustomerId(String id) throws CustomerHasNoUnusedToken{
         for (Token t : tokens) {
             if (t.getCustomerId().equals(id) && t.getUsed() == false) return t;
         }
@@ -52,9 +49,5 @@ public class TokenAdapter implements ITokenAdapter {
                 return true;
         }
         return false;
-    }
-
-    private void doesCustomerExist(String id) throws CustomerDoesNotExist {
-        Customer customer = dbCustomer.getCustomerByCustomerId(id);
     }
 }
