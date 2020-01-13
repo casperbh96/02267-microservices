@@ -1,6 +1,8 @@
 package com.dtupay;
 
 import com.dtupay.app.*;
+import com.dtupay.bank.BankAdapterJar;
+import com.dtupay.bank.IBankAdapter;
 import com.dtupay.database.*;
 import com.dtupay.database.exceptions.CustomerDoesNotExist;
 import com.dtupay.database.exceptions.CustomerHasNoUnusedToken;
@@ -14,7 +16,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 
 public class DtuPayAppTest {
-    Bank bank;
+    IBankAdapter bank;
     ICustomerAdapter customers;
     IMerchantAdapter merchants;
     ITokenAdapter tokens;
@@ -23,6 +25,7 @@ public class DtuPayAppTest {
 
     @Before
     public void Setup(){
+        bank = new BankAdapterJar();
         customers = new CustomerAdapter();
         merchants = new MerchantAdapter();
         tokens = new TokenAdapter();
@@ -63,8 +66,8 @@ public class DtuPayAppTest {
         BigDecimal amount = new BigDecimal(200.0);
         String description = "A proper meal";
 
+        bank.createAccount(merchant.getName(), merchant.getId(), new BigDecimal(201.0));
         dtupay.transferMoney(merchant.getId(), token, amount, description);
-
     }
 
     @Test
