@@ -9,7 +9,6 @@ import java.util.List;
 public class Merchant {
     String name;
     String id;
-    List<Token> tokens;
     IDtuPayApp dtuPay;
 
     public Merchant () {}
@@ -17,7 +16,6 @@ public class Merchant {
     public Merchant( String _id, String _name) {
         id = _id;
         name = _name;
-        tokens = new ArrayList<>();
     }
 
     public String getName() {
@@ -26,14 +24,6 @@ public class Merchant {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Token> getTokens() {
-        return tokens;
-    }
-
-    public void setTokens(List<Token> tokens) {
-        this.tokens = tokens;
     }
 
     public String getId() {
