@@ -11,9 +11,12 @@ import dtu.ws.fastmoney.Bank;
 import dtu.ws.fastmoney.BankServiceException;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 public class DtuPayAppTest {
     IBankAdapter bank;
@@ -62,17 +65,32 @@ public class DtuPayAppTest {
     @Test
     public void transferMoneyFromExistingCustomerToExistingMerchant() throws MerchantDoesNotExist, CustomerHasNoUnusedToken, CustomerDoesNotExist, BankServiceException {
         Merchant merchant = merchants.getMerchantByMerchantId("1");
-        Token token = tokens.getUnusedTokenByCustomerId("1");
+        Customer customer = customers.createCustomer(new Customer("99", "Casper2"));
+
+        Token token = new Token(tokenManager.GetToken(), customer.getId());
+        tokens.createToken(token);
         BigDecimal amount = new BigDecimal(200.0);
         String description = "A proper meal";
 
-        bank.createAccount(merchant.getName(), merchant.getId(), new BigDecimal(201.0));
+        bank.createAccount(merchant.getName(), merchant.getId(), new BigDecimal(200.0));
+        bank.createAccount(customer.getName(), customer.getId(), new BigDecimal(200.0));
         dtupay.transferMoney(merchant.getId(), token, amount, description);
+
+        BigDecimal balance = bank.getBalanceByCPR("1");
+        Assert.assertEquals(new BigDecimal(400.0), balance);
     }
 
-    @Test
-    public void transferMoneyFromExistingCustomerToMerchantThatDoesNotExist() {
+    @Test(expected=NullPointerException.class)
+    public void transferMoneyFromExistingCustomerToMerchantThatDoesNotExist() throws MerchantDoesNotExist, CustomerHasNoUnusedToken, CustomerDoesNotExist, BankServiceException {
+        Customer customer = customers.createCustomer(new Customer("99", "Casper2"));
 
+        Token token = new Token(tokenManager.GetToken(), customer.getId());
+        tokens.createToken(token);
+        BigDecimal amount = new BigDecimal(200.0);
+        String description = "A proper meal";
+
+        bank.createAccount(customer.getName(), customer.getId(), new BigDecimal(200.0));
+        dtupay.transferMoney("1", token, amount, description);
     }
 
     @Test
