@@ -1,17 +1,21 @@
 package com.dtupay.app;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Merchant {
     String name;
-    int id;
+    String id;
     List<Token> tokens;
+    IDtuPayApp dtuPay;
 
     public Merchant () {}
 
-    public Merchant(int _id, String _name) {
+    public Merchant( String _id, String _name) {
         id = _id;
         name = _name;
+        tokens = new ArrayList<>();
     }
 
     public String getName() {
@@ -30,11 +34,27 @@ public class Merchant {
         this.tokens = tokens;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
+    }
+
+    public IDtuPayApp getDtuPay() {
+        return dtuPay;
+    }
+
+    public void setDtuPay(IDtuPayApp dtuPay) {
+        this.dtuPay = dtuPay;
+    }
+
+    public boolean scanCustomerToken(Token customerToken){
+        return dtuPay.checkTokenValidity(customerToken);
+    }
+
+    public void requestTransfer(Token token, BigDecimal amount, String description){
+        dtuPay.transferMoney(this.id, token, amount, description);
     }
 }

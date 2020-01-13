@@ -17,22 +17,22 @@ public class TokenAdapter implements ITokenAdapter {
 
     public TokenAdapter() {
         tokens = new ArrayList<>();
-        tokens.add(new Token(tokenManager.GetToken(), 1));
-        tokens.add(new Token(tokenManager.GetToken(), 2));
-        tokens.add(new Token(tokenManager.GetToken(), 3));
-        tokens.add(new Token(tokenManager.GetToken(), 4));
-        tokens.add(new Token(tokenManager.GetToken(), 5));
-        tokens.add(new Token(tokenManager.GetToken(), 6));
-        tokens.add(new Token(tokenManager.GetToken(), 7));
+        tokens.add(new Token(tokenManager.GetToken(), "1"));
+        tokens.add(new Token(tokenManager.GetToken(), "2"));
+        tokens.add(new Token(tokenManager.GetToken(), "3"));
+        tokens.add(new Token(tokenManager.GetToken(), "4"));
+        tokens.add(new Token(tokenManager.GetToken(), "5"));
+        tokens.add(new Token(tokenManager.GetToken(), "6"));
+        tokens.add(new Token(tokenManager.GetToken(), "7"));
     }
 
     @Override
-    public Token getUnusedTokenByCustomerId(int id) throws CustomerHasNoUnusedToken, CustomerDoesNotExist {
+    public Token getUnusedTokenByCustomerId(String id) throws CustomerHasNoUnusedToken, CustomerDoesNotExist {
         // if customer does not exist, throws a CustomerDoesNotExist exception
         doesCustomerExist(id);
 
         for (Token t : tokens) {
-            if (t.getCustomerId() == id && t.getUsed() == false) return t;
+            if (t.getCustomerId().equals(id) && t.getUsed() == false) return t;
         }
 
         throw new CustomerHasNoUnusedToken(MessageFormat.format(
@@ -45,7 +45,16 @@ public class TokenAdapter implements ITokenAdapter {
         return token;
     }
 
-    private void doesCustomerExist(int id) throws CustomerDoesNotExist {
+    @Override
+    public boolean checkExists(Token token){
+        for(Token t : tokens){
+            if (t.equals(token))
+                return true;
+        }
+        return false;
+    }
+
+    private void doesCustomerExist(String id) throws CustomerDoesNotExist {
         Customer customer = dbCustomer.getCustomerByCustomerId(id);
     }
 }

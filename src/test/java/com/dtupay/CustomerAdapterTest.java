@@ -20,14 +20,14 @@ public class CustomerAdapterTest {
 
     @Test
     public void CreateCustomerTest() throws CustomerDoesNotExist {
-        Customer customer = new Customer(55, "Test");
+        Customer customer = new Customer("55", "Test");
         c.createCustomer(customer);
-        Assert.assertEquals(customer, c.getCustomerByCustomerId(55));
+        Assert.assertEquals(customer, c.getCustomerByCustomerId("55"));
     }
 
     @Test(expected = CustomerDoesNotExist.class)
     public void DeleteCustomerTest() throws CustomerDoesNotExist {
-        int id = 56;
+        String id = "56";
         c.createCustomer(new Customer(id, "Test"));
         c.deleteCustomerByCustomerId(id);
         c.getCustomerByCustomerId(id);
@@ -35,11 +35,11 @@ public class CustomerAdapterTest {
 
     @Test
     public void UpdateCustomerTest() throws CustomerDoesNotExist {
-        Customer customer = new Customer(57, "Test1");
+        Customer customer = new Customer("57", "Test1");
         c.createCustomer(customer);
         customer.setName("Test2");
         c.updateCustomer(customer);
-        Assert.assertEquals(customer, c.getCustomerByCustomerId(57));
+        Assert.assertEquals(customer, c.getCustomerByCustomerId("57"));
     }
     @Rule
     public ExpectedException thrown = ExpectedException.none();
