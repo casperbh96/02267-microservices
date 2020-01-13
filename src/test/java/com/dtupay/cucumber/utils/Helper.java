@@ -5,30 +5,30 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.dtupay.app.*;
+import com.dtupay.bank.BankAdapterJar;
+import com.dtupay.bank.IBankAdapter;
 import com.dtupay.database.*;
+import com.dtupay.database.exceptions.CustomerDoesNotExist;
 import cucumber.api.java.After;
-import dtu.ws.fastmoney.Bank;
-import dtu.ws.fastmoney.User;
 
 public class Helper {
-    public Set<String> usedAccounts = new HashSet<>();
+    public Set<String> usedBankAccounts = new HashSet<>();
     public String errorMessage;
-    private Bank bank;
+    private IBankAdapter bank;
     private ICustomerAdapter customers;
     private IMerchantAdapter merchants;
     private ITokenAdapter tokens;
     private ITokenManagement tokenManager = new TokenManagement();
     public boolean errorHasOccured = false;
 
-    public Helper(BankFactory factory) {
-
-        this.bank = factory.createBank();
+    public Helper() {
+        this.bank = new BankAdapterJar();
         this.customers = new CustomerAdapter();
         this.merchants = new MerchantAdapter();
         this.tokens = new TokenAdapter();
     }
 
-    public Bank getBank() {
+    public IBankAdapter getBank() {
         return bank;
     }
 
@@ -44,32 +44,13 @@ public class Helper {
         return tokens;
     }
 
-    User createUser(String arg1, String arg2, String arg3) {
-        User user = new User();
-        user.setFirstName(arg1);
-        user.setLastName(arg2);
-        user.setCprNumber(arg3);
-        return user;
-    }
-
-    public String createBankAccount(String arg1, String arg2, String arg3, int balance) throws Exception {
-        User user = createUser(arg1, arg2, arg3);
-        return createBankAccount(user, balance);
-    }
-
-    public String createBankAccount(User user, int balance) throws Exception {
-        String accountId = getBank().createAccountWithBalance(user, new BigDecimal(balance));
-        usedAccounts.add(accountId);
-        return accountId;
-    }
-
     public Customer createDtuPayCustomer(String name, String id, int tokens) {
         Customer customer = new Customer(id, name);
         customers.createCustomer(customer);
         tokenManager.CustomerGetTokens(customer, tokens);
 
         //TODO: this part should be taken care of by the token manager
-        for (Token token : customer.getTokens()){
+        for (Token token : customer.getTokens()) {
             this.tokens.createToken(token);
         }
         return customer;
@@ -89,22 +70,27 @@ public class Helper {
         return customer;
     }
 
-    public Merchant createDtuPayMerchant(String name, String id, int tokens) {
+    public Merchant createDtuPayMerchant(String name, String id) {
         Merchant merchant = new Merchant(id, name);
         merchants.createMerchant(merchant);
         return merchant;
     }
 
+    public void createBankAccount(String name, String cpr, int initialBalance) throws Exception {
+        bank.createAccount(name, cpr, BigDecimal.valueOf(initialBalance));
+        usedBankAccounts.add(cpr);
+    }
+
     @After
     public void retireUsedAccounts() {
-        for (String id : usedAccounts) {
+        for (String cpr : usedBankAccounts) {
             try {
-                bank.retireAccount(id);
+                bank.removeAccountByCpr(cpr);
             } catch (Exception e) {
                 // ignore: account does not exist anymore
             }
         }
-        usedAccounts = new HashSet<String>();
+        usedBankAccounts.clear();
     }
 
 

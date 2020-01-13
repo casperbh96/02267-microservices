@@ -1,5 +1,7 @@
 package com.dtupay.app;
 
+import dtu.ws.fastmoney.BankServiceException;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +9,6 @@ import java.util.List;
 public class Merchant {
     String name;
     String id;
-    List<Token> tokens;
     IDtuPayApp dtuPay;
 
     public Merchant () {}
@@ -15,7 +16,6 @@ public class Merchant {
     public Merchant( String _id, String _name) {
         id = _id;
         name = _name;
-        tokens = new ArrayList<>();
     }
 
     public String getName() {
@@ -24,14 +24,6 @@ public class Merchant {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Token> getTokens() {
-        return tokens;
-    }
-
-    public void setTokens(List<Token> tokens) {
-        this.tokens = tokens;
     }
 
     public String getId() {
@@ -54,7 +46,7 @@ public class Merchant {
         return dtuPay.checkTokenValidity(customerToken);
     }
 
-    public void requestTransfer(Token token, BigDecimal amount, String description){
+    public void requestTransfer(Token token, BigDecimal amount, String description) throws BankServiceException {
         dtuPay.transferMoney(this.id, token, amount, description);
     }
 }
