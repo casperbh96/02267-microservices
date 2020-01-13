@@ -16,6 +16,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+
 public class BasicTransferSteps {
     Helper helper;
 
@@ -68,7 +70,7 @@ public class BasicTransferSteps {
 
         token = customer.giveToken();
         scanSuccessful = merchant.scanCustomerToken(token);
-        Assert.assertEquals(true, scanSuccessful);
+        assertEquals(true, scanSuccessful);
     }
 
     @Then("^the amount (\\d+) is transferred to the merchant$")
@@ -81,13 +83,13 @@ public class BasicTransferSteps {
 
     @Then("^the balance of the customer is (\\d+)$")
     public void the_balance_of_the_customer_is(int arg1) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        BigDecimal customerBalance = bank.getAccountByCprNumber(customerId).getBalance();
+        assertEquals(new BigDecimal(arg1), customerBalance);
     }
 
     @Then("^the balance of the merchant is (\\d+)$")
     public void the_balance_of_the_merchant_is(int arg1) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        BigDecimal merchantBalance = bank.getAccountByCprNumber(merchantId).getBalance();
+        assertEquals(new BigDecimal(arg1), merchantBalance);
     }
 }
