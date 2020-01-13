@@ -41,6 +41,13 @@ public class BankAdapterJar implements IBankAdapter {
         bank.transferMoneyFromTo(customerBankId, merchantBankId, amount, comment);
     }
 
+    @Override
+    public void makeTransaction(String customerCpr, String merchantCpr, BigDecimal amount, String comment) throws BankServiceException {
+        String customerBankId = repo.readAccountByCpr(customerCpr).getId();
+        String merchantBankId = repo.readAccountByCpr(merchantCpr).getId();
+        bank.transferMoneyFromTo(customerBankId, merchantBankId, amount, comment);
+    }
+
 //    public static void main(String[] args) throws Exception {
 //        BankAdapterJar b = new BankAdapterJar();
 //
@@ -56,6 +63,13 @@ public class BankAdapterJar implements IBankAdapter {
 //        }
 //
 //        b.makeTransaction(dmr, bilka, BigDecimal.valueOf(500), "pizza");
+//
+//        for (AccountInfo acc : b.bank.getAccounts()) {
+//            System.out.print(acc.getUser().getFirstName() + " ");
+//            System.out.println(b.bank.getAccount(acc.getAccountId()).getBalance());
+//        }
+//
+//        b.makeTransaction("1111111111", "12", BigDecimal.valueOf(500), "pizza");
 //
 //        for (AccountInfo acc : b.bank.getAccounts()) {
 //            System.out.print(acc.getUser().getFirstName() + " ");

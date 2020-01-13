@@ -12,4 +12,6 @@ public interface IBankAdapter {
     void createAccount(Merchant merchant, BigDecimal initialBalance) throws BankServiceException;
 
     void makeTransaction(Customer from, Merchant to, BigDecimal amount, String comment) throws BankServiceException;
+
+    void makeTransaction(String customerCpr, String merchantCpr, BigDecimal amount, String comment) throws BankServiceException;
 }
