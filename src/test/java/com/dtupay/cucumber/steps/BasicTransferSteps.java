@@ -1,9 +1,6 @@
 package com.dtupay.cucumber.steps;
 
-import com.dtupay.app.Customer;
-import com.dtupay.app.DtuPayApp;
-import com.dtupay.app.IDtuPayApp;
-import com.dtupay.app.Merchant;
+import com.dtupay.app.*;
 import com.dtupay.cucumber.utils.Helper;
 import com.dtupay.database.ICustomerAdapter;
 import com.dtupay.database.IMerchantAdapter;
@@ -15,6 +12,7 @@ import cucumber.api.java.en.When;
 import dtu.ws.fastmoney.Bank;
 import org.junit.Assert;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +20,8 @@ public class BasicTransferSteps {
     Helper helper;
 
     List<String> accounts = new ArrayList<>();
-    int customerId;
-    int merchantId;
+    String customerId;
+    String merchantId;
 
     IDtuPayApp dtuPayApp;
     Bank bank;
@@ -31,6 +29,7 @@ public class BasicTransferSteps {
     IMerchantAdapter merchants;
     ITokenAdapter tokens;
 
+    Token token;
     boolean scanSuccessful;
 
 
@@ -47,13 +46,13 @@ public class BasicTransferSteps {
         accounts.add(helper.createBankAccount(arg1, arg2, arg3, arg4));
     }
 
-    @Given("^customer DTU Pay account \"([^\"]*)\", ID (\\d+), and (\\d+) unused token$")
-    public void customer_DTU_Pay_account_ID_and_unused_token(String arg1, int arg2, int arg3) throws Throwable {
+    @Given("^customer DTU Pay account \"([^\"]*)\", ID \"([^\"]*)\", and (\\d+) unused token$")
+    public void customerDTUPayAccountIDAndUnusedToken(String arg1, String arg2, int arg3) throws Throwable {
         customerId = helper.createDtuPayCustomer(arg1, arg2, arg3).getId();
     }
 
-    @Given("^merchant DTU Pay account \"([^\"]*)\", ID (\\d+), and (\\d+) tokens$")
-    public void merchant_DTU_Pay_account_ID_and_tokens(String arg1, int arg2, int arg3) throws Throwable {
+    @Given("^merchant DTU Pay account \"([^\"]*)\", ID \"([^\"]*)\", and (\\d+) tokens$")
+    public void merchantDTUPayAccountIDAndTokens(String arg1, String arg2, int arg3) throws Throwable {
         merchantId = helper.createDtuPayMerchant(arg1, arg2, arg3).getId();
     }
 
@@ -67,14 +66,17 @@ public class BasicTransferSteps {
         customer.setDtuPay(dtuPayApp);
         merchant.setDtuPay(dtuPayApp);
 
-        scanSuccessful = merchant.scanCustomerToken(customer.giveToken());
+        token = customer.giveToken();
+        scanSuccessful = merchant.scanCustomerToken(token);
         Assert.assertEquals(true, scanSuccessful);
     }
 
     @Then("^the amount (\\d+) is transferred to the merchant$")
     public void the_amount_is_transferred_to_the_merchant(int arg1) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        if (scanSuccessful){
+            Merchant merchant = merchants.getMerchantByMerchantId(merchantId);
+            merchant.requestTransfer(token, new BigDecimal(arg1), "Transfer");
+        }
     }
 
     @Then("^the balance of the customer is (\\d+)$")

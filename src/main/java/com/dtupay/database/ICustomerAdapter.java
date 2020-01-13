@@ -4,8 +4,8 @@ import com.dtupay.app.Customer;
 import com.dtupay.database.exceptions.*;
 
 public interface ICustomerAdapter {
-    Customer getCustomerByCustomerId(int id) throws CustomerDoesNotExist;
+    Customer getCustomerByCustomerId(String id) throws CustomerDoesNotExist;
     Customer createCustomer(Customer customer);
     Customer updateCustomer(Customer customer) throws CustomerDoesNotExist;
-    void deleteCustomerByCustomerId(int id) throws CustomerDoesNotExist;
+    void deleteCustomerByCustomerId(String id) throws CustomerDoesNotExist;
 }

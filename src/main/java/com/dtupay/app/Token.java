@@ -4,23 +4,23 @@ import java.util.UUID;
 
 public class Token {
     UUID id;
-    int customerId;
+    String customerId;
     boolean used;
 
     public Token() {
     }
 
-    public Token(UUID _id, int _customerId) {
+    public Token(UUID _id, String _customerId) {
         id = _id;
         customerId = _customerId;
         used = false;
     }
 
-    public void setCustomerId(int id) {
+    public void setCustomerId(String id) {
         this.customerId = id;
     }
 
-    public int getCustomerId() {
+    public String getCustomerId() {
         return this.customerId;
     }
 

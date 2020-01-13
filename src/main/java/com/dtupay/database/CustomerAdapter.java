@@ -12,19 +12,19 @@ public class CustomerAdapter implements ICustomerAdapter {
 
     public CustomerAdapter() {
         customers = new ArrayList<>();
-        customers.add(new Customer(1, "Casper"));
-        customers.add(new Customer(2, "Nela"));
-        customers.add(new Customer(3, "Ansh"));
-        customers.add(new Customer(4, "Danial"));
-        customers.add(new Customer(5, "Dmitry"));
-        customers.add(new Customer(6, "Isma"));
-        customers.add(new Customer(7, "Hilda"));
+        customers.add(new Customer("1", "Casper"));
+        customers.add(new Customer("2", "Nela"));
+        customers.add(new Customer("3", "Ansh"));
+        customers.add(new Customer("4", "Danial"));
+        customers.add(new Customer("5", "Dmitry"));
+        customers.add(new Customer("6", "Isma"));
+        customers.add(new Customer("7", "Hilda"));
     }
 
     @Override
-    public Customer getCustomerByCustomerId(int id) throws CustomerDoesNotExist {
+    public Customer getCustomerByCustomerId(String id) throws CustomerDoesNotExist {
         for (Customer c : customers) {
-            if (c.getId() == id) return c;
+            if (c.getId().equals(id)) return c;
         }
 
         throw new CustomerDoesNotExist(MessageFormat.format(
@@ -44,7 +44,7 @@ public class CustomerAdapter implements ICustomerAdapter {
     }
 
     @Override
-    public void deleteCustomerByCustomerId(int id) throws CustomerDoesNotExist {
+    public void deleteCustomerByCustomerId(String id) throws CustomerDoesNotExist {
         Customer customer = getCustomerByCustomerId(id);
         customers.remove(customer);
     }

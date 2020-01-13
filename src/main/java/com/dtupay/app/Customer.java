@@ -5,24 +5,24 @@ import java.util.List;
 
 public class Customer {
     String name;
-    int id;
+    String id;
     List<Token> tokens;
     IDtuPayApp dtuPay;
 
     public Customer() {
     }
 
-    public Customer(int _id, String _name) {
+    public Customer(String _id, String _name) {
         id = _id;
         name = _name;
         tokens = new ArrayList<>();
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

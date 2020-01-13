@@ -63,7 +63,7 @@ public class Helper {
         return accountId;
     }
 
-    public Customer createDtuPayCustomer(String name, int id, int tokens) {
+    public Customer createDtuPayCustomer(String name, String id, int tokens) {
         Customer customer = new Customer(id, name);
         customers.createCustomer(customer);
         tokenManager.CustomerGetTokens(customer, tokens);
@@ -75,7 +75,7 @@ public class Helper {
         return customer;
     }
 
-    public Merchant createDtuPayMerchant(String name, int id, int tokens) {
+    public Merchant createDtuPayMerchant(String name, String id, int tokens) {
         Merchant merchant = new Merchant(id, name);
         merchants.createMerchant(merchant);
         return merchant;
