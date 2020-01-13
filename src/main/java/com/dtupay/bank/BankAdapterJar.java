@@ -16,53 +16,44 @@ public class BankAdapterJar implements IBankAdapter {
     }
 
     @Override
-    public void createAccount(Customer customer, int initialBalance) {
+    public void createAccount(String name, String cpr, BigDecimal initialBalance) throws BankServiceException {
         User u = new User();
-        u.setFirstName(customer.getName());
-        u.setCprNumber(customer.getId());
+        u.setFirstName(name);
+        u.setLastName(name);
+        u.setCprNumber(cpr);
 
-        Account a = new Account();
-        a.setUser(u);
-        a.setBalance(BigDecimal.valueOf(initialBalance));
-
-        repo.createAccount(a);
+        bank.createAccountWithBalance(u, initialBalance);
     }
 
     @Override
-    public void createAccount(Merchant merchant, int initialBalance) {
-        User u = new User();
-        u.setFirstName(merchant.getName());
-
-        Account a = new Account();
-        a.setUser(u);
-        a.setId(String.valueOf(merchant.getId()));
-        a.setBalance(BigDecimal.valueOf(initialBalance));
-
-        repo.createAccount(a);
+    public void removeAccountByCpr(String cpr) throws BankServiceException {
+        bank.retireAccount(cpr);
     }
 
     @Override
-    public void makeTransaction(Customer from, Merchant to, int amount, String comment) throws BankServiceException {
-        String customerBankId = repo.readAccountByCpr(from.getId()).getId();
-        String merchantBankId = repo.readAccount(String.valueOf(to.getId())).getId();
-        bank.transferMoneyFromTo(customerBankId, merchantBankId, BigDecimal.valueOf(amount), comment);
+    public void makeTransaction(String customerCpr, String merchantCpr, BigDecimal amount, String comment) throws BankServiceException {
+        String customerBankId = repo.readAccountByCpr(customerCpr).getId();
+        String merchantBankId = repo.readAccountByCpr(merchantCpr).getId();
+        bank.transferMoneyFromTo(customerBankId, merchantBankId, amount, comment);
+    }
+
+    @Override
+    public BigDecimal getBalanceByCPR(String cpr) throws BankServiceException {
+        return bank.getAccountByCprNumber(cpr).getBalance();
     }
 
 //    public static void main(String[] args) throws Exception {
 //        BankAdapterJar b = new BankAdapterJar();
 //
-//        Customer dmr = new Customer("dmitry", "1111111111");
-//        Merchant bilka = new Merchant("12", "Bilka Horsens");
-//
-//        b.createAccount(dmr, 1000);
-//        b.createAccount(bilka, 100000);
+//        b.createAccount("Dmitry", "1", BigDecimal.valueOf(1000));
+//        b.createAccount("Bilka", "2", BigDecimal.valueOf(100000));
 //
 //        for (AccountInfo acc : b.bank.getAccounts()) {
 //            System.out.print(acc.getUser().getFirstName() + " ");
 //            System.out.println(b.bank.getAccount(acc.getAccountId()).getBalance());
 //        }
 //
-//        b.makeTransaction(dmr, bilka, 500, "pizza");
+//        b.makeTransaction("1", "2", BigDecimal.valueOf(500), "pizza");
 //
 //        for (AccountInfo acc : b.bank.getAccounts()) {
 //            System.out.print(acc.getUser().getFirstName() + " ");
