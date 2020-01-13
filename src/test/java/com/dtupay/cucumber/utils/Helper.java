@@ -5,12 +5,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.dtupay.app.*;
+import com.dtupay.bank.BankAdapterJar;
 import com.dtupay.bank.IBankAdapter;
 import com.dtupay.database.*;
 import com.dtupay.database.exceptions.CustomerDoesNotExist;
 import cucumber.api.java.After;
-import dtu.ws.fastmoney.Bank;
-import dtu.ws.fastmoney.User;
 
 public class Helper {
     public Set<String> usedBankAccounts = new HashSet<>();
@@ -22,8 +21,8 @@ public class Helper {
     private ITokenManagement tokenManager = new TokenManagement();
     public boolean errorHasOccured = false;
 
-    public Helper(BankFactory factory) {
-        this.bank = factory.createBank();
+    public Helper() {
+        this.bank = new BankAdapterJar();
         this.customers = new CustomerAdapter();
         this.merchants = new MerchantAdapter();
         this.tokens = new TokenAdapter();
