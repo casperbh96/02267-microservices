@@ -49,7 +49,7 @@ public class Token {
             return false;
         }
         Token otherToken = (Token) other;
-        return customerId == otherToken.customerId &&
+        return customerId.equals(otherToken.customerId) &&
                 used == otherToken.used &&
                 id.equals(otherToken.id);
     }
