@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class BasicTransferSteps {
     Helper helper;
@@ -70,7 +71,7 @@ public class BasicTransferSteps {
 
         token = customer.giveToken();
         scanSuccessful = merchant.scanCustomerToken(token);
-        assertEquals(true, scanSuccessful);
+        assertTrue(scanSuccessful);
     }
 
     @Then("^the amount (\\d+) is transferred to the merchant$")

@@ -1,15 +1,19 @@
 package com.dtupay.cucumber.utils;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 import com.dtupay.app.*;
-import com.dtupay.bank.BankAdapterJar;
+//import com.dtupay.bank.BankAdapterJar;
+import com.dtupay.bank.BankAdapterSoap;
 import com.dtupay.bank.IBankAdapter;
 import com.dtupay.database.*;
 import com.dtupay.database.exceptions.CustomerDoesNotExist;
 import cucumber.api.java.After;
+import cucumber.api.java.Before;
+import dtu.ws.fastmoney.AccountInfo;
 
 public class Helper {
     public Set<String> usedBankAccounts = new HashSet<>();
@@ -22,10 +26,16 @@ public class Helper {
     public boolean errorHasOccured = false;
 
     public Helper() {
-        this.bank = new BankAdapterJar();
+//        this.bank = new BankAdapterJar();
+        this.bank = new BankAdapterSoap();
         this.customers = new CustomerAdapter();
         this.merchants = new MerchantAdapter();
         this.tokens = new TokenAdapter();
+    }
+
+    @Before
+    public void deleteSomeAccount() throws Exception {
+        bank.deleteAllAccounts();
     }
 
     public IBankAdapter getBank() {
@@ -66,6 +76,8 @@ public class Helper {
         bank.createAccount(name, cpr, BigDecimal.valueOf(initialBalance));
         usedBankAccounts.add(cpr);
     }
+
+
 
     @After
     public void retireUsedAccounts() {

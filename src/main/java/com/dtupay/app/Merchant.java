@@ -46,7 +46,7 @@ public class Merchant {
         return dtuPay.checkTokenValidity(customerToken);
     }
 
-    public void requestTransfer(Token token, BigDecimal amount, String description) throws BankServiceException {
+    public void requestTransfer(Token token, BigDecimal amount, String description) throws Exception {
         dtuPay.transferMoney(this.id, token, amount, description);
     }
 }

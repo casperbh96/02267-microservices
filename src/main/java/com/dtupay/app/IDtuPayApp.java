@@ -7,5 +7,5 @@ import java.math.BigDecimal;
 
 public interface IDtuPayApp {
     boolean checkTokenValidity(Token token);
-    void transferMoney(String merchantId, Token merchantToken, BigDecimal amount, String description) throws BankServiceException;
+    void transferMoney(String merchantId, Token merchantToken, BigDecimal amount, String description) throws Exception;
 }

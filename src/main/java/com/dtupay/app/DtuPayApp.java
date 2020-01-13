@@ -32,7 +32,7 @@ public class DtuPayApp implements IDtuPayApp {
     }
 
     @Override
-    public void transferMoney(String merchantId, Token merchantToken, BigDecimal amount, String description) throws BankServiceException{
+    public void transferMoney(String merchantId, Token merchantToken, BigDecimal amount, String description) throws Exception {
         // assumption that token is valid at this point..
 
         bank.makeTransaction(merchantToken.customerId, merchantId, amount, description);
