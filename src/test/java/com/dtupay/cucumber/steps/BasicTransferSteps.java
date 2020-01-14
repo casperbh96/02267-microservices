@@ -6,16 +6,11 @@ import com.dtupay.cucumber.utils.Helper;
 import com.dtupay.database.ICustomerAdapter;
 import com.dtupay.database.IMerchantAdapter;
 import com.dtupay.database.ITokenAdapter;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import dtu.ws.fastmoney.Bank;
-import org.junit.Assert;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 

@@ -17,7 +17,7 @@ public class TokenManagement implements ITokenManagement {
     }
 
     @Override
-    public void CustomerGetTokens(Customer customer, int numTokens) {
+    public void CustomerGetTokens(Customer customer, int numTokens, ITokenAdapter tokens) {
         if (CanCustomerGetTokens(customer, numTokens)) {
             for (int i = 0; i < numTokens; i++) {
                 Token token = new Token();
@@ -25,6 +25,7 @@ public class TokenManagement implements ITokenManagement {
                 token.customerId = customer.getId();
                 token.used = false;
                 customer.tokens.add(token);
+                tokens.createToken(token);
             }
         } else {
             throw new RuntimeException("Customer is unable to receive new tokens");
