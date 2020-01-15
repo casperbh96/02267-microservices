@@ -2,7 +2,7 @@ package com.dtupay.junit;
 
 import com.dtupay.bank.BankAdapter;
 import com.dtupay.bank.IBankAdapter;
-import dtu.ws.fastmoney.BankServiceException_Exception;
+import com.dtupay.bank.exceptions.BankAdapterException;
 import dtu.ws.fastmoney.User;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +18,7 @@ public class BankAdapterTest {
     String cpr;
 
     @Before
-    public void Setup() throws BankServiceException_Exception {
+    public void Setup() throws BankAdapterException {
         bankAdapter = new BankAdapter();
         bankAdapter.deleteAllAccounts();
         user = new User();
@@ -27,36 +27,36 @@ public class BankAdapterTest {
     }
 
     @Test
-    public void CreateAccountWithNoException() throws BankServiceException_Exception {
+    public void CreateAccountWithNoException() throws BankAdapterException {
         bankAdapter.createAccount("test", cpr, big);
     }
 
-    @Test(expected = BankServiceException_Exception.class)
-    public void ChecksIfThereIsThrownAnExceptionWhenGivingWrongInputsToCreateAccount() throws BankServiceException_Exception {
+    @Test(expected = BankAdapterException.class)
+    public void ChecksIfThereIsThrownAnExceptionWhenGivingWrongInputsToCreateAccount() throws BankAdapterException {
         bankAdapter.createAccount(null, cpr, big);
     }
 
-    @Test(expected = BankServiceException_Exception.class)
-    public void ThrowsAExceptionWhenAccoutIsDeletedAndTryingToFindIt() throws BankServiceException_Exception {
+    @Test(expected = BankAdapterException.class)
+    public void ThrowsAExceptionWhenAccoutIsDeletedAndTryingToFindIt() throws BankAdapterException {
         bankAdapter.createAccount("test", cpr, big);
         bankAdapter.removeAccountByCpr(cpr);
         bankAdapter.getBalanceByCPR(cpr);
     }
 
     @Test
-    public void ReturnsTheValueOfTheBalanceOfAAccount() throws BankServiceException_Exception {
+    public void ReturnsTheValueOfTheBalanceOfAAccount() throws BankAdapterException {
         bankAdapter.createAccount("Test", cpr, big);
         BigDecimal actual = bankAdapter.getBalanceByCPR(cpr);
         assertEquals(big, actual);
     }
 
-    @Test(expected = BankServiceException_Exception.class)
-    public void ThrowsAExceptionWhenTryingToGetBalanceFromANonExitingAccount() throws BankServiceException_Exception {
+    @Test(expected = BankAdapterException.class)
+    public void ThrowsAExceptionWhenTryingToGetBalanceFromANonExitingAccount() throws BankAdapterException {
         bankAdapter.getBalanceByCPR(cpr);
     }
 
     @Test
-    public void MoneyShouldBeTransferredFromCustomerToMerchant() throws BankServiceException_Exception {
+    public void MoneyShouldBeTransferredFromCustomerToMerchant() throws BankAdapterException {
         bankAdapter.createAccount("Test", cpr, big);
         bankAdapter.createAccount("MerchantCpr", "1231231234", big);
         bankAdapter.makeTransaction(cpr, "1231231234", big, "TestComment");
