@@ -5,6 +5,7 @@
 /target
 /bank/doc
 /bank/*.settings
+/generated
 
 # Compiled class file
 *.class
