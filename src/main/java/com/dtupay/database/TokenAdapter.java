@@ -1,9 +1,8 @@
 package com.dtupay.database;
 
-import com.dtupay.app.Customer;
+import com.dtupay.app.ITokenManagement;
 import com.dtupay.app.Token;
 import com.dtupay.app.TokenManagement;
-import com.dtupay.database.exceptions.CustomerDoesNotExist;
 import com.dtupay.database.exceptions.CustomerHasNoUnusedToken;
 
 import java.text.MessageFormat;
@@ -11,11 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TokenAdapter implements ITokenAdapter {
-    List<Token> tokens;
-    CustomerAdapter dbCustomer = new CustomerAdapter();
-    TokenManagement tokenManager = new TokenManagement();
+    public List<Token> tokens;
+    ICustomerAdapter dbCustomer;
+    ITokenManagement tokenManager;
 
     public TokenAdapter() {
+        dbCustomer = new CustomerAdapter();
+        tokenManager = new TokenManagement();
         tokens = new ArrayList<>();
         tokens.add(new Token(tokenManager.GetToken(), "1"));
         tokens.add(new Token(tokenManager.GetToken(), "2"));
@@ -29,7 +30,7 @@ public class TokenAdapter implements ITokenAdapter {
     @Override
     public Token getUnusedTokenByCustomerId(String id) throws CustomerHasNoUnusedToken{
         for (Token t : tokens) {
-            if (t.getCustomerId().equals(id) && t.getUsed() == false) return t;
+            if (t.getCustomerId().equals(id) && !t.getUsed()) return t;
         }
 
         throw new CustomerHasNoUnusedToken(MessageFormat.format(

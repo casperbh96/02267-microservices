@@ -1,7 +1,5 @@
 package com.dtupay.bank;
 
-import com.dtupay.app.Customer;
-import com.dtupay.app.Merchant;
 import dtu.ws.fastmoney.*;
 import dtu.ws.fastmoney.persistency.*;
 
