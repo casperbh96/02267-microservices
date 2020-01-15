@@ -5,7 +5,7 @@ import dtu.ws.fastmoney.*;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class BankAdapterSoap implements IBankAdapter {
+public class BankAdapter implements IBankAdapter {
     BankService bank = new BankServiceService().getBankServicePort();
 
     @Override

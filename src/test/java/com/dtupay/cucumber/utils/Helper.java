@@ -6,11 +6,10 @@ import java.util.Set;
 
 import com.dtupay.app.*;
 //import com.dtupay.bank.BankAdapterJar;
-import com.dtupay.bank.BankAdapterSoap;
+import com.dtupay.bank.BankAdapter;
 import com.dtupay.bank.IBankAdapter;
 import com.dtupay.database.*;
 import cucumber.api.java.After;
-import cucumber.api.java.Before;
 
 public class Helper {
     public Set<String> usedBankAccounts = new HashSet<>();
@@ -24,7 +23,7 @@ public class Helper {
 
     public Helper() {
 //        this.bank = new BankAdapterJar();
-        this.bank = new BankAdapterSoap();
+        this.bank = new BankAdapter();
         this.customers = new CustomerAdapter();
         this.merchants = new MerchantAdapter();
         this.tokens = new TokenAdapter();

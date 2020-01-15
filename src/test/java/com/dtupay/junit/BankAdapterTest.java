@@ -1,10 +1,9 @@
 package com.dtupay.junit;
 
-import com.dtupay.bank.BankAdapterSoap;
+import com.dtupay.bank.BankAdapter;
 import com.dtupay.bank.IBankAdapter;
 import dtu.ws.fastmoney.BankServiceException_Exception;
 import dtu.ws.fastmoney.User;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,7 +19,7 @@ public class BankAdapterTest {
 
     @Before
     public void Setup() throws BankServiceException_Exception {
-        bankAdapter = new BankAdapterSoap();
+        bankAdapter = new BankAdapter();
         bankAdapter.deleteAllAccounts();
         user = new User();
         big = new BigDecimal(99999);

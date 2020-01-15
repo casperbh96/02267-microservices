@@ -1,7 +1,7 @@
 package com.dtupay.junit;
 
 import com.dtupay.app.*;
-import com.dtupay.bank.BankAdapterSoap;
+import com.dtupay.bank.BankAdapter;
 import com.dtupay.bank.IBankAdapter;
 import com.dtupay.database.*;
 import com.dtupay.database.exceptions.CustomerDoesNotExist;
@@ -28,7 +28,7 @@ public class DtuPayAppTest {
 
     @Before
     public void Setup() throws MerchantDoesNotExist, BankServiceException_Exception {
-        bank = new BankAdapterSoap();
+        bank = new BankAdapter();
         bank.deleteAllAccounts();
         customerAdapter = new CustomerAdapter();
         merchantAdapter = new MerchantAdapter();
