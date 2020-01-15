@@ -9,9 +9,6 @@ For running in IntelliJ
     - `mvn install`
 3. From IntelliJ, open the Maven sidebar in the top right and press the left-most button, that looks like a sync button.
 
-  
-1. Make sure that you are in the root of the project 
-2. `mvn install`
-3. `mvn package`
-4. `java -jar target/calculator-artifact-thorntail.jar`
+For running a service in Terminal:
 
+1. `java -jar target/calculator-artifact-thorntail.jar`
