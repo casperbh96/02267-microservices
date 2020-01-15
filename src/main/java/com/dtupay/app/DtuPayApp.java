@@ -1,10 +1,10 @@
 package com.dtupay.app;
 
+import com.dtupay.bank.exceptions.BankAdapterException;
 import com.dtupay.database.ICustomerAdapter;
 import com.dtupay.database.IMerchantAdapter;
 import com.dtupay.database.ITokenAdapter;
 import com.dtupay.bank.IBankAdapter;
-import dtu.ws.fastmoney.BankServiceException_Exception;
 
 import java.math.BigDecimal;
 
@@ -32,7 +32,7 @@ public class DtuPayApp implements IDtuPayApp {
     }
 
     @Override
-    public void transferMoney(String merchantId, Token customerToken, BigDecimal amount, String description) throws BankServiceException_Exception {
+    public void transferMoney(String merchantId, Token customerToken, BigDecimal amount, String description) throws BankAdapterException {
         // assumption that token is valid at this point..
         bank.makeTransaction(customerToken.customerId, merchantId, amount, description);
     }
