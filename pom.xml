@@ -59,7 +59,7 @@
                         </goals>
                         <configuration>
                             <sources>
-                                <source>./target/generated/src/main/java</source>
+                                <source>./generated/wsdl-bank-classes</source>
                             </sources>
                         </configuration>
                     </execution>
