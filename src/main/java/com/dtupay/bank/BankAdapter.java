@@ -1,5 +1,6 @@
 package com.dtupay.bank;
 
+import com.dtupay.bank.exceptions.BankAdapterException;
 import dtu.ws.fastmoney.*;
 
 import java.math.BigDecimal;
@@ -9,36 +10,56 @@ public class BankAdapter implements IBankAdapter {
     BankService bank = new BankServiceService().getBankServicePort();
 
     @Override
-    public void createAccount(String name, String cpr, BigDecimal initialBalance) throws BankServiceException_Exception {
+    public void createAccount(String name, String cpr, BigDecimal initialBalance) throws BankAdapterException {
         User u = new User();
         u.setFirstName(name);
         u.setLastName(name);
         u.setCprNumber(cpr);
-        bank.createAccountWithBalance(u, initialBalance);
+        try {
+            bank.createAccountWithBalance(u, initialBalance);
+        } catch (BankServiceException_Exception e) {
+            throw new BankAdapterException(e.getMessage());
+        }
     }
 
     @Override
-    public void removeAccountByCpr(String cpr) throws BankServiceException_Exception {
-        bank.retireAccount(cpr);
+    public void removeAccountByCpr(String cpr) throws BankAdapterException {
+        try {
+            bank.retireAccount(cpr);
+        } catch (BankServiceException_Exception e) {
+            throw new BankAdapterException(e.getMessage());
+        }
     }
 
     @Override
-    public void makeTransaction(String customerCpr, String merchantCpr, BigDecimal amount, String comment) throws BankServiceException_Exception {
-        String customerBankId = bank.getAccountByCprNumber(customerCpr).getId();
-        String merchantBankId = bank.getAccountByCprNumber(merchantCpr).getId();
-        bank.transferMoneyFromTo(customerBankId, merchantBankId, amount, comment);
+    public void makeTransaction(String customerCpr, String merchantCpr, BigDecimal amount, String comment) throws BankAdapterException {
+        try {
+            String customerBankId = bank.getAccountByCprNumber(customerCpr).getId();
+            String merchantBankId = bank.getAccountByCprNumber(merchantCpr).getId();
+            bank.transferMoneyFromTo(customerBankId, merchantBankId, amount, comment);
+        } catch (BankServiceException_Exception e) {
+            throw new BankAdapterException(e.getMessage());
+        }
     }
 
     @Override
-    public BigDecimal getBalanceByCPR(String cpr) throws BankServiceException_Exception {
-        return bank.getAccountByCprNumber(cpr).getBalance();
+    public BigDecimal getBalanceByCPR(String cpr) throws BankAdapterException {
+        try {
+            return bank.getAccountByCprNumber(cpr).getBalance();
+        } catch (BankServiceException_Exception e) {
+            throw new BankAdapterException(e.getMessage());
+        }
     }
 
     @Override
-    public void deleteAllAccounts() throws BankServiceException_Exception {
+    public void deleteAllAccounts() throws BankAdapterException {
         List<AccountInfo> accounts = bank.getAccounts();
-        for (AccountInfo acc : accounts){
-            bank.retireAccount(acc.getAccountId());
+        for (AccountInfo acc : accounts) {
+            try {
+                bank.retireAccount(acc.getAccountId());
+            } catch (BankServiceException_Exception e) {
+                throw new BankAdapterException(e.getMessage());
+            }
         }
     }
 
