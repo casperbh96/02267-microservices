@@ -11,12 +11,12 @@ node {
     stage ('JUnit tests') {
         checkout scm
         sh 'mvn install'
-        sh 'mvn test'
+        sh 'mvn -D test=com.dtupay.junit.** test'
     }
 
     stage ('Cucumber tests') {
         checkout scm
         sh 'mvn install'
-        sh 'mvn -D test=CucumberTest test'
+        sh 'mvn -D test=com.dtupay.cucumber.** test'
     }
 }

@@ -49,12 +49,18 @@ public class Helper {
     public Customer createDtuPayCustomer(String name, String id, int tokens) {
         Customer customer = new Customer(id, name);
         customers.createCustomer(customer);
-        tokenManager.CustomerGetTokens(customer, tokens);
+        tokenManager.CustomerGetTokens(customer, tokens, this.tokens);
+        return customer;
+    }
 
-        //TODO: this part should be taken care of by the token manager
-        for (Token token : customer.getTokens()) {
-            this.tokens.createToken(token);
+    public Customer createDtuPayCustomerUsedToken(String name, String id, int tokens) {
+        Customer customer = new Customer(id, name);
+        customers.createCustomer(customer);
+        tokenManager.CustomerGetTokens(customer, tokens, this.tokens);
+        for (Token token : customer.getTokens()){
+            token.setUsed(true);
         }
+
         return customer;
     }
 
