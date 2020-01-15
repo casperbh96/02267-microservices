@@ -35,7 +35,7 @@ public class BankAdapterSoap implements IBankAdapter {
     }
 
     @Override
-    public void deleteAllAccounts() throws Exception {
+    public void deleteAllAccounts() throws BankServiceException_Exception {
         List<AccountInfo> accounts = bank.getAccounts();
         for (AccountInfo acc : accounts){
             bank.retireAccount(acc.getAccountId());
