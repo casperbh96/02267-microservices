@@ -3,8 +3,6 @@
 .DS_store
 *.lst
 /target
-/bank/doc
-/bank/*.settings
 /generated
 
 # Compiled class file
