@@ -5,10 +5,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.dtupay.app.*;
-import com.dtupay.bank.BankAdapterJar;
+//import com.dtupay.bank.BankAdapterJar;
+import com.dtupay.bank.BankAdapter;
 import com.dtupay.bank.IBankAdapter;
 import com.dtupay.database.*;
-import com.dtupay.database.exceptions.CustomerDoesNotExist;
 import cucumber.api.java.After;
 
 public class Helper {
@@ -22,7 +22,8 @@ public class Helper {
     public boolean errorHasOccured = false;
 
     public Helper() {
-        this.bank = new BankAdapterJar();
+//        this.bank = new BankAdapterJar();
+        this.bank = new BankAdapter();
         this.customers = new CustomerAdapter();
         this.merchants = new MerchantAdapter();
         this.tokens = new TokenAdapter();
@@ -76,10 +77,11 @@ public class Helper {
     @After
     public void retireUsedAccounts() {
         for (String cpr : usedBankAccounts) {
+            System.out.println(cpr);
             try {
                 bank.removeAccountByCpr(cpr);
             } catch (Exception e) {
-                // ignore: account does not exist anymore
+                System.out.println(e);
             }
         }
         usedBankAccounts.clear();
