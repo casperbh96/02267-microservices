@@ -3,7 +3,6 @@ package com.dtupay.bank;
 import dtu.ws.fastmoney.*;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 public class BankAdapterSoap implements IBankAdapter {
