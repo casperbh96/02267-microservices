@@ -1,13 +1,13 @@
 package com.dtupay.junit;
 
 import com.dtupay.app.*;
-import com.dtupay.bank.BankAdapterJar;
+import com.dtupay.bank.BankAdapter;
 import com.dtupay.bank.IBankAdapter;
 import com.dtupay.database.*;
 import com.dtupay.database.exceptions.CustomerDoesNotExist;
 import com.dtupay.database.exceptions.CustomerHasNoUnusedToken;
 import com.dtupay.database.exceptions.MerchantDoesNotExist;
-import dtu.ws.fastmoney.BankServiceException;
+import dtu.ws.fastmoney.BankServiceException_Exception;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,8 +27,9 @@ public class DtuPayAppTest {
     String description;
 
     @Before
-    public void Setup() throws MerchantDoesNotExist {
-        bank = new BankAdapterJar();
+    public void Setup() throws MerchantDoesNotExist, BankServiceException_Exception {
+        bank = new BankAdapter();
+        bank.deleteAllAccounts();
         customerAdapter = new CustomerAdapter();
         merchantAdapter = new MerchantAdapter();
         tokenAdapter = new TokenAdapter();
@@ -69,7 +70,7 @@ public class DtuPayAppTest {
     }
 
     @Test
-    public void transferMoneyFromExistingCustomerToExistingMerchant() throws MerchantDoesNotExist, CustomerHasNoUnusedToken, CustomerDoesNotExist, BankServiceException {
+    public void transferMoneyFromExistingCustomerToExistingMerchant() throws MerchantDoesNotExist, CustomerHasNoUnusedToken, CustomerDoesNotExist, BankServiceException_Exception {
         BigDecimal amount = new BigDecimal(200.0);
 
         bank.createAccount(merchant.getName(), merchant.getId(), new BigDecimal(200.0));
@@ -80,16 +81,16 @@ public class DtuPayAppTest {
         Assert.assertEquals(new BigDecimal(400.0), balance);
     }
 
-    @Test(expected=NullPointerException.class)
-    public void transferMoneyFromExistingCustomerToMerchantThatDoesNotExist() throws MerchantDoesNotExist, CustomerHasNoUnusedToken, CustomerDoesNotExist, BankServiceException {
+    @Test(expected=BankServiceException_Exception.class)
+    public void transferMoneyFromExistingCustomerToMerchantThatDoesNotExist() throws MerchantDoesNotExist, CustomerHasNoUnusedToken, CustomerDoesNotExist, BankServiceException_Exception {
         BigDecimal amount = new BigDecimal(200.0);
 
         bank.createAccount(customer.getName(), customer.getId(), new BigDecimal(200.0));
         dtupay.transferMoney("1", token, amount, description);
     }
 
-    @Test(expected=BankServiceException.class)
-    public void transferMoneyByNegativeAmountFromCustomerToMerchant() throws BankServiceException, MerchantDoesNotExist {
+    @Test(expected=BankServiceException_Exception.class)
+    public void transferMoneyByNegativeAmountFromCustomerToMerchant() throws BankServiceException_Exception, MerchantDoesNotExist {
         BigDecimal amount = new BigDecimal(-200.0);
 
         bank.createAccount(merchant.getName(), merchant.getId(), new BigDecimal(200.0));
@@ -97,8 +98,8 @@ public class DtuPayAppTest {
         dtupay.transferMoney(merchant.getId(), token, amount, description);
     }
 
-    @Test(expected=BankServiceException.class)
-    public void transferMoneyFromCustomerWithNegativeBalanceToMerchant() throws BankServiceException, MerchantDoesNotExist {
+    @Test(expected=BankServiceException_Exception.class)
+    public void transferMoneyFromCustomerWithNegativeBalanceToMerchant() throws BankServiceException_Exception, MerchantDoesNotExist {
         BigDecimal amount = new BigDecimal(200.0);
 
         bank.createAccount(merchant.getName(), merchant.getId(), new BigDecimal(200.0));

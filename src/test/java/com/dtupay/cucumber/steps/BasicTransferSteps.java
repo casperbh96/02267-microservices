@@ -6,6 +6,7 @@ import com.dtupay.cucumber.utils.Helper;
 import com.dtupay.database.ICustomerAdapter;
 import com.dtupay.database.IMerchantAdapter;
 import com.dtupay.database.ITokenAdapter;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -13,6 +14,7 @@ import cucumber.api.java.en.When;
 import java.math.BigDecimal;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class BasicTransferSteps {
     Helper helper;
@@ -36,6 +38,11 @@ public class BasicTransferSteps {
         this.customers = helper.getCustomers();
         this.merchants = helper.getMerchants();
         this.tokens = helper.getTokens();
+    }
+
+    @Before
+    public void deleteeAccount() throws Exception {
+        bank.deleteAllAccounts();
     }
 
     @Given("^customer DTU Pay account \"([^\"]*)\", ID \"([^\"]*)\", and (\\d+) unused token$")
@@ -65,7 +72,7 @@ public class BasicTransferSteps {
 
         token = customer.giveToken();
         scanSuccessful = merchant.scanCustomerToken(token);
-        assertEquals(true, scanSuccessful);
+        assertTrue(scanSuccessful);
     }
 
     @Then("^the amount (\\d+) is transferred to the merchant$")
