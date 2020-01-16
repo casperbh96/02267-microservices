@@ -2,11 +2,7 @@ package com.dtupay.database;
 
 import com.dtupay.app.Customer;
 import com.dtupay.database.exceptions.CustomerDoesNotExist;
-<<<<<<< Updated upstream
-=======
-import com.dtupay.database.exceptions.NoCustomers;
 import com.mysql.cj.jdbc.MysqlDataSource;
->>>>>>> Stashed changes
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -38,14 +34,6 @@ public class CustomerAdapter implements ICustomerAdapter {
     }
 
     @Override
-<<<<<<< Updated upstream
-=======
-    public List<Customer> getAllCustomers() throws NoCustomers {
-        return customers;
-    }
-
-    @Override
->>>>>>> Stashed changes
     public Customer getCustomerByCustomerId(String id) throws CustomerDoesNotExist {
         for (Customer c : customers) {
             if (c.getId().equals(id)) return c;
