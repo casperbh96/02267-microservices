@@ -21,7 +21,7 @@ public class TokenAdapterTest {
     ITokenAdapter tokenAdapter;
     Token token;
     Customer customer;
-    String customerId = "99";
+    int customerId = 99;
 
     @Before
     public void Setup() {

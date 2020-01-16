@@ -13,8 +13,8 @@ public class MerchantAdapter implements IMerchantAdapter {
 
     public MerchantAdapter() {
         merchants = new ArrayList<>();
-        merchants.add(new Merchant("1", "DTU Canteen"));
-        merchants.add(new Merchant("2", "DTU Library"));
+        merchants.add(new Merchant(1, "DTU Canteen"));
+        merchants.add(new Merchant(2, "DTU Library"));
     }
 
     @Override
@@ -23,9 +23,9 @@ public class MerchantAdapter implements IMerchantAdapter {
     }
 
     @Override
-    public Merchant getMerchantByMerchantId(String id) throws MerchantDoesNotExist {
+    public Merchant getMerchantByMerchantId(int id) throws MerchantDoesNotExist {
         for (Merchant m : merchants) {
-            if (m.getId().equals(id)) return m;
+            if (m.getId() == id) return m;
         }
 
         throw new MerchantDoesNotExist(MessageFormat.format(
@@ -45,7 +45,7 @@ public class MerchantAdapter implements IMerchantAdapter {
     }
 
     @Override
-    public void deleteMerchantByMerchantId(String id) throws MerchantDoesNotExist {
+    public void deleteMerchantByMerchantId(int id) throws MerchantDoesNotExist {
         Merchant merchant = getMerchantByMerchantId(id);
         merchants.remove(merchant);
     }

@@ -10,13 +10,13 @@ import java.util.List;
 
 public class Merchant {
     String name;
-    String id;
+    int id;
     IDtuPayApp dtuPay;
 
     public Merchant() {
     }
 
-    public Merchant(String _id, String _name) {
+    public Merchant(int _id, String _name) {
         id = _id;
         name = _name;
     }
@@ -29,11 +29,11 @@ public class Merchant {
         this.name = name;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

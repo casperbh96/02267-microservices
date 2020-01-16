@@ -7,15 +7,14 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.sql.*;
 import java.text.MessageFormat;
 
 public class Connector {
 
-    public MysqlDataSource dataSource;
+    public static MysqlDataSource dataSource;
 
-    public MysqlDataSource createConnection() throws SQLException {
+    public static Connection createConnection() throws SQLException {
         dataSource = new MysqlDataSource();
 
         try {
@@ -25,10 +24,27 @@ public class Connector {
             dataSource.setPort(5000);
             dataSource.setDatabaseName("DTUPay");
             dataSource.setCreateDatabaseIfNotExist(true);
+
+            createTablesIfNotExists(dataSource);
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return dataSource;
+        return getConnection(dataSource);
+    }
+
+    public static Connection getConnection(MysqlDataSource db) throws SQLException {
+        return db.getConnection();
+    }
+
+    private static void createTablesIfNotExists(MysqlDataSource db) throws SQLException {
+        try (Connection connection = getConnection(db)) {
+            String sql = "CREATE TABLE IF NOT EXISTS customer (id INTEGER AUTO_INCREMENT, name VARCHAR(255), PRIMARY KEY (id))";
+            Statement query = connection.createStatement();
+            int success = query.executeUpdate(sql);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 }

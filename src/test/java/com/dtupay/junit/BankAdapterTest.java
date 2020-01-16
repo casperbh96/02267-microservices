@@ -16,14 +16,14 @@ public class BankAdapterTest {
     IBankAdapter bankAdapter;
     User user;
     BigDecimal big;
-    String cpr;
+    int cpr;
 
     @Before
     public void Setup() throws BankAdapterException {
         bankAdapter = new BankAdapter();
         user = new User();
         big = new BigDecimal(99999);
-        cpr = "1234561234";
+        cpr = 1234561234;
     }
 
     @After
@@ -63,8 +63,8 @@ public class BankAdapterTest {
     @Test
     public void MoneyShouldBeTransferredFromCustomerToMerchant() throws BankAdapterException {
         bankAdapter.createAccount("Test", cpr, big);
-        bankAdapter.createAccount("MerchantCpr", "1231231234", big);
-        bankAdapter.makeTransaction(cpr, "1231231234", big, "TestComment");
+        bankAdapter.createAccount("MerchantCpr", 1231231234, big);
+        bankAdapter.makeTransaction(cpr, 1231231234, big, "TestComment");
         BigDecimal actual = bankAdapter.getBalanceByCPR(cpr);
         BigDecimal expected = BigDecimal.valueOf(0);
         assertEquals(expected, actual);
