@@ -1,7 +1,9 @@
 package com.dtupay.cucumber.utils;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.dtupay.app.*;
@@ -56,9 +58,22 @@ public class Helper {
         Customer customer = new Customer(id, name);
         customers.createCustomer(customer);
         tokenManager.CustomerGetTokens(customer, tokens, this.tokens);
-        for (Token token : customer.getTokens()){
+        for (Token token : customer.getTokens()) {
             token.setUsed(true);
         }
+
+        return customer;
+    }
+
+
+    public Customer createDtuPayCustomerInvalidToken(String name, String id, int tokens) {
+        Customer customer = new Customer(id, name);
+        customers.createCustomer(customer);
+        List<Token> tokenList = new ArrayList<>();
+        for (int i = 0; i < tokens; i++) {
+            tokenList.add(new Token());
+        }
+        customer.setTokens(tokenList);
 
         return customer;
     }

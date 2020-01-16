@@ -1,5 +1,7 @@
 package com.dtupay.app;
 
+import com.dtupay.database.exceptions.FakeToken;
+import com.dtupay.database.exceptions.TokenAlreadyUsed;
 import dtu.ws.fastmoney.BankServiceException;
 
 import java.math.BigDecimal;
@@ -11,9 +13,10 @@ public class Merchant {
     String id;
     IDtuPayApp dtuPay;
 
-    public Merchant () {}
+    public Merchant() {
+    }
 
-    public Merchant( String _id, String _name) {
+    public Merchant(String _id, String _name) {
         id = _id;
         name = _name;
     }
@@ -42,7 +45,7 @@ public class Merchant {
         this.dtuPay = dtuPay;
     }
 
-    public boolean scanCustomerToken(Token customerToken){
+    public boolean scanCustomerToken(Token customerToken) throws FakeToken, TokenAlreadyUsed {
         return dtuPay.checkTokenValidity(customerToken);
     }
 

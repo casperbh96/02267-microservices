@@ -5,6 +5,8 @@ import com.dtupay.database.ICustomerAdapter;
 import com.dtupay.database.IMerchantAdapter;
 import com.dtupay.database.ITokenAdapter;
 import com.dtupay.bank.IBankAdapter;
+import com.dtupay.database.exceptions.FakeToken;
+import com.dtupay.database.exceptions.TokenAlreadyUsed;
 
 import java.math.BigDecimal;
 
@@ -24,11 +26,9 @@ public class DtuPayApp implements IDtuPayApp {
     }
 
     @Override
-    public boolean checkTokenValidity(Token token) {
+    public boolean checkTokenValidity(Token token) throws FakeToken, TokenAlreadyUsed {
         // TODO: also check the customerID who provided the token?
-        if (tokens.checkExists(token) && !token.used)
-            return true;
-        return false;
+        return tokens.checkToken(token);
     }
 
     @Override

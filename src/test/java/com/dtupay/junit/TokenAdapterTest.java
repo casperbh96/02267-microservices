@@ -7,6 +7,8 @@ import com.dtupay.database.ICustomerAdapter;
 import com.dtupay.database.ITokenAdapter;
 import com.dtupay.database.TokenAdapter;
 import com.dtupay.database.exceptions.CustomerHasNoUnusedToken;
+import com.dtupay.database.exceptions.FakeToken;
+import com.dtupay.database.exceptions.TokenAlreadyUsed;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,12 +45,12 @@ public class TokenAdapterTest {
     }
 
     @Test
-    public void CreateATokenAndChecksIfTheTokenHasBeenAdded(){
+    public void CreateATokenAndChecksIfTheTokenHasBeenAdded() throws FakeToken, TokenAlreadyUsed {
         tokenAdapter.createToken(token);
-        Assert.assertTrue(tokenAdapter.checkExists(token));
+        Assert.assertTrue(tokenAdapter.checkToken(token));
     }
 
-    private void CreateCustomer(boolean used){
+    private void CreateCustomer(boolean used) {
         customerAdapter.createCustomer(customer);
         token.setUsed(used);
         tokenAdapter.createToken(token);
