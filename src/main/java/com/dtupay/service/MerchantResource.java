@@ -10,8 +10,8 @@ import javax.ws.rs.core.Response;
 
 
 @Path("/merchant")
-@Produces("text/json")
-@Consumes("text/json")
+@Produces("application/json")
+@Consumes("application/json")
 public class MerchantResource {
 
     IMerchantAdapter m = new MerchantAdapter();
