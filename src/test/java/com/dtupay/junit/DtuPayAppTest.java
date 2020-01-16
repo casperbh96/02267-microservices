@@ -7,6 +7,7 @@ import com.dtupay.bank.exceptions.BankAdapterException;
 import com.dtupay.database.*;
 import com.dtupay.database.exceptions.*;
 import gherkin.lexer.Fa;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +29,6 @@ public class DtuPayAppTest {
     @Before
     public void Setup() throws MerchantDoesNotExist, BankAdapterException {
         bank = new BankAdapter();
-        bank.deleteAllAccounts();
         customerAdapter = new CustomerAdapter();
         merchantAdapter = new MerchantAdapter();
         tokenAdapter = new TokenAdapter();
@@ -40,6 +40,11 @@ public class DtuPayAppTest {
         token = new Token(tokenManager.GetToken(), customer.getId());
         tokenAdapter.createToken(token);
         description = "A proper meal";
+    }
+
+    @After
+    public void deleteAccounts() throws BankAdapterException {
+        bank.deleteAllAccounts();
     }
 
     @Test
