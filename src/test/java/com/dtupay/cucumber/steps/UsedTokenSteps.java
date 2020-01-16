@@ -70,11 +70,5 @@ public class UsedTokenSteps {
         merchant.setDtuPay(dtuPayApp);
     }
 
-    @Then("^the system detects the token has already been used$")
-    public void the_system_detects_the_token_has_already_been_used() throws Throwable {
-        token = customer.giveToken();
-        scanUnsuccessful = merchant.scanCustomerToken(token);
-        assertEquals(false, scanUnsuccessful);
-    }
 
 }
