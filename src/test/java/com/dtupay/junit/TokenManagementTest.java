@@ -4,6 +4,7 @@ import com.dtupay.app.Customer;
 import com.dtupay.app.ITokenManagement;
 import com.dtupay.app.Token;
 import com.dtupay.app.TokenManagement;
+import com.dtupay.database.exceptions.TooManyTokenRequest;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -27,7 +28,7 @@ public class TokenManagementTest {
     }
 
     @Test
-    public final void WhenCustomerOnlyHasOneUnusedTokenAndOneUsedTokenThenHeIsValidToGetNewTokens(){
+    public final void WhenCustomerOnlyHasOneUnusedTokenAndOneUsedTokenThenHeIsValidToGetNewTokens() throws TooManyTokenRequest {
         //Arrange
         ArrayList<Token> t = new ArrayList<>();
 
@@ -49,7 +50,7 @@ public class TokenManagementTest {
     }
 
     @Test
-    public final void WhenCustomerHasTwoUnusedTokenThenHeIsNotValidToGetNewTokens(){
+    public final void WhenCustomerHasTwoUnusedTokenThenHeIsNotValidToGetNewTokens() throws TooManyTokenRequest {
         //Arrange
         ArrayList<Token> t = new ArrayList<>();
 
@@ -71,7 +72,7 @@ public class TokenManagementTest {
     }
 
     @Test
-    public final void WhenCustomerOnlyHasNoTokensThenHeIsValidToGetNewTokens(){
+    public final void WhenCustomerOnlyHasNoTokensThenHeIsValidToGetNewTokens() throws TooManyTokenRequest {
         //Arrange
         ArrayList<Token> t = new ArrayList<>();
         customer.setTokens(t);
@@ -83,21 +84,14 @@ public class TokenManagementTest {
         Assert.assertTrue(actual);
     }
 
-    @Rule
-    public ExpectedException expectedEx = ExpectedException.none();
-
-    @Test
+    @Test(expected = TooManyTokenRequest.class)
     public final void WhenCustomerAskForTooManyTokensHeWillGetAnException() throws Exception{
-        //Arrange
-        expectedEx.expect(RuntimeException.class);
-
-        ArrayList<Token> t = new ArrayList<>();
-        customer.setTokens(t);
+        ArrayList<Token> tokens = new ArrayList<>();
+        customer.setTokens(tokens);
 
         int numTokens = 6;
 
         //Act
-        expectedEx.expectMessage("Too many token request: " + numTokens);
         tm.CanCustomerGetTokens(customer, numTokens);
     }
 }

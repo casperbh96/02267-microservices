@@ -1,13 +1,12 @@
 package com.dtupay.app;
 
 import com.dtupay.database.ITokenAdapter;
-import com.dtupay.database.TokenAdapter;
+import com.dtupay.database.exceptions.CustomerIsUnableToReceiveNewTokens;
+import com.dtupay.database.exceptions.TooManyTokenRequest;
 
 import java.util.UUID;
 
 public class TokenManagement implements ITokenManagement {
-
-
 
     @Override
     public UUID GetToken() {
@@ -17,7 +16,7 @@ public class TokenManagement implements ITokenManagement {
     }
 
     @Override
-    public void CustomerGetTokens(Customer customer, int numTokens, ITokenAdapter tokens) {
+    public void CustomerGetTokens(Customer customer, int numTokens, ITokenAdapter tokens) throws CustomerIsUnableToReceiveNewTokens, TooManyTokenRequest {
         if (CanCustomerGetTokens(customer, numTokens)) {
             for (int i = 0; i < numTokens; i++) {
                 Token token = new Token();
@@ -28,14 +27,14 @@ public class TokenManagement implements ITokenManagement {
                 tokens.createToken(token);
             }
         } else {
-            throw new RuntimeException("Customer is unable to receive new tokens");
+            throw new CustomerIsUnableToReceiveNewTokens("Customer is unable to receive new tokens");
         }
     }
 
     @Override
-    public boolean CanCustomerGetTokens(Customer customer, int numTokens) {
+    public boolean CanCustomerGetTokens(Customer customer, int numTokens) throws TooManyTokenRequest {
         if(numTokens > 5){
-            throw new RuntimeException("Too many token request: " + numTokens);
+            throw new TooManyTokenRequest("Too many token request: " + numTokens);
         }
 
         if (customer.tokens.isEmpty()) {

@@ -11,6 +11,8 @@ import com.dtupay.app.*;
 import com.dtupay.bank.BankAdapter;
 import com.dtupay.bank.IBankAdapter;
 import com.dtupay.database.*;
+import com.dtupay.database.exceptions.CustomerIsUnableToReceiveNewTokens;
+import com.dtupay.database.exceptions.TooManyTokenRequest;
 import cucumber.api.java.After;
 
 public class Helper {
@@ -47,14 +49,14 @@ public class Helper {
         return tokens;
     }
 
-    public Customer createDtuPayCustomer(String name, String id, int tokens) {
+    public Customer createDtuPayCustomer(String name, String id, int tokens) throws CustomerIsUnableToReceiveNewTokens, TooManyTokenRequest {
         Customer customer = new Customer(id, name);
         customers.createCustomer(customer);
         tokenManager.CustomerGetTokens(customer, tokens, this.tokens);
         return customer;
     }
 
-    public Customer createDtuPayCustomerUsedToken(String name, String id, int tokens) {
+    public Customer createDtuPayCustomerUsedToken(String name, String id, int tokens) throws CustomerIsUnableToReceiveNewTokens, TooManyTokenRequest {
         Customer customer = new Customer(id, name);
         customers.createCustomer(customer);
         tokenManager.CustomerGetTokens(customer, tokens, this.tokens);
