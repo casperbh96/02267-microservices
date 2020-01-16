@@ -35,8 +35,8 @@ public class DtuPayAppTest {
         tokenManager = new TokenManagement();
         dtupay = new DtuPayApp(bank, customerAdapter, merchantAdapter, tokenAdapter);
 
-        merchant = merchantAdapter.getMerchantByMerchantId("1");
-        customer = customerAdapter.createCustomer(new Customer("99", "Casper2"));
+        merchant = merchantAdapter.getMerchantByMerchantId(1);
+        customer = customerAdapter.createCustomer(new Customer(99, "Casper2"));
         token = new Token(tokenManager.GetToken(), customer.getId());
         tokenAdapter.createToken(token);
         description = "A proper meal";
@@ -49,27 +49,27 @@ public class DtuPayAppTest {
 
     @Test
     public void checkTokenValidityOfUnusedToken() throws CustomerHasNoUnusedToken, FakeToken, TokenAlreadyUsed {
-        Token token = tokenAdapter.getUnusedTokenByCustomerId("1");
+        Token token = tokenAdapter.getUnusedTokenByCustomerId(1);
         Assert.assertTrue(dtupay.checkTokenValidity(token));
     }
 
     @Test(expected = TokenAlreadyUsed.class)
     public void checkTokenValidityOfUsedToken() throws CustomerHasNoUnusedToken, FakeToken, TokenAlreadyUsed {
-        Token token = tokenAdapter.getUnusedTokenByCustomerId("1");
+        Token token = tokenAdapter.getUnusedTokenByCustomerId(1);
         token.setUsed(true);
         dtupay.checkTokenValidity(token);
     }
 
     @Test(expected = FakeToken.class)
     public void checkTokenValidityOfTokenThatDoesNotExistInTokenDatabase() throws FakeToken, TokenAlreadyUsed {
-        Token token = new Token(tokenManager.GetToken(), "1");
+        Token token = new Token(tokenManager.GetToken(), 1);
         dtupay.checkTokenValidity(token);
     }
 
     @Test(expected = FakeToken.class)
     public void checkTokenValidityOfTokenFromAnotherCustomer() throws CustomerHasNoUnusedToken, FakeToken, TokenAlreadyUsed {
-        Token token1 = tokenAdapter.getUnusedTokenByCustomerId("1");
-        Token token2 = new Token(token1.getId(), "2");
+        Token token1 = tokenAdapter.getUnusedTokenByCustomerId(1);
+        Token token2 = new Token(token1.getId(), 2);
         dtupay.checkTokenValidity(token2);
     }
 
@@ -81,7 +81,7 @@ public class DtuPayAppTest {
         bank.createAccount(customer.getName(), customer.getId(), new BigDecimal(200.0));
         dtupay.transferMoney(merchant.getId(), token, amount, description);
 
-        BigDecimal balance = bank.getBalanceByCPR("1");
+        BigDecimal balance = bank.getBalanceByCPR(1);
         Assert.assertEquals(new BigDecimal(400.0), balance);
     }
 
@@ -90,7 +90,7 @@ public class DtuPayAppTest {
         BigDecimal amount = new BigDecimal(200.0);
 
         bank.createAccount(customer.getName(), customer.getId(), new BigDecimal(200.0));
-        dtupay.transferMoney("1", token, amount, description);
+        dtupay.transferMoney(1, token, amount, description);
     }
 
     @Test(expected = BankAdapterException.class)

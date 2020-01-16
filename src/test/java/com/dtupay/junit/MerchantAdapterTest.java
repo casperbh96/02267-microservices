@@ -20,14 +20,14 @@ public class MerchantAdapterTest {
 
     @Test
     public void CreateMerchantTest() throws MerchantDoesNotExist {
-        Merchant merchant = new Merchant("57", "Test");
+        Merchant merchant = new Merchant(57, "Test");
         m.createMerchant(merchant);
-        Assert.assertEquals(merchant, m.getMerchantByMerchantId("57"));
+        Assert.assertEquals(merchant, m.getMerchantByMerchantId(57));
     }
 
     @Test(expected = MerchantDoesNotExist.class)
     public void DeleteMerchantTest() throws MerchantDoesNotExist {
-        String id = "58";
+        int id = 58;
         m.createMerchant(new Merchant(id, "Test"));
         m.deleteMerchantByMerchantId(id);
         m.getMerchantByMerchantId(id);
@@ -35,11 +35,11 @@ public class MerchantAdapterTest {
 
     @Test
     public void UpdateMerchantTest() throws MerchantDoesNotExist {
-        Merchant merchant = new Merchant("59", "Merchant");
+        Merchant merchant = new Merchant(59, "Merchant");
         m.createMerchant(merchant);
         merchant.setName("UpdatedMerchant");
         m.updateMerchant(merchant);
-        Assert.assertEquals(merchant, m.getMerchantByMerchantId("59"));
+        Assert.assertEquals(merchant, m.getMerchantByMerchantId(59));
     }
     @Rule
     public ExpectedException thrown = ExpectedException.none();

@@ -9,6 +9,6 @@ import java.math.BigDecimal;
 public interface IDtuPayApp {
     boolean checkTokenValidity(Token token) throws FakeToken, TokenAlreadyUsed;
 
-    void transferMoney(String merchantId, Token merchantToken, BigDecimal amount, String description) throws BankAdapterException;
+    void transferMoney(int merchantId, Token merchantToken, BigDecimal amount, String description) throws BankAdapterException;
 
 }

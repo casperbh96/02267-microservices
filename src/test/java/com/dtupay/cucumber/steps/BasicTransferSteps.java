@@ -22,8 +22,8 @@ import static org.junit.Assert.assertTrue;
 public class BasicTransferSteps {
     Helper helper;
 
-    String customerId;
-    String merchantId;
+    int customerId;
+    int merchantId;
 
     IDtuPayApp dtuPayApp;
     IBankAdapter bank;
@@ -52,7 +52,7 @@ public class BasicTransferSteps {
     }
 
     @Given("^customer DTU Pay account \"([^\"]*)\", ID \"([^\"]*)\", and (\\d+) ([^\"]*) token$")
-    public void customerDTUPayAccountIDAndUnusedToken(String name, String cpr, int numOfTokens, String tokenType) throws Throwable {
+    public void customerDTUPayAccountIDAndUnusedToken(String name, int cpr, int numOfTokens, String tokenType) throws Throwable {
         switch (tokenType) {
             case "unused":
                 customerId = helper.createDtuPayCustomer(name, cpr, numOfTokens).getId();
@@ -67,12 +67,12 @@ public class BasicTransferSteps {
     }
 
     @Given("^merchant DTU Pay account \"([^\"]*)\", ID \"([^\"]*)\"")
-    public void merchantDTUPayAccountIDAndTokens(String name, String cpr) throws Throwable {
+    public void merchantDTUPayAccountIDAndTokens(String name, int cpr) throws Throwable {
         merchantId = helper.createDtuPayMerchant(name, cpr).getId();
     }
 
     @Given("^bank account \"([^\"]*)\", \"([^\"]*)\" with start balance (\\d+)$")
-    public void bank_account_with_start_balance(String name, String cpr, int startBalance) throws Throwable {
+    public void bank_account_with_start_balance(String name, int cpr, int startBalance) throws Throwable {
         helper.createBankAccount(name, cpr, startBalance);
     }
 

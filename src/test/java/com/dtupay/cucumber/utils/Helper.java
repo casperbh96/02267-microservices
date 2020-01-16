@@ -16,7 +16,7 @@ import com.dtupay.database.exceptions.TooManyTokenRequest;
 import cucumber.api.java.After;
 
 public class Helper {
-    public Set<String> usedBankAccounts = new HashSet<>();
+    public Set<Integer> usedBankAccounts = new HashSet<Integer>();
     public String errorMessage;
     private IBankAdapter bank;
     private ICustomerAdapter customers;
@@ -49,14 +49,14 @@ public class Helper {
         return tokens;
     }
 
-    public Customer createDtuPayCustomer(String name, String id, int tokens) throws CustomerIsUnableToReceiveNewTokens, TooManyTokenRequest {
+    public Customer createDtuPayCustomer(String name, int id, int tokens) throws CustomerIsUnableToReceiveNewTokens, TooManyTokenRequest {
         Customer customer = new Customer(id, name);
         customers.createCustomer(customer);
         tokenManager.CustomerGetTokens(customer, tokens, this.tokens);
         return customer;
     }
 
-    public Customer createDtuPayCustomerUsedToken(String name, String id, int tokens) throws CustomerIsUnableToReceiveNewTokens, TooManyTokenRequest {
+    public Customer createDtuPayCustomerUsedToken(String name, int id, int tokens) throws CustomerIsUnableToReceiveNewTokens, TooManyTokenRequest {
         Customer customer = new Customer(id, name);
         customers.createCustomer(customer);
         tokenManager.CustomerGetTokens(customer, tokens, this.tokens);
@@ -68,7 +68,7 @@ public class Helper {
     }
 
 
-    public Customer createDtuPayCustomerInvalidToken(String name, String id, int tokens) {
+    public Customer createDtuPayCustomerInvalidToken(String name, int id, int tokens) {
         Customer customer = new Customer(id, name);
         customers.createCustomer(customer);
         List<Token> tokenList = new ArrayList<>();
@@ -80,13 +80,13 @@ public class Helper {
         return customer;
     }
 
-    public Merchant createDtuPayMerchant(String name, String id) {
+    public Merchant createDtuPayMerchant(String name, int id) {
         Merchant merchant = new Merchant(id, name);
         merchants.createMerchant(merchant);
         return merchant;
     }
 
-    public void createBankAccount(String name, String cpr, int initialBalance) throws Exception {
+    public void createBankAccount(String name, int cpr, int initialBalance) throws Exception {
         bank.createAccount(name, cpr, BigDecimal.valueOf(initialBalance));
         usedBankAccounts.add(cpr);
     }
