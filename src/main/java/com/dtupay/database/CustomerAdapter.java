@@ -24,9 +24,6 @@ public class CustomerAdapter implements ICustomerAdapter {
 
     @Override
     public List<Customer> getAllCustomers() throws NoCustomers {
-        for (Customer c : customers) {
-            System.out.println(c.getName());
-        }
         return customers;
     }
 
