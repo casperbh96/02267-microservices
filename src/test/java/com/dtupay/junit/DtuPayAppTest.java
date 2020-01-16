@@ -29,6 +29,7 @@ public class DtuPayAppTest {
     @Before
     public void Setup() throws MerchantDoesNotExist, BankAdapterException {
         bank = new BankAdapter();
+        bank.deleteAllAccounts();
         customerAdapter = new CustomerAdapter();
         merchantAdapter = new MerchantAdapter();
         tokenAdapter = new TokenAdapter();
