@@ -43,7 +43,7 @@ public class DtuPayAppTest {
     }
 
     @After
-    public void deleteAccounts() throws BankAdapterException {
+    public void cleanUp() throws BankAdapterException {
         bank.deleteAllAccounts();
     }
 
