@@ -1,6 +1,5 @@
 package com.dtupay.service;
 
-
 import com.dtupay.app.Customer;
 import com.dtupay.database.CustomerAdapter;
 import com.dtupay.database.ICustomerAdapter;
@@ -23,7 +22,7 @@ public class CustomerResource {
     }
 
     @GET
-    @Path("{id}")
+    @Path("get/{id}")
     public Response getCustomer(@PathParam("id") String id) {
         if(id == null) {
             return Response.status(400).entity("Missing parameters.").build();
@@ -39,15 +38,29 @@ public class CustomerResource {
         }
     }
 
-    /*@POST
+    @POST
+    @Path("post/{customer}")
     public Response postCustomer(Customer customer) {
-        String message = "postCustomer/" + customer.getName() + "/" + customer.getId() + "/";
         if(customer.getName() == null || customer.getId() == null) {
             return Response.status(400).entity("Missing parameters.").build();
         }
         try {
             // String response = sendMessage(message);
-            return Response.status(200).entity("Posted customer").build();
+            return Response.ok(c.createCustomer(customer)).build();
+        }
+        catch(Exception e) {
+            return Response.serverError().build();
+        }
+    }
+
+    @PUT
+    @Path("put/{customer}")
+    public Response putCustomer(Customer customer) {
+        if(customer.getName() == null || customer.getId() == null) {
+            return Response.status(400).entity("Missing parameters.").build();
+        }
+        try {
+            return Response.ok(c.updateCustomer(customer)).build();
         }
         catch(Exception e) {
             return Response.serverError().build();
@@ -55,20 +68,20 @@ public class CustomerResource {
     }
 
     @DELETE
-    @Path("{customer}")
-    public Response deleteCustomer(@PathParam("customer") String customer) {
-        String message = "deleteCustomer/" + customer;
-        if(customer == null) {
+    @Path("delete/{id}")
+    public Response deleteCustomer(@PathParam("id") String id) {
+        if(id == null) {
             return Response.status(400).entity("Missing parameters.").build();
         }
         try {
             // String response = sendMessage(message);
             //return Response.ok("Delete customers").build();
             //return Response.status(200).entity(response).build();
-            return Response.status(200).entity("Delete customers").build();
+            c.deleteCustomerByCustomerId(id);
+            return Response.ok("Deleted customer").status(200).build();
         }
         catch(Exception e){
             return Response.serverError().build();
         }
-    }*/
+    }
 }
