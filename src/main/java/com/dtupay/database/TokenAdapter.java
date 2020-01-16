@@ -4,6 +4,8 @@ import com.dtupay.app.ITokenManagement;
 import com.dtupay.app.Token;
 import com.dtupay.app.TokenManagement;
 import com.dtupay.database.exceptions.CustomerHasNoUnusedToken;
+import com.dtupay.database.exceptions.FakeToken;
+import com.dtupay.database.exceptions.TokenAlreadyUsed;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -28,7 +30,7 @@ public class TokenAdapter implements ITokenAdapter {
     }
 
     @Override
-    public Token getUnusedTokenByCustomerId(String id) throws CustomerHasNoUnusedToken{
+    public Token getUnusedTokenByCustomerId(String id) throws CustomerHasNoUnusedToken {
         for (Token t : tokens) {
             if (t.getCustomerId().equals(id) && !t.getUsed()) return t;
         }
@@ -44,11 +46,15 @@ public class TokenAdapter implements ITokenAdapter {
     }
 
     @Override
-    public boolean checkExists(Token token){
-        for(Token t : tokens){
-            if (t.equals(token))
+    public boolean checkToken(Token token) throws FakeToken, TokenAlreadyUsed {
+        for (Token t : tokens) {
+            if (t.equals(token)) {
+                if (t.getUsed()) {
+                    throw new TokenAlreadyUsed("The token is already used");
+                }
                 return true;
+            }
         }
-        return false;
+        throw new FakeToken("The token is not known to the system");
     }
 }
