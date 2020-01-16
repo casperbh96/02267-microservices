@@ -20,8 +20,3 @@ Feature: Monthly reporting of transactions for a customer
     Then customer "220866-1111" will have 1 transaction in his report
     And customer "220866-2222" will have 2 transactions in his report
 
-
-#    Scenario: No transactions this month
-#    Given customer DTU Pay account "Bob Clark", ID "220866-2859", and 3 unused token
-#    And merchant DTU Pay account "Alice Klaus", ID "220866-2858"
-#    And merchant DTU Pay account "Chris White", ID "220866-2857"
