@@ -2,6 +2,7 @@ package com.dtupay.database;
 
 import com.dtupay.app.Customer;
 import com.dtupay.database.exceptions.CustomerDoesNotExist;
+import com.dtupay.database.exceptions.NoCustomers;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -19,6 +20,11 @@ public class CustomerAdapter implements ICustomerAdapter {
         customers.add(new Customer("5", "Dmitry"));
         customers.add(new Customer("6", "Isma"));
         customers.add(new Customer("7", "Hilda"));
+    }
+
+    @Override
+    public List<Customer> getAllCustomers() throws NoCustomers {
+        return customers;
     }
 
     @Override

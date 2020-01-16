@@ -2,6 +2,7 @@ package com.dtupay.database;
 
 import com.dtupay.app.Merchant;
 import com.dtupay.database.exceptions.MerchantDoesNotExist;
+import com.dtupay.database.exceptions.NoMerchants;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -14,6 +15,11 @@ public class MerchantAdapter implements IMerchantAdapter {
         merchants = new ArrayList<>();
         merchants.add(new Merchant("1", "DTU Canteen"));
         merchants.add(new Merchant("2", "DTU Library"));
+    }
+
+    @Override
+    public List<Merchant> getAllMerchants() throws NoMerchants {
+        return merchants;
     }
 
     @Override
