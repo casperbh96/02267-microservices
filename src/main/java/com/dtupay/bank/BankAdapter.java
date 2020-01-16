@@ -63,5 +63,4 @@ public class BankAdapter implements IBankAdapter {
         }
     }
 
-
 }

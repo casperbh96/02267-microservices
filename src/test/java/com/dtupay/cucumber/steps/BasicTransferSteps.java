@@ -2,13 +2,14 @@ package com.dtupay.cucumber.steps;
 
 import com.dtupay.app.*;
 import com.dtupay.bank.IBankAdapter;
+import com.dtupay.bank.exceptions.BankAdapterException;
 import com.dtupay.cucumber.utils.Helper;
 import com.dtupay.database.ICustomerAdapter;
 import com.dtupay.database.IMerchantAdapter;
 import com.dtupay.database.ITokenAdapter;
 import com.dtupay.database.exceptions.FakeToken;
 import com.dtupay.database.exceptions.TokenAlreadyUsed;
-import cucumber.api.java.Before;
+import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -45,8 +46,8 @@ public class BasicTransferSteps {
         this.tokens = helper.getTokens();
     }
 
-    @Before
-    public void deleteeAccount() throws Exception {
+    @After
+    public void cleanUp() throws BankAdapterException {
         bank.deleteAllAccounts();
     }
 
