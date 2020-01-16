@@ -8,6 +8,7 @@ import com.dtupay.database.*;
 import com.dtupay.database.exceptions.CustomerDoesNotExist;
 import com.dtupay.database.exceptions.CustomerHasNoUnusedToken;
 import com.dtupay.database.exceptions.MerchantDoesNotExist;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,7 +30,6 @@ public class DtuPayAppTest {
     @Before
     public void Setup() throws MerchantDoesNotExist, BankAdapterException {
         bank = new BankAdapter();
-        bank.deleteAllAccounts();
         customerAdapter = new CustomerAdapter();
         merchantAdapter = new MerchantAdapter();
         tokenAdapter = new TokenAdapter();
@@ -41,6 +41,11 @@ public class DtuPayAppTest {
         token = new Token(tokenManager.GetToken(), customer.getId());
         tokenAdapter.createToken(token);
         description = "A proper meal";
+    }
+
+    @After
+    public void deleteAccounts() throws BankAdapterException {
+        bank.deleteAllAccounts();
     }
 
     @Test
