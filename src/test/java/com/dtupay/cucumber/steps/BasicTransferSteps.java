@@ -6,6 +6,7 @@ import com.dtupay.cucumber.utils.Helper;
 import com.dtupay.database.ICustomerAdapter;
 import com.dtupay.database.IMerchantAdapter;
 import com.dtupay.database.ITokenAdapter;
+import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -40,7 +41,7 @@ public class BasicTransferSteps {
         this.tokens = helper.getTokens();
     }
 
-    @Before
+    @After
     public void deleteeAccount() throws Exception {
         bank.deleteAllAccounts();
     }
