@@ -45,7 +45,7 @@ public class CustomerResource {
     }
 
     @POST
-    @Path("post/{customer}")
+    @Path("post")
     public Response postCustomer(Customer customer) {
         if(customer.getName() == null || customer.getId() == null) {
             return Response.status(400).entity("Missing parameters.").build();

@@ -45,7 +45,7 @@ public class MerchantResource {
     }
 
     @POST
-    @Path("post/{merchant}")
+    @Path("post")
     public Response postMerchant(Merchant merchant) {
         if(merchant.getName() == null || merchant.getId() == null) {
             return Response.status(400).entity("Missing parameters.").build();

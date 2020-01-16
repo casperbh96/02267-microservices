@@ -4,6 +4,7 @@ import com.dtupay.bank.BankAdapter;
 import com.dtupay.bank.IBankAdapter;
 import com.dtupay.bank.exceptions.BankAdapterException;
 import dtu.ws.fastmoney.User;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,10 +21,14 @@ public class BankAdapterTest {
     @Before
     public void Setup() throws BankAdapterException {
         bankAdapter = new BankAdapter();
-        bankAdapter.deleteAllAccounts();
         user = new User();
         big = new BigDecimal(99999);
         cpr = "1234561234";
+    }
+
+    @After
+    public void deleteAccounts() throws BankAdapterException {
+        bankAdapter.deleteAllAccounts();
     }
 
     @Test
