@@ -91,18 +91,4 @@ public class Helper {
         usedBankAccounts.add(cpr);
     }
 
-    @After
-    public void retireUsedAccounts() {
-        for (String cpr : usedBankAccounts) {
-            System.out.println(cpr);
-            try {
-                bank.removeAccountByCpr(cpr);
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        }
-        usedBankAccounts.clear();
-    }
-
-
 }
