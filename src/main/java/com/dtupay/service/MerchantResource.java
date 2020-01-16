@@ -1,32 +1,37 @@
-/*
 package com.dtupay.service;
 
 import com.dtupay.app.Merchant;
+import com.dtupay.database.IMerchantAdapter;
+import com.dtupay.database.MerchantAdapter;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
+
+
 @Path("/merchant")
+@Produces("text/json")
+@Consumes("text/json")
 public class MerchantResource {
+
+    IMerchantAdapter m = new MerchantAdapter();
+
     @GET
-    @Produces("text/plain")
     public Response getMerchants() {
         return Response.ok("Get merchants").build();
     }
 
     @GET
-    @Path("{merchant}")
-    @Produces("text/plain")
-    public Response getMerchant(Merchant merchant) {
-        String message = "getMerchant/" + merchant;
-        if(merchant == null) {
+    @Path("get/{id}")
+    public Response getMerchant(@PathParam("id") String id) {
+        if(id == null) {
             return Response.status(400).entity("Missing parameters.").build();
         }
         try {
-            // String response = sendMessage(message);
             //return Response.ok("Get merchants").build();
             //return Response.status(200).entity(response).build();
-            return Response.status(200).entity("Get merchants").build();
+            //return Response.status(200).entity("Get merchants").build();
+            return Response.ok(m.getMerchantByMerchantId(id)).build();
         }
         catch(Exception e) {
             return Response.serverError().build();
@@ -34,16 +39,29 @@ public class MerchantResource {
     }
 
     @POST
-    @Produces("text/plain")
+    @Path("post/{merchant}")
     public Response postMerchant(Merchant merchant) {
-        String message = "postMerchant/" + merchant.getName() + "/" + merchant.getId();
         if(merchant.getName() == null || merchant.getId() == null) {
             return Response.status(400).entity("Missing parameters.").build();
         }
         try {
             //String response = sendMessage(message);
             //return Response.status(200).entity(response).build();
-            return Response.ok("Posted merchant").build();
+            return Response.ok(m.createMerchant(merchant)).build();
+        }
+        catch(Exception e) {
+            return Response.serverError().build();
+        }
+    }
+
+    @PUT
+    @Path("put/{merchant}")
+    public Response putCustomer(Merchant merchant) {
+        if(merchant.getName() == null || merchant.getId() == null) {
+            return Response.status(400).entity("Missing parameters.").build();
+        }
+        try {
+            return Response.ok(m.updateMerchant(merchant)).build();
         }
         catch(Exception e) {
             return Response.serverError().build();
@@ -51,22 +69,21 @@ public class MerchantResource {
     }
 
     @DELETE
-    @Path("{merchant}")
-    @Produces("text/plain")
-    public Response deleteMerchant(Merchant merchant) {
-        String message = "deleteMerchant/" + merchant;
-        if(merchant == null) {
+    @Path("delete/{id}")
+    public Response deleteMerchant(@PathParam("id") String id) {
+        if(id == null) {
             return Response.status(400).entity("Missing parameters.").build();
         }
         try {
             // String response = sendMessage(message);
             //return Response.ok("Deleted merchants").build();
             //return Response.status(200).entity(response).build();
-            return Response.status(200).entity("Deleted merchants").build();
+            m.deleteMerchantByMerchantId(id);
+            return Response.ok("Deleted merchants").status(200).build();
         }
         catch(Exception e) {
             return Response.serverError().build();
         }
     }
 }
-*/
+
