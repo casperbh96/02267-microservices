@@ -7,6 +7,8 @@ import com.dtupay.database.exceptions.NoCustomers;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import com.dtupay.database.exceptions.NoCustomers;
+
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,11 @@ public class CustomerAdapter implements ICustomerAdapter {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public List<Customer> getAllCustomers() throws NoCustomers {
+        return customers;
     }
 
     @Override
