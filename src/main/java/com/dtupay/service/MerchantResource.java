@@ -14,10 +14,9 @@ import javax.ws.rs.core.Response;
 @Consumes("application/json")
 public class MerchantResource {
 
-    IMerchantAdapter m = new MerchantAdapter();
+    private static IMerchantAdapter m = new MerchantAdapter();
 
     @GET
-    @Path("get/")
     public Response getMerchants() {
         try {
             return Response.ok(m.getAllMerchants()).build();
@@ -28,7 +27,7 @@ public class MerchantResource {
     }
 
     @GET
-    @Path("get/{id}")
+    @Path("{id}")
     public Response getMerchant(@PathParam("id") String id) {
         if(id == null) {
             return Response.status(400).entity("Missing parameters.").build();
@@ -45,7 +44,6 @@ public class MerchantResource {
     }
 
     @POST
-    @Path("post/{merchant}")
     public Response postMerchant(Merchant merchant) {
         if(merchant.getName() == null || merchant.getId() == null) {
             return Response.status(400).entity("Missing parameters.").build();
@@ -61,7 +59,6 @@ public class MerchantResource {
     }
 
     @PUT
-    @Path("put/{merchant}")
     public Response putCustomer(Merchant merchant) {
         if(merchant.getName() == null || merchant.getId() == null) {
             return Response.status(400).entity("Missing parameters.").build();
@@ -75,7 +72,7 @@ public class MerchantResource {
     }
 
     @DELETE
-    @Path("delete/{id}")
+    @Path("{id}")
     public Response deleteMerchant(@PathParam("id") String id) {
         if(id == null) {
             return Response.status(400).entity("Missing parameters.").build();

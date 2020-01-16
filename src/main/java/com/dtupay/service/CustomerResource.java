@@ -13,14 +13,9 @@ import javax.ws.rs.core.Response;
 @Consumes("application/json")
 public class CustomerResource {
 
-    ICustomerAdapter c;
-
-    public CustomerResource(){
-        c = new CustomerAdapter();
-    }
+    private static ICustomerAdapter c = new CustomerAdapter();
 
     @GET
-    @Path("get/")
     public Response getCustomers() {
         try {
             return Response.ok(c.getAllCustomers()).build();
@@ -31,7 +26,7 @@ public class CustomerResource {
     }
 
     @GET
-    @Path("get/{id}")
+    @Path("{id}")
     public Response getCustomer(@PathParam("id") String id) {
         if(id == null) {
             return Response.status(400).entity("Missing parameters.").build();
@@ -48,7 +43,6 @@ public class CustomerResource {
     }
 
     @POST
-    @Path("post/{customer}")
     public Response postCustomer(Customer customer) {
         if(customer.getName() == null || customer.getId() == null) {
             return Response.status(400).entity("Missing parameters.").build();
@@ -63,7 +57,6 @@ public class CustomerResource {
     }
 
     @PUT
-    @Path("put/{customer}")
     public Response putCustomer(Customer customer) {
         if(customer.getName() == null || customer.getId() == null) {
             return Response.status(400).entity("Missing parameters.").build();
@@ -77,7 +70,7 @@ public class CustomerResource {
     }
 
     @DELETE
-    @Path("delete/{id}")
+    @Path("{id}")
     public Response deleteCustomer(@PathParam("id") String id) {
         if(id == null) {
             return Response.status(400).entity("Missing parameters.").build();
