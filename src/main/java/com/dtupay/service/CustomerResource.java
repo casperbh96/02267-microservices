@@ -8,13 +8,16 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
 
-
 @Path("/customer")
-@Produces("text/json")
-@Consumes("text/json")
+@Produces("application/json")
+@Consumes("application/json")
 public class CustomerResource {
 
-    ICustomerAdapter c = new CustomerAdapter();
+    ICustomerAdapter c;
+
+    public CustomerResource(){
+        c = new CustomerAdapter();
+    }
 
     @GET
     @Path("get/")
