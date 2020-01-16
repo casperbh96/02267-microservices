@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class UsedTokenSteps {
     Helper helper;
@@ -74,7 +75,7 @@ public class UsedTokenSteps {
     public void the_system_detects_the_token_has_already_been_used() throws Throwable {
         token = customer.giveToken();
         scanUnsuccessful = merchant.scanCustomerToken(token);
-        assertEquals(false, scanUnsuccessful);
+        assertFalse(scanUnsuccessful);
     }
 
 }
