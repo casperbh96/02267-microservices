@@ -17,8 +17,14 @@ public class MerchantResource {
     IMerchantAdapter m = new MerchantAdapter();
 
     @GET
+    @Path("get/")
     public Response getMerchants() {
-        return Response.ok("Get merchants").build();
+        try {
+            return Response.ok(m.getAllMerchants()).build();
+        }
+        catch (Exception e) {
+            return Response.serverError().build();
+        }
     }
 
     @GET

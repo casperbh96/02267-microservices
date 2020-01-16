@@ -17,8 +17,14 @@ public class CustomerResource {
     ICustomerAdapter c = new CustomerAdapter();
 
     @GET
+    @Path("get/")
     public Response getCustomers() {
-        return Response.ok("Get customers").build();
+        try {
+            return Response.ok(c.getAllCustomers()).build();
+        }
+        catch (Exception e) {
+            return Response.serverError().build();
+        }
     }
 
     @GET
