@@ -41,11 +41,6 @@ public class CustomerAdapter implements ICustomerAdapter {
     }
 
     @Override
-    public List<Customer> getAllCustomers() throws NoCustomers {
-        return customers;
-    }
-
-    @Override
     public Customer getCustomerByCustomerId(String id) throws CustomerDoesNotExist {
         for (Customer c : customers) {
             if (c.getId().equals(id)) return c;
