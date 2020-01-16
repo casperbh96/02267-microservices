@@ -1,5 +1,6 @@
 package com.dtupay.cucumber.steps;
 
+import com.dtupay.app.Transaction;
 import com.dtupay.cucumber.utils.Helper;
 import cucumber.api.DataTable;
 import cucumber.api.PendingException;
@@ -7,6 +8,8 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +32,6 @@ public class MonthlyReportCustomerSteps {
         for(Map<String, String> details : userDetails){
             customerIds.add(helper.createDtuPayCustomer(details.get("name"), details.get("id"), 0).getId());
         }
-        System.out.println(customerIds.size());
     }
 
     @Given("^the following merchants:$")
@@ -38,16 +40,15 @@ public class MonthlyReportCustomerSteps {
         for(Map<String, String> details : userDetails){
             merchantIds.add(helper.createDtuPayMerchant(details.get("name"), details.get("id")).getId());
         }
-        System.out.println(merchantIds.size());
     }
 
     @Given("^the following transactions:$")
     public void the_following_transactions(DataTable arg1) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // List<YourType>, List<List<E>>, List<Map<K,V>> or Map<K,V>.
-        // E,K,V must be a scalar (String, Integer, Date, enum etc)
-        throw new PendingException();
+        List<Map<String, String>> transDetails = arg1.asMaps(String.class, String.class);
+        transDetails.forEach(d -> {
+            Transaction t = helper.addTransaction(d.get("customer"), d.get("merchant"), d.get("tokenId"), new BigDecimal(d.get("amount")));
+            t.setTimestamp(Timestamp.valueOf(d.get("timestamp")));
+        });
     }
 
     @When("^DTU Pay sends out the monthly reports for \"([^\"]*)\" (\\d+)$")

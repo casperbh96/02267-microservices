@@ -19,6 +19,7 @@ public class Helper {
     private IMerchantAdapter merchants;
     private ITokenAdapter tokens;
     private ITokenManagement tokenManager = new TokenManagement();
+    private ITransactionManager transactionManager;
     public boolean errorHasOccured = false;
 
     public Helper() {
@@ -27,6 +28,8 @@ public class Helper {
         this.customers = new CustomerAdapter();
         this.merchants = new MerchantAdapter();
         this.tokens = new TokenAdapter();
+
+        transactionManager = new TransactionManager(new TransactionAdapter());
     }
 
     public IBankAdapter getBank() {
@@ -72,6 +75,10 @@ public class Helper {
     public void createBankAccount(String name, String cpr, int initialBalance) throws Exception {
         bank.createAccount(name, cpr, BigDecimal.valueOf(initialBalance));
         usedBankAccounts.add(cpr);
+    }
+
+    public Transaction addTransaction(String customerCpr, String merchantCpr, String tokenId, BigDecimal amount){
+        return transactionManager.registerTransaction(customerCpr, merchantCpr, tokenId, amount);
     }
 
     @After
