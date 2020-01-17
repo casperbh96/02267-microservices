@@ -3,10 +3,11 @@ package com.dtupay.database;
 import com.dtupay.app.Customer;
 import com.dtupay.database.exceptions.CustomerDoesNotExist;
 import com.mysql.cj.jdbc.MysqlDataSource;
-
+import com.dtupay.database.exceptions.NoCustomers;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,11 @@ public class CustomerAdapter implements ICustomerAdapter {
     }
 
     public List<Customer> getCustomers() {
+        return customers;
+    }
+
+    @Override
+    public List<Customer> getAllCustomers() throws NoCustomers {
         return customers;
     }
 

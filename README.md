@@ -9,3 +9,6 @@ For running in IntelliJ
 3. From IntelliJ, open the Maven sidebar in the top right and press the left-most button, that looks like a sync button.
 
     
+For running a service in Terminal:
+
+1. `java -jar target/calculator-artifact-thorntail.jar`
