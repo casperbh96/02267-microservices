@@ -11,11 +11,17 @@ public class Token {
     public Token() {
     }
 
-    public Token(int _id, UUID _uuid, int _customerId) {
+    public Token(int _customerId, UUID _uuid, boolean _used) {
+        customerId = _customerId;
+        uuid = _uuid;
+        used = _used;
+    }
+
+    public Token(int _id, int _customerId, UUID _uuid, boolean _used) {
         id = _id;
         customerId = _customerId;
         uuid = _uuid;
-        used = false;
+        used = _used;
     }
 
     public void setId(int _id) {

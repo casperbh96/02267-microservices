@@ -17,40 +17,34 @@ import java.util.UUID;
 
 public class BusinessLogicTestForToken {
 
-    IBusinessLogicForCustomer customerAdapter;
-    IBusinessLogicForToken tokenAdapter;
-    Token token;
+    IBusinessLogicForCustomer customerLogic;
+    IBusinessLogicForToken tokenLogic;
     Customer customer;
+    Customer customerNoToken;
 
     @Before
     public void Setup() {
-        customerAdapter = new BusinessLogicForCustomer();
-        tokenAdapter = new BusinessLogicForToken();
-        customer = customerAdapter.CreateCustomer("9876", "BLCustomer");
-        token = new Token(1, UUID.randomUUID(), customer.getId());
+        customerLogic = new BusinessLogicForCustomer();
+        tokenLogic = new BusinessLogicForToken();
+        customer = customerLogic.CreateCustomer("9876", "BLCustomer");
+        customerNoToken = customerLogic.CreateCustomer("211", "BLLCustomer2");
     }
 
     @Test
     public void GetUnusedTokenByCustomerIdWithAUnusedToken() throws CustomerHasNoUnusedToken {
-        CreateToken(false);
-        Token actualToken = tokenAdapter.GetUnusedTokenByCustomerId(customer.getId());
-        Assert.assertEquals(token, actualToken);
+        Token newToken = tokenLogic.CreateToken(customer.getId(), UUID.randomUUID(), false);
+        Token actualToken = tokenLogic.GetUnusedTokenByCustomerId(customer.getId());
+        Assert.assertEquals(newToken.getCustomerId(), actualToken.getCustomerId());
     }
 
     @Test(expected = CustomerHasNoUnusedToken.class)
     public void GetUnusedTokenByCustomerIdWithNoUnusedToken() throws CustomerHasNoUnusedToken {
-        CreateToken(true);
-        tokenAdapter.GetUnusedTokenByCustomerId(customer.getId());
+        tokenLogic.GetUnusedTokenByCustomerId(customerNoToken.getId());
     }
 
     @Test
     public void CreateATokenAndChecksIfTheTokenHasBeenAdded() throws FakeToken, TokenAlreadyUsed {
-        tokenAdapter.CreateToken(token);
-        Assert.assertTrue(tokenAdapter.CheckToken(token));
-    }
-
-    private void CreateToken(boolean used) {
-        token.setUsed(used);
-        tokenAdapter.CreateToken(token);
+        Token newToken = tokenLogic.CreateToken(customer.getId(), UUID.randomUUID(), false);
+        Assert.assertTrue(tokenLogic.isTokenValid(newToken));
     }
 }
