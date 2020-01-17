@@ -82,12 +82,14 @@ public class CustomerAdapter implements ICustomerAdapter {
 
     @Override
     public Customer updateCustomer(Customer customer) throws CustomerDoesNotExist {
+        Customer returnCustomer = null;
         try (Connection connection = createConnection()) {
             PreparedStatement query = connection.prepareStatement(
-                    "UPDATE customer SET name = ? WHERE id = ?");
+                    "UPDATE customer SET cpr = ?, name = ? WHERE id = ?");
 
-            query.setInt(2, customer.getId());
-            query.setString(1, customer.getName());
+            query.setString(1, customer.getCpr());
+            query.setString(2, customer.getName());
+            query.setInt(3, customer.getId());
 
             query.executeUpdate();
 
@@ -95,7 +97,13 @@ public class CustomerAdapter implements ICustomerAdapter {
             ex.printStackTrace();
         }
 
-        return customer;
+        try {
+            returnCustomer = getCustomerByCustomerId(customer.getId());
+        } catch (CustomerDoesNotExist ex) {
+            ex.printStackTrace();
+        }
+
+        return returnCustomer;
     }
 
     @Override
