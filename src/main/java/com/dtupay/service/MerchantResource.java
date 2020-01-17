@@ -36,22 +36,24 @@ public class MerchantResource {
             //return Response.status(200).entity(response).build();
             //return Response.status(200).entity("Get merchants").build();
             return Response.ok(m.getMerchantByMerchantId(id)).build();
-        } catch (Exception e) {
-            return Response.serverError().build();
+        }
+        catch(Exception e) {
+            return Response.status(400).build();
         }
     }
 
     @POST
     public Response postMerchant(Merchant merchant) {
-        if (merchant.getName() == null || merchant.getId() == 0) {
+        if (merchant.getName() == null || merchant.getCvr() == null) {
             return Response.status(400).entity("Missing parameters.").build();
         }
         try {
             //String response = sendMessage(message);
             //return Response.status(200).entity(response).build();
-            return Response.ok(m.createMerchant(merchant.getCvr(), merchant.getName())).build();
-        } catch (Exception e) {
-            return Response.serverError().build();
+            return Response.accepted(m.createMerchant(merchant.getCvr(), merchant.getName())).build();
+        }
+        catch(Exception e) {
+            return Response.status(400).build();
         }
     }
 
@@ -62,8 +64,9 @@ public class MerchantResource {
         }
         try {
             return Response.ok(m.updateMerchant(merchant)).build();
-        } catch (Exception e) {
-            return Response.serverError().build();
+        }
+        catch(Exception e) {
+            return Response.status(400).build();
         }
     }
 
