@@ -20,7 +20,7 @@ public class MerchantAdapterTest {
 
     @Test
     public void CreateMerchantTest() throws MerchantDoesNotExist {
-        Merchant merchant = new Merchant(57, "Test");
+        Merchant merchant = new Merchant(57, "1234", "Test");
         m.createMerchant(merchant);
         Assert.assertEquals(merchant, m.getMerchantByMerchantId(57));
     }
@@ -28,14 +28,14 @@ public class MerchantAdapterTest {
     @Test(expected = MerchantDoesNotExist.class)
     public void DeleteMerchantTest() throws MerchantDoesNotExist {
         int id = 58;
-        m.createMerchant(new Merchant(id, "Test"));
+        m.createMerchant(new Merchant(id, "123", "Test"));
         m.deleteMerchantByMerchantId(id);
         m.getMerchantByMerchantId(id);
     }
 
     @Test
     public void UpdateMerchantTest() throws MerchantDoesNotExist {
-        Merchant merchant = new Merchant(59, "Merchant");
+        Merchant merchant = new Merchant(59, "12", "Merchant");
         m.createMerchant(merchant);
         merchant.setName("UpdatedMerchant");
         m.updateMerchant(merchant);

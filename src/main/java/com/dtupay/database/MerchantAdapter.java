@@ -12,8 +12,9 @@ public class MerchantAdapter implements IMerchantAdapter {
 
     public MerchantAdapter() {
         merchants = new ArrayList<>();
-        merchants.add(new Merchant(1, "DTU Canteen"));
-        merchants.add(new Merchant(2, "DTU Library"));
+
+        merchants.add(new Merchant(1, "123", "DTU Canteen"));
+        merchants.add(new Merchant(2, "1234","DTU Library"));
     }
 
     @Override

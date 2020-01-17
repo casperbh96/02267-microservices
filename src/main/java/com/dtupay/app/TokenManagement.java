@@ -20,7 +20,7 @@ public class TokenManagement implements ITokenManagement {
         if (CanCustomerGetTokens(customer, numTokens)) {
             for (int i = 0; i < numTokens; i++) {
                 Token token = new Token();
-                token.id = GetToken();
+                token.uuid = GetToken();
                 token.customerId = customer.getId();
                 token.used = false;
                 customer.tokens.add(token);

@@ -3,10 +3,9 @@ package com.dtupay.database;
 import com.dtupay.app.Customer;
 import com.dtupay.database.exceptions.CustomerDoesNotExist;
 import com.dtupay.database.helper.CustomerResultSetToObject;
-import com.mysql.cj.jdbc.MysqlDataSource;
+
 import static com.dtupay.database.Connector.*;
 
-import javax.sql.DataSource;
 import java.sql.*;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -18,6 +17,7 @@ public class CustomerAdapter implements ICustomerAdapter {
 
     public CustomerAdapter() {
         customers = new ArrayList<>();
+        /*
         customers.add(new Customer(1, "Casper"));
         customers.add(new Customer(2, "Nela"));
         customers.add(new Customer(3, "Ansh"));
@@ -25,6 +25,8 @@ public class CustomerAdapter implements ICustomerAdapter {
         customers.add(new Customer(5, "Dmitry"));
         customers.add(new Customer(6, "Isma"));
         customers.add(new Customer(7, "Hilda"));
+        */
+
     }
 
     @Override

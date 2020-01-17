@@ -52,27 +52,27 @@ public class BasicTransferSteps {
     }
 
     @Given("^customer DTU Pay account \"([^\"]*)\", ID \"([^\"]*)\", and (\\d+) ([^\"]*) token$")
-    public void customerDTUPayAccountIDAndUnusedToken(String name, int cpr, int numOfTokens, String tokenType) throws Throwable {
+    public void customerDTUPayAccountIDAndUnusedToken(int id, String cpr, String name, int numOfTokens, String tokenType) throws Throwable {
         switch (tokenType) {
             case "unused":
-                customerId = helper.createDtuPayCustomer(name, cpr, numOfTokens).getId();
+                customerId = helper.createDtuPayCustomer(id, cpr, name, numOfTokens).getId();
                 break;
             case "used":
-                customerId = helper.createDtuPayCustomerUsedToken(name, cpr, numOfTokens).getId();
+                customerId = helper.createDtuPayCustomerUsedToken(id, name, cpr, numOfTokens).getId();
                 break;
             case "invalid":
-                customerId = helper.createDtuPayCustomerInvalidToken(name, cpr, numOfTokens).getId();
+                customerId = helper.createDtuPayCustomerInvalidToken(id, name, cpr, numOfTokens).getId();
                 break;
         }
     }
 
     @Given("^merchant DTU Pay account \"([^\"]*)\", ID \"([^\"]*)\"")
-    public void merchantDTUPayAccountIDAndTokens(String name, int cpr) throws Throwable {
-        merchantId = helper.createDtuPayMerchant(name, cpr).getId();
+    public void merchantDTUPayAccountIDAndTokens(int id, String name, String cpr) throws Throwable {
+        merchantId = helper.createDtuPayMerchant(id, cpr, name).getId();
     }
 
     @Given("^bank account \"([^\"]*)\", \"([^\"]*)\" with start balance (\\d+)$")
-    public void bank_account_with_start_balance(String name, int cpr, int startBalance) throws Throwable {
+    public void bank_account_with_start_balance(int id, String cpr, String name, int startBalance) throws Throwable {
         helper.createBankAccount(name, cpr, startBalance);
     }
 
@@ -122,12 +122,12 @@ public class BasicTransferSteps {
 
     @Then("^the balance of the customer is (\\d+)$")
     public void theBalanceOfTheCustomerIs(int arg1) throws Throwable {
-        assertEquals(new BigDecimal(arg1), bank.getBalanceByCPR(customerId));
+        assertEquals(new BigDecimal(arg1), bank.getBalanceByCPR(customer.getCpr()));
     }
 
     @Then("^the balance of the merchant is (\\d+)$")
     public void theBalanceOfTheMerchantIs(int arg1) throws Throwable {
-        assertEquals(new BigDecimal(arg1), bank.getBalanceByCPR(merchantId));
+        assertEquals(new BigDecimal(arg1), bank.getBalanceByCPR(merchant.getCvr()));
     }
 
 }

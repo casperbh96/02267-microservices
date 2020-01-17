@@ -10,7 +10,7 @@ public class BankAdapter implements IBankAdapter {
     BankService bank = new BankServiceService().getBankServicePort();
 
     @Override
-    public void createAccount(String name, int cpr, BigDecimal initialBalance) throws BankAdapterException {
+    public void createAccount(String name, String cpr, BigDecimal initialBalance) throws BankAdapterException {
         User u = new User();
         u.setFirstName(name);
         u.setLastName(name);
@@ -23,7 +23,7 @@ public class BankAdapter implements IBankAdapter {
     }
 
     @Override
-    public void removeAccountByCpr(int cpr) throws BankAdapterException {
+    public void removeAccountByCpr(String cpr) throws BankAdapterException {
         try {
             bank.retireAccount(cpr);
         } catch (BankServiceException_Exception e) {
@@ -32,7 +32,7 @@ public class BankAdapter implements IBankAdapter {
     }
 
     @Override
-    public void makeTransaction(int customerCpr, int merchantCpr, BigDecimal amount, String comment) throws BankAdapterException {
+    public void makeTransaction(String customerCpr, String merchantCpr, BigDecimal amount, String comment) throws BankAdapterException {
         try {
             String customerBankId = bank.getAccountByCprNumber(customerCpr).getId();
             String merchantBankId = bank.getAccountByCprNumber(merchantCpr).getId();
@@ -43,7 +43,7 @@ public class BankAdapter implements IBankAdapter {
     }
 
     @Override
-    public BigDecimal getBalanceByCPR(int cpr) throws BankAdapterException {
+    public BigDecimal getBalanceByCPR(String cpr) throws BankAdapterException {
         try {
             return bank.getAccountByCprNumber(cpr).getBalance();
         } catch (BankServiceException_Exception e) {

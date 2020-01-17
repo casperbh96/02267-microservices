@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Customer {
-    String name;
     int id;
+    String cpr;
+    String name;
     List<Token> tokens;
     IDtuPayApp dtuPay;
 
@@ -17,42 +18,45 @@ public class Customer {
         tokens = new ArrayList<>();
     }
 
-    public Customer(int _id, String _name) {
+    public Customer(int _id, String _cpr, String _name) {
         id = _id;
+        cpr = _cpr;
         name = _name;
         tokens = new ArrayList<>();
     }
-
+    public void setId(int id) {
+        this.id = id;
+    }
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCpr(String _cpr) {
+        this.cpr = _cpr;
     }
-
-    public List<Token> getTokens() {
-        return tokens;
-    }
-
-    public void setTokens(List<Token> tokens) {
-        this.tokens = tokens;
-    }
-
-    public String getName() {
-        return name;
+    public String getCpr() {
+        return cpr;
     }
 
     public void setName(String name) {
         this.name = name;
     }
+    public String getName() {
+        return name;
+    }
 
-    public IDtuPayApp getDtuPay() {
-        return dtuPay;
+    public void setTokens(List<Token> tokens) {
+        this.tokens = tokens;
+    }
+    public List<Token> getTokens() {
+        return tokens;
     }
 
     public void setDtuPay(IDtuPayApp dtuPay) {
         this.dtuPay = dtuPay;
+    }
+    public IDtuPayApp getDtuPay() {
+        return dtuPay;
     }
 
     public Token giveToken(){
