@@ -10,7 +10,6 @@ import com.dtupay.database.ITokenAdapter;
 import com.dtupay.database.exceptions.FakeToken;
 import com.dtupay.database.exceptions.TokenAlreadyUsed;
 import cucumber.api.java.After;
-import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -42,7 +41,7 @@ public class BasicTransferSteps {
     public BasicTransferSteps(Helper helper) throws BankAdapterException {
         this.helper = helper;
         this.bank = helper.getBank();
-        bank.deleteAllAccounts();
+        bank.deleteAllCreatedAccounts();
         this.customers = helper.getCustomers();
         this.merchants = helper.getMerchants();
         this.tokens = helper.getTokens();
@@ -50,7 +49,7 @@ public class BasicTransferSteps {
 
     @After
     public void cleanUp() throws BankAdapterException {
-        bank.deleteAllAccounts();
+        bank.deleteAllCreatedAccounts();
     }
 
     @Given("^customer DTU Pay account \"([^\"]*)\", ID \"([^\"]*)\", and (\\d+) ([^\"]*) token$")
