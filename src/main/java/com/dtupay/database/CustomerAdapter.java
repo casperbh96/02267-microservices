@@ -7,7 +7,6 @@ import com.dtupay.database.exceptions.NoCustomers;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
-import com.dtupay.database.exceptions.NoCustomers;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
