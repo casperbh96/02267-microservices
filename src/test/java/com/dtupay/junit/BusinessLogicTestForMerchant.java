@@ -1,4 +1,4 @@
-package com.dtupay.BusinessLogicJunitTest;
+package com.dtupay.junit;
 
 import com.dtupay.BusinessLogic.BusinessLogicForMerchant;
 import com.dtupay.BusinessLogic.IBusinessLogicForMerchant;
