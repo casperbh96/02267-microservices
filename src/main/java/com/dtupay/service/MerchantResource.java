@@ -19,7 +19,8 @@ public class MerchantResource {
     public Response getMerchants() {
         try {
             return Response.ok(m.getAllMerchants()).build();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             return Response.serverError().build();
         }
     }
@@ -78,8 +79,9 @@ public class MerchantResource {
             //return Response.status(200).entity(response).build();
             m.deleteMerchantByMerchantId(id);
             return Response.ok("Deleted merchants").status(200).build();
-        } catch (Exception e) {
-            return Response.serverError().build();
+        }
+        catch(Exception e) {
+            return Response.status(400).build();
         }
     }
 }
