@@ -48,6 +48,6 @@ public class TokenAdapterTest {
     @Test
     public void CreateATokenAndChecksIfTheTokenHasBeenAdded() throws FakeToken, TokenAlreadyUsed {
         tokenAdapter.createToken(token);
-        Assert.assertTrue(tokenAdapter.checkToken(token));
+        Assert.assertTrue(tokenAdapter.isTokenUnused(token));
     }
 }

@@ -6,9 +6,10 @@ import com.dtupay.database.exceptions.*;
 import java.util.List;
 
 public interface ITokenAdapter {
+    Token getTokenByTokenId(int tokenId);
     Token getUnusedTokenByCustomerId(int id) throws CustomerHasNoUnusedToken;
     Token createToken(Token token);
-    boolean checkToken(Token token) throws FakeToken, TokenAlreadyUsed;
+    boolean isTokenUnused(Token token) throws FakeToken, TokenAlreadyUsed;
     List<Token> getAllUnusedTokenByCustomerId(int id) throws CustomerHasNoUnusedToken;
     List<Token> getAllTokens();
 }

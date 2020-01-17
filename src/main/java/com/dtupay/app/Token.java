@@ -18,6 +18,13 @@ public class Token {
         used = false;
     }
 
+    public Token(int _id, int _customerId, UUID _uuid, boolean _used) {
+        id = _id;
+        customerId = _customerId;
+        uuid = _uuid;
+        used = _used;
+    }
+
     public void setId(int _id) {
         this.id = _id;
     }
