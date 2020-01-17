@@ -39,7 +39,10 @@ public class Connector {
 
     private static void createTablesIfNotExists(MysqlDataSource db) throws SQLException {
         try (Connection connection = getConnection(db)) {
-            String sql = "CREATE TABLE IF NOT EXISTS customer (id INTEGER AUTO_INCREMENT, name VARCHAR(255), PRIMARY KEY (id))";
+            String sql = "CREATE TABLE IF NOT EXISTS customer (" +
+                    "id INTEGER AUTO_INCREMENT, " +
+                    "cpr VARCHAR(255), name VARCHAR(255), " +
+                    "PRIMARY KEY (id))";
             Statement query = connection.createStatement();
             int success = query.executeUpdate(sql);
 

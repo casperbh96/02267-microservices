@@ -27,8 +27,8 @@ public class TokenAdapterTest {
     public void Setup() {
         customerAdapter = new CustomerAdapter();
         tokenAdapter = new TokenAdapter();
-        token = new Token(UUID.randomUUID(), customerId);
-        customer = new Customer(customerId, "Test");
+        token = new Token(1, UUID.randomUUID(), customerId);
+        customer = new Customer(customerId, "1", "Test");
     }
 
     @Test

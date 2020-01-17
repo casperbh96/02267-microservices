@@ -9,40 +9,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Merchant {
-    String name;
     int id;
+    String cvr;
+    String name;
     IDtuPayApp dtuPay;
 
     public Merchant() {
     }
 
-    public Merchant(int _id, String _name) {
+    public Merchant(int _id, String _cvr, String _name) {
         id = _id;
+        cvr = _cvr;
         name = _name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public void setId(int id) {
         this.id = id;
     }
+    public int getId() {
+        return id;
+    }
 
-    public IDtuPayApp getDtuPay() {
-        return dtuPay;
+    public void setCvr(String _cvr) {
+        this.cvr = _cvr;
+    }
+    public String getCvr() {
+        return cvr;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getName() {
+        return name;
     }
 
     public void setDtuPay(IDtuPayApp dtuPay) {
         this.dtuPay = dtuPay;
+    }
+    public IDtuPayApp getDtuPay() {
+        return dtuPay;
     }
 
     public boolean scanCustomerToken(Token customerToken) throws FakeToken, TokenAlreadyUsed {
@@ -50,6 +56,6 @@ public class Merchant {
     }
 
     public void requestTransfer(Token token, BigDecimal amount, String description) throws Exception {
-        dtuPay.transferMoney(this.id, token, amount, description);
+        dtuPay.transferMoney(this.cvr, token, amount, description);
     }
 }

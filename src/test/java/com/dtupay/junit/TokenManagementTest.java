@@ -23,8 +23,8 @@ public class TokenManagementTest {
     @Before
     public void Setup(){
     tm = new TokenManagement();
-    customer = new Customer(1, "Test");
-    token1 = new Token(UUID.randomUUID(), 1);
+    customer = new Customer(1, "1", "Test");
+    token1 = new Token(1, UUID.randomUUID(), 1);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class TokenManagementTest {
 
         //new used token
         Token t2 = new Token();
-        t2.setId(UUID.randomUUID());
+        t2.setUuid(UUID.randomUUID());
         t2.setUsed(true);
 
         t.add(token1);
@@ -56,7 +56,7 @@ public class TokenManagementTest {
 
         //new unused token
         Token t2 = new Token();
-        t2.setId(UUID.randomUUID());
+        t2.setUuid(UUID.randomUUID());
         t2.setUsed(false);
 
         t.add(token1);

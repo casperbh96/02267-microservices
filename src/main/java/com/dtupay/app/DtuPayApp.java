@@ -5,6 +5,7 @@ import com.dtupay.database.ICustomerAdapter;
 import com.dtupay.database.IMerchantAdapter;
 import com.dtupay.database.ITokenAdapter;
 import com.dtupay.bank.IBankAdapter;
+import com.dtupay.database.exceptions.CustomerDoesNotExist;
 import com.dtupay.database.exceptions.FakeToken;
 import com.dtupay.database.exceptions.TokenAlreadyUsed;
 
@@ -32,9 +33,14 @@ public class DtuPayApp implements IDtuPayApp {
     }
 
     @Override
-    public void transferMoney(int merchantId, Token customerToken, BigDecimal amount, String description) throws BankAdapterException {
+    public void transferMoney(String merchantId, Token customerToken, BigDecimal amount, String description) throws BankAdapterException {
         // assumption that token is valid at this point..
-        bank.makeTransaction(customerToken.customerId, merchantId, amount, description);
+        try {
+            Customer customer = customers.getCustomerByCustomerId(customerToken.customerId);
+            bank.makeTransaction(customer.getCpr(), merchantId, amount, description);
+        } catch (CustomerDoesNotExist customerDoesNotExist) {
+            customerDoesNotExist.printStackTrace();
+        }
     }
 
 }

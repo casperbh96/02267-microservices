@@ -35,8 +35,8 @@ public class DtuPayAppTest {
         dtupay = new DtuPayApp(bank, customerAdapter, merchantAdapter, tokenAdapter);
 
         merchant = merchantAdapter.getMerchantByMerchantId(1);
-        customer = customerAdapter.createCustomer(new Customer(99, "Casper2"));
-        token = new Token(tokenManager.GetToken(), customer.getId());
+        customer = customerAdapter.createCustomer(new Customer(99, "99","Casper2"));
+        token = new Token(1, tokenManager.GetToken(), customer.getId());
         tokenAdapter.createToken(token);
         description = "A proper meal";
     }
@@ -61,14 +61,14 @@ public class DtuPayAppTest {
 
     @Test(expected = FakeToken.class)
     public void checkTokenValidityOfTokenThatDoesNotExistInTokenDatabase() throws FakeToken, TokenAlreadyUsed {
-        Token token = new Token(tokenManager.GetToken(), 1);
+        Token token = new Token(2, tokenManager.GetToken(), 1);
         dtupay.checkTokenValidity(token);
     }
 
     @Test(expected = FakeToken.class)
     public void checkTokenValidityOfTokenFromAnotherCustomer() throws CustomerHasNoUnusedToken, FakeToken, TokenAlreadyUsed {
         Token token1 = tokenAdapter.getUnusedTokenByCustomerId(1);
-        Token token2 = new Token(token1.getId(), 2);
+        Token token2 = new Token(3, token1.getUuid(), 2);
         dtupay.checkTokenValidity(token2);
     }
 
@@ -76,11 +76,11 @@ public class DtuPayAppTest {
     public void transferMoneyFromExistingCustomerToExistingMerchant() throws BankAdapterException {
         BigDecimal amount = new BigDecimal(200.0);
 
-        bank.createAccount(merchant.getName(), merchant.getId(), new BigDecimal(200.0));
-        bank.createAccount(customer.getName(), customer.getId(), new BigDecimal(200.0));
-        dtupay.transferMoney(merchant.getId(), token, amount, description);
+        bank.createAccount(merchant.getName(), merchant.getCvr(), new BigDecimal(200.0));
+        bank.createAccount(customer.getName(), customer.getCpr(), new BigDecimal(200.0));
+        dtupay.transferMoney(merchant.getCvr(), token, amount, description);
 
-        BigDecimal balance = bank.getBalanceByCPR(1);
+        BigDecimal balance = bank.getBalanceByCPR("1");
         Assert.assertEquals(new BigDecimal(400.0), balance);
     }
 
@@ -88,26 +88,26 @@ public class DtuPayAppTest {
     public void transferMoneyFromExistingCustomerToMerchantThatDoesNotExist() throws BankAdapterException {
         BigDecimal amount = new BigDecimal(200.0);
 
-        bank.createAccount(customer.getName(), customer.getId(), new BigDecimal(200.0));
-        dtupay.transferMoney(1, token, amount, description);
+        bank.createAccount(customer.getName(), customer.getCpr(), new BigDecimal(200.0));
+        dtupay.transferMoney("1", token, amount, description);
     }
 
     @Test(expected = BankAdapterException.class)
     public void transferMoneyByNegativeAmountFromCustomerToMerchant() throws BankAdapterException {
         BigDecimal amount = new BigDecimal(-200.0);
 
-        bank.createAccount(merchant.getName(), merchant.getId(), new BigDecimal(200.0));
-        bank.createAccount(customer.getName(), customer.getId(), new BigDecimal(200.0));
-        dtupay.transferMoney(merchant.getId(), token, amount, description);
+        bank.createAccount(merchant.getName(), merchant.getCvr(), new BigDecimal(200.0));
+        bank.createAccount(customer.getName(), customer.getCpr(), new BigDecimal(200.0));
+        dtupay.transferMoney(merchant.getCvr(), token, amount, description);
     }
 
     @Test(expected = BankAdapterException.class)
     public void transferMoneyFromCustomerWithNegativeBalanceToMerchant() throws BankAdapterException {
         BigDecimal amount = new BigDecimal(200.0);
 
-        bank.createAccount(merchant.getName(), merchant.getId(), new BigDecimal(200.0));
-        bank.createAccount(customer.getName(), customer.getId(), new BigDecimal(-200.0));
-        dtupay.transferMoney(merchant.getId(), token, amount, description);
+        bank.createAccount(merchant.getName(), merchant.getCvr(), new BigDecimal(200.0));
+        bank.createAccount(customer.getName(), customer.getCpr(), new BigDecimal(-200.0));
+        dtupay.transferMoney(merchant.getCvr(), token, amount, description);
     }
 
 }

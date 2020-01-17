@@ -22,6 +22,7 @@ public class CustomerAdapter implements ICustomerAdapter {
 
     public CustomerAdapter() {
         customers = new ArrayList<>();
+        /*
         customers.add(new Customer(1, "Casper"));
         customers.add(new Customer(2, "Nela"));
         customers.add(new Customer(3, "Ansh"));
@@ -29,6 +30,8 @@ public class CustomerAdapter implements ICustomerAdapter {
         customers.add(new Customer(5, "Dmitry"));
         customers.add(new Customer(6, "Isma"));
         customers.add(new Customer(7, "Hilda"));
+        */
+
     }
 
     public List<Customer> getCustomers() {
