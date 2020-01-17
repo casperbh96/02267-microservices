@@ -15,21 +15,20 @@ public class BusinessLogicTestForMerchant {
     IBusinessLogicForMerchant m;
 
     @Before
-    public void Setup(){
+    public void Setup() {
         m = new BusinessLogicForMerchant();
     }
 
     @Test
     public void CreateMerchantTest() throws MerchantDoesNotExist {
-        Merchant merchant = new Merchant("57", "Test");
-        Merchant newMerchant = m.CreateMerchant(merchant);
-        Assert.assertEquals(merchant.getCvr(), newMerchant.getCvr());
+        String cvr = "57";
+        Merchant newMerchant = m.CreateMerchant(cvr, "Test");
+        Assert.assertEquals(cvr, newMerchant.getCvr());
     }
 
     @Test(expected = MerchantDoesNotExist.class)
     public void DeleteMerchantTest() throws MerchantDoesNotExist {
-        Merchant merchant = new Merchant("57", "Test");
-        Merchant newMerchant = m.CreateMerchant(merchant);
+        Merchant newMerchant = m.CreateMerchant("57", "Test");
 
         m.DeleteMerchantByMerchantId(newMerchant.getId());
         m.GetMerchantByMerchantId(newMerchant.getId());
@@ -39,19 +38,19 @@ public class BusinessLogicTestForMerchant {
     public void UpdateMerchantTest() throws MerchantDoesNotExist {
         String newName = "UpdatedMerchant";
 
-        Merchant merchant = new Merchant("57", "Test");
-        Merchant newMerchant = m.CreateMerchant(merchant);
+        Merchant newMerchant = m.CreateMerchant("57", "Test");
 
         newMerchant.setName(newName);
         newMerchant = m.UpdateMerchant(newMerchant);
 
         Assert.assertEquals(newName, newMerchant.getName());
     }
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void throwsMerchantDoesNotExist() throws MerchantDoesNotExist{
+    public void throwsMerchantDoesNotExist() throws MerchantDoesNotExist {
         thrown.expect(MerchantDoesNotExist.class);
         throw new MerchantDoesNotExist("");
     }

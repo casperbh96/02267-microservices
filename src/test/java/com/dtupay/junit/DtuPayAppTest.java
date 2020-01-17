@@ -35,7 +35,7 @@ public class DtuPayAppTest {
         dtupay = new DtuPayApp(bank, customerAdapter, merchantAdapter, tokenAdapter);
 
         merchant = merchantAdapter.getMerchantByMerchantId(1);
-        customer = customerAdapter.createCustomer(new Customer("100","Casper2"));
+        customer = customerAdapter.createCustomer("100", "Casper2");
         token = new Token(1, tokenManager.GetToken(), customer.getId());
         tokenAdapter.createToken(token);
         description = "A proper meal";

@@ -14,21 +14,21 @@ public class CustomerAdapterTest {
     ICustomerAdapter c;
 
     @Before
-    public void Setup(){
+    public void Setup() {
         c = new CustomerAdapter();
     }
 
     @Test
     public void CreateCustomerTest() throws CustomerDoesNotExist {
-        Customer customer = new Customer("123", "Test");
-        Customer createdCustomer = c.createCustomer(customer);
+        String cpr = "123";
+        Customer createdCustomer = c.createCustomer(cpr, "Test");
 
-        Assert.assertEquals(customer.getCpr(), createdCustomer.getCpr());
+        Assert.assertEquals(cpr, createdCustomer.getCpr());
     }
 
     @Test(expected = CustomerDoesNotExist.class)
     public void DeleteCustomerTest() throws CustomerDoesNotExist {
-        Customer customer = c.createCustomer(new Customer("Test"));
+        Customer customer = c.createCustomer("16", "Test");
         c.deleteCustomerByCustomerId(customer.getId());
         c.getCustomerByCustomerId(customer.getId());
     }
@@ -37,7 +37,7 @@ public class CustomerAdapterTest {
     public void UpdateCustomerTest() throws CustomerDoesNotExist {
         String newName = "Test2";
 
-        Customer newCustomer = c.createCustomer(new Customer("974", "Test1"));
+        Customer newCustomer = c.createCustomer("974", "Test1");
         newCustomer.setName(newName);
         newCustomer = c.updateCustomer(newCustomer);
 
@@ -48,7 +48,7 @@ public class CustomerAdapterTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void throwsCustomerDoesNotExist() throws CustomerDoesNotExist{
+    public void throwsCustomerDoesNotExist() throws CustomerDoesNotExist {
         thrown.expect(CustomerDoesNotExist.class);
         throw new CustomerDoesNotExist("");
     }

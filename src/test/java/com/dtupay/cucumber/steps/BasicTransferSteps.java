@@ -22,9 +22,6 @@ import static org.junit.Assert.assertTrue;
 public class BasicTransferSteps {
     Helper helper;
 
-    int customerId;
-    int merchantId;
-
     IDtuPayApp dtuPayApp;
     IBankAdapter bank;
     ICustomerAdapter customers;
@@ -52,37 +49,34 @@ public class BasicTransferSteps {
         bank.deleteAllCreatedAccounts();
     }
 
-    @Given("^customer DTU Pay account \"([^\"]*)\", ID \"([^\"]*)\", and (\\d+) ([^\"]*) token$")
-    public void customerDTUPayAccountIDAndUnusedToken(int id, String cpr, String name, int numOfTokens, String tokenType) throws Throwable {
+    @Given("^customer DTU Pay account \"([^\"]*)\", CPR \"([^\"]*)\", and (\\d+) ([^\"]*) token$")
+    public void customerDTUPayAccountIDAndUnusedToken(String name, String cpr, int numOfTokens, String tokenType) throws Throwable {
         switch (tokenType) {
             case "unused":
-                customerId = helper.createDtuPayCustomer(id, cpr, name, numOfTokens).getId();
+                customer = helper.createDtuPayCustomer(name, cpr, numOfTokens);
                 break;
             case "used":
-                customerId = helper.createDtuPayCustomerUsedToken(id, name, cpr, numOfTokens).getId();
+                customer = helper.createDtuPayCustomerUsedToken(name, cpr, numOfTokens);
                 break;
             case "invalid":
-                customerId = helper.createDtuPayCustomerInvalidToken(id, name, cpr, numOfTokens).getId();
+                customer = helper.createDtuPayCustomerInvalidToken(name, cpr, numOfTokens);
                 break;
         }
     }
 
-    @Given("^merchant DTU Pay account \"([^\"]*)\", ID \"([^\"]*)\"")
-    public void merchantDTUPayAccountIDAndTokens(int id, String name, String cpr) throws Throwable {
-        merchantId = helper.createDtuPayMerchant(id, cpr, name).getId();
+    @Given("^merchant DTU Pay account \"([^\"]*)\", CVR \"([^\"]*)\"")
+    public void merchantDTUPayAccountIDAndTokens(String name, String cvr) throws Throwable {
+        merchant = helper.createDtuPayMerchant(name, cvr);
     }
 
     @Given("^bank account \"([^\"]*)\", \"([^\"]*)\" with start balance (\\d+)$")
-    public void bank_account_with_start_balance(int id, String cpr, String name, int startBalance) throws Throwable {
+    public void bank_account_with_start_balance(String name, String cpr, int startBalance) throws Throwable {
         helper.createBankAccount(name, cpr, startBalance);
     }
 
     @When("^the merchant scans the customer's token$")
     public void the_merchant_scans_the_customer_s_token() throws Throwable {
         dtuPayApp = new DtuPayApp(bank, customers, merchants, tokens);
-
-        customer = customers.getCustomerByCustomerId(customerId);
-        merchant = merchants.getMerchantByMerchantId(merchantId);
 
         customer.setDtuPay(dtuPayApp);
         merchant.setDtuPay(dtuPayApp);
@@ -116,7 +110,6 @@ public class BasicTransferSteps {
     @Then("^the amount (\\d+) is transferred to the merchant$")
     public void theAmountIsTransferredToTheMerchant(int arg1) throws Throwable {
         if (scanSuccessful) {
-            Merchant merchant = merchants.getMerchantByMerchantId(merchantId);
             merchant.requestTransfer(token, new BigDecimal(arg1), "Transfer");
         }
     }
