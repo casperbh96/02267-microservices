@@ -9,8 +9,12 @@ import java.util.List;
 
 public interface IBusinessLogicForToken {
     Token GetUnusedTokenByCustomerId(int id) throws CustomerHasNoUnusedToken;
+
     Token CreateToken(Token token);
+
     boolean CheckToken(Token token) throws TokenAlreadyUsed, FakeToken;
+
     List<Token> GetAllUnusedTokenByCustomerId(int id) throws CustomerHasNoUnusedToken;
+
     List<Token> GetAllTokens();
 }

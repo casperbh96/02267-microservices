@@ -8,7 +8,7 @@ import java.util.List;
 public interface IMerchantAdapter {
     List<Merchant> getAllMerchants() throws NoMerchants;
     Merchant getMerchantByMerchantId(int id) throws MerchantDoesNotExist;
-    Merchant createMerchant(Merchant merchant);
+    Merchant createMerchant(String cvr, String name);
     Merchant updateMerchant(Merchant merchant)  throws MerchantDoesNotExist;
     void deleteMerchantByMerchantId(int id) throws MerchantDoesNotExist;
 }

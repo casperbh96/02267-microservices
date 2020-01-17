@@ -28,10 +28,10 @@ public class TokenAdapterTest {
         customerAdapter = new CustomerAdapter();
         tokenAdapter = new TokenAdapter();
 
-        customer = customerAdapter.createCustomer(new Customer("1", "Test"));
+        customer = customerAdapter.createCustomer("1", "Test");
         token = tokenAdapter.createToken(new Token(1, UUID.randomUUID(), customer.getId()));
 
-        customerNoToken = customerAdapter.createCustomer(new Customer("2", "Test"));
+        customerNoToken = customerAdapter.createCustomer("2", "Test");
     }
 
     @Test
