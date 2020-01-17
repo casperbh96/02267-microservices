@@ -12,7 +12,7 @@ public interface IBusinessLogicForToken {
 
     Token CreateToken(Token token);
 
-    boolean CheckToken(Token token) throws TokenAlreadyUsed, FakeToken;
+    boolean isTokenValid(Token token) throws TokenAlreadyUsed, FakeToken;
 
     List<Token> GetAllUnusedTokenByCustomerId(int id) throws CustomerHasNoUnusedToken;
 

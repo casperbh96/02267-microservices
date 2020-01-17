@@ -17,7 +17,7 @@ public class BusinessLogicForToken implements IBusinessLogicForToken {
         return tokenAdapter.createToken(token);
     }
 
-    public boolean CheckToken(Token token) throws TokenAlreadyUsed, FakeToken {
+    public boolean isTokenValid(Token token) throws TokenAlreadyUsed, FakeToken {
         return tokenAdapter.isTokenValid(token);
     }
 

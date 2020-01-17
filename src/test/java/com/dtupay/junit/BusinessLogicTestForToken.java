@@ -29,7 +29,7 @@ public class BusinessLogicTestForToken {
         tokenLogic = new BusinessLogicForToken();
         customer = customerLogic.CreateCustomer("9876", "BLCustomer");
         customerNoToken = customerLogic.CreateCustomer("211", "BLLCustomer2");
-        token = new Token(1, UUID.randomUUID(), customer.getId());
+        token = new Token(1, customer.getId(), UUID.randomUUID(), false);
     }
 
     @Test
@@ -47,6 +47,6 @@ public class BusinessLogicTestForToken {
     @Test
     public void CreateATokenAndChecksIfTheTokenHasBeenAdded() throws FakeToken, TokenAlreadyUsed {
         Token newToken = tokenLogic.CreateToken(token);
-        Assert.assertFalse(tokenLogic.CheckToken(newToken));
+        Assert.assertTrue(tokenLogic.isTokenValid(newToken));
     }
 }
