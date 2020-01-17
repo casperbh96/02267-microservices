@@ -80,7 +80,7 @@ public class DtuPayAppTest {
         bank.createAccount(customer.getName(), customer.getCpr(), new BigDecimal(200.0));
         dtupay.transferMoney(merchant.getCvr(), token, amount, description);
 
-        BigDecimal balance = bank.getBalanceByCPR("1");
+        BigDecimal balance = bank.getBalanceByCPR(merchant.getCvr());
         Assert.assertEquals(new BigDecimal(400.0), balance);
     }
 
