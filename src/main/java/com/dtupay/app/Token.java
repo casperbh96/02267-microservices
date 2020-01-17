@@ -17,13 +17,6 @@ public class Token {
         used = _used;
     }
 
-    public Token(int _id, UUID _uuid, int _customerId) {
-        id = _id;
-        customerId = _customerId;
-        uuid = _uuid;
-        used = false;
-    }
-
     public Token(int _id, int _customerId, UUID _uuid, boolean _used) {
         id = _id;
         customerId = _customerId;

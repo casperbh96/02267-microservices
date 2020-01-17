@@ -13,6 +13,7 @@ import java.sql.*;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static com.dtupay.database.Connector.createConnection;
 
@@ -61,8 +62,9 @@ public class TokenAdapter implements ITokenAdapter {
         Token token = null;
         try (Connection connection = createConnection()) {
             PreparedStatement query = connection.prepareStatement(
-                    "SELECT * FROM token WHERE customerId = ? LIMIT 1;");
+                    "SELECT * FROM token WHERE customerId = ? AND used = ? LIMIT 1;");
             query.setInt(1, customerId);
+            query.setBoolean(2, false);
             ResultSet rs = query.executeQuery();
 
             if (!rs.next()) throw new CustomerHasNoUnusedToken(MessageFormat.format(
@@ -78,7 +80,7 @@ public class TokenAdapter implements ITokenAdapter {
     }
 
     @Override
-    public List<Token> getAllUnusedTokenByCustomerId(int customerId) throws CustomerHasNoUnusedToken{
+    public List<Token> getAllUnusedTokenByCustomerId(int customerId) throws CustomerHasNoUnusedToken {
         List<Token> tokens = new ArrayList<>();
         try (Connection connection = createConnection()) {
             PreparedStatement query = connection.prepareStatement(
@@ -99,7 +101,7 @@ public class TokenAdapter implements ITokenAdapter {
     }
 
     @Override
-    public List<Token> getAllTokens(){
+    public List<Token> getAllTokens() {
         List<Token> tokens = new ArrayList<>();
         try (Connection connection = createConnection()) {
             PreparedStatement query = connection.prepareStatement(
@@ -116,19 +118,18 @@ public class TokenAdapter implements ITokenAdapter {
     }
 
     @Override
-    public Token createToken(Token token) {
-        if (token.getCustomerId() == 0) throw new NullPointerException("customerId == 0");
+    public Token createToken(int customerId, UUID uuid, boolean used) {
+        if (customerId == 0) throw new NullPointerException("customerId == 0");
 
-        Token returnToken = null;
         int autoGenId = 0;
         try (Connection connection = createConnection()) {
             PreparedStatement query = connection.prepareStatement(
                     "INSERT INTO token (customerId, uuid, used) VALUES (?,?,?)",
                     Statement.RETURN_GENERATED_KEYS);
 
-            query.setInt(1, token.getCustomerId());
-            query.setString(2, String.valueOf(token.getUuid()));
-            query.setBoolean(3, token.getUsed());
+            query.setInt(1, customerId);
+            query.setString(2, String.valueOf(uuid));
+            query.setBoolean(3, used);
 
             query.executeUpdate();
 
@@ -150,11 +151,11 @@ public class TokenAdapter implements ITokenAdapter {
 
             ResultSet rs = query.executeQuery();
 
-            if(!rs.next()) throw new FakeToken("The token is not known to the system");
+            if (!rs.next()) throw new FakeToken("The token is not known to the system");
 
             token = converter.resultSetToToken(rs);
 
-            if (token.getUsed() == true) throw new TokenAlreadyUsed("The token is already used");
+            if (token.getUsed()) throw new TokenAlreadyUsed("The token is already used");
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

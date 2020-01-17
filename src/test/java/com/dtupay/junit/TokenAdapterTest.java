@@ -29,7 +29,7 @@ public class TokenAdapterTest {
         tokenAdapter = new TokenAdapter();
 
         customer = customerAdapter.createCustomer("1", "Test");
-        token = tokenAdapter.createToken(new Token(1, customer.getId(), UUID.randomUUID(), false));
+        token = tokenAdapter.createToken(customer.getId(), UUID.randomUUID(), false);
 
         customerNoToken = customerAdapter.createCustomer("2", "Test");
     }
@@ -47,7 +47,7 @@ public class TokenAdapterTest {
 
     @Test
     public void CreateATokenAndChecksIfTheTokenHasBeenAdded() throws FakeToken, TokenAlreadyUsed {
-        Token newToken = tokenAdapter.createToken(token);
+        Token newToken = tokenAdapter.createToken(customer.getId(), UUID.randomUUID(), false);
         Assert.assertTrue(tokenAdapter.isTokenValid(newToken));
     }
 }

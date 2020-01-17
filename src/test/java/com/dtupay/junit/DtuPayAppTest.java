@@ -38,8 +38,7 @@ public class DtuPayAppTest {
         merchant = merchantAdapter.createMerchant("1234536", "Casper1");
         customer = customerAdapter.createCustomer("1003245", "Casper2");
         customerNoToken = customerAdapter.createCustomer("09876", "Casper3");
-        token = new Token(1, tokenManager.GetToken(), customer.getId());
-        token = tokenAdapter.createToken(token);
+        token = tokenAdapter.createToken(customer.getId(), tokenManager.GetToken(), false);
         description = "A proper meal";
     }
 
@@ -56,7 +55,7 @@ public class DtuPayAppTest {
 
     @Test(expected = TokenAlreadyUsed.class)
     public void checkTokenValidityOfUsedToken() throws CustomerHasNoUnusedToken, FakeToken, TokenAlreadyUsed {
-        Token newToken = tokenAdapter.createToken(new Token(2, tokenManager.GetToken(), true));
+        Token newToken = tokenAdapter.createToken(2, tokenManager.GetToken(), true);
         dtupay.checkTokenValidity(newToken);
     }
 

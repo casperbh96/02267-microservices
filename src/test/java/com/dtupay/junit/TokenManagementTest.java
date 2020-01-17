@@ -21,10 +21,10 @@ public class TokenManagementTest {
     Token token1;
 
     @Before
-    public void Setup(){
-    tm = new TokenManagement();
-    customer = new Customer(1, "1", "Test");
-    token1 = new Token(1, UUID.randomUUID(), 1);
+    public void Setup() {
+        tm = new TokenManagement();
+        customer = new Customer(1, "1", "Test");
+        token1 = new Token(1, UUID.randomUUID(), false);
     }
 
     @Test
@@ -85,7 +85,7 @@ public class TokenManagementTest {
     }
 
     @Test(expected = TooManyTokenRequest.class)
-    public final void WhenCustomerAskForTooManyTokensHeWillGetAnException() throws Exception{
+    public final void WhenCustomerAskForTooManyTokensHeWillGetAnException() throws Exception {
         ArrayList<Token> tokens = new ArrayList<>();
         customer.setTokens(tokens);
 

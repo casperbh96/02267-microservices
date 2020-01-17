@@ -19,7 +19,6 @@ public class BusinessLogicTestForToken {
 
     IBusinessLogicForCustomer customerLogic;
     IBusinessLogicForToken tokenLogic;
-    Token token;
     Customer customer;
     Customer customerNoToken;
 
@@ -29,12 +28,11 @@ public class BusinessLogicTestForToken {
         tokenLogic = new BusinessLogicForToken();
         customer = customerLogic.CreateCustomer("9876", "BLCustomer");
         customerNoToken = customerLogic.CreateCustomer("211", "BLLCustomer2");
-        token = new Token(1, customer.getId(), UUID.randomUUID(), false);
     }
 
     @Test
     public void GetUnusedTokenByCustomerIdWithAUnusedToken() throws CustomerHasNoUnusedToken {
-        Token newToken = tokenLogic.CreateToken(token);
+        Token newToken = tokenLogic.CreateToken(customer.getId(), UUID.randomUUID(), false);
         Token actualToken = tokenLogic.GetUnusedTokenByCustomerId(customer.getId());
         Assert.assertEquals(newToken.getCustomerId(), actualToken.getCustomerId());
     }
@@ -46,7 +44,7 @@ public class BusinessLogicTestForToken {
 
     @Test
     public void CreateATokenAndChecksIfTheTokenHasBeenAdded() throws FakeToken, TokenAlreadyUsed {
-        Token newToken = tokenLogic.CreateToken(token);
+        Token newToken = tokenLogic.CreateToken(customer.getId(), UUID.randomUUID(), false);
         Assert.assertTrue(tokenLogic.isTokenValid(newToken));
     }
 }

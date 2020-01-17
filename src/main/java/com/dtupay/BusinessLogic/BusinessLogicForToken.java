@@ -8,13 +8,14 @@ import com.dtupay.database.exceptions.FakeToken;
 import com.dtupay.database.exceptions.TokenAlreadyUsed;
 
 import java.util.List;
+import java.util.UUID;
 
 public class BusinessLogicForToken implements IBusinessLogicForToken {
 
     ITokenAdapter tokenAdapter = new TokenAdapter();
 
-    public Token CreateToken(Token token) {
-        return tokenAdapter.createToken(token);
+    public Token CreateToken(int customerId, UUID uuid, boolean used) {
+        return tokenAdapter.createToken(customerId, uuid, used);
     }
 
     public boolean isTokenValid(Token token) throws TokenAlreadyUsed, FakeToken {
