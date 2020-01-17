@@ -25,14 +25,14 @@ public class BusinessLogicTestForToken {
     IBusinessLogicForToken tokenAdapter;
     Token token;
     Customer customer;
-    String customerId = "99";
+    int customerId = 99;
 
     @Before
     public void Setup() {
         customerAdapter = new BusinessLogicForCustomer();
         tokenAdapter = new BusinessLogicForToken();
-        token = new Token(UUID.randomUUID(), customerId);
-        customer = new Customer(customerId, "Test");
+        token = new Token(1, UUID.randomUUID(), customerId);
+        customer = new Customer(customerId, "9876", "BLCustomer");
     }
 
     @Test

@@ -28,8 +28,8 @@ public class MerchantResource {
 
     @GET
     @Path("{id}")
-    public Response getMerchant(@PathParam("id") String id) {
-        if(id == null) {
+    public Response getMerchant(@PathParam("id") int id) {
+        if(id == 0) {
             return Response.status(400).entity("Missing parameters.").build();
         }
         try {
@@ -45,7 +45,7 @@ public class MerchantResource {
 
     @POST
     public Response postMerchant(Merchant merchant) {
-        if(merchant.getName() == null || merchant.getId() == null) {
+        if(merchant.getName() == null || merchant.getId() == 0) {
             return Response.status(400).entity("Missing parameters.").build();
         }
         try {
@@ -60,7 +60,7 @@ public class MerchantResource {
 
     @PUT
     public Response putCustomer(Merchant merchant) {
-        if(merchant.getName() == null || merchant.getId() == null) {
+        if(merchant.getName() == null || merchant.getId() == 0) {
             return Response.status(400).entity("Missing parameters.").build();
         }
         try {
@@ -73,8 +73,8 @@ public class MerchantResource {
 
     @DELETE
     @Path("{id}")
-    public Response deleteMerchant(@PathParam("id") String id) {
-        if(id == null) {
+    public Response deleteMerchant(@PathParam("id") int id) {
+        if(id == 0) {
             return Response.status(400).entity("Missing parameters.").build();
         }
         try {

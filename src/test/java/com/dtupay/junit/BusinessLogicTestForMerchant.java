@@ -22,25 +22,30 @@ public class BusinessLogicTestForMerchant {
     @Test
     public void CreateMerchantTest() throws MerchantDoesNotExist {
         Merchant merchant = new Merchant("57", "Test");
-        m.CreateMerchant(merchant);
-        Assert.assertEquals(merchant, m.GetMerchantByMerchantId("57"));
+        Merchant newMerchant = m.CreateMerchant(merchant);
+        Assert.assertEquals(merchant.getCvr(), newMerchant.getCvr());
     }
 
     @Test(expected = MerchantDoesNotExist.class)
     public void DeleteMerchantTest() throws MerchantDoesNotExist {
-        String id = "58";
-        m.CreateMerchant(new Merchant(id, "Test"));
-        m.DeleteMerchantByMerchantId(id);
-        m.GetMerchantByMerchantId(id);
+        Merchant merchant = new Merchant("57", "Test");
+        Merchant newMerchant = m.CreateMerchant(merchant);
+
+        m.DeleteMerchantByMerchantId(newMerchant.getId());
+        m.GetMerchantByMerchantId(newMerchant.getId());
     }
 
     @Test
     public void UpdateMerchantTest() throws MerchantDoesNotExist {
-        Merchant merchant = new Merchant("59", "Merchant");
-        m.CreateMerchant(merchant);
-        merchant.setName("UpdatedMerchant");
-        m.UpdateMerchant(merchant);
-        Assert.assertEquals(merchant, m.GetMerchantByMerchantId("59"));
+        String newName = "UpdatedMerchant";
+
+        Merchant merchant = new Merchant("57", "Test");
+        Merchant newMerchant = m.CreateMerchant(merchant);
+
+        newMerchant.setName(newName);
+        newMerchant = m.UpdateMerchant(newMerchant);
+
+        Assert.assertEquals(newName, newMerchant.getName());
     }
     @Rule
     public ExpectedException thrown = ExpectedException.none();

@@ -9,6 +9,6 @@ public interface ITokenAdapter {
     Token getUnusedTokenByCustomerId(int id) throws CustomerHasNoUnusedToken;
     Token createToken(Token token);
     boolean checkToken(Token token) throws FakeToken, TokenAlreadyUsed;
-    List<Token> getAllUnusedTokenByCustomerId(String id) throws CustomerHasNoUnusedToken;
+    List<Token> getAllUnusedTokenByCustomerId(int id) throws CustomerHasNoUnusedToken;
     List<Token> getAllTokens();
 }

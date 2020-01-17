@@ -17,11 +17,11 @@ public class BusinessLogicForMerchant implements IBusinessLogicForMerchant{
         return merchantAdapter.updateMerchant(merchant);
     }
 
-    public void DeleteMerchantByMerchantId(String id) throws MerchantDoesNotExist {
+    public void DeleteMerchantByMerchantId(int id) throws MerchantDoesNotExist {
         merchantAdapter.deleteMerchantByMerchantId(id);
     }
 
-    public Merchant GetMerchantByMerchantId(String id) throws MerchantDoesNotExist {
+    public Merchant GetMerchantByMerchantId(int id) throws MerchantDoesNotExist {
         return merchantAdapter.getMerchantByMerchantId(id);
     }
 

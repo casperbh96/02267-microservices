@@ -41,10 +41,10 @@ public class TokenAdapter implements ITokenAdapter {
     }
 
     @Override
-    public List<Token> getAllUnusedTokenByCustomerId(String id) throws CustomerHasNoUnusedToken{
+    public List<Token> getAllUnusedTokenByCustomerId(int id) throws CustomerHasNoUnusedToken{
         allTokens  = new ArrayList<>();
         for (Token t : tokens) {
-            if (t.getCustomerId().equals(id) && !t.getUsed()) {
+            if (t.getCustomerId() == id && !t.getUsed()) {
                 allTokens.add(t);
             }
         }
