@@ -22,7 +22,7 @@ public class MerchantAdapter implements IMerchantAdapter {
         merchants = new ArrayList<>();
 
         merchants.add(new Merchant(1, "123", "DTU Canteen"));
-        merchants.add(new Merchant(2, "1234","DTU Library"));
+        merchants.add(new Merchant(2, "1234", "DTU Library"));
     }
 
     @Override
@@ -52,7 +52,7 @@ public class MerchantAdapter implements IMerchantAdapter {
     }
 
     @Override
-    public Merchant createMerchant(Merchant merchant) {
+    public Merchant createMerchant(String cvr, String name) {
         Merchant returnMerchant = null;
         int autoGenId = 0;
         try (Connection connection = createConnection()) {
@@ -60,8 +60,8 @@ public class MerchantAdapter implements IMerchantAdapter {
                     "INSERT INTO merchant (cvr, name) VALUES (?,?)",
                     Statement.RETURN_GENERATED_KEYS);
 
-            query.setString(1, merchant.getCvr());
-            query.setString(2, merchant.getName());
+            query.setString(1, cvr);
+            query.setString(2, name);
 
             query.executeUpdate();
 

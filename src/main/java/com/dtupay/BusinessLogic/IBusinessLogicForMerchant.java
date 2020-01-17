@@ -5,7 +5,10 @@ import com.dtupay.database.exceptions.MerchantDoesNotExist;
 
 public interface IBusinessLogicForMerchant {
     Merchant GetMerchantByMerchantId(int id) throws MerchantDoesNotExist;
-    Merchant CreateMerchant(Merchant merchant);
-    Merchant UpdateMerchant(Merchant merchant)  throws MerchantDoesNotExist;
+
+    Merchant CreateMerchant(String cvr, String name);
+
+    Merchant UpdateMerchant(Merchant merchant) throws MerchantDoesNotExist;
+
     void DeleteMerchantByMerchantId(int id) throws MerchantDoesNotExist;
 }

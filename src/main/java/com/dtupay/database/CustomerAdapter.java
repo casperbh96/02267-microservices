@@ -61,7 +61,7 @@ public class CustomerAdapter implements ICustomerAdapter {
     }
 
     @Override
-    public Customer createCustomer(Customer customer) {
+    public Customer createCustomer(String cpr, String name) {
         Customer returnCustomer = null;
         int autoGenId = 0;
         try (Connection connection = createConnection()) {
@@ -69,8 +69,8 @@ public class CustomerAdapter implements ICustomerAdapter {
                     "INSERT INTO customer (cpr, name) VALUES (?,?)",
                     Statement.RETURN_GENERATED_KEYS);
 
-            query.setString(1, customer.getCpr());
-            query.setString(2, customer.getName());
+            query.setString(1, cpr);
+            query.setString(2, name);
 
             query.executeUpdate();
 

@@ -7,19 +7,19 @@ import com.dtupay.database.exceptions.CustomerDoesNotExist;
 
 import java.util.List;
 
-public class BusinessLogicForCustomer implements IBusinessLogicForCustomer{
+public class BusinessLogicForCustomer implements IBusinessLogicForCustomer {
 
     ICustomerAdapter customerAdapter = new CustomerAdapter();
 
-    public Customer CreateCustomer(Customer customer){
-        return customerAdapter.createCustomer(customer);
+    public Customer CreateCustomer(String cpr, String name) {
+        return customerAdapter.createCustomer(cpr, name);
     }
 
     public Customer UpdateCustomer(Customer customer) throws CustomerDoesNotExist {
         return customerAdapter.updateCustomer(customer);
     }
 
-    public void  DeleteCustomerByCustomerId(int id) throws CustomerDoesNotExist {
+    public void DeleteCustomerByCustomerId(int id) throws CustomerDoesNotExist {
         customerAdapter.deleteCustomerByCustomerId(id);
     }
 
