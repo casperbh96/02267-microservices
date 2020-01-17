@@ -3,41 +3,47 @@ package com.dtupay.app;
 import java.util.UUID;
 
 public class Token {
-    UUID id;
-    String customerId;
+    int id;
+    int customerId;
+    UUID uuid;
     boolean used;
 
     public Token() {
     }
 
-    public Token(UUID _id, String _customerId) {
+    public Token(int _id, UUID _uuid, int _customerId) {
         id = _id;
         customerId = _customerId;
+        uuid = _uuid;
         used = false;
     }
 
-    public void setCustomerId(String id) {
-        this.customerId = id;
+    public void setId(int _id) {
+        this.id = _id;
+    }
+    public int getId() {
+        return this.id;
     }
 
-    public String getCustomerId() {
+    public void setCustomerId(int _customerId) {
+        this.customerId = _customerId;
+    }
+    public int getCustomerId() {
         return this.customerId;
     }
 
-    public boolean getUsed() {
-        return used;
+    public void setUuid(UUID newUuid) {
+        this.uuid = newUuid;
+    }
+    public UUID getUuid() {
+        return uuid;
     }
 
     public void setUsed(boolean newUsed) {
         this.used = newUsed;
     }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID newId) {
-        this.id = newId;
+    public boolean getUsed() {
+        return used;
     }
 
     @Override
@@ -49,9 +55,10 @@ public class Token {
             return false;
         }
         Token otherToken = (Token) other;
-        return customerId.equals(otherToken.customerId) &&
-                used == otherToken.used &&
-                id.equals(otherToken.id);
+        return id == otherToken.id &&
+                customerId == otherToken.customerId &&
+                uuid.equals(otherToken.getUuid()) &&
+                used == otherToken.used;
     }
 
 

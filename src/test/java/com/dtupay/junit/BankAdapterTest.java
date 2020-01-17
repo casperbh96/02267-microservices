@@ -28,7 +28,7 @@ public class BankAdapterTest {
 
     @After
     public void cleanUp() throws BankAdapterException {
-        bankAdapter.deleteAllAccounts();
+        bankAdapter.deleteAllCreatedAccounts();
     }
 
     @Test

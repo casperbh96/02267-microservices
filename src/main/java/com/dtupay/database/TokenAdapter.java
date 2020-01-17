@@ -21,30 +21,30 @@ public class TokenAdapter implements ITokenAdapter {
         dbCustomer = new CustomerAdapter();
         tokenManager = new TokenManagement();
         tokens = new ArrayList<>();
-        tokens.add(new Token(tokenManager.GetToken(), "1"));
-        tokens.add(new Token(tokenManager.GetToken(), "2"));
-        tokens.add(new Token(tokenManager.GetToken(), "3"));
-        tokens.add(new Token(tokenManager.GetToken(), "4"));
-        tokens.add(new Token(tokenManager.GetToken(), "5"));
-        tokens.add(new Token(tokenManager.GetToken(), "6"));
-        tokens.add(new Token(tokenManager.GetToken(), "7"));
+        tokens.add(new Token(1, tokenManager.GetToken(), 1));
+        tokens.add(new Token(2, tokenManager.GetToken(), 2));
+        tokens.add(new Token(3, tokenManager.GetToken(), 3));
+        tokens.add(new Token(4, tokenManager.GetToken(), 4));
+        tokens.add(new Token(5, tokenManager.GetToken(), 5));
+        tokens.add(new Token(6, tokenManager.GetToken(), 6));
+        tokens.add(new Token(7, tokenManager.GetToken(), 7));
     }
 
     @Override
-    public Token getUnusedTokenByCustomerId(String id) throws CustomerHasNoUnusedToken {
+    public Token getUnusedTokenByCustomerId(int customerId) throws CustomerHasNoUnusedToken {
         for (Token t : tokens) {
-            if (t.getCustomerId().equals(id) && !t.getUsed()) return t;
+            if (t.getCustomerId() == customerId && !t.getUsed()) return t;
         }
 
         throw new CustomerHasNoUnusedToken(MessageFormat.format(
-                "Customer id {0} has no unused tokens.", id));
+                "Customer id {0} has no unused tokens.", customerId));
     }
 
     @Override
-    public List<Token> getAllUnusedTokenByCustomerId(String id) throws CustomerHasNoUnusedToken{
+    public List<Token> getAllUnusedTokenByCustomerId(int id) throws CustomerHasNoUnusedToken{
         allTokens  = new ArrayList<>();
         for (Token t : tokens) {
-            if (t.getCustomerId().equals(id) && !t.getUsed()) {
+            if (t.getCustomerId() == id && !t.getUsed()) {
                 allTokens.add(t);
             }
         }

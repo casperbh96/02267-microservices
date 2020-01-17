@@ -27,8 +27,8 @@ public class CustomerResource {
 
     @GET
     @Path("{id}")
-    public Response getCustomer(@PathParam("id") String id) {
-        if(id == null) {
+    public Response getCustomer(@PathParam("id") int id) {
+        if(id == 0) {
             return Response.status(400).entity("Missing parameters.").build();
         }
         try {
@@ -44,7 +44,7 @@ public class CustomerResource {
 
     @POST
     public Response postCustomer(Customer customer) {
-        if(customer.getName() == null || customer.getId() == null) {
+        if(customer.getName() == null || customer.getId() == 0) {
             return Response.status(400).entity("Missing parameters.").build();
         }
         try {
@@ -58,7 +58,7 @@ public class CustomerResource {
 
     @PUT
     public Response putCustomer(Customer customer) {
-        if(customer.getName() == null || customer.getId() == null) {
+        if(customer.getName() == null || customer.getId() == 0) {
             return Response.status(400).entity("Missing parameters.").build();
         }
         try {
@@ -71,8 +71,8 @@ public class CustomerResource {
 
     @DELETE
     @Path("{id}")
-    public Response deleteCustomer(@PathParam("id") String id) {
-        if(id == null) {
+    public Response deleteCustomer(@PathParam("id") int id) {
+        if(id == 0) {
             return Response.status(400).entity("Missing parameters.").build();
         }
         try {

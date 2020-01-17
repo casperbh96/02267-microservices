@@ -10,7 +10,6 @@ import com.dtupay.database.ITokenAdapter;
 import com.dtupay.database.exceptions.FakeToken;
 import com.dtupay.database.exceptions.TokenAlreadyUsed;
 import cucumber.api.java.After;
-import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -23,8 +22,8 @@ import static org.junit.Assert.assertTrue;
 public class BasicTransferSteps {
     Helper helper;
 
-    String customerId;
-    String merchantId;
+    int customerId;
+    int merchantId;
 
     IDtuPayApp dtuPayApp;
     IBankAdapter bank;
@@ -42,7 +41,7 @@ public class BasicTransferSteps {
     public BasicTransferSteps(Helper helper) throws BankAdapterException {
         this.helper = helper;
         this.bank = helper.getBank();
-        bank.deleteAllAccounts();
+        bank.deleteAllCreatedAccounts();
         this.customers = helper.getCustomers();
         this.merchants = helper.getMerchants();
         this.tokens = helper.getTokens();
@@ -50,31 +49,31 @@ public class BasicTransferSteps {
 
     @After
     public void cleanUp() throws BankAdapterException {
-        bank.deleteAllAccounts();
+        bank.deleteAllCreatedAccounts();
     }
 
     @Given("^customer DTU Pay account \"([^\"]*)\", ID \"([^\"]*)\", and (\\d+) ([^\"]*) token$")
-    public void customerDTUPayAccountIDAndUnusedToken(String name, String cpr, int numOfTokens, String tokenType) throws Throwable {
+    public void customerDTUPayAccountIDAndUnusedToken(int id, String cpr, String name, int numOfTokens, String tokenType) throws Throwable {
         switch (tokenType) {
             case "unused":
-                customerId = helper.createDtuPayCustomer(name, cpr, numOfTokens).getId();
+                customerId = helper.createDtuPayCustomer(id, cpr, name, numOfTokens).getId();
                 break;
             case "used":
-                customerId = helper.createDtuPayCustomerUsedToken(name, cpr, numOfTokens).getId();
+                customerId = helper.createDtuPayCustomerUsedToken(id, name, cpr, numOfTokens).getId();
                 break;
             case "invalid":
-                customerId = helper.createDtuPayCustomerInvalidToken(name, cpr, numOfTokens).getId();
+                customerId = helper.createDtuPayCustomerInvalidToken(id, name, cpr, numOfTokens).getId();
                 break;
         }
     }
 
     @Given("^merchant DTU Pay account \"([^\"]*)\", ID \"([^\"]*)\"")
-    public void merchantDTUPayAccountIDAndTokens(String name, String cpr) throws Throwable {
-        merchantId = helper.createDtuPayMerchant(name, cpr).getId();
+    public void merchantDTUPayAccountIDAndTokens(int id, String name, String cpr) throws Throwable {
+        merchantId = helper.createDtuPayMerchant(id, cpr, name).getId();
     }
 
     @Given("^bank account \"([^\"]*)\", \"([^\"]*)\" with start balance (\\d+)$")
-    public void bank_account_with_start_balance(String name, String cpr, int startBalance) throws Throwable {
+    public void bank_account_with_start_balance(int id, String cpr, String name, int startBalance) throws Throwable {
         helper.createBankAccount(name, cpr, startBalance);
     }
 
@@ -124,12 +123,12 @@ public class BasicTransferSteps {
 
     @Then("^the balance of the customer is (\\d+)$")
     public void theBalanceOfTheCustomerIs(int arg1) throws Throwable {
-        assertEquals(new BigDecimal(arg1), bank.getBalanceByCPR(customerId));
+        assertEquals(new BigDecimal(arg1), bank.getBalanceByCPR(customer.getCpr()));
     }
 
     @Then("^the balance of the merchant is (\\d+)$")
     public void theBalanceOfTheMerchantIs(int arg1) throws Throwable {
-        assertEquals(new BigDecimal(arg1), bank.getBalanceByCPR(merchantId));
+        assertEquals(new BigDecimal(arg1), bank.getBalanceByCPR(merchant.getCvr()));
     }
 
 }

@@ -21,38 +21,33 @@ public class TokenAdapterTest {
     ITokenAdapter tokenAdapter;
     Token token;
     Customer customer;
-    String customerId = "99";
+    Customer customerNoToken;
 
     @Before
     public void Setup() {
         customerAdapter = new CustomerAdapter();
         tokenAdapter = new TokenAdapter();
-        token = new Token(UUID.randomUUID(), customerId);
-        customer = new Customer(customerId, "Test");
+
+        customer = customerAdapter.createCustomer(new Customer("1", "Test"));
+        token = tokenAdapter.createToken(new Token(1, UUID.randomUUID(), customer.getId()));
+
+        customerNoToken = customerAdapter.createCustomer(new Customer("2", "Test"));
     }
 
     @Test
     public void GetUnusedTokenByCustomerIdWithAUnusedToken() throws CustomerHasNoUnusedToken {
-        CreateCustomer(false);
-        Token actualToken = tokenAdapter.getUnusedTokenByCustomerId(customerId);
+        Token actualToken = tokenAdapter.getUnusedTokenByCustomerId(customer.getId());
         Assert.assertEquals(token, actualToken);
     }
 
     @Test(expected = CustomerHasNoUnusedToken.class)
     public void GetUnusedTokenByCustomerIdWithNoUnusedToken() throws CustomerHasNoUnusedToken {
-        CreateCustomer(true);
-        tokenAdapter.getUnusedTokenByCustomerId(customerId);
+        tokenAdapter.getUnusedTokenByCustomerId(customerNoToken.getId());
     }
 
     @Test
     public void CreateATokenAndChecksIfTheTokenHasBeenAdded() throws FakeToken, TokenAlreadyUsed {
         tokenAdapter.createToken(token);
         Assert.assertTrue(tokenAdapter.checkToken(token));
-    }
-
-    private void CreateCustomer(boolean used) {
-        customerAdapter.createCustomer(customer);
-        token.setUsed(used);
-        tokenAdapter.createToken(token);
     }
 }
