@@ -13,5 +13,5 @@ public interface IBankAdapter {
 
     BigDecimal getBalanceByCPR(String cpr) throws BankAdapterException;
 
-    void deleteAllAccounts() throws BankAdapterException;
+    void deleteAllCreatedAccounts() throws BankAdapterException;
 }

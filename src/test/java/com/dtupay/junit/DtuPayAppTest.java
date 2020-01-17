@@ -6,7 +6,6 @@ import com.dtupay.bank.IBankAdapter;
 import com.dtupay.bank.exceptions.BankAdapterException;
 import com.dtupay.database.*;
 import com.dtupay.database.exceptions.*;
-import gherkin.lexer.Fa;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -44,7 +43,7 @@ public class DtuPayAppTest {
 
     @After
     public void cleanUp() throws BankAdapterException {
-        bank.deleteAllAccounts();
+        bank.deleteAllCreatedAccounts();
     }
 
     @Test
