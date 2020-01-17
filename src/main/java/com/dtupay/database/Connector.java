@@ -39,13 +39,26 @@ public class Connector {
 
     private static void createTablesIfNotExists(MysqlDataSource db) throws SQLException {
         try (Connection connection = getConnection(db)) {
-            String sql = "CREATE TABLE IF NOT EXISTS customer (" +
+            String customer = "CREATE TABLE IF NOT EXISTS customer (" +
                     "id INTEGER AUTO_INCREMENT, " +
                     "cpr VARCHAR(255), " +
                     "name VARCHAR(255), " +
                     "PRIMARY KEY (id))";
+            String merchant = "CREATE TABLE IF NOT EXISTS merchant (" +
+                    "id INTEGER AUTO_INCREMENT, " +
+                    "cvr VARCHAR(255), " +
+                    "name VARCHAR(255), " +
+                    "PRIMARY KEY (id))";
+            String token = "CREATE TABLE IF NOT EXISTS token (" +
+                    "id INTEGER AUTO_INCREMENT, " +
+                    "customerId INTEGER NOT NULL, " +
+                    "uuid VARCHAR(255), " +
+                    "used BOOLEAN, " +
+                    "PRIMARY KEY (id))";
             Statement query = connection.createStatement();
-            int success = query.executeUpdate(sql);
+            int customerSuccess = query.executeUpdate(customer);
+            int merchantSuccess = query.executeUpdate(merchant);
+            int tokenSuccess = query.executeUpdate(token);
 
         } catch (SQLException ex) {
             ex.printStackTrace();
