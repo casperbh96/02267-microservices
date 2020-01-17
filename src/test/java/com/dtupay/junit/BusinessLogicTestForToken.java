@@ -6,10 +6,6 @@ import com.dtupay.BusinessLogic.IBusinessLogicForCustomer;
 import com.dtupay.BusinessLogic.IBusinessLogicForToken;
 import com.dtupay.app.Customer;
 import com.dtupay.app.Token;
-import com.dtupay.database.CustomerAdapter;
-import com.dtupay.database.ICustomerAdapter;
-import com.dtupay.database.ITokenAdapter;
-import com.dtupay.database.TokenAdapter;
 import com.dtupay.database.exceptions.CustomerHasNoUnusedToken;
 import com.dtupay.database.exceptions.FakeToken;
 import com.dtupay.database.exceptions.TokenAlreadyUsed;
@@ -25,27 +21,26 @@ public class BusinessLogicTestForToken {
     IBusinessLogicForToken tokenAdapter;
     Token token;
     Customer customer;
-    String customerId = "99";
 
     @Before
     public void Setup() {
         customerAdapter = new BusinessLogicForCustomer();
         tokenAdapter = new BusinessLogicForToken();
-        token = new Token(UUID.randomUUID(), customerId);
-        customer = new Customer(customerId, "Test");
+        customer = customerAdapter.CreateCustomer("9876", "BLCustomer");
+        token = new Token(1, UUID.randomUUID(), customer.getId());
     }
 
     @Test
     public void GetUnusedTokenByCustomerIdWithAUnusedToken() throws CustomerHasNoUnusedToken {
-        CreateCustomer(false);
-        Token actualToken = tokenAdapter.GetUnusedTokenByCustomerId(customerId);
+        CreateToken(false);
+        Token actualToken = tokenAdapter.GetUnusedTokenByCustomerId(customer.getId());
         Assert.assertEquals(token, actualToken);
     }
 
     @Test(expected = CustomerHasNoUnusedToken.class)
     public void GetUnusedTokenByCustomerIdWithNoUnusedToken() throws CustomerHasNoUnusedToken {
-        CreateCustomer(true);
-        tokenAdapter.GetUnusedTokenByCustomerId(customerId);
+        CreateToken(true);
+        tokenAdapter.GetUnusedTokenByCustomerId(customer.getId());
     }
 
     @Test
@@ -54,8 +49,7 @@ public class BusinessLogicTestForToken {
         Assert.assertTrue(tokenAdapter.CheckToken(token));
     }
 
-    private void CreateCustomer(boolean used) {
-        customerAdapter.CreateCustomer(customer);
+    private void CreateToken(boolean used) {
         token.setUsed(used);
         tokenAdapter.CreateToken(token);
     }

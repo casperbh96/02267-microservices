@@ -22,9 +22,6 @@ import static org.junit.Assert.assertTrue;
 public class BasicTransferSteps {
     Helper helper;
 
-    String customerId;
-    String merchantId;
-
     IDtuPayApp dtuPayApp;
     IBankAdapter bank;
     ICustomerAdapter customers;
@@ -52,24 +49,24 @@ public class BasicTransferSteps {
         bank.deleteAllCreatedAccounts();
     }
 
-    @Given("^customer DTU Pay account \"([^\"]*)\", ID \"([^\"]*)\", and (\\d+) ([^\"]*) token$")
+    @Given("^customer DTU Pay account \"([^\"]*)\", CPR \"([^\"]*)\", and (\\d+) ([^\"]*) token$")
     public void customerDTUPayAccountIDAndUnusedToken(String name, String cpr, int numOfTokens, String tokenType) throws Throwable {
         switch (tokenType) {
             case "unused":
-                customerId = helper.createDtuPayCustomer(name, cpr, numOfTokens).getId();
+                customer = helper.createDtuPayCustomer(name, cpr, numOfTokens);
                 break;
             case "used":
-                customerId = helper.createDtuPayCustomerUsedToken(name, cpr, numOfTokens).getId();
+                customer = helper.createDtuPayCustomerUsedToken(name, cpr, numOfTokens);
                 break;
             case "invalid":
-                customerId = helper.createDtuPayCustomerInvalidToken(name, cpr, numOfTokens).getId();
+                customer = helper.createDtuPayCustomerInvalidToken(name, cpr, numOfTokens);
                 break;
         }
     }
 
-    @Given("^merchant DTU Pay account \"([^\"]*)\", ID \"([^\"]*)\"")
-    public void merchantDTUPayAccountIDAndTokens(String name, String cpr) throws Throwable {
-        merchantId = helper.createDtuPayMerchant(name, cpr).getId();
+    @Given("^merchant DTU Pay account \"([^\"]*)\", CVR \"([^\"]*)\"")
+    public void merchantDTUPayAccountIDAndTokens(String name, String cvr) throws Throwable {
+        merchant = helper.createDtuPayMerchant(name, cvr);
     }
 
     @Given("^bank account \"([^\"]*)\", \"([^\"]*)\" with start balance (\\d+)$")
@@ -80,9 +77,6 @@ public class BasicTransferSteps {
     @When("^the merchant scans the customer's token$")
     public void the_merchant_scans_the_customer_s_token() throws Throwable {
         dtuPayApp = new DtuPayApp(bank, customers, merchants, tokens);
-
-        customer = customers.getCustomerByCustomerId(customerId);
-        merchant = merchants.getMerchantByMerchantId(merchantId);
 
         customer.setDtuPay(dtuPayApp);
         merchant.setDtuPay(dtuPayApp);
@@ -116,19 +110,18 @@ public class BasicTransferSteps {
     @Then("^the amount (\\d+) is transferred to the merchant$")
     public void theAmountIsTransferredToTheMerchant(int arg1) throws Throwable {
         if (scanSuccessful) {
-            Merchant merchant = merchants.getMerchantByMerchantId(merchantId);
             merchant.requestTransfer(token, new BigDecimal(arg1), "Transfer");
         }
     }
 
     @Then("^the balance of the customer is (\\d+)$")
     public void theBalanceOfTheCustomerIs(int arg1) throws Throwable {
-        assertEquals(new BigDecimal(arg1), bank.getBalanceByCPR(customerId));
+        assertEquals(new BigDecimal(arg1), bank.getBalanceByCPR(customer.getCpr()));
     }
 
     @Then("^the balance of the merchant is (\\d+)$")
     public void theBalanceOfTheMerchantIs(int arg1) throws Throwable {
-        assertEquals(new BigDecimal(arg1), bank.getBalanceByCPR(merchantId));
+        assertEquals(new BigDecimal(arg1), bank.getBalanceByCPR(merchant.getCvr()));
     }
 
 }

@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface ICustomerAdapter {
     List<Customer> getAllCustomers() throws NoCustomers;
-    Customer getCustomerByCustomerId(String id) throws CustomerDoesNotExist;
-    Customer createCustomer(Customer customer);
+    Customer getCustomerByCustomerId(int id) throws CustomerDoesNotExist;
+    Customer createCustomer(String cpr, String name) ;
     Customer updateCustomer(Customer customer) throws CustomerDoesNotExist;
-    void deleteCustomerByCustomerId(String id) throws CustomerDoesNotExist;
+    void deleteCustomerByCustomerId(int id) throws CustomerDoesNotExist;
 }

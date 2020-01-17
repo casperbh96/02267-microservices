@@ -14,38 +14,42 @@ public class BusinessLogicTestForCustomer {
     IBusinessLogicForCustomer c;
 
     @Before
-    public void Setup(){
+    public void Setup() {
         c = new BusinessLogicForCustomer();
     }
 
     @Test
     public void CreateCustomerTest() throws CustomerDoesNotExist {
-        Customer customer = new Customer("55", "Test");
-        c.CreateCustomer(customer);
-        Assert.assertEquals(customer, c.GetCustomerByCustomerId("55"));
+        String cpr = "55";
+        Customer newCustomer = c.CreateCustomer(cpr, "Test");
+        Assert.assertEquals(cpr, newCustomer.getCpr());
     }
 
     @Test(expected = CustomerDoesNotExist.class)
     public void DeleteCustomerTest() throws CustomerDoesNotExist {
-        String id = "56";
-        c.CreateCustomer(new Customer(id, "Test"));
-        c.DeleteCustomerByCustomerId(id);
-        c.GetCustomerByCustomerId(id);
+        Customer newCustomer = c.CreateCustomer("56", "Test");
+
+        c.DeleteCustomerByCustomerId(newCustomer.getId());
+        c.GetCustomerByCustomerId(newCustomer.getId());
     }
 
     @Test
     public void UpdateCustomerTest() throws CustomerDoesNotExist {
-        Customer customer = new Customer("57", "Test1");
-        c.CreateCustomer(customer);
-        customer.setName("Test2");
-        c.UpdateCustomer(customer);
-        Assert.assertEquals(customer, c.GetCustomerByCustomerId("57"));
+        String newName = "Test2";
+
+        Customer newCustomer = c.CreateCustomer("55", "Test");
+
+        newCustomer.setName(newName);
+        newCustomer = c.UpdateCustomer(newCustomer);
+
+        Assert.assertEquals(newName, newCustomer.getName());
     }
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void ThrowsCustomerDoesNotExist() throws CustomerDoesNotExist{
+    public void ThrowsCustomerDoesNotExist() throws CustomerDoesNotExist {
         thrown.expect(CustomerDoesNotExist.class);
         throw new CustomerDoesNotExist("");
     }
