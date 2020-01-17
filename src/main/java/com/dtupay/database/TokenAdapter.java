@@ -13,6 +13,7 @@ import java.util.List;
 
 public class TokenAdapter implements ITokenAdapter {
     public List<Token> tokens;
+    public List<Token> allTokens;
     ICustomerAdapter dbCustomer;
     ITokenManagement tokenManager;
 
@@ -37,6 +38,22 @@ public class TokenAdapter implements ITokenAdapter {
 
         throw new CustomerHasNoUnusedToken(MessageFormat.format(
                 "Customer id {0} has no unused tokens.", id));
+    }
+
+    @Override
+    public List<Token> getAllUnusedTokenByCustomerId(String id) throws CustomerHasNoUnusedToken{
+        allTokens  = new ArrayList<>();
+        for (Token t : tokens) {
+            if (t.getCustomerId().equals(id) && !t.getUsed()) {
+                allTokens.add(t);
+            }
+        }
+        return allTokens;
+    }
+
+    @Override
+    public List<Token> getAllTokens(){
+        return tokens;
     }
 
     @Override

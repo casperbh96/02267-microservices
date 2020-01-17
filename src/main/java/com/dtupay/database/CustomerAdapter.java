@@ -33,6 +33,10 @@ public class CustomerAdapter implements ICustomerAdapter {
         }
     }
 
+    public List<Customer> getCustomers() {
+        return customers;
+    }
+
     @Override
     public Customer getCustomerByCustomerId(String id) throws CustomerDoesNotExist {
         for (Customer c : customers) {
