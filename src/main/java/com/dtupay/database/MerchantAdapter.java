@@ -27,7 +27,7 @@ public class MerchantAdapter implements IMerchantAdapter {
 
     @Override
     public List<Merchant> getAllMerchants() throws NoMerchants {
-        return merchants;
+        return null;
     }
 
     @Override
