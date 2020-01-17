@@ -18,6 +18,12 @@ public class Customer {
         tokens = new ArrayList<>();
     }
 
+    public Customer(String _cpr, String _name) {
+        cpr = _cpr;
+        name = _name;
+        tokens = new ArrayList<>();
+    }
+
     public Customer(int _id, String _cpr, String _name) {
         id = _id;
         cpr = _cpr;

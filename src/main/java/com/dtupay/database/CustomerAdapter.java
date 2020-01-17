@@ -2,6 +2,7 @@ package com.dtupay.database;
 
 import com.dtupay.app.Customer;
 import com.dtupay.database.exceptions.CustomerDoesNotExist;
+import com.dtupay.database.helper.CustomerIdGenerator;
 import com.dtupay.database.helper.CustomerResultSetToObject;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import com.dtupay.database.exceptions.NoCustomers;
@@ -19,6 +20,7 @@ import java.util.List;
 public class CustomerAdapter implements ICustomerAdapter {
     public List<Customer> customers;
     CustomerResultSetToObject converter = new CustomerResultSetToObject();
+    CustomerIdGenerator gen = new CustomerIdGenerator();
 
     public CustomerAdapter() {
         customers = new ArrayList<>();
@@ -66,18 +68,30 @@ public class CustomerAdapter implements ICustomerAdapter {
 
     @Override
     public Customer createCustomer(Customer customer) {
+        Customer returnCustomer = null;
+        int autoGenId = 0;
         try (Connection connection = createConnection()) {
             PreparedStatement query = connection.prepareStatement(
-                    "INSERT INTO customer (name) VALUES (?)");
+                    "INSERT INTO customer (cpr, name) VALUES (?,?)",
+                    Statement.RETURN_GENERATED_KEYS);
 
-            query.setString(1, customer.getName());
+            query.setString(1, customer.getCpr());
+            query.setString(2, customer.getName());
 
             query.executeUpdate();
+
+            autoGenId = gen.getIdFromDbReturn(query);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
 
-        return customer;
+        try {
+            returnCustomer = getCustomerByCustomerId(autoGenId);
+        } catch (CustomerDoesNotExist ex) {
+            ex.printStackTrace();
+        }
+
+        return returnCustomer;
     }
 
     @Override
