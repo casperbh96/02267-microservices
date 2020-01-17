@@ -4,7 +4,6 @@ import com.dtupay.app.Customer;
 import com.dtupay.database.CustomerAdapter;
 import com.dtupay.database.ICustomerAdapter;
 import com.dtupay.database.exceptions.CustomerDoesNotExist;
-import com.dtupay.database.helper.CustomerIdGenerator;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -13,12 +12,10 @@ import org.junit.rules.ExpectedException;
 
 public class CustomerAdapterTest {
     ICustomerAdapter c;
-    CustomerIdGenerator gen;
 
     @Before
     public void Setup(){
         c = new CustomerAdapter();
-        gen = new CustomerIdGenerator();
     }
 
     @Test
