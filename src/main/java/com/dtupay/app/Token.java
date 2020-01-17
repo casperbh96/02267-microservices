@@ -11,6 +11,12 @@ public class Token {
     public Token() {
     }
 
+    public Token(int _customerId, UUID _uuid, boolean _used) {
+        customerId = _customerId;
+        uuid = _uuid;
+        used = _used;
+    }
+
     public Token(int _id, UUID _uuid, int _customerId) {
         id = _id;
         customerId = _customerId;

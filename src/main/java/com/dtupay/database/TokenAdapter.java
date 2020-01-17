@@ -141,7 +141,7 @@ public class TokenAdapter implements ITokenAdapter {
     }
 
     @Override
-    public boolean isTokenUnused(Token token) throws FakeToken, TokenAlreadyUsed {
+    public boolean isTokenValid(Token token) throws FakeToken, TokenAlreadyUsed {
         try (Connection connection = createConnection()) {
             PreparedStatement query = connection.prepareStatement(
                     "SELECT * FROM token WHERE id = ?");
@@ -150,26 +150,16 @@ public class TokenAdapter implements ITokenAdapter {
 
             ResultSet rs = query.executeQuery();
 
+            if(!rs.next()) throw new FakeToken("The token is not known to the system");
+
             token = converter.resultSetToToken(rs);
 
-            if (!token.getUsed()) return false;
+            if (token.getUsed() == true) throw new TokenAlreadyUsed("The token is already used");
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
 
         return true;
-        /*
-        for (Token t : tokens) {
-            if (t.equals(token)) {
-                if (t.getUsed()) {
-                    throw new TokenAlreadyUsed("The token is already used");
-                }
-                return true;
-            }
-        }
-        throw new FakeToken("The token is not known to the system");
-
-         */
     }
 
     public int getIdFromDbReturn(PreparedStatement stmt) throws SQLException {
