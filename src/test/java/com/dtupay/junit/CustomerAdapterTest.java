@@ -23,10 +23,10 @@ public class CustomerAdapterTest {
 
     @Test
     public void CreateCustomerTest() throws CustomerDoesNotExist {
-        Customer customer = new Customer("Test");
+        Customer customer = new Customer("123", "Test");
         Customer createdCustomer = c.createCustomer(customer);
 
-        Assert.assertEquals(customer.getId(), createdCustomer.getId());
+        Assert.assertEquals(customer.getCpr(), createdCustomer.getCpr());
     }
 
     @Test(expected = CustomerDoesNotExist.class)
@@ -38,13 +38,11 @@ public class CustomerAdapterTest {
 
     @Test
     public void UpdateCustomerTest() throws CustomerDoesNotExist {
-        String name = "Test1";
         String newName = "Test2";
 
-        Customer customer = new Customer(name);
-        Customer newCustomer = c.createCustomer(customer);
-        customer.setName(newName);
-        c.updateCustomer(customer);
+        Customer newCustomer = c.createCustomer(new Customer("974", "Test1"));
+        newCustomer.setName(newName);
+        newCustomer = c.updateCustomer(newCustomer);
 
         Assert.assertEquals(newName, newCustomer.getName());
     }
