@@ -17,6 +17,11 @@ public class Merchant {
     public Merchant() {
     }
 
+    public Merchant(String _cvr, String _name) {
+        cvr = _cvr;
+        name = _name;
+    }
+
     public Merchant(int _id, String _cvr, String _name) {
         id = _id;
         cvr = _cvr;

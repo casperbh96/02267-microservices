@@ -41,7 +41,7 @@ public class CustomerAdapter implements ICustomerAdapter {
             ResultSet rs = query.executeQuery();
 
             if (!rs.next()) throw new CustomerDoesNotExist(MessageFormat.format(
-                            "Customer id {0} was not found in customer list.", id));
+                            "Customer id {0} was not found in customer table.", id));
 
             customer = converter.resultSetToCustomer(rs);
 
