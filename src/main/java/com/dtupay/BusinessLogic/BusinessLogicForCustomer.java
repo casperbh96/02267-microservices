@@ -19,11 +19,11 @@ public class BusinessLogicForCustomer implements IBusinessLogicForCustomer{
         return customerAdapter.updateCustomer(customer);
     }
 
-    public void  DeleteCustomerByCustomerId(String id) throws CustomerDoesNotExist {
+    public void  DeleteCustomerByCustomerId(int id) throws CustomerDoesNotExist {
         customerAdapter.deleteCustomerByCustomerId(id);
     }
 
-    public Customer GetCustomerByCustomerId(String id) throws CustomerDoesNotExist {
+    public Customer GetCustomerByCustomerId(int id) throws CustomerDoesNotExist {
         return customerAdapter.getCustomerByCustomerId(id);
     }
 

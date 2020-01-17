@@ -20,27 +20,30 @@ public class CustomerAdapterTest {
 
     @Test
     public void CreateCustomerTest() throws CustomerDoesNotExist {
-        Customer customer = new Customer("55", "Test");
-        c.createCustomer(customer);
-        Assert.assertEquals(customer, c.getCustomerByCustomerId("55"));
+        Customer customer = new Customer("123", "Test");
+        Customer createdCustomer = c.createCustomer(customer);
+
+        Assert.assertEquals(customer.getCpr(), createdCustomer.getCpr());
     }
 
     @Test(expected = CustomerDoesNotExist.class)
     public void DeleteCustomerTest() throws CustomerDoesNotExist {
-        String id = "56";
-        c.createCustomer(new Customer(id, "Test"));
-        c.deleteCustomerByCustomerId(id);
-        c.getCustomerByCustomerId(id);
+        Customer customer = c.createCustomer(new Customer("Test"));
+        c.deleteCustomerByCustomerId(customer.getId());
+        c.getCustomerByCustomerId(customer.getId());
     }
 
     @Test
     public void UpdateCustomerTest() throws CustomerDoesNotExist {
-        Customer customer = new Customer("57", "Test1");
-        c.createCustomer(customer);
-        customer.setName("Test2");
-        c.updateCustomer(customer);
-        Assert.assertEquals(customer, c.getCustomerByCustomerId("57"));
+        String newName = "Test2";
+
+        Customer newCustomer = c.createCustomer(new Customer("974", "Test1"));
+        newCustomer.setName(newName);
+        newCustomer = c.updateCustomer(newCustomer);
+
+        Assert.assertEquals(newName, newCustomer.getName());
     }
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 

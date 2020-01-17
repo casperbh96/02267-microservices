@@ -25,11 +25,11 @@ public class BusinessLogicForToken implements IBusinessLogicForToken{
         return tokenAdapter.getAllTokens();
     }
 
-    public Token GetUnusedTokenByCustomerId(String id) throws CustomerHasNoUnusedToken {
+    public Token GetUnusedTokenByCustomerId(int id) throws CustomerHasNoUnusedToken {
         return tokenAdapter.getUnusedTokenByCustomerId(id);
     }
 
-    public List<Token> GetAllUnusedTokenByCustomerId(String id) throws CustomerHasNoUnusedToken {
+    public List<Token> GetAllUnusedTokenByCustomerId(int id) throws CustomerHasNoUnusedToken {
         return tokenAdapter.getAllUnusedTokenByCustomerId(id);
     }
 
