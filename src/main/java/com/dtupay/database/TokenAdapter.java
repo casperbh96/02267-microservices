@@ -30,13 +30,13 @@ public class TokenAdapter implements ITokenAdapter {
     }
 
     @Override
-    public Token getUnusedTokenByCustomerId(int id) throws CustomerHasNoUnusedToken {
+    public Token getUnusedTokenByCustomerId(int customerId) throws CustomerHasNoUnusedToken {
         for (Token t : tokens) {
-            if (t.getId() == id && !t.getUsed()) return t;
+            if (t.getCustomerId() == customerId && !t.getUsed()) return t;
         }
 
         throw new CustomerHasNoUnusedToken(MessageFormat.format(
-                "Customer id {0} has no unused tokens.", id));
+                "Customer id {0} has no unused tokens.", customerId));
     }
 
     @Override
