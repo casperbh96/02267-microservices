@@ -2,7 +2,6 @@ package com.dtupay.database;
 
 import com.dtupay.app.Customer;
 import com.dtupay.database.exceptions.CustomerDoesNotExist;
-import com.dtupay.database.helper.CustomerIdGenerator;
 import com.dtupay.database.helper.CustomerResultSetToObject;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import com.dtupay.database.exceptions.NoCustomers;
@@ -20,7 +19,6 @@ import java.util.List;
 public class CustomerAdapter implements ICustomerAdapter {
     public List<Customer> customers;
     CustomerResultSetToObject converter = new CustomerResultSetToObject();
-    CustomerIdGenerator gen = new CustomerIdGenerator();
 
     public CustomerAdapter() {
         customers = new ArrayList<>();
@@ -80,7 +78,7 @@ public class CustomerAdapter implements ICustomerAdapter {
 
             query.executeUpdate();
 
-            autoGenId = gen.getIdFromDbReturn(query);
+            autoGenId = getIdFromDbReturn(query);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -132,5 +130,12 @@ public class CustomerAdapter implements ICustomerAdapter {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public int getIdFromDbReturn(PreparedStatement stmt) throws SQLException {
+        ResultSet rs = stmt.getGeneratedKeys();
+        rs.next();
+
+        return rs.getInt(1);
     }
 }
