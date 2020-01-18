@@ -30,7 +30,7 @@ public class MonthlyReportCustomerSteps {
     public void the_following_customers(DataTable arg1) throws Throwable {
         List<Map<String, String>> userDetails = arg1.asMaps(String.class, String.class);
         for(Map<String, String> details : userDetails){
-            customerIds.add(helper.createDtuPayCustomer(details.get("name"), details.get("id"), 0).getId());
+            customerIds.add(helper.createDtuPayCustomer(details.get("name"), details.get("id"), 0).getCpr());
         }
     }
 
@@ -38,7 +38,7 @@ public class MonthlyReportCustomerSteps {
     public void the_following_merchants(DataTable arg1) throws Throwable {
         List<Map<String, String>> userDetails = arg1.asMaps(String.class, String.class);
         for(Map<String, String> details : userDetails){
-            merchantIds.add(helper.createDtuPayMerchant(details.get("name"), details.get("id")).getId());
+            merchantIds.add(helper.createDtuPayMerchant(details.get("name"), details.get("id")).getCvr());
         }
     }
 
