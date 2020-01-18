@@ -4,6 +4,7 @@ import com.dtupay.app.Customer;
 import com.dtupay.app.ITokenManagement;
 import com.dtupay.app.Token;
 import com.dtupay.app.TokenManagement;
+import com.dtupay.database.exceptions.TooManyTokenRequest;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -20,20 +21,20 @@ public class TokenManagementTest {
     Token token1;
 
     @Before
-    public void Setup(){
-    tm = new TokenManagement();
-    customer = new Customer("1", "Test");
-    token1 = new Token(UUID.randomUUID(), "1");
+    public void Setup() {
+        tm = new TokenManagement();
+        customer = new Customer(1, "1", "Test");
+        token1 = new Token(1, UUID.randomUUID(), false);
     }
 
     @Test
-    public final void WhenCustomerOnlyHasOneUnusedTokenAndOneUsedTokenThenHeIsValidToGetNewTokens(){
+    public final void WhenCustomerOnlyHasOneUnusedTokenAndOneUsedTokenThenHeIsValidToGetNewTokens() throws TooManyTokenRequest {
         //Arrange
         ArrayList<Token> t = new ArrayList<>();
 
         //new used token
         Token t2 = new Token();
-        t2.setId(UUID.randomUUID());
+        t2.setUuid(UUID.randomUUID());
         t2.setUsed(true);
 
         t.add(token1);
@@ -49,13 +50,13 @@ public class TokenManagementTest {
     }
 
     @Test
-    public final void WhenCustomerHasTwoUnusedTokenThenHeIsNotValidToGetNewTokens(){
+    public final void WhenCustomerHasTwoUnusedTokenThenHeIsNotValidToGetNewTokens() throws TooManyTokenRequest {
         //Arrange
         ArrayList<Token> t = new ArrayList<>();
 
         //new unused token
         Token t2 = new Token();
-        t2.setId(UUID.randomUUID());
+        t2.setUuid(UUID.randomUUID());
         t2.setUsed(false);
 
         t.add(token1);
@@ -71,7 +72,7 @@ public class TokenManagementTest {
     }
 
     @Test
-    public final void WhenCustomerOnlyHasNoTokensThenHeIsValidToGetNewTokens(){
+    public final void WhenCustomerOnlyHasNoTokensThenHeIsValidToGetNewTokens() throws TooManyTokenRequest {
         //Arrange
         ArrayList<Token> t = new ArrayList<>();
         customer.setTokens(t);
@@ -83,21 +84,14 @@ public class TokenManagementTest {
         Assert.assertTrue(actual);
     }
 
-    @Rule
-    public ExpectedException expectedEx = ExpectedException.none();
-
-    @Test
-    public final void WhenCustomerAskForTooManyTokensHeWillGetAnException() throws Exception{
-        //Arrange
-        expectedEx.expect(RuntimeException.class);
-
-        ArrayList<Token> t = new ArrayList<>();
-        customer.setTokens(t);
+    @Test(expected = TooManyTokenRequest.class)
+    public final void WhenCustomerAskForTooManyTokensHeWillGetAnException() throws Exception {
+        ArrayList<Token> tokens = new ArrayList<>();
+        customer.setTokens(tokens);
 
         int numTokens = 6;
 
         //Act
-        expectedEx.expectMessage("Too many token request: " + numTokens);
         tm.CanCustomerGetTokens(customer, numTokens);
     }
 }

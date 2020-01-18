@@ -4,9 +4,11 @@ import com.dtupay.bank.exceptions.BankAdapterException;
 import dtu.ws.fastmoney.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BankAdapter implements IBankAdapter {
+    private List<String> createdAccounts = new ArrayList<>();
     BankService bank = new BankServiceService().getBankServicePort();
 
     @Override
@@ -16,7 +18,8 @@ public class BankAdapter implements IBankAdapter {
         u.setLastName(name);
         u.setCprNumber(cpr);
         try {
-            bank.createAccountWithBalance(u, initialBalance);
+            String accountId = bank.createAccountWithBalance(u, initialBalance);
+            createdAccounts.add(accountId);
         } catch (BankServiceException_Exception e) {
             throw new BankAdapterException(e.getMessage());
         }
@@ -52,16 +55,15 @@ public class BankAdapter implements IBankAdapter {
     }
 
     @Override
-    public void deleteAllAccounts() throws BankAdapterException {
-        List<AccountInfo> accounts = bank.getAccounts();
-        for (AccountInfo acc : accounts) {
+    public void deleteAllCreatedAccounts() throws BankAdapterException {
+        for (String id : createdAccounts) {
             try {
-                bank.retireAccount(acc.getAccountId());
+                bank.retireAccount(id);
             } catch (BankServiceException_Exception e) {
                 throw new BankAdapterException(e.getMessage());
             }
         }
+        createdAccounts.clear();
     }
-
 
 }

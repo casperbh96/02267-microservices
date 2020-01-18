@@ -7,6 +7,8 @@ import com.dtupay.database.ICustomerAdapter;
 import com.dtupay.database.ITokenAdapter;
 import com.dtupay.database.TokenAdapter;
 import com.dtupay.database.exceptions.CustomerHasNoUnusedToken;
+import com.dtupay.database.exceptions.FakeToken;
+import com.dtupay.database.exceptions.TokenAlreadyUsed;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,38 +21,33 @@ public class TokenAdapterTest {
     ITokenAdapter tokenAdapter;
     Token token;
     Customer customer;
-    String customerId = "99";
+    Customer customerNoToken;
 
     @Before
     public void Setup() {
         customerAdapter = new CustomerAdapter();
         tokenAdapter = new TokenAdapter();
-        token = new Token(UUID.randomUUID(), customerId);
-        customer = new Customer(customerId, "Test");
+
+        customer = customerAdapter.createCustomer("1", "Test");
+        token = tokenAdapter.createToken(customer.getId(), UUID.randomUUID(), false);
+
+        customerNoToken = customerAdapter.createCustomer("2", "Test");
     }
 
     @Test
     public void GetUnusedTokenByCustomerIdWithAUnusedToken() throws CustomerHasNoUnusedToken {
-        CreateCustomer(false);
-        Token actualToken = tokenAdapter.getUnusedTokenByCustomerId(customerId);
+        Token actualToken = tokenAdapter.getUnusedTokenByCustomerId(customer.getId());
         Assert.assertEquals(token, actualToken);
     }
 
     @Test(expected = CustomerHasNoUnusedToken.class)
     public void GetUnusedTokenByCustomerIdWithNoUnusedToken() throws CustomerHasNoUnusedToken {
-        CreateCustomer(true);
-        tokenAdapter.getUnusedTokenByCustomerId(customerId);
+        tokenAdapter.getUnusedTokenByCustomerId(customerNoToken.getId());
     }
 
     @Test
-    public void CreateATokenAndChecksIfTheTokenHasBeenAdded(){
-        tokenAdapter.createToken(token);
-        Assert.assertTrue(tokenAdapter.checkExists(token));
-    }
-
-    private void CreateCustomer(boolean used){
-        customerAdapter.createCustomer(customer);
-        token.setUsed(used);
-        tokenAdapter.createToken(token);
+    public void CreateATokenAndChecksIfTheTokenHasBeenAdded() throws FakeToken, TokenAlreadyUsed {
+        Token newToken = tokenAdapter.createToken(customer.getId(), UUID.randomUUID(), false);
+        Assert.assertTrue(tokenAdapter.isTokenValid(newToken));
     }
 }
