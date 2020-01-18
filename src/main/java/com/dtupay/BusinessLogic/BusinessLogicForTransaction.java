@@ -24,7 +24,6 @@ public class BusinessLogicForTransaction implements IBusinessLogicForTransaction
         }
     }
 
-
     public Transaction getTransactionByTransactionId(int id) {
         try {
             return transactionAdapter.getTransactionByTransactionId(id);
@@ -33,7 +32,6 @@ public class BusinessLogicForTransaction implements IBusinessLogicForTransaction
             return null;
         }
     }
-
 
     public Transaction addTransaction(Timestamp timestamp, int from, int to, String tokenId, BigDecimal amount, boolean isRefund) {
         return transactionAdapter.addTransaction(timestamp, from, to, tokenId, amount, isRefund);
