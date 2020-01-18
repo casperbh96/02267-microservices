@@ -17,26 +17,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerAdapter implements ICustomerAdapter {
-    public List<Customer> customers;
     CustomerResultSetToObject converter = new CustomerResultSetToObject();
-
-    public CustomerAdapter() {
-        customers = new ArrayList<>();
-        /*
-        customers.add(new Customer(1, "Casper"));
-        customers.add(new Customer(2, "Nela"));
-        customers.add(new Customer(3, "Ansh"));
-        customers.add(new Customer(4, "Danial"));
-        customers.add(new Customer(5, "Dmitry"));
-        customers.add(new Customer(6, "Isma"));
-        customers.add(new Customer(7, "Hilda"));
-        */
-
-    }
     
     @Override
     public List<Customer> getAllCustomers() throws NoCustomers {
-        return null;
+        List<Customer> customers = new ArrayList<>();
+        try (Connection connection = createConnection()) {
+            PreparedStatement query = connection.prepareStatement(
+                    "SELECT * FROM customer");
+            ResultSet rs = query.executeQuery();
+
+            customers = converter.resultSetToListOfCustomers(rs);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return customers;
     }
 
     @Override
