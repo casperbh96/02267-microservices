@@ -22,6 +22,7 @@ public class DtuPayAppTest {
     ITokenManagement tokenManager;
     Merchant merchant;
     Customer customer;
+    Customer customerNoToken;
     Token token;
     String description;
 
@@ -36,8 +37,8 @@ public class DtuPayAppTest {
 
         merchant = merchantAdapter.createMerchant("1234536", "Casper1");
         customer = customerAdapter.createCustomer("1003245", "Casper2");
-        token = new Token(1, tokenManager.GetToken(), customer.getId());
-        tokenAdapter.createToken(token);
+        customerNoToken = customerAdapter.createCustomer("09876", "Casper3");
+        token = tokenAdapter.createToken(customer.getId(), tokenManager.GetToken(), false);
         description = "A proper meal";
     }
 
@@ -48,28 +49,19 @@ public class DtuPayAppTest {
 
     @Test
     public void checkTokenValidityOfUnusedToken() throws CustomerHasNoUnusedToken, FakeToken, TokenAlreadyUsed {
-        Token token = tokenAdapter.getUnusedTokenByCustomerId(1);
+        Token token = tokenAdapter.getUnusedTokenByCustomerId(customer.getId());
         Assert.assertTrue(dtupay.checkTokenValidity(token));
     }
 
     @Test(expected = TokenAlreadyUsed.class)
     public void checkTokenValidityOfUsedToken() throws CustomerHasNoUnusedToken, FakeToken, TokenAlreadyUsed {
-        Token token = tokenAdapter.getUnusedTokenByCustomerId(1);
-        token.setUsed(true);
-        dtupay.checkTokenValidity(token);
+        Token newToken = tokenAdapter.createToken(2, tokenManager.GetToken(), true);
+        dtupay.checkTokenValidity(newToken);
     }
 
     @Test(expected = FakeToken.class)
     public void checkTokenValidityOfTokenThatDoesNotExistInTokenDatabase() throws FakeToken, TokenAlreadyUsed {
-        Token token = new Token(2, tokenManager.GetToken(), 1);
-        dtupay.checkTokenValidity(token);
-    }
-
-    @Test(expected = FakeToken.class)
-    public void checkTokenValidityOfTokenFromAnotherCustomer() throws CustomerHasNoUnusedToken, FakeToken, TokenAlreadyUsed {
-        Token token1 = tokenAdapter.getUnusedTokenByCustomerId(1);
-        Token token2 = new Token(3, token1.getUuid(), 2);
-        dtupay.checkTokenValidity(token2);
+        dtupay.checkTokenValidity(new Token());
     }
 
     @Test
