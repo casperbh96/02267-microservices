@@ -1,8 +1,8 @@
 package com.dtupay.service;
 
-import com.dtupay.app.Token;
-import com.dtupay.database.ITokenAdapter;
-import com.dtupay.database.TokenAdapter;
+import com.dtupay.BusinessLogic.BusinessLogicForToken;
+import com.dtupay.BusinessLogic.IBusinessLogicForToken;
+import org.json.JSONObject;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -10,27 +10,73 @@ import java.util.UUID;
 
 @Path("/token")
 @Produces("application/json")
-@Consumes("application/json")
 public class TokenResource {
 
-    private static ITokenAdapter c = new TokenAdapter();
+    private static IBusinessLogicForToken tokens = new BusinessLogicForToken();
 
     @GET
     public Response getTokens() {
         try {
-            return Response.ok(c.getAllTokens()).build();
+            return Response.ok(tokens.getAllTokens()).build();
         } catch (Exception e) {
             return Response.serverError().build();
         }
     }
 
-    @POST
-    public Response postToken(int customerId, UUID uuid, boolean used) {
-        if (customerId == 0 || uuid == null) {
+    @GET
+    @Path("unused/{customerId}")
+    public Response getUnusedToken(@PathParam("customerId") int customerId) {
+        if (customerId == 0) {
             return Response.status(400).entity("Missing parameters.").build();
         }
         try {
-            return Response.ok(c.createToken(customerId, uuid, used)).build();
+            return Response.ok(tokens.getUnusedTokenByCustomerId(customerId)).build();
+        } catch (Exception e) {
+            return Response.serverError().build();
+        }
+    }
+
+    @GET
+    @Path("validation/{tokenId}")
+    public Response getValidityOfAToken(@PathParam("tokenId") int tokenId) {
+        if (tokenId == 0) {
+            return Response.status(400).entity("Missing parameters.").build();
+        }
+        try {
+            return Response.ok(tokens.isTokenValid(tokenId)).build();
+        } catch (Exception e) {
+            return Response.serverError().build();
+        }
+    }
+
+    @PUT
+    @Path("{tokenId}")
+    public Response putTokenToUsed(@PathParam("tokenId") int tokenId) {
+        if (tokenId == 0) {
+            return Response.status(400).entity("Missing parameters.").build();
+        }
+        try {
+            tokens.markTokenAsUsed(tokenId);
+            return Response.ok().build();
+        } catch (Exception e) {
+            return Response.serverError().build();
+        }
+    }
+
+
+    @POST
+    @Consumes("application/json")
+    public Response postNewToken(String jsonRaw) {
+        JSONObject json = new JSONObject(jsonRaw);
+        int customerId = json.getInt("customerId");
+        UUID uuid = UUID.fromString(json.getString("uuid"));
+        boolean used = json.getBoolean("used");
+
+        if (customerId == 0) {
+            return Response.status(400).entity("Missing parameters.").build();
+        }
+        try {
+            return Response.ok(tokens.createToken(customerId, uuid, used)).build();
         } catch (Exception e) {
             return Response.serverError().build();
         }

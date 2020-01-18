@@ -9,21 +9,23 @@ import java.util.List;
 import java.util.UUID;
 
 public interface IBusinessLogicForToken {
-    // GET /token/unused/{id}
-    Token getUnusedTokenByCustomerId(int id) throws CustomerHasNoUnusedToken;
+    // GET /token/unused/{customer_id}
+    // DONE
+    Token getUnusedTokenByCustomerId(int customerId) throws CustomerHasNoUnusedToken;
 
     // POST /token
+    // DONE
     Token createToken(int customerId, UUID uuid, boolean used);
 
-    // POST /token/validation
-    boolean isTokenValid(Token token) throws TokenAlreadyUsed, FakeToken;
+    // get /token/validation/id
+    boolean isTokenValid(int tokenId);
 
-    // PUT /token/validation
+    // PUT /token/{id}
+    // DONE
     void markTokenAsUsed(int tokenId) throws FakeToken, TokenAlreadyUsed;
 
-//    List<Token> GetAllUnusedTokenByCustomerId(int id) throws CustomerHasNoUnusedToken;
-
     // GET /token
+    // DONE
     List<Token> getAllTokens();
 
 }

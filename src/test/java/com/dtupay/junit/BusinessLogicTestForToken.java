@@ -43,8 +43,8 @@ public class BusinessLogicTestForToken {
     }
 
     @Test
-    public void CreateATokenAndChecksIfTheTokenHasBeenAdded() throws FakeToken, TokenAlreadyUsed {
+    public void CreateATokenAndChecksIfTheTokenHasBeenAdded() {
         Token newToken = tokenLogic.createToken(customer.getId(), UUID.randomUUID(), false);
-        Assert.assertTrue(tokenLogic.isTokenValid(newToken));
+        Assert.assertTrue(tokenLogic.isTokenValid(newToken.getId()));
     }
 }
