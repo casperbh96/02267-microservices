@@ -18,8 +18,6 @@ import java.util.UUID;
 import static com.dtupay.database.Connector.createConnection;
 
 public class TokenAdapter implements ITokenAdapter {
-    public List<Token> tokens;
-    public List<Token> allTokens;
     ICustomerAdapter dbCustomer;
     ITokenManagement tokenManager;
     TokenResultSetToObject converter = new TokenResultSetToObject();
@@ -27,17 +25,6 @@ public class TokenAdapter implements ITokenAdapter {
     public TokenAdapter() {
         dbCustomer = new CustomerAdapter();
         tokenManager = new TokenManagement();
-        tokens = new ArrayList<>();
-        /*
-        tokens.add(new Token(1, tokenManager.GetToken(), 1));
-        tokens.add(new Token(2, tokenManager.GetToken(), 2));
-        tokens.add(new Token(3, tokenManager.GetToken(), 3));
-        tokens.add(new Token(4, tokenManager.GetToken(), 4));
-        tokens.add(new Token(5, tokenManager.GetToken(), 5));
-        tokens.add(new Token(6, tokenManager.GetToken(), 6));
-        tokens.add(new Token(7, tokenManager.GetToken(), 7));
-
-         */
     }
 
     @Override

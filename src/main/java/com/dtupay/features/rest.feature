@@ -1,17 +1,26 @@
+Feature: Basic rest operations
+  Scenario: get merchant successful
+    Given a new merchant we created
+    When the merchant is requested
+    Then the rest service returns the merchant associated
 
-Feature: Basic rest
+  Scenario: get merchant unsuccessful
+    Given merchant with ID 400000
+    When the merchant is requested
+    Then the rest service returns an error response
 
-  Scenario: Get customer
-    Given customer with 1 as Id
-    When the customer is requested
-    Then the rest service will send ok 200 http status
+#  Scenario: update merchant successful
+#    Given a new merchant we created
+#    When the merchant is updated with CVR "test", name "DTU Skylab"
+#    Then the rest service updates it correctly
 
-  Scenario: Get customer with a wrong id
-    Given customer with 2131231 as id
-    When the customer is requestedTest
-    Then the rest service will send not found 404 http status
+  Scenario: delete merchant successful
+    Given a new merchant we created
+    When the merchant is requested to be deleted
+    Then the rest service deletes it correctly
 
-  Scenario: Create a new customer
-    Given a customer named "TrustMeItWillWork" and cpr "433330"
-    When the customer is posted to the service
-    Then the rest service will post ok 200 http status
+  Scenario: post merchant successful
+    Given a new merchant with CVR "2", name "DTU Canteen"
+    When the merchant is posted to the service
+    Then the rest service posts it correctly
+
