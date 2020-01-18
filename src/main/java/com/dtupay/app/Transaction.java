@@ -10,10 +10,10 @@ public class Transaction {
     private int fromId;
     private int toId;
     private BigDecimal amount;
-    private String tokenId;
+    private int tokenId;
     private boolean isRefund;
 
-    public Transaction(int id, Timestamp timestamp, int fromId, int toId, BigDecimal amount, String tokenId, boolean isRefund) {
+    public Transaction(int id, Timestamp timestamp, int fromId, int toId, BigDecimal amount, int tokenId, boolean isRefund) {
         this.id = id;
         this.timestamp = timestamp;
         this.fromId = fromId;
@@ -43,7 +43,7 @@ public class Transaction {
         return toId;
     }
 
-    public String getTokenId() {
+    public int getTokenId() {
         return tokenId;
     }
 

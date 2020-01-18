@@ -30,7 +30,7 @@ public class TransactionAdapter implements ITransactionAdapter {
     }
 
     @Override
-    public Transaction addTransaction(Timestamp timestamp, int fromId, int toId, String tokenId, BigDecimal amount, boolean isRefund) {
+    public Transaction addTransaction(Timestamp timestamp, int fromId, int toId, int tokenId, BigDecimal amount, boolean isRefund) {
 //        Transaction transaction = new Transaction(customerCpr, merchantCpr, tokenId, amount);
 //        transactions.add(transaction);
 //        return transaction;
@@ -45,7 +45,7 @@ public class TransactionAdapter implements ITransactionAdapter {
             query.setTimestamp(1, timestamp);
             query.setInt(2, fromId);
             query.setInt(3, toId);
-            query.setString(4, tokenId);
+            query.setInt(4, tokenId);
             query.setBigDecimal(5, amount);
             query.setBoolean(6, isRefund);
 

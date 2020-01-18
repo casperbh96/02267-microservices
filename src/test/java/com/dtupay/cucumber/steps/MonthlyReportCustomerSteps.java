@@ -48,7 +48,7 @@ public class MonthlyReportCustomerSteps {
         transDetails.forEach(d -> {
             Transaction t = helper.addTransaction(Timestamp.valueOf(d.get("timestamp")),
                     Integer.parseInt(d.get("fromId")), Integer.parseInt(d.get("toId")),
-                    d.get("tokenId"), new BigDecimal(d.get("amount")), Boolean.parseBoolean(d.get("isRefund")));
+                    Integer.parseInt(d.get("tokenId")), new BigDecimal(d.get("amount")), Boolean.parseBoolean(d.get("isRefund")));
             t.setTimestamp(Timestamp.valueOf(d.get("timestamp")));
         });
     }
