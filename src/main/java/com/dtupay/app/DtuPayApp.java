@@ -11,6 +11,7 @@ import com.dtupay.database.exceptions.TokenAlreadyUsed;
 import com.dtupay.database.TransactionAdapter;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,13 +25,13 @@ public class DtuPayApp implements IDtuPayApp {
     private ITokenManagement tokenManager;
     private ITransactionManager transactionManager;
 
-    public DtuPayApp(IBankAdapter bank, ICustomerAdapter customers, IMerchantAdapter merchants, ITokenAdapter tokens) {
+    public DtuPayApp(IBankAdapter bank, ICustomerAdapter customers, IMerchantAdapter merchants, ITokenAdapter tokens, ITransactionManager transactionManager) {
         this.bank = bank;
         this.customers = customers;
         this.merchants = merchants;
         this.tokens = tokens;
 
-        this.transactionManager = new TransactionManager(new TransactionAdapter());
+        this.transactionManager = transactionManager;
     }
 
     public void setTransactionManager(ITransactionManager transactionManager) {
@@ -54,12 +55,8 @@ public class DtuPayApp implements IDtuPayApp {
         }
     }
 
-    private Map<String, List<Transaction>> generateMonthlyCustomerReports(){
-        Map<String, List<Transaction>> allReports = new HashMap<>();
-        for (Customer c : customers.getAllCustomers()) {
-            allReports.put(c.getCpr(), transactionManager.getCustomerMonthlyReport(c.getId()));
-        }
-        return allReports;
+    public List<Transaction> generateMonthlyCustomerReport(int customerId, int month, int year){
+        return transactionManager.getCustomerMonthlyReport(customerId, month, year);
     }
 
 }

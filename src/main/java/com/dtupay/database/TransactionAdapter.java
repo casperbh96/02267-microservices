@@ -25,15 +25,19 @@ public class TransactionAdapter implements ITransactionAdapter {
     }
 
     @Override
-    public List<Transaction> getTransactionsByCustomerId(int customerId) throws CustomerDoesNotExist {
+    public List<Transaction> getMonthlyTransactionsByCustomerId(int customerId, int month, int year) throws CustomerDoesNotExist {
         List<Transaction> customerTransactions = new ArrayList<>();
         try (Connection connection = createConnection()) {
             PreparedStatement query = connection.prepareStatement(
                     "SELECT * FROM transaction  WHERE (isRefund=0 AND fromId = (?))" +
-                            "OR (isRefund=1 AND toId = (?))",
+                            "OR (isRefund=1 AND toId = (?))" +
+                            "AND MONTH(timestamp) = (?) \n" +
+                            "AND YEAR(timestamp) = (?)",
                     Statement.RETURN_GENERATED_KEYS);
             query.setInt(1, customerId);
             query.setInt(2, customerId);
+            query.setInt(3, month);
+            query.setInt(4, year);
             ResultSet set = query.executeQuery();
 
             if(!set.next())
