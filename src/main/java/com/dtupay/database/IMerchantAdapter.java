@@ -9,6 +9,6 @@ public interface IMerchantAdapter {
     List<Merchant> getAllMerchants() throws NoMerchants;
     Merchant getMerchantByMerchantId(int id) throws MerchantDoesNotExist;
     Merchant createMerchant(String cvr, String name);
-    Merchant updateMerchant(Merchant merchant)  throws MerchantDoesNotExist;
+    Merchant updateMerchant(int id, String cvr, String name)  throws MerchantDoesNotExist;
     void deleteMerchantByMerchantId(int id) throws MerchantDoesNotExist;
 }

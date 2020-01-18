@@ -4,6 +4,9 @@ import com.dtupay.app.Merchant;
 import com.dtupay.database.IMerchantAdapter;
 import com.dtupay.database.MerchantAdapter;
 import com.dtupay.database.exceptions.MerchantDoesNotExist;
+import com.dtupay.database.exceptions.NoMerchants;
+
+import java.util.List;
 
 public class BusinessLogicForMerchant implements IBusinessLogicForMerchant {
 
@@ -13,8 +16,8 @@ public class BusinessLogicForMerchant implements IBusinessLogicForMerchant {
         return merchantAdapter.createMerchant(cvr, name);
     }
 
-    public Merchant UpdateMerchant(Merchant merchant) throws MerchantDoesNotExist {
-        return merchantAdapter.updateMerchant(merchant);
+    public Merchant UpdateMerchant(int id, String cvr, String name) throws MerchantDoesNotExist {
+        return merchantAdapter.updateMerchant(id, cvr, name);
     }
 
     public void DeleteMerchantByMerchantId(int id) throws MerchantDoesNotExist {
@@ -23,6 +26,10 @@ public class BusinessLogicForMerchant implements IBusinessLogicForMerchant {
 
     public Merchant GetMerchantByMerchantId(int id) throws MerchantDoesNotExist {
         return merchantAdapter.getMerchantByMerchantId(id);
+    }
+
+    public List<Merchant> GetAllMerchants() throws NoMerchants {
+        return merchantAdapter.getAllMerchants();
     }
 
 }

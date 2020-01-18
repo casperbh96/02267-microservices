@@ -1,8 +1,8 @@
 package com.dtupay.service;
 
-import com.dtupay.app.Merchant;
-import com.dtupay.database.IMerchantAdapter;
-import com.dtupay.database.MerchantAdapter;
+import com.dtupay.BusinessLogic.BusinessLogicForMerchant;
+import com.dtupay.BusinessLogic.IBusinessLogicForMerchant;
+import org.json.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -10,15 +10,14 @@ import javax.ws.rs.core.Response;
 
 @Path("/merchant")
 @Produces("application/json")
-@Consumes("application/json")
 public class MerchantResource {
 
-    private static IMerchantAdapter m = new MerchantAdapter();
+    private static IBusinessLogicForMerchant m = new BusinessLogicForMerchant();
 
     @GET
     public Response getMerchants() {
         try {
-            return Response.ok(m.getAllMerchants()).build();
+            return Response.ok(m.GetAllMerchants()).build();
         }
         catch (Exception e) {
             return Response.serverError().build();
@@ -35,7 +34,7 @@ public class MerchantResource {
             //return Response.ok("Get merchants").build();
             //return Response.status(200).entity(response).build();
             //return Response.status(200).entity("Get merchants").build();
-            return Response.ok(m.getMerchantByMerchantId(id)).build();
+            return Response.ok(m.GetMerchantByMerchantId(id)).build();
         }
         catch(Exception e) {
             return Response.status(400).build();
@@ -43,14 +42,19 @@ public class MerchantResource {
     }
 
     @POST
-    public Response postMerchant(Merchant merchant) {
-        if (merchant.getName() == null || merchant.getCvr() == null) {
+    @Consumes("application/json")
+    public Response postMerchant(String json) {
+        JSONObject obj = new JSONObject(json);
+        String cvr = obj.getString("cvr");
+        String name = obj.getString("name");
+
+        if (cvr == null || name == null) {
             return Response.status(400).entity("Missing parameters.").build();
         }
         try {
             //String response = sendMessage(message);
             //return Response.status(200).entity(response).build();
-            return Response.accepted(m.createMerchant(merchant.getCvr(), merchant.getName())).build();
+            return Response.accepted(m.CreateMerchant(cvr, name)).build();
         }
         catch(Exception e) {
             return Response.status(400).build();
@@ -58,12 +62,18 @@ public class MerchantResource {
     }
 
     @PUT
-    public Response putCustomer(Merchant merchant) {
-        if (merchant.getName() == null || merchant.getId() == 0) {
+    @Consumes("application/json")
+    public Response putCustomer(String json) {
+        JSONObject obj = new JSONObject(json);
+        int id = obj.getInt("id");
+        String cvr = obj.getString("cvr");
+        String name = obj.getString("name");
+
+        if (cvr == null || id == 0 || name == null) {
             return Response.status(400).entity("Missing parameters.").build();
         }
         try {
-            return Response.ok(m.updateMerchant(merchant)).build();
+            return Response.ok(m.UpdateMerchant(id, cvr, name)).build();
         }
         catch(Exception e) {
             return Response.status(400).build();
@@ -80,8 +90,8 @@ public class MerchantResource {
             // String response = sendMessage(message);
             //return Response.ok("Deleted merchants").build();
             //return Response.status(200).entity(response).build();
-            m.deleteMerchantByMerchantId(id);
-            return Response.ok("Deleted merchants").status(200).build();
+            m.DeleteMerchantByMerchantId(id);
+            return Response.ok("Deleted merchants").build();
         }
         catch(Exception e) {
             return Response.status(400).build();
