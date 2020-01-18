@@ -4,6 +4,7 @@ import com.dtupay.app.Customer;
 import com.dtupay.app.ITokenManagement;
 import com.dtupay.app.Token;
 import com.dtupay.app.TokenManagement;
+import com.dtupay.database.exceptions.CustomerDoesNotExist;
 import com.dtupay.database.exceptions.CustomerHasNoUnusedToken;
 import com.dtupay.database.exceptions.FakeToken;
 import com.dtupay.database.exceptions.TokenAlreadyUsed;
@@ -164,6 +165,18 @@ public class TokenAdapter implements ITokenAdapter {
 
     @Override
     public void markTokenAsUsed(int tokenId) throws FakeToken, TokenAlreadyUsed {
+        try (Connection connection = createConnection()) {
+            PreparedStatement query = connection.prepareStatement(
+                    "UPDATE token SET used = ? WHERE id = ?");
+
+            query.setBoolean(1, true);
+            query.setInt(2, tokenId);
+
+            query.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public int getIdFromDbReturn(PreparedStatement stmt) throws SQLException {
