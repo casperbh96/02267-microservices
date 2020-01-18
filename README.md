@@ -16,3 +16,11 @@
 
 1. `docker-compose build`
 2. `docker-compose up`
+
+## Running docker in Jenkins
+
+This assumes that the user "jenkins" is the user running Jenkins on the VM.
+
+1. `sudo usermod -aG docker jenkins`
+2. `systemctl restart docker`
+3. `systemctl restart jenkins`
