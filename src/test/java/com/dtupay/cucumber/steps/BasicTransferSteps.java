@@ -94,7 +94,7 @@ public class BasicTransferSteps {
     public void TokenIsNotFoundInTheDTUPaySystem() throws Throwable {
         Token token = new Token();
         try {
-            tokens.checkToken(token);
+            tokens.isTokenValid(token);
         } catch (FakeToken e) {
         }
     }
@@ -103,7 +103,7 @@ public class BasicTransferSteps {
     public void TheTokenIsNotVerifiedAsUsed() throws Throwable {
         token = customer.giveToken();
         try {
-            tokens.checkToken(token);
+            tokens.isTokenValid(token);
         } catch (TokenAlreadyUsed e) {
         }
     }

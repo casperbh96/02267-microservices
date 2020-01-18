@@ -15,26 +15,22 @@ import java.util.List;
 import static com.dtupay.database.Connector.createConnection;
 
 public class MerchantAdapter implements IMerchantAdapter {
-    List<Merchant> merchants;
     MerchantResultSetToObject converter = new MerchantResultSetToObject();
-
-    public MerchantAdapter() {
-        merchants = new ArrayList<>();
-
-        merchants.add(new Merchant(1, "123", "DTU Canteen"));
-        merchants.add(new Merchant(2, "1234", "DTU Library"));
-    }
 
     @Override
     public List<Merchant> getAllMerchants() throws NoMerchants {
+        List<Merchant> merchants = new ArrayList<>();
         try (Connection connection = createConnection()) {
-            PreparedStatement query = connection.prepareStatement("SELECT * FROM merchant");
+            PreparedStatement query = connection.prepareStatement(
+                    "SELECT * FROM merchant");
             ResultSet rs = query.executeQuery();
-            merchants = converter.resultSetToMerchantList(rs);
-        }
-        catch (SQLException ex) {
+
+            merchants = converter.resultSetToListOfMerchants(rs);
+
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
+
         return merchants;
     }
 
@@ -124,7 +120,6 @@ public class MerchantAdapter implements IMerchantAdapter {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-            System.out.println("Merchant not found");
         }
     }
 
