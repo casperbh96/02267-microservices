@@ -1,5 +1,7 @@
 package com.dtupay.cucumber.steps;
 
+import com.dtupay.app.DtuPayApp;
+import com.dtupay.app.IDtuPayApp;
 import com.dtupay.app.Transaction;
 import com.dtupay.cucumber.utils.Helper;
 import cucumber.api.DataTable;
@@ -55,8 +57,7 @@ public class MonthlyReportCustomerSteps {
 
     @When("^DTU Pay sends out the monthly reports for \"([^\"]*)\" (\\d+)$")
     public void dtu_Pay_sends_out_the_monthly_reports_for(String arg1, int arg2) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+//        IDtuPayApp dtuPayApp = new DtuPayApp(helper.getBank(), helper);
     }
 
     @Then("^customer (\\d+) will have (\\d+) transaction in his report$")

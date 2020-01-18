@@ -33,7 +33,8 @@ public class BusinessLogicForTransaction implements IBusinessLogicForTransaction
         }
     }
 
-    public Transaction addTransaction(Timestamp timestamp, int from, int to, String tokenId, BigDecimal amount, boolean isRefund) {
+    @Override
+    public Transaction addTransaction(Timestamp timestamp, int from, int to, int tokenId, BigDecimal amount, boolean isRefund) {
         return transactionAdapter.addTransaction(timestamp, from, to, tokenId, amount, isRefund);
     }
 }

@@ -26,7 +26,7 @@ public class BusinessLogicForToken implements IBusinessLogicForToken {
         return tokenAdapter.getAllTokens();
     }
 
-    public Token GetUnusedTokenByCustomerId(int id) throws CustomerHasNoUnusedToken {
+        public Token GetUnusedTokenByCustomerId(int id) throws CustomerHasNoUnusedToken {
         return tokenAdapter.getUnusedTokenByCustomerId(id);
     }
 

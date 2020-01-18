@@ -8,8 +8,12 @@ import com.dtupay.bank.IBankAdapter;
 import com.dtupay.database.exceptions.CustomerDoesNotExist;
 import com.dtupay.database.exceptions.FakeToken;
 import com.dtupay.database.exceptions.TokenAlreadyUsed;
+import com.dtupay.database.TransactionAdapter;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class DtuPayApp implements IDtuPayApp {
 
@@ -18,12 +22,19 @@ public class DtuPayApp implements IDtuPayApp {
     private IMerchantAdapter merchants;
     private ITokenAdapter tokens;
     private ITokenManagement tokenManager;
+    private ITransactionManager transactionManager;
 
     public DtuPayApp(IBankAdapter bank, ICustomerAdapter customers, IMerchantAdapter merchants, ITokenAdapter tokens) {
         this.bank = bank;
         this.customers = customers;
         this.merchants = merchants;
         this.tokens = tokens;
+
+        this.transactionManager = new TransactionManager(new TransactionAdapter());
+    }
+
+    public void setTransactionManager(ITransactionManager transactionManager) {
+        this.transactionManager = transactionManager;
     }
 
     @Override
@@ -41,6 +52,14 @@ public class DtuPayApp implements IDtuPayApp {
         } catch (CustomerDoesNotExist customerDoesNotExist) {
             customerDoesNotExist.printStackTrace();
         }
+    }
+
+    private Map<String, List<Transaction>> generateMonthlyCustomerReports(){
+        Map<String, List<Transaction>> allReports = new HashMap<>();
+        for (Customer c : customers.getAllCustomers()) {
+            allReports.put(c.getCpr(), transactionManager.getCustomerMonthlyReport(c.getId()));
+        }
+        return allReports;
     }
 
 }

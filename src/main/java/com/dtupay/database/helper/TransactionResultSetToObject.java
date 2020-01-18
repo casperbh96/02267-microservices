@@ -9,9 +9,6 @@ import java.sql.Timestamp;
 
 public class TransactionResultSetToObject {
     public Transaction resultSetToTransaction(ResultSet set) throws SQLException {
-        set.beforeFirst();
-        set.next();
-
         int id = set.getInt(1);
         Timestamp timestamp = set.getTimestamp(2);
         int fromId = set.getInt(3);

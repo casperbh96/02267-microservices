@@ -26,14 +26,32 @@ public class TransactionAdapter implements ITransactionAdapter {
 
     @Override
     public List<Transaction> getTransactionsByCustomerId(int customerId) throws CustomerDoesNotExist {
-        return transactions.stream().filter(t -> t.getFromId()==customerId).collect(Collectors.toList());
+        List<Transaction> customerTransactions = new ArrayList<>();
+        try (Connection connection = createConnection()) {
+            PreparedStatement query = connection.prepareStatement(
+                    "SELECT * FROM transaction  WHERE (isRefund=0 AND fromId = (?))" +
+                            "OR (isRefund=1 AND toId = (?))",
+                    Statement.RETURN_GENERATED_KEYS);
+            query.setInt(1, customerId);
+            query.setInt(2, customerId);
+            ResultSet set = query.executeQuery();
+
+            if(!set.next())
+                return customerTransactions;
+
+            set.beforeFirst();
+            while(set.next()){
+                customerTransactions.add(converter.resultSetToTransaction(set));
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return customerTransactions;
     }
 
     @Override
     public Transaction addTransaction(Timestamp timestamp, int fromId, int toId, int tokenId, BigDecimal amount, boolean isRefund) {
-//        Transaction transaction = new Transaction(customerCpr, merchantCpr, tokenId, amount);
-//        transactions.add(transaction);
-//        return transaction;
 
         Transaction returnTransaction = null;
         int autoGenId = 0;
@@ -76,6 +94,7 @@ public class TransactionAdapter implements ITransactionAdapter {
 
             if (!rs.next()) throw new TransactionDoesNotExist(MessageFormat.format(
                     "Transaction id {0} was not found in transaction table.", id));
+
 
             transaction = converter.resultSetToTransaction(rs);
 
