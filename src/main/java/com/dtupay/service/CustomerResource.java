@@ -31,23 +31,21 @@ public class CustomerResource {
             return Response.status(400).entity("Missing parameters.").build();
         }
         try {
-            // String response = sendMessage(message);
-            //return Response.status(200).entity(response).build();
-            //return Response.status(200).entity(c.getCustomerByCustomerId(id)).build();
             return Response.ok(c.getCustomerByCustomerId(id)).build();
-        } catch (Exception e) {
-            return Response.serverError().build();
+        }
+        catch(Exception e) {
+            return Response.status(404).build();
         }
     }
 
     @POST
-    public Response postCustomer(Customer customer) {
-        if (customer.getName() == null || customer.getId() == 0) {
+    public Response postCustomer(String name, String cpr) {
+        if (name == null || cpr == null) {
             return Response.status(400).entity("Missing parameters.").build();
         }
         try {
             // String response = sendMessage(message);
-            return Response.ok(c.createCustomer(customer.getCpr(), customer.getName())).build();
+            return Response.ok(c.createCustomer(name, cpr)).build();
         } catch (Exception e) {
             return Response.serverError().build();
         }
