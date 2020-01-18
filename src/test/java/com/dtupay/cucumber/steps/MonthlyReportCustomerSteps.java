@@ -46,7 +46,9 @@ public class MonthlyReportCustomerSteps {
     public void the_following_transactions(DataTable arg1) throws Throwable {
         List<Map<String, String>> transDetails = arg1.asMaps(String.class, String.class);
         transDetails.forEach(d -> {
-            Transaction t = helper.addTransaction(d.get("customer"), d.get("merchant"), d.get("tokenId"), new BigDecimal(d.get("amount")));
+            Transaction t = helper.addTransaction(Timestamp.valueOf(d.get("timestamp")),
+                    Integer.parseInt(d.get("fromId")), Integer.parseInt(d.get("toId")),
+                    d.get("tokenId"), new BigDecimal(d.get("amount")), Boolean.parseBoolean(d.get("isRefund")));
             t.setTimestamp(Timestamp.valueOf(d.get("timestamp")));
         });
     }
@@ -57,14 +59,14 @@ public class MonthlyReportCustomerSteps {
         throw new PendingException();
     }
 
-    @Then("^customer \"([^\"]*)\" will have (\\d+) transaction in his report$")
-    public void customer_will_have_transaction_in_his_report(String arg1, int arg2) throws Throwable {
+    @Then("^customer (\\d+) will have (\\d+) transaction in his report$")
+    public void customer_will_have_transaction_in_his_report(int arg1, int arg2) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
     }
 
-    @Then("^customer \"([^\"]*)\" will have (\\d+) transactions in his report$")
-    public void customer_will_have_transactions_in_his_report(String arg1, int arg2) throws Throwable {
+    @Then("^customer (\\d+) will have (\\d+) transactions in his report$")
+    public void customer_will_have_transactions_in_his_report(int arg1, int arg2) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
     }

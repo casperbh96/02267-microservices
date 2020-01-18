@@ -2,22 +2,29 @@ package com.dtupay.app;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 public class Transaction {
 
+    private int id;
     private Timestamp timestamp;
-    private String customerCpr;
-    private String merchantCpr;
-    private String tokenId;
+    private int fromId;
+    private int toId;
     private BigDecimal amount;
+    private String tokenId;
+    private boolean isRefund;
 
-    public Transaction(String customerCpr, String merchantCpr, String tokenId, BigDecimal amount) {
-        this.timestamp = Timestamp.valueOf(LocalDateTime.now());
-        this.customerCpr = customerCpr;
-        this.merchantCpr = merchantCpr;
-        this.tokenId = tokenId;
+    public Transaction(int id, Timestamp timestamp, int fromId, int toId, BigDecimal amount, String tokenId, boolean isRefund) {
+        this.id = id;
+        this.timestamp = timestamp;
+        this.fromId = fromId;
+        this.toId = toId;
         this.amount = amount;
+        this.tokenId = tokenId;
+        this.isRefund = isRefund;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public Timestamp getTimestamp() {
@@ -28,12 +35,12 @@ public class Transaction {
         this.timestamp = timestamp;
     }
 
-    public String getCustomerCpr() {
-        return customerCpr;
+    public int getFromId() {
+        return fromId;
     }
 
-    public String getMerchantCpr() {
-        return merchantCpr;
+    public int getToId() {
+        return toId;
     }
 
     public String getTokenId() {

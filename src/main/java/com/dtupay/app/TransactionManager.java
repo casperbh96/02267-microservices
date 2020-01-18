@@ -3,6 +3,7 @@ package com.dtupay.app;
 import com.dtupay.database.ITransactionAdapter;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.List;
 
 public class TransactionManager implements ITransactionManager {
@@ -14,17 +15,17 @@ public class TransactionManager implements ITransactionManager {
     }
 
     @Override
-    public List<String> getCustomerMonthlyReport(String customerCpr) {
+    public List<Transaction> getCustomerMonthlyReport(String customerCpr) {
         return null;
     }
 
     @Override
-    public List<String> getMerchantMonthlyReport(String merchantCpr) {
+    public List<Transaction> getMerchantMonthlyReport(String merchantCpr) {
         return null;
     }
 
     @Override
-    public Transaction registerTransaction(String customerCpr, String merchantCpr, String tokenId, BigDecimal amount) {
-        return transactionAdapter.addTransaction(customerCpr, merchantCpr, tokenId, amount);
+    public Transaction registerTransaction(Timestamp timestamp, int fromId, int toId, String tokenId, BigDecimal amount, boolean isRefund) {
+        return transactionAdapter.addTransaction(timestamp, fromId, toId, tokenId, amount, isRefund);
     }
 }

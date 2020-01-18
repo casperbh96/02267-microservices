@@ -6,7 +6,7 @@ import com.dtupay.database.exceptions.*;
 import java.util.List;
 
 public interface ICustomerAdapter {
-    List<Customer> getAllCustomers() throws NoCustomers;
+    List<Customer> getAllCustomers();
     Customer getCustomerByCustomerId(int id) throws CustomerDoesNotExist;
     Customer createCustomer(String cpr, String name) ;
     Customer updateCustomer(Customer customer) throws CustomerDoesNotExist;

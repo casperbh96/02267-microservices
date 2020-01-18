@@ -35,8 +35,8 @@ public class CustomerAdapter implements ICustomerAdapter {
     }
     
     @Override
-    public List<Customer> getAllCustomers() throws NoCustomers {
-        return null;
+    public List<Customer> getAllCustomers() {
+        return customers;
     }
 
     @Override

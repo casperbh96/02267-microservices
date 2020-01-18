@@ -55,10 +55,20 @@ public class Connector {
                     "uuid VARCHAR(255), " +
                     "used BOOLEAN, " +
                     "PRIMARY KEY (id))";
+            String transaction = "CREATE TABLE IF NOT EXISTS transaction (" +
+                    "id INTEGER AUTO_INCREMENT, " +
+                    "timestamp TIMESTAMP," +
+                    "fromId INTEGER NOT NULL, " +
+                    "toId INTEGER NOT NULL, " +
+                    "amount DECIMAL(5,2), " +
+                    "tokenId VARCHAR(255), " +
+                    "isRefund BOOLEAN, " +
+                    "PRIMARY KEY (id))";
             Statement query = connection.createStatement();
             int customerSuccess = query.executeUpdate(customer);
             int merchantSuccess = query.executeUpdate(merchant);
             int tokenSuccess = query.executeUpdate(token);
+            int transactionSuccess = query.executeUpdate(transaction);
 
         } catch (SQLException ex) {
             ex.printStackTrace();
