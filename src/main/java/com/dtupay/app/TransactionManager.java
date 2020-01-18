@@ -15,12 +15,12 @@ public class TransactionManager implements ITransactionManager {
     }
 
     @Override
-    public List<Transaction> getCustomerMonthlyReport(String customerCpr) {
+    public List<Transaction> getCustomerMonthlyReport(int customerId) {
         return null;
     }
 
     @Override
-    public List<Transaction> getMerchantMonthlyReport(String merchantCpr) {
+    public List<Transaction> getMerchantMonthlyReport(int merchantId) {
         return null;
     }
 
