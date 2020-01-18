@@ -14,7 +14,7 @@ public class BusinessLogicForToken implements IBusinessLogicForToken {
 
     ITokenAdapter tokenAdapter = new TokenAdapter();
 
-    public Token CreateToken(int customerId, UUID uuid, boolean used) {
+    public Token createToken(int customerId, UUID uuid, boolean used) {
         return tokenAdapter.createToken(customerId, uuid, used);
     }
 
@@ -22,17 +22,21 @@ public class BusinessLogicForToken implements IBusinessLogicForToken {
         return tokenAdapter.isTokenValid(token);
     }
 
-    public List<Token> GetAllTokens() {
+    public void markTokenAsUsed(int tokenId) throws FakeToken, TokenAlreadyUsed {
+       tokenAdapter.markTokenAsUsed(tokenId);
+    }
+
+    public List<Token> getAllTokens() {
         return tokenAdapter.getAllTokens();
     }
 
-    public Token GetUnusedTokenByCustomerId(int id) throws CustomerHasNoUnusedToken {
+    public Token getUnusedTokenByCustomerId(int id) throws CustomerHasNoUnusedToken {
         return tokenAdapter.getUnusedTokenByCustomerId(id);
     }
 
-    public List<Token> GetAllUnusedTokenByCustomerId(int id) throws CustomerHasNoUnusedToken {
-        return tokenAdapter.getAllUnusedTokenByCustomerId(id);
-    }
+//    public List<Token> GetAllUnusedTokenByCustomerId(int id) throws CustomerHasNoUnusedToken {
+//        return tokenAdapter.getAllUnusedTokenByCustomerId(id);
+//    }
 
 
 }

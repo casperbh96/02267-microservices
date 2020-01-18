@@ -40,8 +40,7 @@ public class TokenAdapter implements ITokenAdapter {
          */
     }
 
-    @Override
-    public Token getTokenByTokenId(int tokenId) {
+    private Token getTokenByTokenId(int tokenId) {
         Token token = null;
         try (Connection connection = createConnection()) {
             PreparedStatement query = connection.prepareStatement(
@@ -79,26 +78,26 @@ public class TokenAdapter implements ITokenAdapter {
         return token;
     }
 
-    @Override
-    public List<Token> getAllUnusedTokenByCustomerId(int customerId) throws CustomerHasNoUnusedToken {
-        List<Token> tokens = new ArrayList<>();
-        try (Connection connection = createConnection()) {
-            PreparedStatement query = connection.prepareStatement(
-                    "SELECT * FROM token WHERE customerId = ?;");
-            query.setInt(1, customerId);
-            ResultSet rs = query.executeQuery();
-
-            if (!rs.next()) throw new CustomerHasNoUnusedToken(MessageFormat.format(
-                    "Customer customerId {0} has no unused tokens", customerId));
-
-            tokens = converter.resultSetToListOfTokens(rs);
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
-        return tokens;
-    }
+//    @Override
+//    public List<Token> getAllUnusedTokenByCustomerId(int customerId) throws CustomerHasNoUnusedToken {
+//        List<Token> tokens = new ArrayList<>();
+//        try (Connection connection = createConnection()) {
+//            PreparedStatement query = connection.prepareStatement(
+//                    "SELECT * FROM token WHERE customerId = ?;");
+//            query.setInt(1, customerId);
+//            ResultSet rs = query.executeQuery();
+//
+//            if (!rs.next()) throw new CustomerHasNoUnusedToken(MessageFormat.format(
+//                    "Customer customerId {0} has no unused tokens", customerId));
+//
+//            tokens = converter.resultSetToListOfTokens(rs);
+//
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//        }
+//
+//        return tokens;
+//    }
 
     @Override
     public List<Token> getAllTokens() {
@@ -163,6 +162,10 @@ public class TokenAdapter implements ITokenAdapter {
         return true;
     }
 
+    @Override
+    public void markTokenAsUsed(int tokenId) throws FakeToken, TokenAlreadyUsed {
+    }
+
     public int getIdFromDbReturn(PreparedStatement stmt) throws SQLException {
         ResultSet rs = stmt.getGeneratedKeys();
         rs.next();
@@ -170,3 +173,8 @@ public class TokenAdapter implements ITokenAdapter {
         return rs.getInt(1);
     }
 }
+
+//{
+//    "name": "John Doe",
+//    "cpr": "23143253253"
+// }
