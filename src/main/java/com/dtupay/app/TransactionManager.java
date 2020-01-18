@@ -25,7 +25,7 @@ public class TransactionManager implements ITransactionManager {
     }
 
     @Override
-    public Transaction registerTransaction(Timestamp timestamp, int fromId, int toId, String tokenId, BigDecimal amount, boolean isRefund) {
+    public Transaction registerTransaction(Timestamp timestamp, int fromId, int toId, int tokenId, BigDecimal amount, boolean isRefund) {
         return transactionAdapter.addTransaction(timestamp, fromId, toId, tokenId, amount, isRefund);
     }
 }

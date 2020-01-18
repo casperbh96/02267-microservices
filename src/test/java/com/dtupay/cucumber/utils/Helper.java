@@ -91,7 +91,7 @@ public class Helper {
     }
 
 
-    public Transaction addTransaction(Timestamp timestamp, int fromId, int toId, String tokenId, BigDecimal amount, boolean isRefund){
+    public Transaction addTransaction(Timestamp timestamp, int fromId, int toId, int tokenId, BigDecimal amount, boolean isRefund){
         return transactionManager.registerTransaction(timestamp, fromId, toId, tokenId, amount, isRefund);
     }
 

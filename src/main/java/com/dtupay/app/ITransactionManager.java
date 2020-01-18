@@ -7,5 +7,5 @@ import java.util.List;
 public interface ITransactionManager {
     List<Transaction> getCustomerMonthlyReport(String customerCpr);
     List<Transaction> getMerchantMonthlyReport(String merchantCpr);
-    Transaction registerTransaction(Timestamp timestamp, int fromId, int toId, String tokenId, BigDecimal amount, boolean isRefund);
+    Transaction registerTransaction(Timestamp timestamp, int fromId, int toId, int tokenId, BigDecimal amount, boolean isRefund);
 }

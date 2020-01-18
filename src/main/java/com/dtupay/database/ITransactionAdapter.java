@@ -11,5 +11,5 @@ import java.util.List;
 public interface ITransactionAdapter {
     List<Transaction> getTransactionsByCustomerId(int customerId) throws CustomerDoesNotExist;
     Transaction getTransactionByTransactionId(int id) throws TransactionDoesNotExist;
-    Transaction addTransaction(Timestamp timestamp, int from, int to, String tokenId, BigDecimal amount, boolean isRefund);
+    Transaction addTransaction(Timestamp timestamp, int from, int to, int tokenId, BigDecimal amount, boolean isRefund);
 }
