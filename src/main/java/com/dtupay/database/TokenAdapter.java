@@ -19,8 +19,6 @@ import java.util.UUID;
 import static com.dtupay.database.Connector.createConnection;
 
 public class TokenAdapter implements ITokenAdapter {
-    public List<Token> tokens;
-    public List<Token> allTokens;
     ICustomerAdapter dbCustomer;
     ITokenManagement tokenManager;
     TokenResultSetToObject converter = new TokenResultSetToObject();
@@ -28,17 +26,6 @@ public class TokenAdapter implements ITokenAdapter {
     public TokenAdapter() {
         dbCustomer = new CustomerAdapter();
         tokenManager = new TokenManagement();
-        tokens = new ArrayList<>();
-        /*
-        tokens.add(new Token(1, tokenManager.GetToken(), 1));
-        tokens.add(new Token(2, tokenManager.GetToken(), 2));
-        tokens.add(new Token(3, tokenManager.GetToken(), 3));
-        tokens.add(new Token(4, tokenManager.GetToken(), 4));
-        tokens.add(new Token(5, tokenManager.GetToken(), 5));
-        tokens.add(new Token(6, tokenManager.GetToken(), 6));
-        tokens.add(new Token(7, tokenManager.GetToken(), 7));
-
-         */
     }
 
     private Token getTokenByTokenId(int tokenId) {
@@ -78,27 +65,6 @@ public class TokenAdapter implements ITokenAdapter {
 
         return token;
     }
-
-//    @Override
-//    public List<Token> getAllUnusedTokenByCustomerId(int customerId) throws CustomerHasNoUnusedToken {
-//        List<Token> tokens = new ArrayList<>();
-//        try (Connection connection = createConnection()) {
-//            PreparedStatement query = connection.prepareStatement(
-//                    "SELECT * FROM token WHERE customerId = ?;");
-//            query.setInt(1, customerId);
-//            ResultSet rs = query.executeQuery();
-//
-//            if (!rs.next()) throw new CustomerHasNoUnusedToken(MessageFormat.format(
-//                    "Customer customerId {0} has no unused tokens", customerId));
-//
-//            tokens = converter.resultSetToListOfTokens(rs);
-//
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//        }
-//
-//        return tokens;
-//    }
 
     @Override
     public List<Token> getAllTokens() {
@@ -186,8 +152,3 @@ public class TokenAdapter implements ITokenAdapter {
         return rs.getInt(1);
     }
 }
-
-//{
-//    "name": "John Doe",
-//    "cpr": "23143253253"
-// }
