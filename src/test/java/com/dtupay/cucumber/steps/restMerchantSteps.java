@@ -24,7 +24,6 @@ public class restMerchantSteps {
     HttpURLConnection con;
     String merchant_name;
     String cvr;
-    int merchant_id;
     IBusinessLogicForMerchant m = new BusinessLogicForMerchant();
     Merchant merchant;
 
@@ -60,7 +59,6 @@ public class restMerchantSteps {
         int status = con.getResponseCode();
         //assertEquals(response.toString(), 200, response.getStatus());
         assertEquals(200, status);
-        System.out.println(status);
     }
 
     @Then("^the rest service returns an error response$")
@@ -81,7 +79,6 @@ public class restMerchantSteps {
     public void theRestServiceDeletesItCorrectly() throws IOException {
         int status = con.getResponseCode();
         assertEquals(200, status);
-        System.out.println(status);
     }
 
     @Given("^a new merchant with CVR \"([^\"]*)\", name \"([^\"]*)\"$")
@@ -107,14 +104,12 @@ public class restMerchantSteps {
     public void theRestServicePostsItCorrectly() throws IOException {
         int status = con.getResponseCode();
         assertEquals(202, status);
-        System.out.println(status);
     }
 
     @Then("^the rest service updates it correctly$")
     public void theRestServiceUpdatesItCorrectly() throws IOException {
         int status = con.getResponseCode();
         assertEquals(202, status);
-        System.out.println(status);
     }
 
     @When("^the merchant is updated with CVR \"([^\"]*)\", name \"([^\"]*)\"$")

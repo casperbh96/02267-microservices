@@ -1,8 +1,8 @@
 package com.dtupay.service;
 
-import com.dtupay.app.Customer;
-import com.dtupay.database.CustomerAdapter;
-import com.dtupay.database.ICustomerAdapter;
+import com.dtupay.BusinessLogic.BusinessLogicForCustomer;
+import com.dtupay.BusinessLogic.IBusinessLogicForCustomer;
+import org.json.JSONObject;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -10,15 +10,14 @@ import javax.ws.rs.core.Response;
 
 @Path("/customer")
 @Produces("application/json")
-@Consumes("application/json")
 public class CustomerResource {
 
-    private static ICustomerAdapter c = new CustomerAdapter();
+    private static IBusinessLogicForCustomer c = new BusinessLogicForCustomer();
 
     @GET
     public Response getCustomers() {
         try {
-            return Response.ok(c.getAllCustomers()).build();
+            return Response.ok(c.GetAllCustomers()).build();
         } catch (Exception e) {
             return Response.serverError().build();
         }
@@ -31,35 +30,46 @@ public class CustomerResource {
             return Response.status(400).entity("Missing parameters.").build();
         }
         try {
-            return Response.ok(c.getCustomerByCustomerId(id)).build();
+            return Response.ok(c.GetCustomerByCustomerId(id)).build();
         }
         catch(Exception e) {
-            return Response.status(404).build();
+            return Response.status(400).build();
         }
     }
 
     @POST
-    public Response postCustomer(String name, String cpr) {
+    @Consumes("application/json")
+    public Response postCustomer(String json) {
+        JSONObject obj = new JSONObject(json);
+        String cpr = obj.getString("cpr");
+        String name = obj.getString("name");
+
         if (name == null || cpr == null) {
             return Response.status(400).entity("Missing parameters.").build();
         }
         try {
             // String response = sendMessage(message);
-            return Response.ok(c.createCustomer(name, cpr)).build();
+            return Response.ok(c.CreateCustomer(cpr, name)).build();
         } catch (Exception e) {
             return Response.serverError().build();
         }
     }
 
     @PUT
-    public Response putCustomer(Customer customer) {
-        if (customer.getName() == null || customer.getId() == 0) {
+    @Consumes("application/json")
+    public Response putCustomer(String json) {
+        JSONObject obj = new JSONObject(json);
+        int id = obj.getInt("id");
+        String cpr = obj.getString("cpr");
+        String name = obj.getString("name");
+
+        if (cpr == null || id == 0 || name == null) {
             return Response.status(400).entity("Missing parameters.").build();
         }
         try {
-            return Response.ok(c.updateCustomer(customer)).build();
+            return Response.ok(c.UpdateCustomer(id, cpr, name)).build();
         } catch (Exception e) {
-            return Response.serverError().build();
+            return Response.status(400).build();
         }
     }
 
@@ -73,10 +83,10 @@ public class CustomerResource {
             // String response = sendMessage(message);
             //return Response.ok("Delete customers").build();
             //return Response.status(200).entity(response).build();
-            c.deleteCustomerByCustomerId(id);
+            c.DeleteCustomerByCustomerId(id);
             return Response.ok("Deleted customer").status(200).build();
         } catch (Exception e) {
-            return Response.serverError().build();
+            return Response.status(400).build();
         }
     }
 }

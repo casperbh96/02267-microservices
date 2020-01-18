@@ -24,3 +24,27 @@ Feature: Basic rest operations
     When the merchant is posted to the service
     Then the rest service posts it correctly
 
+  Scenario: Get customer successful
+    Given a new customer we created
+    When the customer is requested
+    Then the rest service returns the customer associated
+
+  Scenario: Get customer unsuccessful
+    Given customer with ID 400000
+    When the customer is requested
+    Then the rest service will send not found 400 http status
+
+#  Scenario: update customer successful
+#    Given a new customer we created
+#    When the customer is updated with CPR "test", name "DTU Skylab"
+#    Then the rest service updates customer correctly
+
+  Scenario: delete customer successful
+    Given a new customer we created
+    When the customer is requested to be deleted
+    Then the rest service deletes customer correctly
+
+  Scenario: post customer successful
+    Given a new customer with CPR "2", name "DTU Canteen"
+    When the customer is posted to the service
+    Then the rest service posts customer correctly
