@@ -42,7 +42,7 @@ public class restTokenSteps {
 
     @Given("^a customer id (\\d+)$")
     public void a_customer_id(int customerId) throws Throwable {
-        url2 = new URL("http://127.0.0.1:8080/token/unused/" + customerId);
+        url2 = new URL("http://localhost:8080/token/unused/" + customerId);
     }
 
     @When("^the token is requested$")
@@ -53,7 +53,7 @@ public class restTokenSteps {
 
     @Given("^a token id (\\d+)$")
     public void a_token_id(int tokenId) throws Throwable {
-        url2 = new URL("http://127.0.0.1:8080/token/validation/" + tokenId);
+        url2 = new URL("http://localhost:8080/token/" + tokenId);
     }
 
     @When("^the validity check of a token is requested$")
@@ -70,7 +70,7 @@ public class restTokenSteps {
 
     @Given("^another token id (\\d+)$")
     public void another_token_id(int tokenId) throws Throwable {
-        url2 = new URL("http://127.0.0.1:8080/token/" + tokenId);
+        url2 = new URL("http://localhost:8080/token/" + tokenId);
     }
 
     @When("^the update to used is requested$")
