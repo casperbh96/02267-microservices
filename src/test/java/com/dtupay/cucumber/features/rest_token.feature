@@ -36,6 +36,6 @@ Feature: REST API calls for Token
     Then the REST service returns a 200 status code
 
   Scenario: Create a new token FAILURE
-    Given a customer id 4, unique identifier 2 and whether the token is used true
+    Given a customer id 4, unique identifier 2 and whether the token is used True
     When the creating of a new token is requested
     Then the REST service returns a 400 status code
