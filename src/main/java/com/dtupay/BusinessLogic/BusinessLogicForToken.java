@@ -14,25 +14,33 @@ public class BusinessLogicForToken implements IBusinessLogicForToken {
 
     ITokenAdapter tokenAdapter = new TokenAdapter();
 
-    public Token CreateToken(int customerId, UUID uuid, boolean used) {
+    @Override
+    public Token createToken(int customerId, UUID uuid, boolean used) {
         return tokenAdapter.createToken(customerId, uuid, used);
     }
 
-    public boolean isTokenValid(Token token) throws TokenAlreadyUsed, FakeToken {
-        return tokenAdapter.isTokenValid(token);
+    @Override
+    public boolean isTokenValid(int tokenId) {
+        try {
+            return tokenAdapter.isTokenValid(tokenId);
+        } catch (TokenAlreadyUsed | FakeToken e) {
+            return false;
+        }
     }
 
-    public List<Token> GetAllTokens() {
+    @Override
+    public void markTokenAsUsed(int tokenId) throws FakeToken, TokenAlreadyUsed {
+        tokenAdapter.markTokenAsUsed(tokenId);
+    }
+
+    @Override
+    public List<Token> getAllTokens() {
         return tokenAdapter.getAllTokens();
     }
 
-    public Token GetUnusedTokenByCustomerId(int id) throws CustomerHasNoUnusedToken {
-        return tokenAdapter.getUnusedTokenByCustomerId(id);
+    @Override
+    public Token getUnusedTokenByCustomerId(int customerId) throws CustomerHasNoUnusedToken {
+        return tokenAdapter.getUnusedTokenByCustomerId(customerId);
     }
-
-    public List<Token> GetAllUnusedTokenByCustomerId(int id) throws CustomerHasNoUnusedToken {
-        return tokenAdapter.getAllUnusedTokenByCustomerId(id);
-    }
-
 
 }

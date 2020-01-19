@@ -9,13 +9,14 @@ import java.util.List;
 import java.util.UUID;
 
 public interface IBusinessLogicForToken {
-    Token GetUnusedTokenByCustomerId(int id) throws CustomerHasNoUnusedToken;
+    Token getUnusedTokenByCustomerId(int customerId) throws CustomerHasNoUnusedToken;
 
-    Token CreateToken(int customerId, UUID uuid, boolean used);
+    Token createToken(int customerId, UUID uuid, boolean used);
 
-    boolean isTokenValid(Token token) throws TokenAlreadyUsed, FakeToken;
+    boolean isTokenValid(int tokenId);
 
-    List<Token> GetAllUnusedTokenByCustomerId(int id) throws CustomerHasNoUnusedToken;
+    void markTokenAsUsed(int tokenId) throws FakeToken, TokenAlreadyUsed;
 
-    List<Token> GetAllTokens();
+    List<Token> getAllTokens();
+
 }

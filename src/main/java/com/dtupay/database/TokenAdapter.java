@@ -4,6 +4,7 @@ import com.dtupay.app.Customer;
 import com.dtupay.app.ITokenManagement;
 import com.dtupay.app.Token;
 import com.dtupay.app.TokenManagement;
+import com.dtupay.database.exceptions.CustomerDoesNotExist;
 import com.dtupay.database.exceptions.CustomerHasNoUnusedToken;
 import com.dtupay.database.exceptions.FakeToken;
 import com.dtupay.database.exceptions.TokenAlreadyUsed;
@@ -27,8 +28,7 @@ public class TokenAdapter implements ITokenAdapter {
         tokenManager = new TokenManagement();
     }
 
-    @Override
-    public Token getTokenByTokenId(int tokenId) {
+    private Token getTokenByTokenId(int tokenId) {
         Token token = null;
         try (Connection connection = createConnection()) {
             PreparedStatement query = connection.prepareStatement(
@@ -64,27 +64,6 @@ public class TokenAdapter implements ITokenAdapter {
         }
 
         return token;
-    }
-
-    @Override
-    public List<Token> getAllUnusedTokenByCustomerId(int customerId) throws CustomerHasNoUnusedToken {
-        List<Token> tokens = new ArrayList<>();
-        try (Connection connection = createConnection()) {
-            PreparedStatement query = connection.prepareStatement(
-                    "SELECT * FROM token WHERE customerId = ?;");
-            query.setInt(1, customerId);
-            ResultSet rs = query.executeQuery();
-
-            if (!rs.next()) throw new CustomerHasNoUnusedToken(MessageFormat.format(
-                    "Customer customerId {0} has no unused tokens", customerId));
-
-            tokens = converter.resultSetToListOfTokens(rs);
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
-        return tokens;
     }
 
     @Override
@@ -129,18 +108,18 @@ public class TokenAdapter implements ITokenAdapter {
     }
 
     @Override
-    public boolean isTokenValid(Token token) throws FakeToken, TokenAlreadyUsed {
+    public boolean isTokenValid(int tokenId) throws FakeToken, TokenAlreadyUsed {
         try (Connection connection = createConnection()) {
             PreparedStatement query = connection.prepareStatement(
                     "SELECT * FROM token WHERE id = ?");
 
-            query.setInt(1, token.getId());
+            query.setInt(1, tokenId);
 
             ResultSet rs = query.executeQuery();
 
             if (!rs.next()) throw new FakeToken("The token is not known to the system");
 
-            token = converter.resultSetToToken(rs);
+            Token token = converter.resultSetToToken(rs);
 
             if (token.getUsed()) throw new TokenAlreadyUsed("The token is already used");
         } catch (SQLException ex) {
@@ -148,6 +127,22 @@ public class TokenAdapter implements ITokenAdapter {
         }
 
         return true;
+    }
+
+    @Override
+    public void markTokenAsUsed(int tokenId) throws FakeToken, TokenAlreadyUsed {
+        try (Connection connection = createConnection()) {
+            PreparedStatement query = connection.prepareStatement(
+                    "UPDATE token SET used = ? WHERE id = ?");
+
+            query.setBoolean(1, true);
+            query.setInt(2, tokenId);
+
+            query.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public int getIdFromDbReturn(PreparedStatement stmt) throws SQLException {
