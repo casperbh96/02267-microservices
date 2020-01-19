@@ -5,11 +5,10 @@ import com.dtupay.app.IDtuPayApp;
 import com.dtupay.app.Transaction;
 import com.dtupay.cucumber.utils.Helper;
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import gherkin.lexer.Tr;
+import org.junit.Assert;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -21,22 +20,25 @@ import java.util.Map;
 public class MonthlyReportCustomerSteps {
 
     Helper helper;
-    List<Integer> customerIds;
-    List<Integer> merchantIds;
+    Map<String, Integer> customerCprToIds;
+    Map<String, Integer> merchantCprToIds;
     Map<Integer, List<Transaction>> customerReports;
+    List<Transaction> transactions;
 
     public MonthlyReportCustomerSteps(Helper helper){
         this.helper = helper;
-        this.customerIds = new ArrayList<>();
-        this.merchantIds = new ArrayList<>();
+        this.customerCprToIds = new HashMap<>();
+        this.merchantCprToIds = new HashMap<>();
         this.customerReports = new HashMap<>();
+        this.transactions = new ArrayList<>();
     }
 
     @Given("^the following customers:$")
     public void the_following_customers(DataTable arg1) throws Throwable {
         List<Map<String, String>> userDetails = arg1.asMaps(String.class, String.class);
         for(Map<String, String> details : userDetails){
-            customerIds.add(helper.createDtuPayCustomer(details.get("name"), details.get("id"), 0).getId());
+            customerCprToIds.put(details.get("cpr"),
+                    helper.createDtuPayCustomer(details.get("name"), details.get("cpr"), 0).getId());
         }
     }
 
@@ -44,7 +46,8 @@ public class MonthlyReportCustomerSteps {
     public void the_following_merchants(DataTable arg1) throws Throwable {
         List<Map<String, String>> userDetails = arg1.asMaps(String.class, String.class);
         for(Map<String, String> details : userDetails){
-            merchantIds.add(helper.createDtuPayMerchant(details.get("name"), details.get("id")).getId());
+            merchantCprToIds.put(details.get("cvr"),
+                    helper.createDtuPayMerchant(details.get("name"), details.get("cvr")).getId());
         }
     }
 
@@ -52,10 +55,14 @@ public class MonthlyReportCustomerSteps {
     public void the_following_transactions(DataTable arg1) throws Throwable {
         List<Map<String, String>> transDetails = arg1.asMaps(String.class, String.class);
         transDetails.forEach(d -> {
-            Transaction t = helper.addTransaction(Timestamp.valueOf(d.get("timestamp")),
-                    Integer.parseInt(d.get("fromId")), Integer.parseInt(d.get("toId")),
-                    Integer.parseInt(d.get("tokenId")), new BigDecimal(d.get("amount")), Boolean.parseBoolean(d.get("isRefund")));
-            t.setTimestamp(Timestamp.valueOf(d.get("timestamp")));
+            boolean isRefund = Boolean.parseBoolean(d.get("isRefund"));
+            transactions.add(helper.addTransaction(
+                    Timestamp.valueOf(d.get("timestamp")),
+                    !isRefund ? customerCprToIds.get(d.get("from")) : merchantCprToIds.get(d.get("from")),
+                    !isRefund ? merchantCprToIds.get(d.get("to")) : customerCprToIds.get(d.get("to")),
+                    Integer.parseInt(d.get("tokenId")),
+                    new BigDecimal(d.get("amount")),
+                    isRefund));
         });
     }
 
@@ -63,21 +70,18 @@ public class MonthlyReportCustomerSteps {
     public void dtu_Pay_generates_monthly_reports_for(int month, int year) throws Throwable {
         IDtuPayApp dtuPayApp = new DtuPayApp(helper.getBank(), helper.getCustomers(), helper.getMerchants(),
                 helper.getTokens(), helper.getTransactionManager());
-        for (int id : customerIds){
+        for (int id : customerCprToIds.values()){
             customerReports.put(id, dtuPayApp.generateMonthlyCustomerReport(id, month, year));
         }
     }
 
-
-    @Then("^customer (\\d+) will have (\\d+) transaction in his report$")
-    public void customer_will_have_transaction_in_his_report(int id, int transactionCount) throws Throwable {
-//        System.out.println(customerReports.get(id).size() + transactionCount);
-        assert customerReports.get(id).size() == transactionCount;
+    @Then("^the following customer reports will be generated:$")
+    public void the_following_customer_reports_will_be_generated(DataTable arg1) throws Throwable {
+        List<Map<String, String>> reportDetails = arg1.asMaps(String.class, String.class);
+        reportDetails.forEach(d -> {
+            int id = customerCprToIds.get(d.get("customerCpr"));
+            Assert.assertEquals(Integer.parseInt(d.get("transactionsInReport")), customerReports.get(id).size());
+        });
     }
 
-    @Then("^customer (\\d+) will have (\\d+) transactions in his report$")
-    public void customer_will_have_transactions_in_his_report(int id, int transactionCount) throws Throwable {
-//        System.out.println(customerReports.get(id).size() + transactionCount);
-        assert customerReports.get(id).size() == transactionCount;
-    }
 }

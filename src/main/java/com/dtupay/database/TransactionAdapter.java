@@ -29,15 +29,18 @@ public class TransactionAdapter implements ITransactionAdapter {
         List<Transaction> customerTransactions = new ArrayList<>();
         try (Connection connection = createConnection()) {
             PreparedStatement query = connection.prepareStatement(
-                    "SELECT * FROM transaction  WHERE (isRefund=0 AND fromId = (?))" +
-                            "OR (isRefund=1 AND toId = (?))" +
-                            "AND MONTH(timestamp) = (?) \n" +
-                            "AND YEAR(timestamp) = (?)",
+                    "SELECT * FROM transaction  " +
+                            "WHERE ((fromId=? AND isRefund=0) "+
+                            "OR (isRefund=1 AND toId=?)) "+
+                            "AND YEAR(timestamp)=? " +
+                            "&& MONTH(timestamp)=? ",
                     Statement.RETURN_GENERATED_KEYS);
+
             query.setInt(1, customerId);
             query.setInt(2, customerId);
-            query.setInt(3, month);
-            query.setInt(4, year);
+            query.setString(3, String.valueOf(year));
+            query.setString(4, String.valueOf(month));
+
             ResultSet set = query.executeQuery();
 
             if(!set.next())
@@ -67,8 +70,8 @@ public class TransactionAdapter implements ITransactionAdapter {
             query.setTimestamp(1, timestamp);
             query.setInt(2, fromId);
             query.setInt(3, toId);
-            query.setInt(4, tokenId);
-            query.setBigDecimal(5, amount);
+            query.setBigDecimal(4, amount);
+            query.setInt(5, tokenId);
             query.setBoolean(6, isRefund);
 
             query.executeUpdate();

@@ -1,11 +1,13 @@
 package com.dtupay.app;
 
+import com.dtupay.database.exceptions.CustomerDoesNotExist;
+
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 
 public interface ITransactionManager {
-    List<Transaction> getCustomerMonthlyReport(int customerId, int month, int year);
+    List<Transaction> getCustomerMonthlyReport(int customerId, int month, int year) throws CustomerDoesNotExist;
 
     List<Transaction> getMerchantMonthlyReport(int merchantId, int month, int year);
 

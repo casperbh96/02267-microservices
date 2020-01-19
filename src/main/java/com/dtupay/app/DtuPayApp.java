@@ -55,7 +55,7 @@ public class DtuPayApp implements IDtuPayApp {
         }
     }
 
-    public List<Transaction> generateMonthlyCustomerReport(int customerId, int month, int year){
+    public List<Transaction> generateMonthlyCustomerReport(int customerId, int month, int year) throws CustomerDoesNotExist {
         return transactionManager.getCustomerMonthlyReport(customerId, month, year);
     }
 
