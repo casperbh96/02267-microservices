@@ -29,7 +29,7 @@ public class restMerchantSteps {
 
     @Before
     public void Setup() {
-        merchant = m.CreateMerchant("12345678", "Ismaa");
+        merchant = m.CreateMerchant("87654321", "Donald the merchant");
     }
 
     @After
@@ -45,6 +45,11 @@ public class restMerchantSteps {
 
     @Given("^a new merchant we created$")
     public void aNewMerchantWeCreated() throws MalformedURLException {
+        url2 = new URL("http://localhost:8080/merchant/");
+    }
+
+    @Given("^the merchant we created$")
+    public void theMerchantWeCreated() throws MalformedURLException {
         url2 = new URL("http://localhost:8080/merchant/" + merchant.getId());
     }
 
@@ -66,7 +71,6 @@ public class restMerchantSteps {
         int status = con.getResponseCode();
         //assertEquals(response.toString(), 200, response.getStatus());
         assertEquals(400, status);
-        System.out.println(status);
     }
 
     @When("^the merchant is requested to be deleted$")
@@ -109,7 +113,7 @@ public class restMerchantSteps {
     @Then("^the rest service updates it correctly$")
     public void theRestServiceUpdatesItCorrectly() throws IOException {
         int status = con.getResponseCode();
-        assertEquals(202, status);
+        assertEquals(200, status);
     }
 
     @When("^the merchant is updated with CVR \"([^\"]*)\", name \"([^\"]*)\"$")
@@ -124,5 +128,23 @@ public class restMerchantSteps {
         OutputStream os = con.getOutputStream();
         os.write(PUT_PARAMS.getBytes());
     }
+
+    @Given("^we have some merchants in the database$")
+    public void weHaveSomeMerchantsInTheDatabase() throws MalformedURLException {
+        url2 = new URL("http://localhost:8080/merchant/");
+    }
+
+    @When("^we request to see all the merchants$")
+    public void weRequestToSeeAllTheMerchants() throws IOException {
+        con = (HttpURLConnection) url2.openConnection();
+        con.setRequestMethod("GET");
+    }
+
+    @Then("^the service returns a list with all the merchants$")
+    public void theServiceReturnsAListWithAllTheMerchants() throws IOException {
+        int status = con.getResponseCode();
+        assertEquals(200, status);
+    }
+
 }
 

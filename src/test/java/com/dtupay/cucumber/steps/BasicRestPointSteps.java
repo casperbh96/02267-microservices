@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 
 import static org.junit.Assert.assertEquals;
@@ -46,7 +47,7 @@ public class BasicRestPointSteps {
 
     @Given("^a new customer we created$")
     public void aNewCustomerWeCreated() throws MalformedURLException {
-        addURL = new URL("http://localhost:8080/customer/" + customer.getId());
+        addURL = new URL("http://localhost:8080/customer/");
     }
 
 
@@ -122,6 +123,41 @@ public class BasicRestPointSteps {
     @Then("^the rest service updates customer correctly$")
     public void theRestServiceUpdatesCustomerCorrectly() throws IOException {
         int status = connector.getResponseCode();
-        assertEquals(202, status);
+        assertEquals(200, status);
+    }
+
+    @When("^the customer is updated with CPR \"([^\"]*)\", name \"([^\"]*)\"$")
+    public void theCustomerIsUpdatedWithCPRName(String cpr, String customer_name) throws Throwable {
+        final String PUT_PARAMS = "{\n" + "\"name\": \""+customer_name+"\",\r\n" +
+                "    \"id\": "+customer.getId()+",\r\n" +
+                "    \"cpr\": \""+cpr+"\"" + "\n}";
+        connector = (HttpURLConnection) addURL.openConnection();
+        connector.setRequestMethod("PUT");
+        connector.setRequestProperty("Content-Type", "application/json");
+        connector.setDoOutput(true);
+        OutputStream os = connector.getOutputStream();
+        os.write(PUT_PARAMS.getBytes());
+    }
+
+    @Given("^the customer we created$")
+    public void theCustomerWeCreated() throws MalformedURLException {
+        addURL = new URL("http://localhost:8080/merchant/" + customer.getId());
+    }
+
+    @Given("^we have some customers in the database$")
+    public void weHaveSomeCustomersInTheDatabase() throws MalformedURLException {
+        addURL = new URL("http://localhost:8080/merchant/");
+    }
+
+    @When("^we request to see all the customers$")
+    public void weRequestToSeeAllTheCustomers() throws IOException {
+        connector = (HttpURLConnection) addURL.openConnection();
+        connector.setRequestMethod("GET");
+    }
+
+    @Then("^the service returns a list with all the customers$")
+    public void theServiceReturnsAListWithAllTheCustomers() throws IOException {
+        int status = connector.getResponseCode();
+        assertEquals(200, status);
     }
 }
