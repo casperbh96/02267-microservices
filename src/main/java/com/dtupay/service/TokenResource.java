@@ -37,7 +37,7 @@ public class TokenResource {
     }
 
     @GET
-    @Path("validation/{tokenId}")
+    @Path("/{tokenId}")
     public Response getValidityOfAToken(@PathParam("tokenId") int tokenId) {
         if (tokenId == 0) {
             return Response.status(400).entity("Missing parameters.").build();
