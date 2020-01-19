@@ -63,7 +63,7 @@ public class MerchantResource {
 
     @PUT
     @Consumes("application/json")
-    public Response putCustomer(String json) {
+    public Response putMerchant(String json) {
         JSONObject obj = new JSONObject(json);
         int id = obj.getInt("id");
         String cvr = obj.getString("cvr");
