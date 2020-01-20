@@ -1,4 +1,4 @@
-package java.com.merchant.junit;
+package com.merchant.junit;
 
 import com.merchant.manager.MerchantManager;
 import com.merchant.manager.IMerchantManager;
@@ -10,7 +10,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class ManagerTestForMerchant {
+public class MerchantManagerTest {
     IMerchantManager m;
 
     @Before

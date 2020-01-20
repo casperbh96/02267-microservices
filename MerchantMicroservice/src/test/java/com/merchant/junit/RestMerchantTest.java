@@ -1,4 +1,4 @@
-package java.com.merchant.junit;
+package com.merchant.junit;
 
 import com.merchant.manager.MerchantManager;
 import com.merchant.manager.IMerchantManager;
