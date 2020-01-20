@@ -1,9 +1,9 @@
-try{
+try {
     node {
-    stage ('Build Customer') {
+        stage ('Build Application') {
             checkout scm
-        sh 'mvn -f CustomerMicroservice/pom.xml clean compile'
-        sh 'mvn -f CustomerMicroservice/pom.xml -D maven.test.skip=true install'
+            sh 'mvn -f CustomerMicroservice/pom.xml clean compile'
+            sh 'mvn -f CustomerMicroservice/pom.xml -D maven.test.skip=true install'
         }
 
         stage ('Build Docker Images') {
@@ -12,9 +12,9 @@ try{
             sh 'docker-compose up -d'
         }
 
-    stage ('Customer tests') {
+        stage ('Customer tests') {
             checkout scm
-        sh 'mvn -f CustomerMicroservice/pom.xml test'
+            sh 'mvn -f CustomerMicroservice/pom.xml test'
         }
     }
 } finally {
@@ -22,6 +22,7 @@ try{
         stage ('Docker cleanup') {
             checkout scm
             sh 'docker-compose down'
+        }
         }
     }
 }
