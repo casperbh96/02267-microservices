@@ -81,7 +81,7 @@ public class DtuPayAppTest {
         BigDecimal amount = new BigDecimal(200.0);
 
         bank.createAccount(customer.getName(), customer.getCpr(), new BigDecimal(200.0));
-        dtupay.transferMoney("1", token, amount, description);
+        dtupay.transferMoney("9898989898", token, amount, description);
     }
 
     @Test(expected = BankAdapterException.class)
