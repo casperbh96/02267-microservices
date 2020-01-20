@@ -32,19 +32,19 @@ public class BusinessLogicTestForToken {
 
     @Test
     public void GetUnusedTokenByCustomerIdWithAUnusedToken() throws CustomerHasNoUnusedToken {
-        Token newToken = tokenLogic.CreateToken(customer.getId(), UUID.randomUUID(), false);
-        Token actualToken = tokenLogic.GetUnusedTokenByCustomerId(customer.getId());
+        Token newToken = tokenLogic.createToken(customer.getId(), UUID.randomUUID(), false);
+        Token actualToken = tokenLogic.getUnusedTokenByCustomerId(customer.getId());
         Assert.assertEquals(newToken.getCustomerId(), actualToken.getCustomerId());
     }
 
     @Test(expected = CustomerHasNoUnusedToken.class)
     public void GetUnusedTokenByCustomerIdWithNoUnusedToken() throws CustomerHasNoUnusedToken {
-        tokenLogic.GetUnusedTokenByCustomerId(customerNoToken.getId());
+        tokenLogic.getUnusedTokenByCustomerId(customerNoToken.getId());
     }
 
     @Test
-    public void CreateATokenAndChecksIfTheTokenHasBeenAdded() throws FakeToken, TokenAlreadyUsed {
-        Token newToken = tokenLogic.CreateToken(customer.getId(), UUID.randomUUID(), false);
-        Assert.assertTrue(tokenLogic.isTokenValid(newToken));
+    public void CreateATokenAndChecksIfTheTokenHasBeenAdded() {
+        Token newToken = tokenLogic.createToken(customer.getId(), UUID.randomUUID(), false);
+        Assert.assertTrue(tokenLogic.isTokenValid(newToken.getId()));
     }
 }

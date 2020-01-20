@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  dtupay:
+    image: dtupay:0.1
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    ports:
+      - "8080:8080"

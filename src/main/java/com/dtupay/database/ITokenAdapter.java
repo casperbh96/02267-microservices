@@ -7,15 +7,13 @@ import java.util.List;
 import java.util.UUID;
 
 public interface ITokenAdapter {
-    Token getTokenByTokenId(int tokenId);
-
-    Token getUnusedTokenByCustomerId(int id) throws CustomerHasNoUnusedToken;
+    Token getUnusedTokenByCustomerId(int customerId) throws CustomerHasNoUnusedToken;
 
     Token createToken(int customerId, UUID uuid, boolean used);
 
-    boolean isTokenValid(Token token) throws FakeToken, TokenAlreadyUsed;
+    boolean isTokenValid(int tokenId) throws FakeToken, TokenAlreadyUsed;
 
-    List<Token> getAllUnusedTokenByCustomerId(int id) throws CustomerHasNoUnusedToken;
+    void markTokenAsUsed(int tokenId) throws FakeToken, TokenAlreadyUsed;
 
     List<Token> getAllTokens();
 }

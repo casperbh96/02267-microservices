@@ -41,7 +41,7 @@ public class DtuPayApp implements IDtuPayApp {
     @Override
     public boolean checkTokenValidity(Token token) throws FakeToken, TokenAlreadyUsed {
         // TODO: also check the customerID who provided the token?
-        return tokens.isTokenValid(token);
+        return tokens.isTokenValid(token.getId());
     }
 
     @Override
