@@ -27,6 +27,7 @@ try {
         stage ('Docker cleanup') {
             checkout scm
             sh 'docker-compose down'
+            sh 'docker image prune -f'
         }
     }
 }
