@@ -17,19 +17,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MonthlyReportCustomerSteps {
+public class TransactionReportSteps {
 
     Helper helper;
     Map<String, Integer> customerCprToIds;
     Map<String, Integer> merchantCprToIds;
     Map<Integer, List<Transaction>> customerReports;
+    Map<Integer, List<Transaction>> merchantReports;
     List<Transaction> transactions;
 
-    public MonthlyReportCustomerSteps(Helper helper){
+    public TransactionReportSteps(Helper helper){
         this.helper = helper;
         this.customerCprToIds = new HashMap<>();
         this.merchantCprToIds = new HashMap<>();
         this.customerReports = new HashMap<>();
+        this.merchantReports = new HashMap<>();
         this.transactions = new ArrayList<>();
     }
 
@@ -66,8 +68,8 @@ public class MonthlyReportCustomerSteps {
         });
     }
 
-    @When("^DTU Pay generates monthly reports for (\\d+) (\\d+)$")
-    public void dtu_Pay_generates_monthly_reports_for(int month, int year) throws Throwable {
+    @When("^DTU Pay generates monthly customer reports for (\\d+) (\\d+)$")
+    public void dtu_Pay_generates_monthly_customer_reports_for(int month, int year) throws Throwable {
         IDtuPayApp dtuPayApp = new DtuPayApp(helper.getBank(), helper.getCustomers(), helper.getMerchants(),
                 helper.getTokens(), helper.getTransactionManager());
         for (int id : customerCprToIds.values()){
@@ -81,6 +83,24 @@ public class MonthlyReportCustomerSteps {
         reportDetails.forEach(d -> {
             int id = customerCprToIds.get(d.get("customerCpr"));
             Assert.assertEquals(Integer.parseInt(d.get("transactionsInReport")), customerReports.get(id).size());
+        });
+    }
+
+    @When("^DTU Pay generates monthly merchant reports for (\\d+) (\\d+)$")
+    public void dtu_Pay_generates_monthly_merchant_reports_for(int month, int year) throws Throwable {
+        IDtuPayApp dtuPayApp = new DtuPayApp(helper.getBank(), helper.getCustomers(), helper.getMerchants(),
+                helper.getTokens(), helper.getTransactionManager());
+        for (int id : merchantCprToIds.values()){
+            merchantReports.put(id, dtuPayApp.generateMonthlyMerchantReport(id, month, year));
+        }
+    }
+
+    @Then("^the following merchant reports will be generated:$")
+    public void the_following_merchant_reports_will_be_generated(DataTable arg1) throws Throwable {
+        List<Map<String, String>> reportDetails = arg1.asMaps(String.class, String.class);
+        reportDetails.forEach(d -> {
+            int id = merchantCprToIds.get(d.get("merchantCvr"));
+            Assert.assertEquals(Integer.parseInt(d.get("transactionsInReport")), merchantReports.get(id).size());
         });
     }
 

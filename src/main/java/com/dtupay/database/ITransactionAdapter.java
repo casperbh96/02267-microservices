@@ -9,7 +9,8 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public interface ITransactionAdapter {
-    List<Transaction> getMonthlyTransactionsByCustomerId(int customerId, int month, int year) throws CustomerDoesNotExist;
-    Transaction getTransactionByTransactionId(int id) throws TransactionDoesNotExist;
     Transaction addTransaction(Timestamp timestamp, int from, int to, int tokenId, BigDecimal amount, boolean isRefund);
+    Transaction getTransactionByTransactionId(int id) throws TransactionDoesNotExist;
+    List<Transaction> getMonthlyTransactionsByCustomerId(int customerId, int month, int year) throws CustomerDoesNotExist;
+    List<Transaction> getMonthlyTransactionsByMerchantId(int merchantId, int month, int year);
 }

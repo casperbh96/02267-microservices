@@ -22,7 +22,8 @@ public class TransactionManager implements ITransactionManager {
 
     @Override
     public List<Transaction> getMerchantMonthlyReport(int merchantId, int month, int year) {
-        return null;
+
+        return transactionAdapter.getMonthlyTransactionsByMerchantId(merchantId, month, year);
     }
 
     @Override

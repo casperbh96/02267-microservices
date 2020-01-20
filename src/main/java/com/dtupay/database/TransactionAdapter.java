@@ -31,7 +31,7 @@ public class TransactionAdapter implements ITransactionAdapter {
             PreparedStatement query = connection.prepareStatement(
                     "SELECT * FROM transaction  " +
                             "WHERE ((fromId=? AND isRefund=0) "+
-                            "OR (isRefund=1 AND toId=?)) "+
+                            "OR (toId=? AND isRefund=1)) "+
                             "AND YEAR(timestamp)=? " +
                             "&& MONTH(timestamp)=? ",
                     Statement.RETURN_GENERATED_KEYS);
@@ -55,6 +55,39 @@ public class TransactionAdapter implements ITransactionAdapter {
             ex.printStackTrace();
         }
         return customerTransactions;
+    }
+
+    @Override
+    public List<Transaction> getMonthlyTransactionsByMerchantId(int merchantId, int month, int year) {
+        List<Transaction> merchantTransactions = new ArrayList<>();
+        try (Connection connection = createConnection()) {
+            PreparedStatement query = connection.prepareStatement(
+                    "SELECT * FROM transaction  " +
+                            "WHERE ((fromId=? AND isRefund=1) "+
+                            "OR (toId=? AND isRefund=0)) "+
+                            "AND YEAR(timestamp)=? " +
+                            "&& MONTH(timestamp)=? ",
+                    Statement.RETURN_GENERATED_KEYS);
+
+            query.setInt(1, merchantId);
+            query.setInt(2, merchantId);
+            query.setString(3, String.valueOf(year));
+            query.setString(4, String.valueOf(month));
+
+            ResultSet set = query.executeQuery();
+
+            if(!set.next())
+                return merchantTransactions;
+
+            set.beforeFirst();
+            while(set.next()){
+                merchantTransactions.add(converter.resultSetToTransaction(set));
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return merchantTransactions;
     }
 
     @Override

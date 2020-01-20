@@ -59,4 +59,9 @@ public class DtuPayApp implements IDtuPayApp {
         return transactionManager.getCustomerMonthlyReport(customerId, month, year);
     }
 
+    @Override
+    public List<Transaction> generateMonthlyMerchantReport(int merchantId, int month, int year) {
+        return transactionManager.getMerchantMonthlyReport(merchantId, month, year);
+    }
+
 }
