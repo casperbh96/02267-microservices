@@ -50,7 +50,7 @@ public class TransactionAdapter implements ITransactionAdapter {
 
             set.beforeFirst();
             while(set.next()){
-                customerTransactions.add(converter.resultSetToTransaction(set));
+                customerTransactions.add(converter.resultSetToTransactionCustomer(set));
             }
 
         } catch (SQLException ex) {
@@ -83,7 +83,7 @@ public class TransactionAdapter implements ITransactionAdapter {
 
             set.beforeFirst();
             while(set.next()){
-                merchantTransactions.add(converter.resultSetToTransaction(set));
+                merchantTransactions.add(converter.resultSetToTransactionMerchant(set));
             }
 
         } catch (SQLException ex) {
