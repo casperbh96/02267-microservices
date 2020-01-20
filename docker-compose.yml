@@ -17,3 +17,11 @@ services:
       dockerfile: ./docker/Dockerfile.token
     ports:
       - "8082:8080"
+  transaction:
+    image: transaction:0.1
+    container_name: token
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.transaction
+    ports:
+      - "8083:8080"
