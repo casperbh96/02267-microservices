@@ -1,7 +1,7 @@
 package com.customer.junit;
 
-import com.customer.Manager.CustomerManager;
-import com.customer.Manager.ICustomerManager;
+import com.customer.manager.CustomerManager;
+import com.customer.manager.ICustomerManager;
 import com.customer.app.Customer;
 import com.customer.database.exceptions.CustomerDoesNotExist;
 import com.customer.service.CustomerResource;

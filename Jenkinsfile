@@ -2,8 +2,8 @@ try {
     node {
         stage ('Build Application') {
             checkout scm
-            sh 'mvn -f CustomerMicroservice/pom.xml clean compile'
             sh 'mvn -f CustomerMicroservice/pom.xml -D maven.test.skip=true install'
+            sh 'mvn -f TokenMicroservice/pom.xml -D maven.test.skip=true install'
         }
 
         stage ('Build Docker Images') {
@@ -15,6 +15,11 @@ try {
         stage ('Customer tests') {
             checkout scm
             sh 'mvn -f CustomerMicroservice/pom.xml test'
+        }
+
+        stage ('Token tests') {
+            checkout scm
+            sh 'mvn -f TokenMicroservice/pom.xml test'
         }
     }
 } finally {

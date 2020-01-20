@@ -1,7 +1,7 @@
 package com.customer.service;
 
-import com.customer.Manager.CustomerManager;
-import com.customer.Manager.ICustomerManager;
+import com.customer.manager.CustomerManager;
+import com.customer.manager.ICustomerManager;
 import org.json.JSONObject;
 
 import javax.ws.rs.*;

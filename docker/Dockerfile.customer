@@ -10,4 +10,3 @@ CMD [ "java", \
       "-Djava.net.preferIPv4Addresses=true", \
       "-jar", \
       "./src/customer-microservice.jar" ]
-
