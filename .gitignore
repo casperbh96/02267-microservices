@@ -32,3 +32,5 @@ CustomerMicroservice/target
 hs_err_pid*
 *.prefs
 .classpath
+TokenMicroservice/target/maven-archiver/pom.properties
+*.properties
