@@ -23,7 +23,6 @@ try {
             checkout scm
             sh 'docker-compose down'
         }
-        }
     }
 }
 
