@@ -1,7 +1,7 @@
 package com.dtupay.service;
 
-import com.dtupay.BusinessLogic.BusinessLogicForCustomer;
-import com.dtupay.BusinessLogic.IBusinessLogicForCustomer;
+import com.dtupay.BusinessLogic.CustomerManager;
+import com.dtupay.BusinessLogic.ICustomerManager;
 import org.json.JSONObject;
 
 import javax.ws.rs.*;
@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 @Produces("application/json")
 public class CustomerResource {
 
-    private static IBusinessLogicForCustomer c = new BusinessLogicForCustomer();
+    private static ICustomerManager c = new CustomerManager();
 
     @GET
     public Response getCustomers() {

@@ -1,7 +1,7 @@
 package com.dtupay.junit;
 
-import com.dtupay.BusinessLogic.BusinessLogicForCustomer;
-import com.dtupay.BusinessLogic.IBusinessLogicForCustomer;
+import com.dtupay.BusinessLogic.CustomerManager;
+import com.dtupay.BusinessLogic.ICustomerManager;
 import com.dtupay.app.Customer;
 import com.dtupay.database.exceptions.CustomerDoesNotExist;
 import com.dtupay.service.CustomerResource;
@@ -13,7 +13,7 @@ import org.junit.Test;
 
 public class RestCustomerTest {
 
-    IBusinessLogicForCustomer c = new BusinessLogicForCustomer();
+    ICustomerManager c = new CustomerManager();
     CustomerResource cr = new CustomerResource();
     Customer customer;
 

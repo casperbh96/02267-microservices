@@ -8,7 +8,7 @@ import com.dtupay.database.exceptions.NoCustomers;
 
 import java.util.List;
 
-public class BusinessLogicForCustomer implements IBusinessLogicForCustomer {
+public class CustomerManager implements ICustomerManager {
 
     ICustomerAdapter customerAdapter = new CustomerAdapter();
 

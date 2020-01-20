@@ -6,7 +6,7 @@ import com.dtupay.database.exceptions.NoCustomers;
 
 import java.util.List;
 
-public interface IBusinessLogicForCustomer {
+public interface ICustomerManager {
     List<Customer> GetAllCustomers() throws NoCustomers;
 
     Customer GetCustomerByCustomerId(int id) throws CustomerDoesNotExist;

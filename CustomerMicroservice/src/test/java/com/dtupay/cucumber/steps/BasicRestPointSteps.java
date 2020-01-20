@@ -1,7 +1,7 @@
 package com.dtupay.cucumber.steps;
 
-import com.dtupay.BusinessLogic.BusinessLogicForCustomer;
-import com.dtupay.BusinessLogic.IBusinessLogicForCustomer;
+import com.dtupay.BusinessLogic.CustomerManager;
+import com.dtupay.BusinessLogic.ICustomerManager;
 import com.dtupay.app.Customer;
 import com.dtupay.database.exceptions.CustomerDoesNotExist;
 import cucumber.api.java.After;
@@ -24,7 +24,7 @@ public class BasicRestPointSteps {
 
     String customerCPR;
     String customerName;
-    IBusinessLogicForCustomer c = new BusinessLogicForCustomer();
+    ICustomerManager c = new CustomerManager();
     Customer customer;
 
     @Before
