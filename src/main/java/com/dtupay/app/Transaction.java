@@ -10,15 +10,13 @@ public class Transaction {
     private BigDecimal amount;
     private int tokenId;
     private boolean isRefund;
-    private int fromId;
 
-    public Transaction(int id, Timestamp timestamp, BigDecimal amount, int tokenId, boolean isRefund, int fromId) {
+    public Transaction(int id, Timestamp timestamp, BigDecimal amount, int tokenId, boolean isRefund) {
         this.id = id;
         this.timestamp = timestamp;
         this.amount = amount;
         this.tokenId = tokenId;
         this.isRefund = isRefund;
-        this.fromId = fromId;
     }
 
     public int getId() {
@@ -41,7 +39,4 @@ public class Transaction {
         return isRefund;
     }
 
-    public int getFromId() {
-        return fromId;
-    }
 }
