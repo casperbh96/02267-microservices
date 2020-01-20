@@ -7,13 +7,13 @@ import com.customer.database.exceptions.NoCustomers;
 import java.util.List;
 
 public interface ICustomerManager {
-    List<Customer> GetAllCustomers() throws NoCustomers;
+    List<Customer> getAllCustomers() throws NoCustomers;
 
-    Customer GetCustomerByCustomerId(int id) throws CustomerDoesNotExist;
+    Customer getCustomerByCustomerId(int id) throws CustomerDoesNotExist;
 
-    Customer CreateCustomer(String cpr, String name);
+    Customer createCustomer(String cpr, String name);
 
-    Customer UpdateCustomer(int id, String cpr, String name) throws CustomerDoesNotExist;
+    Customer updateCustomer(int id, String cpr, String name) throws CustomerDoesNotExist;
 
-    void DeleteCustomerByCustomerId(int id) throws CustomerDoesNotExist;
+    void deleteCustomerByCustomerId(int id) throws CustomerDoesNotExist;
 }

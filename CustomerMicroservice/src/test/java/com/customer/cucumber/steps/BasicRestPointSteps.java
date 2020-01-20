@@ -29,12 +29,12 @@ public class BasicRestPointSteps {
 
     @Before
     public void Setup() {
-        customer = c.CreateCustomer("12345678", "Ismaa");
+        customer = c.createCustomer("12345678", "Ismaa");
     }
 
     @After
     public void cleanUp() throws CustomerDoesNotExist {
-        c.DeleteCustomerByCustomerId(customer.getId());
+        c.deleteCustomerByCustomerId(customer.getId());
     }
 
     @Given("^customer with ID (\\d+)$")

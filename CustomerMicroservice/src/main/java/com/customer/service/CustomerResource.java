@@ -17,7 +17,7 @@ public class CustomerResource {
     @GET
     public Response getCustomers() {
         try {
-            return Response.ok(c.GetAllCustomers()).build();
+            return Response.ok(c.getAllCustomers()).build();
         } catch (Exception e) {
             return Response.serverError().build();
         }
@@ -30,7 +30,7 @@ public class CustomerResource {
             return Response.status(400).entity("Missing parameters.").build();
         }
         try {
-            return Response.ok(c.GetCustomerByCustomerId(id)).build();
+            return Response.ok(c.getCustomerByCustomerId(id)).build();
         }
         catch(Exception e) {
             return Response.status(400).build();
@@ -49,7 +49,7 @@ public class CustomerResource {
         }
         try {
             // String response = sendMessage(message);
-            return Response.ok(c.CreateCustomer(cpr, name)).build();
+            return Response.ok(c.createCustomer(cpr, name)).build();
         } catch (Exception e) {
             return Response.serverError().build();
         }
@@ -67,7 +67,7 @@ public class CustomerResource {
             return Response.status(400).entity("Missing parameters.").build();
         }
         try {
-            return Response.ok(c.UpdateCustomer(id, cpr, name)).build();
+            return Response.ok(c.updateCustomer(id, cpr, name)).build();
         } catch (Exception e) {
             return Response.status(400).build();
         }
@@ -83,7 +83,7 @@ public class CustomerResource {
             // String response = sendMessage(message);
             //return Response.ok("Delete customers").build();
             //return Response.status(200).entity(response).build();
-            c.DeleteCustomerByCustomerId(id);
+            c.deleteCustomerByCustomerId(id);
             return Response.ok("Deleted customer").status(200).build();
         } catch (Exception e) {
             return Response.status(400).build();
