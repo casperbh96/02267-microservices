@@ -4,8 +4,6 @@ WORKDIR /app
 
 COPY ./CustomerMicroservice/target/customer-microservice-thorntail.jar ./src/customer-microservice.jar
 
-EXPOSE 8080
-
 CMD [ "java", \
       "-Xmx64m", \
       "-Djava.net.preferIPv4Stack=true", \
