@@ -11,8 +11,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.ws.rs.core.Response;
-
 public class RestCustomerTest {
 
     IBusinessLogicForCustomer c = new BusinessLogicForCustomer();
@@ -21,12 +19,12 @@ public class RestCustomerTest {
 
     @Before
     public void Setup() {
-        customer = c.CreateCustomer("12345678", "Ismaa");
+        customer = c.createCustomer("12345678", "Ismaa");
     }
 
     @After
     public void cleanUp() throws CustomerDoesNotExist {
-        c.DeleteCustomerByCustomerId(customer.getId());
+        c.deleteCustomerByCustomerId(customer.getId());
     }
 
     @Test

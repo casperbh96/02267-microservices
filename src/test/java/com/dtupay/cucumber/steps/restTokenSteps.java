@@ -1,11 +1,8 @@
 package com.dtupay.cucumber.steps;
 
-import com.dtupay.BusinessLogic.BusinessLogicForToken;
-import com.dtupay.BusinessLogic.IBusinessLogicForToken;
-import com.dtupay.app.ITokenManagement;
+import com.dtupay.BusinessLogic.TokenManager;
+import com.dtupay.BusinessLogic.ITokenManager;
 import com.dtupay.app.Token;
-import com.dtupay.app.TokenManagement;
-import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
@@ -22,8 +19,7 @@ public class restTokenSteps {
 
     URL url2;
     HttpURLConnection con;
-    IBusinessLogicForToken t = new BusinessLogicForToken();
-    ITokenManagement tokenManager = new TokenManagement();
+    ITokenManager t = new TokenManager();
     Token token;
 
     String customerId;
@@ -32,7 +28,7 @@ public class restTokenSteps {
 
     @Before
     public void Setup() {
-        token = t.createToken(1, tokenManager.GetToken(), false);
+        token = t.createToken(1, t.getToken(), false);
     }
 
     @After

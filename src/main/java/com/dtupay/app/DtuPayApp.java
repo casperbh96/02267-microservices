@@ -1,5 +1,6 @@
 package com.dtupay.app;
 
+import com.dtupay.BusinessLogic.ITokenManager;
 import com.dtupay.bank.exceptions.BankAdapterException;
 import com.dtupay.database.ICustomerAdapter;
 import com.dtupay.database.IMerchantAdapter;
@@ -22,8 +23,10 @@ public class DtuPayApp implements IDtuPayApp {
     private ICustomerAdapter customers;
     private IMerchantAdapter merchants;
     private ITokenAdapter tokens;
-    private ITokenManagement tokenManager;
+
+    private ITokenManager tokenManager;
     private ITransactionManager transactionManager;
+
 
     public DtuPayApp(IBankAdapter bank, ICustomerAdapter customers, IMerchantAdapter merchants, ITokenAdapter tokens, ITransactionManager transactionManager) {
         this.bank = bank;

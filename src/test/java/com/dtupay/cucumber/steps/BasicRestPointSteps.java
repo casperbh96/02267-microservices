@@ -4,13 +4,11 @@ import com.dtupay.BusinessLogic.BusinessLogicForCustomer;
 import com.dtupay.BusinessLogic.IBusinessLogicForCustomer;
 import com.dtupay.app.Customer;
 import com.dtupay.database.exceptions.CustomerDoesNotExist;
-import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.junit.Assert;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -32,12 +30,12 @@ public class BasicRestPointSteps {
 
     @Before
     public void Setup() {
-        customer = c.CreateCustomer("12345678", "Ismaa");
+        customer = c.createCustomer("12345678", "Ismaa");
     }
 
     @After
     public void cleanUp() throws CustomerDoesNotExist {
-        c.DeleteCustomerByCustomerId(customer.getId());
+        c.deleteCustomerByCustomerId(customer.getId());
     }
 
     @Given("^customer with ID (\\d+)$")

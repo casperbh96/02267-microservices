@@ -2,6 +2,7 @@ package com.dtupay.bank;
 
 import com.dtupay.bank.exceptions.BankAdapterException;
 import dtu.ws.fastmoney.*;
+import gherkin.lexer.Th;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -28,7 +29,9 @@ public class BankAdapter implements IBankAdapter {
     @Override
     public void removeAccountByCpr(String cpr) throws BankAdapterException {
         try {
-            bank.retireAccount(cpr);
+            String id = bank.getAccountByCprNumber(cpr).getId();
+            createdAccounts.remove(id);
+            bank.retireAccount(id);
         } catch (BankServiceException_Exception e) {
             throw new BankAdapterException(e.getMessage());
         }

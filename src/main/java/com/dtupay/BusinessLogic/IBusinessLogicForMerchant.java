@@ -7,13 +7,13 @@ import com.dtupay.database.exceptions.NoMerchants;
 import java.util.List;
 
 public interface IBusinessLogicForMerchant {
-    List<Merchant> GetAllMerchants() throws NoMerchants;
+    List<Merchant> getAllMerchants() throws NoMerchants;
 
-    Merchant GetMerchantByMerchantId(int id) throws MerchantDoesNotExist;
+    Merchant getMerchantByMerchantId(int id) throws MerchantDoesNotExist;
 
-    Merchant CreateMerchant(String cvr, String name);
+    Merchant createMerchant(String cvr, String name);
 
-    Merchant UpdateMerchant(int id, String cvr, String name) throws MerchantDoesNotExist;
+    Merchant updateMerchant(int id, String cvr, String name) throws MerchantDoesNotExist;
 
-    void DeleteMerchantByMerchantId(int id) throws MerchantDoesNotExist;
+    void deleteMerchantByMerchantId(int id) throws MerchantDoesNotExist;
 }
