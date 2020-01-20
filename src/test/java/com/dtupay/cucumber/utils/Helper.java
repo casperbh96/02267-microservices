@@ -1,6 +1,7 @@
 package com.dtupay.cucumber.utils;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -21,7 +22,10 @@ public class Helper {
     private ICustomerAdapter customers;
     private IMerchantAdapter merchants;
     private ITokenAdapter tokens;
+
     private ITokenManager tokenManager = new TokenManager();
+    private ITransactionManager transactionManager;
+
     public boolean errorHasOccured = false;
 
     public Helper() {
@@ -29,6 +33,8 @@ public class Helper {
         this.customers = new CustomerAdapter();
         this.merchants = new MerchantAdapter();
         this.tokens = new TokenAdapter();
+
+        transactionManager = new TransactionManager(new TransactionAdapter());
     }
 
     public IBankAdapter getBank() {
@@ -45,6 +51,10 @@ public class Helper {
 
     public ITokenAdapter getTokens() {
         return tokens;
+    }
+
+    public ITransactionManager getTransactionManager() {
+        return transactionManager;
     }
 
     public Customer createDtuPayCustomer(String name, String cpr, int tokens) throws CustomerIsUnableToReceiveNewTokens, TooManyTokenRequest {
@@ -82,6 +92,11 @@ public class Helper {
 
     public void createBankAccount(String name, String cpr, int initialBalance) throws Exception {
         bank.createAccount(name, cpr, BigDecimal.valueOf(initialBalance));
+    }
+
+
+    public Transaction addTransaction(Timestamp timestamp, int fromId, int toId, int tokenId, BigDecimal amount, boolean isRefund){
+        return transactionManager.registerTransaction(timestamp, fromId, toId, tokenId, amount, isRefund);
     }
 
 }

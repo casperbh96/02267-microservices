@@ -21,7 +21,10 @@ public class DtuPayAppTest {
     IMerchantAdapter merchantAdapter;
     ITokenAdapter tokenAdapter;
     IDtuPayApp dtupay;
+
     ITokenManager tokenManager;
+    ITransactionManager transactionManager;
+
     Merchant merchant;
     Customer customer;
     Customer customerNoToken;
@@ -34,8 +37,11 @@ public class DtuPayAppTest {
         customerAdapter = new CustomerAdapter();
         merchantAdapter = new MerchantAdapter();
         tokenAdapter = new TokenAdapter();
+
         tokenManager = new TokenManager();
-        dtupay = new DtuPayApp(bank, customerAdapter, merchantAdapter, tokenAdapter);
+        transactionManager = new TransactionManager(new TransactionAdapter());
+
+        dtupay = new DtuPayApp(bank, customerAdapter, merchantAdapter, tokenAdapter, transactionManager);
 
         merchant = merchantAdapter.createMerchant("1234536", "Casper1");
         customer = customerAdapter.createCustomer("1003245", "Casper2");

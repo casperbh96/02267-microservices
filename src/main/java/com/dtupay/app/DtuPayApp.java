@@ -9,8 +9,13 @@ import com.dtupay.bank.IBankAdapter;
 import com.dtupay.database.exceptions.CustomerDoesNotExist;
 import com.dtupay.database.exceptions.FakeToken;
 import com.dtupay.database.exceptions.TokenAlreadyUsed;
+import com.dtupay.database.TransactionAdapter;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class DtuPayApp implements IDtuPayApp {
 
@@ -18,13 +23,22 @@ public class DtuPayApp implements IDtuPayApp {
     private ICustomerAdapter customers;
     private IMerchantAdapter merchants;
     private ITokenAdapter tokens;
-    private ITokenManager tokenManager;
 
-    public DtuPayApp(IBankAdapter bank, ICustomerAdapter customers, IMerchantAdapter merchants, ITokenAdapter tokens) {
+    private ITokenManager tokenManager;
+    private ITransactionManager transactionManager;
+
+
+    public DtuPayApp(IBankAdapter bank, ICustomerAdapter customers, IMerchantAdapter merchants, ITokenAdapter tokens, ITransactionManager transactionManager) {
         this.bank = bank;
         this.customers = customers;
         this.merchants = merchants;
         this.tokens = tokens;
+
+        this.transactionManager = transactionManager;
+    }
+
+    public void setTransactionManager(ITransactionManager transactionManager) {
+        this.transactionManager = transactionManager;
     }
 
     @Override
@@ -42,6 +56,15 @@ public class DtuPayApp implements IDtuPayApp {
         } catch (CustomerDoesNotExist customerDoesNotExist) {
             customerDoesNotExist.printStackTrace();
         }
+    }
+
+    public List<TransactionCustomer> generateMonthlyCustomerReport(int customerId, int month, int year) throws CustomerDoesNotExist {
+        return transactionManager.getCustomerMonthlyReport(customerId, month, year);
+    }
+
+    @Override
+    public List<TransactionMerchant> generateMonthlyMerchantReport(int merchantId, int month, int year) {
+        return transactionManager.getMerchantMonthlyReport(merchantId, month, year);
     }
 
 }

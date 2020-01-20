@@ -7,6 +7,7 @@ import com.dtupay.cucumber.utils.Helper;
 import com.dtupay.database.ICustomerAdapter;
 import com.dtupay.database.IMerchantAdapter;
 import com.dtupay.database.ITokenAdapter;
+import com.dtupay.database.TransactionAdapter;
 import com.dtupay.database.exceptions.FakeToken;
 import com.dtupay.database.exceptions.TokenAlreadyUsed;
 import cucumber.api.PendingException;
@@ -77,7 +78,7 @@ public class BasicTransferSteps {
 
     @When("^the merchant scans the customer's token$")
     public void the_merchant_scans_the_customer_s_token() throws Throwable {
-        dtuPayApp = new DtuPayApp(bank, customers, merchants, tokens);
+        dtuPayApp = new DtuPayApp(bank, customers, merchants, tokens, new TransactionManager(new TransactionAdapter()));
 
         customer.setDtuPay(dtuPayApp);
         merchant.setDtuPay(dtuPayApp);
