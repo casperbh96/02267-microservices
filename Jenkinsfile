@@ -12,6 +12,10 @@ try {
             sh 'docker-compose up -d'
         }
 
+        stage ('Wait for the server to start up') {
+            sh 'sleep 20'
+        }
+
         stage ('Customer tests') {
             checkout scm
             sh 'mvn -f CustomerMicroservice/pom.xml test'
