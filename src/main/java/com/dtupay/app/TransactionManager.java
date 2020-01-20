@@ -16,12 +16,12 @@ public class TransactionManager implements ITransactionManager {
     }
 
     @Override
-    public List<Transaction> getCustomerMonthlyReport(int customerId, int month, int year) throws CustomerDoesNotExist {
+    public List<TransactionCustomer> getCustomerMonthlyReport(int customerId, int month, int year) throws CustomerDoesNotExist {
         return transactionAdapter.getMonthlyTransactionsByCustomerId(customerId, month, year);
 }
 
     @Override
-    public List<Transaction> getMerchantMonthlyReport(int merchantId, int month, int year) {
+    public List<TransactionMerchant> getMerchantMonthlyReport(int merchantId, int month, int year) {
 
         return transactionAdapter.getMonthlyTransactionsByMerchantId(merchantId, month, year);
     }

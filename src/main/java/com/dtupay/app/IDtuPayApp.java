@@ -13,7 +13,7 @@ public interface IDtuPayApp {
 
     void transferMoney(String merchantId, Token merchantToken, BigDecimal amount, String description) throws BankAdapterException;
 
-    List<Transaction> generateMonthlyCustomerReport(int customerId, int month, int year) throws CustomerDoesNotExist;
+    List<TransactionCustomer> generateMonthlyCustomerReport(int customerId, int month, int year) throws CustomerDoesNotExist;
 
-    List<Transaction> generateMonthlyMerchantReport(int merchantId, int month, int year);
+    List<TransactionMerchant> generateMonthlyMerchantReport(int merchantId, int month, int year);
 }

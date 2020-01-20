@@ -55,12 +55,12 @@ public class DtuPayApp implements IDtuPayApp {
         }
     }
 
-    public List<Transaction> generateMonthlyCustomerReport(int customerId, int month, int year) throws CustomerDoesNotExist {
+    public List<TransactionCustomer> generateMonthlyCustomerReport(int customerId, int month, int year) throws CustomerDoesNotExist {
         return transactionManager.getCustomerMonthlyReport(customerId, month, year);
     }
 
     @Override
-    public List<Transaction> generateMonthlyMerchantReport(int merchantId, int month, int year) {
+    public List<TransactionMerchant> generateMonthlyMerchantReport(int merchantId, int month, int year) {
         return transactionManager.getMerchantMonthlyReport(merchantId, month, year);
     }
 

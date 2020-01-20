@@ -1,6 +1,8 @@
 package com.dtupay.database;
 
 import com.dtupay.app.Transaction;
+import com.dtupay.app.TransactionCustomer;
+import com.dtupay.app.TransactionMerchant;
 import com.dtupay.database.exceptions.CustomerDoesNotExist;
 import com.dtupay.database.exceptions.TransactionDoesNotExist;
 import com.dtupay.database.helper.TransactionResultSetToObject;
@@ -25,8 +27,8 @@ public class TransactionAdapter implements ITransactionAdapter {
     }
 
     @Override
-    public List<Transaction> getMonthlyTransactionsByCustomerId(int customerId, int month, int year) throws CustomerDoesNotExist {
-        List<Transaction> customerTransactions = new ArrayList<>();
+    public List<TransactionCustomer> getMonthlyTransactionsByCustomerId(int customerId, int month, int year) throws CustomerDoesNotExist {
+        List<TransactionCustomer> customerTransactions = new ArrayList<>();
         try (Connection connection = createConnection()) {
             PreparedStatement query = connection.prepareStatement(
                     "SELECT * FROM transaction  " +
@@ -58,8 +60,8 @@ public class TransactionAdapter implements ITransactionAdapter {
     }
 
     @Override
-    public List<Transaction> getMonthlyTransactionsByMerchantId(int merchantId, int month, int year) {
-        List<Transaction> merchantTransactions = new ArrayList<>();
+    public List<TransactionMerchant> getMonthlyTransactionsByMerchantId(int merchantId, int month, int year) {
+        List<TransactionMerchant> merchantTransactions = new ArrayList<>();
         try (Connection connection = createConnection()) {
             PreparedStatement query = connection.prepareStatement(
                     "SELECT * FROM transaction  " +

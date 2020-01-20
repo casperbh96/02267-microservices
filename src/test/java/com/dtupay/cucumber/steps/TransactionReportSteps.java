@@ -1,8 +1,6 @@
 package com.dtupay.cucumber.steps;
 
-import com.dtupay.app.DtuPayApp;
-import com.dtupay.app.IDtuPayApp;
-import com.dtupay.app.Transaction;
+import com.dtupay.app.*;
 import com.dtupay.cucumber.utils.Helper;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
@@ -22,8 +20,8 @@ public class TransactionReportSteps {
     Helper helper;
     Map<String, Integer> customerCprToIds;
     Map<String, Integer> merchantCprToIds;
-    Map<Integer, List<Transaction>> customerReports;
-    Map<Integer, List<Transaction>> merchantReports;
+    Map<Integer, List<TransactionCustomer>> customerReports;
+    Map<Integer, List<TransactionMerchant>> merchantReports;
     List<Transaction> transactions;
 
     public TransactionReportSteps(Helper helper){
