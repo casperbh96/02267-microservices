@@ -1,7 +1,7 @@
 package com.dtupay.service;
 
-import com.dtupay.BusinessLogic.BusinessLogicForToken;
-import com.dtupay.BusinessLogic.IBusinessLogicForToken;
+import com.dtupay.BusinessLogic.TokenManager;
+import com.dtupay.BusinessLogic.ITokenManager;
 import org.json.JSONObject;
 
 import javax.ws.rs.*;
@@ -12,7 +12,7 @@ import java.util.UUID;
 @Produces("application/json")
 public class TokenResource {
 
-    private static IBusinessLogicForToken tokens = new BusinessLogicForToken();
+    private static ITokenManager tokens = new TokenManager();
 
     @GET
     public Response getTokens() {

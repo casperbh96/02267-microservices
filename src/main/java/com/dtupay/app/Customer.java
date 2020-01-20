@@ -30,9 +30,11 @@ public class Customer {
         name = _name;
         tokens = new ArrayList<>();
     }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public int getId() {
         return id;
     }
@@ -40,6 +42,7 @@ public class Customer {
     public void setCpr(String _cpr) {
         this.cpr = _cpr;
     }
+
     public String getCpr() {
         return cpr;
     }
@@ -47,6 +50,7 @@ public class Customer {
     public void setName(String name) {
         this.name = name;
     }
+
     public String getName() {
         return name;
     }
@@ -54,6 +58,7 @@ public class Customer {
     public void setTokens(List<Token> tokens) {
         this.tokens = tokens;
     }
+
     public List<Token> getTokens() {
         return tokens;
     }
@@ -61,15 +66,20 @@ public class Customer {
     public void setDtuPay(IDtuPayApp dtuPay) {
         this.dtuPay = dtuPay;
     }
+
     public IDtuPayApp getDtuPay() {
         return dtuPay;
     }
 
-    public Token giveToken(){
+    public Token giveToken() {
         // TODO: might need some work on selecting which token to give
         if (!tokens.isEmpty())
             return tokens.get(0);
         return null;
+    }
+
+    public void addToken(Token token) {
+        tokens.add(token);
     }
 
 
