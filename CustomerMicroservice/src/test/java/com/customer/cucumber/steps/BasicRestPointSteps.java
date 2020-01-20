@@ -66,6 +66,7 @@ public class BasicRestPointSteps {
     private void SetConnectorAsGet() throws IOException {
         connector = (HttpURLConnection) addURL.openConnection();
         connector.setRequestMethod("GET");
+        connector.setConnectTimeout(10000);
     }
 
     @Given("^a new customer with CPR \"([^\"]*)\", name \"([^\"]*)\"$")
@@ -81,6 +82,7 @@ public class BasicRestPointSteps {
                 "    \"cpr\": \""+customerCPR+"\"" + "\n}";
         connector = (HttpURLConnection) addURL.openConnection();
         connector.setRequestMethod("POST");
+        connector.setConnectTimeout(10000);
         connector.setRequestProperty("Content-Type", "application/json");
         connector.setDoOutput(true);
         OutputStream os = connector.getOutputStream();
@@ -102,6 +104,7 @@ public class BasicRestPointSteps {
     public void theCustomerIsRequestedToBeDeleted() throws IOException {
         connector = (HttpURLConnection) addURL.openConnection();
         connector.setRequestMethod("DELETE");
+        connector.setConnectTimeout(10000);
     }
 
     @Then("^the rest service deletes customer correctly$")
@@ -130,6 +133,7 @@ public class BasicRestPointSteps {
                 "    \"cpr\": \""+cpr+"\"" + "\n}";
         connector = (HttpURLConnection) addURL.openConnection();
         connector.setRequestMethod("PUT");
+        connector.setConnectTimeout(10000);
         connector.setRequestProperty("Content-Type", "application/json");
         connector.setDoOutput(true);
         OutputStream os = connector.getOutputStream();
@@ -150,6 +154,7 @@ public class BasicRestPointSteps {
     public void weRequestToSeeAllTheCustomers() throws IOException {
         connector = (HttpURLConnection) addURL.openConnection();
         connector.setRequestMethod("GET");
+        connector.setConnectTimeout(10000);
     }
 
     @Then("^the service returns a list with all the customers$")
