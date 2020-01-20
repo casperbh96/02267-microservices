@@ -4,7 +4,6 @@ import com.dtupay.app.Token;
 import com.dtupay.database.exceptions.CustomerHasNoUnusedToken;
 import com.dtupay.database.exceptions.FakeToken;
 import com.dtupay.database.exceptions.TokenAlreadyUsed;
-import com.dtupay.database.helper.TokenResultSetToObject;
 
 import java.sql.*;
 import java.text.MessageFormat;

@@ -3,7 +3,6 @@ package com.dtupay.database;
 import com.dtupay.app.Merchant;
 import com.dtupay.database.exceptions.MerchantDoesNotExist;
 import com.dtupay.database.exceptions.NoMerchants;
-import com.dtupay.database.helper.MerchantResultSetToObject;
 
 import static com.dtupay.database.Connector.*;
 
