@@ -13,7 +13,14 @@ try {
         }
 
         stage ('Wait for the server to start up') {
-            sh 'sleep 20'
+            def container_output
+            ['token', 'customer'].each {
+                container_output = ""
+                while (!container_output.contains("Thorntail is Ready")) {
+                    sh "sleep 2"
+                    container_output = sh (script: "docker logs ${it}", returnStdout: true)
+                }
+            }
         }
 
         stage ('Customer tests') {
