@@ -19,7 +19,7 @@ services:
       - "8082:8080"
   transaction:
     image: transaction:0.1
-    container_name: token
+    container_name: transaction
     build:
       context: .
       dockerfile: ./docker/Dockerfile.transaction
