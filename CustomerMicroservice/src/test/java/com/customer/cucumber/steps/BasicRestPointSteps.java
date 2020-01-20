@@ -39,12 +39,12 @@ public class BasicRestPointSteps {
 
     @Given("^customer with ID (\\d+)$")
     public void customerWithID(int customerID) throws MalformedURLException {
-        addURL = new URL("http://host.docker.internal:8081/customer/" + customerID);
+        addURL = new URL("http://localhost:8081/customer/" + customerID);
     }
 
     @Given("^a new customer we created$")
     public void aNewCustomerWeCreated() throws MalformedURLException {
-        addURL = new URL("http://host.docker.internal:8081/customer/");
+        addURL = new URL("http://localhost:8081/customer/");
     }
 
 
@@ -71,7 +71,7 @@ public class BasicRestPointSteps {
 
     @Given("^a new customer with CPR \"([^\"]*)\", name \"([^\"]*)\"$")
     public void aNewCustomerWithCPRName(String cpr, String customer_name) throws Throwable {
-        addURL = new URL("http://host.docker.internal:8081/customer/");
+        addURL = new URL("http://localhost:8081/customer/");
         customerCPR = cpr;
         customerName = customer_name;
     }
@@ -142,12 +142,12 @@ public class BasicRestPointSteps {
 
     @Given("^the customer we created$")
     public void theCustomerWeCreated() throws MalformedURLException {
-        addURL = new URL("http://host.docker.internal:8081/customer/" + customer.getId());
+        addURL = new URL("http://localhost:8081/customer/" + customer.getId());
     }
 
     @Given("^we have some customers in the database$")
     public void weHaveSomeCustomersInTheDatabase() throws MalformedURLException {
-        addURL = new URL("http://host.docker.internal:8081/customer/");
+        addURL = new URL("http://localhost:8081/customer/");
     }
 
     @When("^we request to see all the customers$")
