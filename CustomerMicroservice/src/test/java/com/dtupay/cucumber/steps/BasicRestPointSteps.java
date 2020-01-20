@@ -138,12 +138,12 @@ public class BasicRestPointSteps {
 
     @Given("^the customer we created$")
     public void theCustomerWeCreated() throws MalformedURLException {
-        addURL = new URL("http://localhost:8080/merchant/" + customer.getId());
+        addURL = new URL("http://localhost:8080/customer/" + customer.getId());
     }
 
     @Given("^we have some customers in the database$")
     public void weHaveSomeCustomersInTheDatabase() throws MalformedURLException {
-        addURL = new URL("http://localhost:8080/merchant/");
+        addURL = new URL("http://localhost:8080/customer/");
     }
 
     @When("^we request to see all the customers$")
