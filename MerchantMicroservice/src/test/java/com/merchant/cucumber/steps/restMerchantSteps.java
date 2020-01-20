@@ -1,7 +1,7 @@
 package com.merchant.cucumber.steps;
 
-import com.merchant.MerchantManager.MerchantManager;
-import com.merchant.MerchantManager.IMerchantManager;
+import com.merchant.manager.MerchantManager;
+import com.merchant.manager.IMerchantManager;
 import com.merchant.app.Merchant;
 import com.merchant.database.exceptions.MerchantDoesNotExist;
 import cucumber.api.java.After;
