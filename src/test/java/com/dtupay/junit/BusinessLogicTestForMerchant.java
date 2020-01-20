@@ -41,7 +41,7 @@ public class BusinessLogicTestForMerchant {
         Merchant newMerchant = m.CreateMerchant("57", "Test");
 
         newMerchant.setName(newName);
-        newMerchant = m.UpdateMerchant(newMerchant);
+        newMerchant = m.UpdateMerchant(newMerchant.getId(), newMerchant.getCvr(), newMerchant.getName());
 
         Assert.assertEquals(newName, newMerchant.getName());
     }

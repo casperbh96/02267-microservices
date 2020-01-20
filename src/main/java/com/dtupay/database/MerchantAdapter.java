@@ -84,15 +84,15 @@ public class MerchantAdapter implements IMerchantAdapter {
     }
 
     @Override
-    public Merchant updateMerchant(Merchant merchant) throws MerchantDoesNotExist {
+    public Merchant updateMerchant(int id, String cvr, String name) throws MerchantDoesNotExist {
         Merchant returnMerchant = null;
         try (Connection connection = createConnection()) {
             PreparedStatement query = connection.prepareStatement(
                     "UPDATE merchant SET cvr = ?, name = ? WHERE id = ?");
 
-            query.setString(1, merchant.getCvr());
-            query.setString(2, merchant.getName());
-            query.setInt(3, merchant.getId());
+            query.setString(1, cvr);
+            query.setString(2, name);
+            query.setInt(3, id);
 
             query.executeUpdate();
 
@@ -101,7 +101,7 @@ public class MerchantAdapter implements IMerchantAdapter {
         }
 
         try {
-            returnMerchant = getMerchantByMerchantId(merchant.getId());
+            returnMerchant = getMerchantByMerchantId(id);
         } catch (MerchantDoesNotExist ex) {
             ex.printStackTrace();
         }

@@ -39,7 +39,7 @@ public class MerchantAdapterTest {
         Merchant newMerchant = m.createMerchant("1234", "Test");
 
         newMerchant.setName(newName);
-        newMerchant = m.updateMerchant(newMerchant);
+        newMerchant = m.updateMerchant(newMerchant.getId(), newMerchant.getCvr(), newMerchant.getName());
 
         Assert.assertEquals(newName, newMerchant.getName());
     }
