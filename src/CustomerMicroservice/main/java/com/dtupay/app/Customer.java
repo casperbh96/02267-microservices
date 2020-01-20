@@ -8,7 +8,6 @@ public class Customer {
     String cpr;
     String name;
     List<Token> tokens;
-    IDtuPayApp dtuPay;
 
     public Customer() {
     }
@@ -56,13 +55,6 @@ public class Customer {
     }
     public List<Token> getTokens() {
         return tokens;
-    }
-
-    public void setDtuPay(IDtuPayApp dtuPay) {
-        this.dtuPay = dtuPay;
-    }
-    public IDtuPayApp getDtuPay() {
-        return dtuPay;
     }
 
     public Token giveToken(){
