@@ -38,7 +38,7 @@ public class RestTokenSteps {
 
     @Given("^a customer id (\\d+)$")
     public void a_customer_id(int customerId) throws Throwable {
-        url2 = new URL("http://localhost:8082/token/unused/" + customerId);
+        url2 = new URL("http://host.docker.internal:8082/token/unused/" + customerId);
     }
 
     @When("^the token is requested$")
@@ -49,7 +49,7 @@ public class RestTokenSteps {
 
     @Given("^a token id (\\d+)$")
     public void a_token_id(int tokenId) throws Throwable {
-        url2 = new URL("http://localhost:8082/token/" + tokenId);
+        url2 = new URL("http://host.docker.internal:8082/token/" + tokenId);
     }
 
     @When("^the validity check of a token is requested$")
@@ -66,7 +66,7 @@ public class RestTokenSteps {
 
     @Given("^another token id (\\d+)$")
     public void another_token_id(int tokenId) throws Throwable {
-        url2 = new URL("http://localhost:8082/token/" + tokenId);
+        url2 = new URL("http://host.docker.internal:8082/token/" + tokenId);
     }
 
     @When("^the update to used is requested$")
@@ -77,7 +77,7 @@ public class RestTokenSteps {
 
     @Given("^a customer id \"([^\"]*)\", unique identifier \"([^\"]*)\" and a token unused \"([^\"]*)\"$")
     public void a_customer_id_unique_identifier_and_a_token_unused(String customerId, String uuid, String unusedStr) throws Throwable {
-        url2 = new URL("http://localhost:8082/token/");
+        url2 = new URL("http://host.docker.internal:8082/token/");
         this.customerId = customerId;
         this.uuid = uuid;
         this.used = unusedStr;

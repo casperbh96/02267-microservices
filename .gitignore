@@ -34,3 +34,7 @@ hs_err_pid*
 .classpath
 TokenMicroservice/target/maven-archiver/pom.properties
 *.properties
+TokenMicroservice/target/token-microservice.war.original
+TokenMicroservice/target/surefire-reports/TEST-com.token.cucumber.CucumberTest.xml
+TokenMicroservice/target/surefire-reports/com.token.cucumber.CucumberTest.txt
+TokenMicroservice/target/maven-archiver/pom.properties
