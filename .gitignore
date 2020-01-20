@@ -1,5 +1,5 @@
-src/CustomerMicroservice/generated
-src/CustomerMicroservice/target
+CustomerMicroservice/generated
+CustomerMicroservice/target
 *.idea
 *.iml
 .DS_store
