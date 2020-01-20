@@ -12,16 +12,9 @@ try{
             sh 'docker-compose up -d'
         }
 
-        stage ('JUnit tests') {
+    stage ('Customer tests') {
             checkout scm
-            sh 'mvn -D maven.test.skip=true install'
-            sh 'mvn -D test=com.dtupay.junit.** test'
-        }
-
-        stage ('Cucumber tests') {
-            checkout scm
-            sh 'mvn -D maven.test.skip=true install'
-            sh 'mvn -D test=com.dtupay.cucumber.** test'
+        sh 'mvn -f CustomerMicroservice/pom.xml test'
         }
     }
 } finally {
