@@ -24,6 +24,22 @@ public class TokenResource {
     }
 
     @GET
+    @Path("newTokens")
+    @Consumes("application/json")
+    public Response getTokens(String jsonRaw) {
+        JSONObject json = new JSONObject(jsonRaw);
+        int customerId = json.getInt("customerId");
+        int numberOfTokens = json.getInt("numberOfTokens");
+
+        try {
+            return Response.ok(tokens.getTokensForCustomer(customerId, numberOfTokens)).build();
+        } catch (Exception e) {
+            return Response.serverError().build();
+        }
+    }
+
+
+    @GET
     @Path("unused/{customerId}")
     public Response getUnusedToken(@PathParam("customerId") int customerId) {
         if (customerId == 0) {
