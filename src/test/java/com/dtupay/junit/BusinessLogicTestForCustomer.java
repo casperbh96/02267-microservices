@@ -40,7 +40,7 @@ public class BusinessLogicTestForCustomer {
         Customer newCustomer = c.CreateCustomer("55", "Test");
 
         newCustomer.setName(newName);
-        newCustomer = c.UpdateCustomer(newCustomer);
+        newCustomer = c.UpdateCustomer(newCustomer.getId(), newCustomer.getCpr(), newCustomer.getName());
 
         Assert.assertEquals(newName, newCustomer.getName());
     }

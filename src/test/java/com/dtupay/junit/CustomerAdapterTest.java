@@ -39,7 +39,7 @@ public class CustomerAdapterTest {
 
         Customer newCustomer = c.createCustomer("974", "Test1");
         newCustomer.setName(newName);
-        newCustomer = c.updateCustomer(newCustomer);
+        newCustomer = c.updateCustomer(newCustomer.getId(), newCustomer.getCpr(), newCustomer.getName());
 
         Assert.assertEquals(newName, newCustomer.getName());
     }
