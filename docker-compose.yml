@@ -3,6 +3,7 @@ version: '3'
 services:
   customer:
     image: customer:0.1
+    container_name: customer
     build:
       context: .
       dockerfile: ./docker/Dockerfile.customer
@@ -10,6 +11,7 @@ services:
       - "8081:8080"
   token:
     image: token:0.1
+    container_name: token
     build:
       context: .
       dockerfile: ./docker/Dockerfile.token
