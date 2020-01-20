@@ -29,12 +29,12 @@ public class restMerchantSteps {
 
     @Before
     public void Setup() {
-        merchant = m.CreateMerchant("87654321", "Donald the merchant");
+        merchant = m.createMerchant("87654321", "Donald the merchant");
     }
 
     @After
     public void cleanUp() throws MerchantDoesNotExist {
-        m.DeleteMerchantByMerchantId(merchant.getId());
+        m.deleteMerchantByMerchantId(merchant.getId());
     }
 
 

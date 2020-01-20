@@ -3,7 +3,6 @@ package com.dtupay.junit;
 import com.dtupay.BusinessLogic.BusinessLogicForMerchant;
 import com.dtupay.BusinessLogic.IBusinessLogicForMerchant;
 import com.dtupay.app.Merchant;
-import com.dtupay.database.MerchantAdapter;
 import com.dtupay.database.exceptions.MerchantDoesNotExist;
 import org.junit.Assert;
 import org.junit.Before;
@@ -22,26 +21,26 @@ public class BusinessLogicTestForMerchant {
     @Test
     public void CreateMerchantTest() throws MerchantDoesNotExist {
         String cvr = "57";
-        Merchant newMerchant = m.CreateMerchant(cvr, "Test");
+        Merchant newMerchant = m.createMerchant(cvr, "Test");
         Assert.assertEquals(cvr, newMerchant.getCvr());
     }
 
     @Test(expected = MerchantDoesNotExist.class)
     public void DeleteMerchantTest() throws MerchantDoesNotExist {
-        Merchant newMerchant = m.CreateMerchant("57", "Test");
+        Merchant newMerchant = m.createMerchant("57", "Test");
 
-        m.DeleteMerchantByMerchantId(newMerchant.getId());
-        m.GetMerchantByMerchantId(newMerchant.getId());
+        m.deleteMerchantByMerchantId(newMerchant.getId());
+        m.getMerchantByMerchantId(newMerchant.getId());
     }
 
     @Test
     public void UpdateMerchantTest() throws MerchantDoesNotExist {
         String newName = "UpdatedMerchant";
 
-        Merchant newMerchant = m.CreateMerchant("57", "Test");
+        Merchant newMerchant = m.createMerchant("57", "Test");
 
         newMerchant.setName(newName);
-        newMerchant = m.UpdateMerchant(newMerchant.getId(), newMerchant.getCvr(), newMerchant.getName());
+        newMerchant = m.updateMerchant(newMerchant.getId(), newMerchant.getCvr(), newMerchant.getName());
 
         Assert.assertEquals(newName, newMerchant.getName());
     }

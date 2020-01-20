@@ -1,5 +1,7 @@
 package com.dtupay.junit;
 
+import com.dtupay.BusinessLogic.ITokenManager;
+import com.dtupay.BusinessLogic.TokenManager;
 import com.dtupay.app.*;
 import com.dtupay.bank.BankAdapter;
 import com.dtupay.bank.IBankAdapter;
@@ -19,7 +21,7 @@ public class DtuPayAppTest {
     IMerchantAdapter merchantAdapter;
     ITokenAdapter tokenAdapter;
     IDtuPayApp dtupay;
-    ITokenManagement tokenManager;
+    ITokenManager tokenManager;
     Merchant merchant;
     Customer customer;
     Customer customerNoToken;
@@ -32,13 +34,13 @@ public class DtuPayAppTest {
         customerAdapter = new CustomerAdapter();
         merchantAdapter = new MerchantAdapter();
         tokenAdapter = new TokenAdapter();
-        tokenManager = new TokenManagement();
+        tokenManager = new TokenManager();
         dtupay = new DtuPayApp(bank, customerAdapter, merchantAdapter, tokenAdapter);
 
         merchant = merchantAdapter.createMerchant("1234536", "Casper1");
         customer = customerAdapter.createCustomer("1003245", "Casper2");
         customerNoToken = customerAdapter.createCustomer("09876", "Casper3");
-        token = tokenAdapter.createToken(customer.getId(), tokenManager.GetToken(), false);
+        token = tokenAdapter.createToken(customer.getId(), tokenManager.getToken(), false);
         description = "A proper meal";
     }
 
@@ -55,7 +57,7 @@ public class DtuPayAppTest {
 
     @Test(expected = TokenAlreadyUsed.class)
     public void checkTokenValidityOfUsedToken() throws CustomerHasNoUnusedToken, FakeToken, TokenAlreadyUsed {
-        Token newToken = tokenAdapter.createToken(2, tokenManager.GetToken(), true);
+        Token newToken = tokenAdapter.createToken(2, tokenManager.getToken(), true);
         dtupay.checkTokenValidity(newToken);
     }
 

@@ -17,7 +17,7 @@ public class MerchantResource {
     @GET
     public Response getMerchants() {
         try {
-            return Response.ok(m.GetAllMerchants()).build();
+            return Response.ok(m.getAllMerchants()).build();
         }
         catch (Exception e) {
             return Response.serverError().build();
@@ -34,7 +34,7 @@ public class MerchantResource {
             //return Response.ok("Get merchants").build();
             //return Response.status(200).entity(response).build();
             //return Response.status(200).entity("Get merchants").build();
-            return Response.ok(m.GetMerchantByMerchantId(id)).build();
+            return Response.ok(m.getMerchantByMerchantId(id)).build();
         }
         catch(Exception e) {
             return Response.status(400).build();
@@ -54,7 +54,7 @@ public class MerchantResource {
         try {
             //String response = sendMessage(message);
             //return Response.status(200).entity(response).build();
-            return Response.accepted(m.CreateMerchant(cvr, name)).build();
+            return Response.accepted(m.createMerchant(cvr, name)).build();
         }
         catch(Exception e) {
             return Response.status(400).build();
@@ -73,7 +73,7 @@ public class MerchantResource {
             return Response.status(400).entity("Missing parameters.").build();
         }
         try {
-            return Response.ok(m.UpdateMerchant(id, cvr, name)).build();
+            return Response.ok(m.updateMerchant(id, cvr, name)).build();
         }
         catch(Exception e) {
             return Response.status(400).build();
@@ -90,7 +90,7 @@ public class MerchantResource {
             // String response = sendMessage(message);
             //return Response.ok("Deleted merchants").build();
             //return Response.status(200).entity(response).build();
-            m.DeleteMerchantByMerchantId(id);
+            m.deleteMerchantByMerchantId(id);
             return Response.ok("Deleted merchants").build();
         }
         catch(Exception e) {

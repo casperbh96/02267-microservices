@@ -11,8 +11,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.ws.rs.core.Response;
-
 public class RestMerchantTest {
 
     IBusinessLogicForMerchant m = new BusinessLogicForMerchant();
@@ -21,12 +19,12 @@ public class RestMerchantTest {
 
     @Before
     public void Setup() {
-        merchant = m.CreateMerchant("12345678", "Ismaa");
+        merchant = m.createMerchant("12345678", "Ismaa");
     }
 
     @After
     public void cleanUp() throws MerchantDoesNotExist {
-        m.DeleteMerchantByMerchantId(merchant.getId());
+        m.deleteMerchantByMerchantId(merchant.getId());
     }
 
     @Test

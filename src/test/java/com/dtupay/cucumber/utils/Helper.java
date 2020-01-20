@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.dtupay.BusinessLogic.ITokenManager;
+import com.dtupay.BusinessLogic.TokenManager;
 import com.dtupay.app.*;
 import com.dtupay.bank.BankAdapter;
 import com.dtupay.bank.IBankAdapter;
@@ -19,7 +21,7 @@ public class Helper {
     private ICustomerAdapter customers;
     private IMerchantAdapter merchants;
     private ITokenAdapter tokens;
-    private ITokenManagement tokenManager = new TokenManagement();
+    private ITokenManager tokenManager = new TokenManager();
     public boolean errorHasOccured = false;
 
     public Helper() {
@@ -47,13 +49,13 @@ public class Helper {
 
     public Customer createDtuPayCustomer(String name, String cpr, int tokens) throws CustomerIsUnableToReceiveNewTokens, TooManyTokenRequest {
         Customer customer = customers.createCustomer(cpr, name);
-        tokenManager.CustomerGetTokens(customer, tokens, this.tokens);
+        tokenManager.customerGetTokens(customer, tokens);
         return customer;
     }
 
     public Customer createDtuPayCustomerUsedToken(String name, String cpr, int tokens) throws CustomerIsUnableToReceiveNewTokens, TooManyTokenRequest {
         Customer customer = customers.createCustomer(cpr, name);
-        tokenManager.CustomerGetTokens(customer, tokens, this.tokens);
+        tokenManager.customerGetTokens(customer, tokens);
         for (Token token : customer.getTokens()) {
             token.setUsed(true);
         }

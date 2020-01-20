@@ -12,23 +12,23 @@ public class BusinessLogicForMerchant implements IBusinessLogicForMerchant {
 
     IMerchantAdapter merchantAdapter = new MerchantAdapter();
 
-    public Merchant CreateMerchant(String cvr, String name) {
+    public Merchant createMerchant(String cvr, String name) {
         return merchantAdapter.createMerchant(cvr, name);
     }
 
-    public Merchant UpdateMerchant(int id, String cvr, String name) throws MerchantDoesNotExist {
+    public Merchant updateMerchant(int id, String cvr, String name) throws MerchantDoesNotExist {
         return merchantAdapter.updateMerchant(id, cvr, name);
     }
 
-    public void DeleteMerchantByMerchantId(int id) throws MerchantDoesNotExist {
+    public void deleteMerchantByMerchantId(int id) throws MerchantDoesNotExist {
         merchantAdapter.deleteMerchantByMerchantId(id);
     }
 
-    public Merchant GetMerchantByMerchantId(int id) throws MerchantDoesNotExist {
+    public Merchant getMerchantByMerchantId(int id) throws MerchantDoesNotExist {
         return merchantAdapter.getMerchantByMerchantId(id);
     }
 
-    public List<Merchant> GetAllMerchants() throws NoMerchants {
+    public List<Merchant> getAllMerchants() throws NoMerchants {
         return merchantAdapter.getAllMerchants();
     }
 
