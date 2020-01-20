@@ -1,10 +1,6 @@
 package com.dtupay.database;
 
-import com.dtupay.app.Customer;
-import com.dtupay.app.ITokenManagement;
 import com.dtupay.app.Token;
-import com.dtupay.app.TokenManagement;
-import com.dtupay.database.exceptions.CustomerDoesNotExist;
 import com.dtupay.database.exceptions.CustomerHasNoUnusedToken;
 import com.dtupay.database.exceptions.FakeToken;
 import com.dtupay.database.exceptions.TokenAlreadyUsed;
@@ -19,13 +15,9 @@ import java.util.UUID;
 import static com.dtupay.database.Connector.createConnection;
 
 public class TokenAdapter implements ITokenAdapter {
-    ICustomerAdapter dbCustomer;
-    ITokenManagement tokenManager;
     TokenResultSetToObject converter = new TokenResultSetToObject();
 
     public TokenAdapter() {
-        dbCustomer = new CustomerAdapter();
-        tokenManager = new TokenManagement();
     }
 
     private Token getTokenByTokenId(int tokenId) {

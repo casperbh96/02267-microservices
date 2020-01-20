@@ -3,9 +3,7 @@ package com.dtupay.database;
 import com.dtupay.app.Customer;
 import com.dtupay.database.exceptions.CustomerDoesNotExist;
 import com.dtupay.database.helper.CustomerResultSetToObject;
-import com.mysql.cj.jdbc.MysqlDataSource;
 import com.dtupay.database.exceptions.NoCustomers;
-import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
