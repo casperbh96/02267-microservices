@@ -7,8 +7,6 @@ import com.dtupay.BusinessLogic.IBusinessLogicForToken;
 import com.dtupay.app.Customer;
 import com.dtupay.app.Token;
 import com.dtupay.database.exceptions.CustomerHasNoUnusedToken;
-import com.dtupay.database.exceptions.FakeToken;
-import com.dtupay.database.exceptions.TokenAlreadyUsed;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,8 +24,8 @@ public class BusinessLogicTestForToken {
     public void Setup() {
         customerLogic = new BusinessLogicForCustomer();
         tokenLogic = new BusinessLogicForToken();
-        customer = customerLogic.CreateCustomer("9876", "BLCustomer");
-        customerNoToken = customerLogic.CreateCustomer("211", "BLLCustomer2");
+        customer = customerLogic.createCustomer("9876", "BLCustomer");
+        customerNoToken = customerLogic.createCustomer("211", "BLLCustomer2");
     }
 
     @Test
