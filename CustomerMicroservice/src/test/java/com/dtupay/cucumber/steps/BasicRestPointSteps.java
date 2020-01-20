@@ -1,7 +1,7 @@
 package com.dtupay.cucumber.steps;
 
-import com.dtupay.BusinessLogic.CustomerManager;
-import com.dtupay.BusinessLogic.ICustomerManager;
+import com.dtupay.Manager.CustomerManager;
+import com.dtupay.Manager.ICustomerManager;
 import com.dtupay.app.Customer;
 import com.dtupay.database.exceptions.CustomerDoesNotExist;
 import cucumber.api.java.After;

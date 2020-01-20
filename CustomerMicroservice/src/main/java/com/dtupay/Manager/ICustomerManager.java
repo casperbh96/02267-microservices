@@ -1,4 +1,4 @@
-package com.dtupay.BusinessLogic;
+package com.dtupay.Manager;
 
 import com.dtupay.app.Customer;
 import com.dtupay.database.exceptions.CustomerDoesNotExist;
