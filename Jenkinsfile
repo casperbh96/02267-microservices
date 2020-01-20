@@ -1,9 +1,9 @@
 try{
     node {
-        stage ('Build Application') {
+    stage ('Build Customer') {
             checkout scm
-            sh 'mvn clean compile'
-            sh 'mvn -D maven.test.skip=true install'
+        sh 'mvn -f CustomerMicroservice/pom.xml clean compile'
+        sh 'mvn -f CustomerMicroservice/pom.xml -D maven.test.skip=true install'
         }
 
         stage ('Build Docker Images') {

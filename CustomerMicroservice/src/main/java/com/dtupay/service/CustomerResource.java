@@ -1,7 +1,7 @@
 package com.dtupay.service;
 
-import com.dtupay.BusinessLogic.CustomerManager;
-import com.dtupay.BusinessLogic.ICustomerManager;
+import com.dtupay.Manager.CustomerManager;
+import com.dtupay.Manager.ICustomerManager;
 import org.json.JSONObject;
 
 import javax.ws.rs.*;
