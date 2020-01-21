@@ -16,7 +16,7 @@ import java.sql.Timestamp;
 public class TransactionResource {
     ITransactionManager transactions = new TransactionManager(new TransactionAdapter());
 
-    @GET
+    @POST
     @Path("customer")
     @Consumes("application/json")
     public Response getMonthlyReportForCustomer(String jsonRaw) {
@@ -36,7 +36,7 @@ public class TransactionResource {
         }
     }
 
-    @GET
+    @POST
     @Path("merchant")
     @Consumes("application/json")
     public Response getMonthlyReportForMerchant(String jsonRaw) {
