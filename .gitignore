@@ -42,3 +42,17 @@ TokenMicroservice/target/maven-archiver/pom.properties
 DTUPay/target
 DTUPay/generated
 DTUPay/.idea
+MerchantMicroservice/target/merchant-microservice.war.original
+MerchantMicroservice/target/surefire-reports/com.merchant.cucumber.CucumberTest.txt
+MerchantMicroservice/target/surefire-reports/com.merchant.junit.MerchantAdapterTest.txt
+MerchantMicroservice/target/surefire-reports/com.merchant.junit.MerchantManagerTest.txt
+MerchantMicroservice/target/surefire-reports/com.merchant.junit.RestMerchantTest.txt
+MerchantMicroservice/target/surefire-reports/TEST-com.merchant.cucumber.CucumberTest.xml
+MerchantMicroservice/target/surefire-reports/TEST-com.merchant.junit.MerchantAdapterTest.xml
+MerchantMicroservice/target/surefire-reports/TEST-com.merchant.junit.MerchantManagerTest.xml
+MerchantMicroservice/target/surefire-reports/TEST-com.merchant.junit.RestMerchantTest.xml
+TokenMicroservice/src/main/java/com/token/database/Connector.java
+TransactionMicroservice/src/main/java/com/transaction/database/Connector.java
+TransactionMicroservice/target/surefire-reports/com.transaction.cucumber.CucumberTest.txt
+TransactionMicroservice/target/surefire-reports/TEST-com.transaction.cucumber.CucumberTest.xml
+TransactionMicroservice/target/transaction-microservice.war.original

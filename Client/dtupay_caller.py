@@ -10,13 +10,13 @@ class DtuPayCaller():
         self.transaction_url = 'http://localhost:8080/transaction'
 
     def getCustomer(self):
-        customer = {'id': 7668, 'cpr': '4564377324', 'name': 'Test Customer Client', 'tokens': []}
+        customer = {'id': 13, 'cpr': '999999', 'name': 'Manolo', 'tokens': []}
         print('Customer: ' + str(customer))
         
         return customer
 
     def getMerchant(self):
-        merchant = {'id': 3830, 'cvr': '3750925552', 'name': 'Test Merchant Client'}
+        merchant = {'id': 13, 'cvr': '1234', 'name': 'UpdatedMerchant'}
         print('Merchant: ' + str(merchant))
         
         return merchant
