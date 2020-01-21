@@ -25,3 +25,11 @@ services:
       dockerfile: ./docker/Dockerfile.transaction
     ports:
       - "8083:8080"
+  merchant:
+    image: merchant:0.1
+    container_name: merchant
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.merchant
+    ports:
+      - "8084:8080"

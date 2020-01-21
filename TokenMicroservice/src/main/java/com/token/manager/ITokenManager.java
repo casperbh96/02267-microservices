@@ -20,7 +20,5 @@ public interface ITokenManager {
 
     UUID getToken();
 
-    void customerGetTokens(Customer customer, int numTokens) throws CustomerIsUnableToReceiveNewTokens, TooManyTokenRequest;
-
-    boolean canCustomerGetTokens(Customer customer, int numTokens) throws TooManyTokenRequest;
+    List<Token> getTokensForCustomer(int customerId, int numTokens);
 }

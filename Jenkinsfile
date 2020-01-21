@@ -3,6 +3,7 @@ try {
         stage ('Build Application') {
             checkout scm
             sh 'mvn -f CustomerMicroservice/pom.xml -D maven.test.skip=true install'
+            sh 'mvn -f MerchantMicroservice/pom.xml -D maven.test.skip=true install'
             sh 'mvn -f TokenMicroservice/pom.xml -D maven.test.skip=true install'
             sh 'mvn -f TransactionMicroservice/pom.xml -D maven.test.skip=true install'
         }
@@ -15,7 +16,7 @@ try {
 
         stage ('Wait for the server to start up') {
             def container_output
-            ['token', 'customer', 'transaction'].each {
+            ['token', 'customer', 'transaction', 'merchant'].each {
                 container_output = ""
                 while (!container_output.contains("Thorntail is Ready")) {
                     sh "sleep 2"
@@ -27,6 +28,11 @@ try {
         stage ('Customer tests') {
             checkout scm
             sh 'mvn -f CustomerMicroservice/pom.xml test'
+        }
+
+        stage ('Merchant tests') {
+            checkout scm
+            sh 'mvn -f MerchantMicroservice/pom.xml test'
         }
 
         stage ('Token tests') {

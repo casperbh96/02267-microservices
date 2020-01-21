@@ -6,6 +6,7 @@ import com.token.app.Token;
 import com.token.database.TokenAdapter;
 import com.token.database.exceptions.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -50,35 +51,13 @@ public class TokenManager implements ITokenManager {
     }
 
     @Override
-    public void customerGetTokens(Customer customer, int numTokens) throws CustomerIsUnableToReceiveNewTokens, TooManyTokenRequest {
-        if (canCustomerGetTokens(customer, numTokens)) {
-            for (int i = 0; i < numTokens; i++) {
-                Token token = tokenAdapter.createToken(customer.getId(), getToken(), false);
-                customer.addToken(token);
-            }
-        } else {
-            throw new CustomerIsUnableToReceiveNewTokens("Customer is unable to receive new tokens");
+    public List<Token> getTokensForCustomer(int customerId, int numTokens) {
+        List<Token> newTokens = new ArrayList<>();
+        for (int i = 0; i < numTokens; i++) {
+            Token token = tokenAdapter.createToken(customerId, getToken(), false);
+            newTokens.add(token);
         }
-    }
-
-    @Override
-    public boolean canCustomerGetTokens(Customer customer, int numTokens) throws TooManyTokenRequest {
-        if (numTokens > 5) {
-            throw new TooManyTokenRequest("Too many token request: " + numTokens);
-        }
-
-        if (customer.getTokens().isEmpty()) {
-            return true;
-        }
-
-        int unusedToken = 0;
-
-        for (Token t : customer.getTokens()) {
-            if (!t.getUsed()) {
-                unusedToken++;
-            }
-        }
-        return unusedToken == 1;
+        return newTokens;
     }
 
 }
