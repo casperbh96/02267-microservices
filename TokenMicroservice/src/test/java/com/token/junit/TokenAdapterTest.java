@@ -1,24 +1,19 @@
-/*
 package com.token.junit;
 
-import com.dtupay.app.Customer;
-import com.dtupay.app.Token;
-import com.dtupay.database.CustomerAdapter;
-import com.dtupay.database.ICustomerAdapter;
-import com.dtupay.database.ITokenAdapter;
-import com.dtupay.database.TokenAdapter;
-import com.dtupay.database.exceptions.CustomerHasNoUnusedToken;
-import com.dtupay.database.exceptions.FakeToken;
-import com.dtupay.database.exceptions.TokenAlreadyUsed;
+import com.token.app.Customer;
+import com.token.app.Token;
+import com.token.database.ITokenAdapter;
+import com.token.database.TokenAdapter;
+import com.token.database.exceptions.CustomerHasNoUnusedToken;
+import com.token.database.exceptions.FakeToken;
+import com.token.database.exceptions.TokenAlreadyUsed;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.util.UUID;
 
 public class TokenAdapterTest {
 
-    ICustomerAdapter customerAdapter;
     ITokenAdapter tokenAdapter;
     Token token;
     Customer customer;
@@ -26,19 +21,17 @@ public class TokenAdapterTest {
 
     @Before
     public void Setup() {
-        customerAdapter = new CustomerAdapter();
         tokenAdapter = new TokenAdapter();
-
-        customer = customerAdapter.createCustomer("1", "Test");
+        customer = new Customer(12345, "1", "Test1");
+        customerNoToken = new Customer(12341234, "2", "Test2");
         token = tokenAdapter.createToken(customer.getId(), UUID.randomUUID(), false);
-
-        customerNoToken = customerAdapter.createCustomer("2", "Test");
     }
 
     @Test
-    public void GetUnusedTokenByCustomerIdWithAUnusedToken() throws CustomerHasNoUnusedToken {
+    public void GetUnusedTokenByCustomerIdWithGetUnusedToken() throws CustomerHasNoUnusedToken {
         Token actualToken = tokenAdapter.getUnusedTokenByCustomerId(customer.getId());
-        Assert.assertEquals(token, actualToken);
+        Assert.assertEquals(token.getCustomerId(), actualToken.getCustomerId());
+        Assert.assertFalse(token.getUsed());
     }
 
     @Test(expected = CustomerHasNoUnusedToken.class)
@@ -52,6 +45,3 @@ public class TokenAdapterTest {
         Assert.assertTrue(tokenAdapter.isTokenValid(newToken.getId()));
     }
 }
-
-
- */

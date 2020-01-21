@@ -1,6 +1,5 @@
 package com.token.manager;
 
-import com.token.app.Customer;
 import com.token.app.Token;
 import com.token.database.exceptions.*;
 
