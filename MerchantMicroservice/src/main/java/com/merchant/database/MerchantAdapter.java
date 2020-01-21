@@ -73,7 +73,7 @@ public class MerchantAdapter implements IMerchantAdapter {
 
     /**
      * to create new merchant
-     * @param cpr number
+     * @param cvr number
      * @param name merchant name
      * @return merchant
      */
@@ -108,7 +108,7 @@ public class MerchantAdapter implements IMerchantAdapter {
     /**
      * This class updates the merchant with new data values
      * @param id merchant id
-     * @param cpr number
+     * @param cvr number
      * @param name merchant name
      * @return merchant
      * @throws MerchantDoesNotExist

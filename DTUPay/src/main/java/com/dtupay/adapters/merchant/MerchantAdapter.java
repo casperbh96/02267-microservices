@@ -11,6 +11,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
+/**
+ * class to handle all merchant related applications in the database
+ */
+
 public class MerchantAdapter implements IMerchantAdapter {
 
     String baseUrl;
@@ -19,6 +23,13 @@ public class MerchantAdapter implements IMerchantAdapter {
         this.baseUrl = baseUrl;
     }
 
+    /**
+     * to create new merchant
+     * @param cvr number
+     * @param name merchant name
+     * @return merchant
+     * @throws MerchantException
+     */
     @Override
     public Merchant createMerchant(String cvr, String name) throws MerchantException {
         try {
@@ -47,6 +58,14 @@ public class MerchantAdapter implements IMerchantAdapter {
         }
     }
 
+    /**
+     * This class updates the merchant with new data values
+     * @param id merchant id
+     * @param cpr number
+     * @param name merchant name
+     * @return merchant
+     * @throws MerchantDoesNotExist
+     */
     @Override
     public Merchant updateMerchant(int merchantId, String cvr, String name) throws MerchantException {
         try {
@@ -75,6 +94,12 @@ public class MerchantAdapter implements IMerchantAdapter {
         }
     }
 
+    /**
+     * gets merchant using merchant id
+     * @param id
+     * @return merchant
+     * @throws MerchantDoesNotExist
+     */
     @Override
     public Merchant getMerchantById(int merchantId) throws MerchantException {
         try {

@@ -19,7 +19,7 @@ public class Merchant {
 
     /**
      * This is constructor for merchant class to initiate the merchant object
-     * @param _cpr CPR number is added as additional information which will be used for bank transactions
+     * @param _cvr CPR number is added as additional information which will be used for bank transactions
      * @param _name a new merchant name
      */
 
@@ -31,7 +31,7 @@ public class Merchant {
     /**
      * add more information
      * @param _id merchant id has been added
-     * @param _cpr CPR number
+     * @param _cvr CPR number
      * @param _name merchant name
      */
     public Merchant(int _id, String _cvr, String _name) {
@@ -58,7 +58,7 @@ public class Merchant {
 
     /**
      * To set merchant CPR number
-     * @param _cpr merchant CPR number
+     * @param _cvr merchant CPR number
      */
     public void setCvr(String _cvr) {
         this.cvr = _cvr;
