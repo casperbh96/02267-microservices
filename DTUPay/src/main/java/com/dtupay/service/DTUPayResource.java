@@ -3,14 +3,13 @@ package com.dtupay.service;
 import com.dtupay.DTUPayApp;
 import com.dtupay.IDTUPayApp;
 import com.dtupay.adapters.token.model.Token;
-import org.jboss.shrinkwrap.descriptor.api.jobXML.JslAnalyzerCommType;
 import org.json.JSONObject;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.math.BigDecimal;
 
-
+@Path("/")
 @Produces("application/json")
 public class DTUPayResource {
 
