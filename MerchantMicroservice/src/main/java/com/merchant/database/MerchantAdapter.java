@@ -14,8 +14,18 @@ import java.util.List;
 
 import static com.merchant.database.Connector.createConnection;
 
+/**
+ * class to handle all merchant related applications in the database
+ */
+
 public class MerchantAdapter implements IMerchantAdapter {
     MerchantResultSetToObject converter = new MerchantResultSetToObject();
+
+    /**
+     * shows all the merchants in the customer list
+     * @return list of merchants
+     * @throws NoMerchants
+     */
 
     @Override
     public List<Merchant> getAllMerchants() throws NoMerchants {
@@ -34,6 +44,12 @@ public class MerchantAdapter implements IMerchantAdapter {
         return merchants;
     }
 
+    /**
+     * gets merchant using merchant id
+     * @param id
+     * @return merchant
+     * @throws MerchantDoesNotExist
+     */
     @Override
     public Merchant getMerchantByMerchantId(int id) throws MerchantDoesNotExist {
         Merchant merchant = null;
@@ -55,6 +71,12 @@ public class MerchantAdapter implements IMerchantAdapter {
         return merchant;
     }
 
+    /**
+     * to create new merchant
+     * @param cvr number
+     * @param name merchant name
+     * @return merchant
+     */
     @Override
     public Merchant createMerchant(String cvr, String name) {
         Merchant returnMerchant = null;
@@ -83,6 +105,15 @@ public class MerchantAdapter implements IMerchantAdapter {
         return returnMerchant;
     }
 
+    /**
+     * This class updates the merchant with new data values
+     * @param id merchant id
+     * @param cvr number
+     * @param name merchant name
+     * @return merchant
+     * @throws MerchantDoesNotExist
+     */
+
     @Override
     public Merchant updateMerchant(int id, String cvr, String name) throws MerchantDoesNotExist {
         Merchant returnMerchant = null;
@@ -109,6 +140,11 @@ public class MerchantAdapter implements IMerchantAdapter {
         return returnMerchant;
     }
 
+    /**
+     * deletes merchant using merchant id
+     * @param id
+     * @throws merchantDoesNotExist
+     */
     @Override
     public void deleteMerchantByMerchantId(int id) throws MerchantDoesNotExist {
         try (Connection connection = createConnection()) {
@@ -123,6 +159,12 @@ public class MerchantAdapter implements IMerchantAdapter {
         }
     }
 
+    /**
+     * get merchant id from database result set
+     * @param stmt prepared statement
+     * @return merchant id
+     * @throws SQLException
+     */
     public int getIdFromDbReturn(PreparedStatement stmt) throws SQLException {
         ResultSet rs = stmt.getGeneratedKeys();
         rs.next();

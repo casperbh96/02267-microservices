@@ -6,6 +6,9 @@ import com.token.database.exceptions.*;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * interface to handle token adapter class
+ */
 public interface ITokenAdapter {
     Token getUnusedTokenByCustomerId(int customerId) throws CustomerHasNoUnusedToken;
 

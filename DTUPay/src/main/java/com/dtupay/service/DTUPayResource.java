@@ -9,6 +9,11 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.math.BigDecimal;
 
+
+
+/**
+ * class for DTUPay using rest services
+ */
 @Path("/")
 @Produces("application/json")
 public class DTUPayResource {
@@ -21,6 +26,12 @@ public class DTUPayResource {
     @POST
     @Path("customer")
     @Consumes("application/json")
+
+    /**
+     * updates the customer using POST request
+     * @param json
+     * @return the update response
+     */
     public Response postCustomer(String json) {
         JSONObject obj = new JSONObject(json);
         String cpr = obj.getString("cpr");
@@ -38,6 +49,11 @@ public class DTUPayResource {
         }
     }
 
+    /**
+     * updates the customer using PUT request
+     * @param json
+     * @return the update response
+     */
     @PUT
     @Path("customer")
     @Consumes("application/json")
@@ -57,9 +73,16 @@ public class DTUPayResource {
         }
     }
 
+    /**
+     * gives new tokens to customer using REST service
+     * @param jsonRaw
+     * @return response request
+     */
+
     @POST
     @Path("newTokens")
     @Consumes("application/json")
+
     public Response getNewTokens(String jsonRaw) {
         JSONObject json = new JSONObject(jsonRaw);
         int customerId = json.getInt("customerId");
@@ -73,6 +96,11 @@ public class DTUPayResource {
         }
     }
 
+    /**
+     * gives monthly report of transactions for customer
+     * @param jsonRaw
+     * @return response monthy report(list type)
+     */
     @POST
     @Path("customer/transactions")
     @Consumes("application/json")
@@ -93,6 +121,11 @@ public class DTUPayResource {
         }
     }
 
+    /**
+     * updates the merchant using POST request
+     * @param json
+     * @return the update response
+     */
     @POST
     @Path("merchant")
     @Consumes("application/json")
@@ -111,6 +144,11 @@ public class DTUPayResource {
         }
     }
 
+    /**
+     * updates the merchant using PUT request
+     * @param json
+     * @return the update response
+     */
     @PUT
     @Path("merchant")
     @Consumes("application/json")
@@ -130,6 +168,11 @@ public class DTUPayResource {
         }
     }
 
+    /**
+     * returns transaction information
+     * @param jsonRaw
+     * @return response for transaction
+     */
     @POST
     @Path("transaction")
     @Consumes("application/json")
@@ -153,6 +196,11 @@ public class DTUPayResource {
         }
     }
 
+    /**
+     * gives monthly report of transactions for merchant
+     * @param jsonRaw
+     * @return response monthy report(list type)
+     */
     @POST
     @Path("merchant/transactions")
     @Consumes("application/json")

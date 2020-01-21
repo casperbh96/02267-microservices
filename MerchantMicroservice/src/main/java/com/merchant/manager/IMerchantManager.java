@@ -6,6 +6,10 @@ import com.merchant.database.exceptions.NoMerchants;
 
 import java.util.List;
 
+/**
+ * interface to handle merchant manager class
+ */
+
 public interface IMerchantManager {
     List<Merchant> getAllMerchants() throws NoMerchants;
 

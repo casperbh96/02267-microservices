@@ -11,6 +11,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
+
+/**
+ * class to handle all customer related applications in the database
+ */
+
 public class CustomerAdapter implements ICustomerAdapter {
 
     String baseUrl;
@@ -19,6 +24,13 @@ public class CustomerAdapter implements ICustomerAdapter {
         this.baseUrl = baseUrl;
     }
 
+    /**
+     * to create new customer
+     * @param cpr number
+     * @param name customer name
+     * @return customer
+     * @throws CustomerException
+     */
     @Override
     public Customer createCustomer(String cpr, String name) throws CustomerException {
         try {
@@ -47,6 +59,14 @@ public class CustomerAdapter implements ICustomerAdapter {
         }
     }
 
+    /**
+     * This class updates the customer with new data values
+     * @param id customer id
+     * @param cpr number
+     * @param name customer name
+     * @return customer
+     * @throws CustomerException
+     */
     @Override
     public Customer updateCustomer(int customerId, String cpr, String name) throws CustomerException {
         try {
@@ -75,6 +95,12 @@ public class CustomerAdapter implements ICustomerAdapter {
         }
     }
 
+    /**
+     * gets customer using customer id
+     * @param id
+     * @return customer
+     * @throws CustomerException
+     */
     @Override
     public Customer getCustomerById(int customerId) throws CustomerException {
         try {

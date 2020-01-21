@@ -11,37 +11,60 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * junit testing for customer rest services
+  */
 public class RestCustomerTest {
 
     ICustomerManager c = new CustomerManager();
     CustomerResource cr = new CustomerResource();
     Customer customer;
 
+    /**
+     * set up the customer
+     */
     @Before
     public void Setup() {
         customer = c.CreateCustomer("12345678", "Ismaa");
     }
 
+    /**
+     * delete the customer by customer id
+     * @throws CustomerDoesNotExist
+     */
     @After
     public void cleanUp() throws CustomerDoesNotExist {
         c.DeleteCustomerByCustomerId(customer.getId());
     }
 
+    /**
+     * test for getting all the customers on call
+     */
     @Test
     public void GetAllCustomersWithNoException() {
         cr.getCustomers();
     }
 
+    /**
+     * test for getting a customer on call
+     */
     @Test
     public void GetCustomerWithNoException() {
         cr.getCustomer(customer.getId());
     }
 
+    /**
+     * checks if it asserts for bad request when asking for customers with wrong id
+     * @throws CustomerResourceException
+     */
     @Test
     public void ChecksIfThereIsThrownAnExceptionWhenGivingWrongIDToGetCustomers() throws CustomerResourceException {
         Assert.assertEquals(400, cr.getCustomer(1111111111).getStatus());
     }
 
+    /**
+     * checks for the post request for customer
+     */
     @Test
     public void PostCustomerWithNoException() {
         String customerName = "Manolo";
@@ -51,6 +74,9 @@ public class RestCustomerTest {
         cr.postCustomer(POST_PARAMS);
     }
 
+    /**
+     * checks for the put request for customer
+     */
     @Test
     public void PutCustomerWithNoException() {
         String customerName = "Updated Manolo";
@@ -61,6 +87,9 @@ public class RestCustomerTest {
         cr.putCustomer(PUT_PARAMS);
     }
 
+    /**
+     * checks for deletion of customer using rest service
+     */
     @Test
     public void DeleteCustomerWithNoException() {
         cr.deleteCustomer(customer.getId());

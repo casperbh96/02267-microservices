@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * class to handle all token related applications in the database
+ */
+
 public class TokenAdapter implements ITokenAdapter {
 
     String baseUrl;
@@ -22,6 +26,13 @@ public class TokenAdapter implements ITokenAdapter {
         this.baseUrl = baseUrl;
     }
 
+    /**
+     * create a list of new tokens for customer using rest service
+     * @param customerId
+     * @param numOfTokens
+     * @return lsit of tokens
+     * @throws TokenException
+     */
     @Override
     public List<Token> getNewTokensForCustomer(int customerId, int numOfTokens) throws TokenException {
         try {
@@ -58,6 +69,13 @@ public class TokenAdapter implements ITokenAdapter {
         }
     }
 
+    /**
+     * checks for token if it is valid or not
+     * @param tokenId
+     * @return boolean value i.e. true or false
+     * @throws FakeToken
+     * @throws TokenAlreadyUsed
+     */
     @Override
     public boolean isTokenValid(int tokenId) throws TokenException {
         try {
@@ -77,6 +95,12 @@ public class TokenAdapter implements ITokenAdapter {
         }
     }
 
+    /**
+     * makes the token a used token for the customer if it is unused
+     * @param tokenId
+     * @throws FakeToken
+     * @throws TokenAlreadyUsed
+     */
     @Override
     public void markTokenAsUsed(int tokenId) throws TokenException {
         try {

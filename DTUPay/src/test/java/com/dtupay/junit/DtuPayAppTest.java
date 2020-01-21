@@ -26,6 +26,10 @@ import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
+
+/**
+ * tests for dtuPayApp
+ */
 public class DtuPayAppTest {
     IBankAdapter bankAdapter;
     ICustomerAdapter customerAdapter;
@@ -35,6 +39,9 @@ public class DtuPayAppTest {
 
     IDTUPayApp dtupay;
 
+    /**
+     * setting up dtupay app
+     */
     @Before
     public void Setup() {
         bankAdapter = Mockito.mock(BankAdapter.class);
@@ -46,6 +53,10 @@ public class DtuPayAppTest {
         dtupay = new DTUPayApp(bankAdapter, customerAdapter, merchantAdapter, tokenAdapter, transactionAdapter);
     }
 
+    /**
+     * correct method calling by create costumer
+     * @throws Throwable
+     */
     @Test
     public void createCustomer_Should_CallTheCorrectMethod() throws Throwable {
         String cpr = "123456";
@@ -54,6 +65,10 @@ public class DtuPayAppTest {
         Mockito.verify(customerAdapter).createCustomer(cpr, name);
     }
 
+    /**
+     * correct method calling by update costumer
+     * @throws Throwable
+     */
     @Test
     public void updateCustomer_Should_CallTheCorrectMethod() throws Throwable {
         int id = 123;
@@ -63,6 +78,10 @@ public class DtuPayAppTest {
         Mockito.verify(customerAdapter).updateCustomer(id, cpr, name);
     }
 
+    /**
+     * checks if function is generating exception when customer is not allowed to requests for more token even though requesting more.
+     * @throws Throwable
+     */
     @Test(expected = TokenException.class)
     public void getMoreTokens_Should_ThrowAnException_When_TokensAreNotAllowed() throws Throwable {
         int id = 123;
@@ -91,6 +110,10 @@ public class DtuPayAppTest {
         dtupay.getMoreTokens(id, numOfTokens);
     }
 
+    /**
+     * checks for customer requesting tokens when is allowed to requests for more token.
+     * @throws Throwable
+     */
     @Test
     public void getMoreTokens_Should_AskForMoreTokens_When_TokensAreAllowed() throws Throwable {
         int id = 123;
@@ -120,6 +143,10 @@ public class DtuPayAppTest {
         Mockito.verify(tokenAdapter).getNewTokensForCustomer(id, numOfTokens);
     }
 
+    /**
+     * checks if generateMonthlyCustomerReport is calling the right method
+     * @throws Throwable
+     */
     @Test
     public void generateMonthlyCustomerReport_Should_CallTheCorrectMethod() throws Throwable {
         int id = 123;
@@ -129,6 +156,10 @@ public class DtuPayAppTest {
         Mockito.verify(transactionAdapter).getMonthlyCustomerReport(id, month, year);
     }
 
+    /**
+     * checks if create merchant is calling correct method
+     * @throws Throwable
+     */
     @Test
     public void createMerchant_Should_CallTheCorrectMethod() throws Throwable {
         String cvr = "123456";
@@ -137,6 +168,10 @@ public class DtuPayAppTest {
         Mockito.verify(merchantAdapter).createMerchant(cvr, name);
     }
 
+    /**
+     * checks if update merchant is calling correct method
+     * @throws Throwable
+     */
     @Test
     public void updateMerchant_Should_CallTheCorrectMethod() throws Throwable {
         int id = 123;
@@ -146,6 +181,10 @@ public class DtuPayAppTest {
         Mockito.verify(merchantAdapter).updateMerchant(id, cvr, name);
     }
 
+    /**
+     * checks if generateMonthlyMerchantReport is calling the right method
+     * @throws Throwable
+     */
     @Test
     public void generateMonthlyMerchantReport_Should_CallTheCorrectMethod() throws Throwable {
         int id = 123;
@@ -155,6 +194,10 @@ public class DtuPayAppTest {
         Mockito.verify(transactionAdapter).getMonthlyMerchantReport(id, month, year);
     }
 
+    /**
+     * checks if tranfer of money is not done when token is invalid
+     * @throws Throwable
+     */
     @Test(expected = TokenException.class)
     public void transferMoney_Should_ThrowAnException_When_TokenIsInvalid() throws Throwable {
         int tokenId = 5;
@@ -165,6 +208,10 @@ public class DtuPayAppTest {
         dtupay.transferMoney(0, tokenMock, BigDecimal.valueOf(0), "");
     }
 
+    /**
+     * checks if there is no update of transaction when it fails
+     * @throws Throwable
+     */
     @Test(expected = BankAdapterException.class)
     public void transferMoney_Should_NotSaveTheTransAction_When_TransactionFails() throws Throwable {
         int tokenId = 5;
@@ -198,6 +245,10 @@ public class DtuPayAppTest {
         Mockito.verify(transactionAdapter, Mockito.never()).registerTransaction((Timestamp) Mockito.any(), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt(), (BigDecimal) Mockito.any(), Mockito.anyBoolean());
     }
 
+    /**
+     * checks if there is update of transaction when it passes
+     * @throws Throwable
+     */
     @Test
     public void transferMoney_Should_PerformTheTransaction_And_SaveTheTransaction_When_TransactionWorks() throws Throwable {
         int tokenId = 5;

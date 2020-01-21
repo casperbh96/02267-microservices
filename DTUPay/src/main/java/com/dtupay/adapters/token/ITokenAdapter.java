@@ -5,6 +5,10 @@ import com.dtupay.adapters.token.model.Token;
 
 import java.util.List;
 
+/**
+ * interface to handle token adapter class
+ */
+
 public interface ITokenAdapter {
     List<Token> getNewTokensForCustomer(int customerId, int numOfTokens) throws TokenException;
 

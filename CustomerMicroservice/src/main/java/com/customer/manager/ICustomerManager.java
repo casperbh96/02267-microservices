@@ -6,6 +6,9 @@ import com.customer.database.exceptions.NoCustomers;
 
 import java.util.List;
 
+/**
+ * interface to handle customer manager class
+ */
 public interface ICustomerManager {
     List<Customer> GetAllCustomers() throws NoCustomers;
 

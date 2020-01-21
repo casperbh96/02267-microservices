@@ -6,7 +6,14 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.SnippetType;
 import cucumber.api.junit.Cucumber;
 
+/**
+ * runs all the test with cucumber class
+ */
 @RunWith(Cucumber.class)
+
+/**
+ * set pathing for cucumber testing
+ */
 @CucumberOptions(features={"src/test/java/com/customer/cucumber/features"},
         snippets=SnippetType.CAMELCASE,
         glue= {"com.customer.cucumber.steps"})

@@ -8,12 +8,28 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.UUID;
 
+/**
+ * defines path for customer
+ */
 @Path("/token")
+
+/**
+ * to produce file in json format
+ */
+
 @Produces("application/json")
+
+/**
+ * class to handle tokens using rest services
+ */
 public class TokenResource {
 
     private static ITokenManager tokens = new TokenManager();
 
+    /**
+     * shows response about retrieval of information for all the tokens using GET request
+     * @return response
+     */
     @GET
     public Response getTokens() {
         try {
@@ -24,6 +40,12 @@ public class TokenResource {
         }
     }
 
+    /**
+     * sets a new path for get tokens
+     * shows all the tokens from json file
+     * @param jsonRaw
+     * @return response
+     */
     @POST
     @Path("newTokens")
     @Consumes("application/json")
@@ -40,6 +62,12 @@ public class TokenResource {
         }
     }
 
+    /**
+     * set new path for getting unused token
+     * shows unused tokens with respect to customer id
+     * @param customerId
+     * @return response
+     */
 
     @GET
     @Path("unused/{customerId}")
@@ -55,6 +83,12 @@ public class TokenResource {
         }
     }
 
+    /**
+     * set new path for getting validity of token
+     * shows if token is valid or not
+     * @param tokenId
+     * @return response
+     */
     @GET
     @Path("/{tokenId}")
     public Response getValidityOfAToken(@PathParam("tokenId") int tokenId) {
@@ -69,6 +103,11 @@ public class TokenResource {
         }
     }
 
+    /**
+     * gives a response about is token has been put to used
+     * @param tokenId
+     * @return response
+     */
     @PUT
     @Path("{tokenId}")
     public Response putTokenToUsed(@PathParam("tokenId") int tokenId) {
@@ -84,7 +123,11 @@ public class TokenResource {
         }
     }
 
-
+    /**
+     * creates a new token and adds it to json file
+     * @param jsonRaw
+     * @return response
+     */
     @POST
     @Consumes("application/json")
     public Response postNewToken(String jsonRaw) {

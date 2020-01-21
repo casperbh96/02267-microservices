@@ -8,6 +8,9 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 
+/**
+ * interface for transaction adapter
+ */
 public interface ITransactionAdapter {
     List<TransactionCustomer> getMonthlyCustomerReport(int customerId, int month, int year) throws TransactionException;
 

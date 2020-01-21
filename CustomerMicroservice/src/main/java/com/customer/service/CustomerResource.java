@@ -7,13 +7,28 @@ import org.json.JSONObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
-
+/**
+ * defines path for customer
+ */
 @Path("/customer")
+
+/**
+ * to produce file in json format
+ */
+
 @Produces("application/json")
+
+/**
+ * class to handle customer using rest services
+ */
 public class CustomerResource {
 
     private static ICustomerManager c = new CustomerManager();
 
+    /**
+     * shows response about retrieval of information for all customers using GET request
+     * @return response
+     */
     @GET
     public Response getCustomers() {
         try {
@@ -24,6 +39,11 @@ public class CustomerResource {
         }
     }
 
+    /**
+     * shows information about customer of a particular id using GET request
+     * @param id
+     * @return response for a customer
+     */
     @GET
     @Path("{id}")
     public Response getCustomer(@PathParam("id") int id) {
@@ -38,6 +58,11 @@ public class CustomerResource {
         }
     }
 
+    /**
+     * updates the customer using POST request
+     * @param json
+     * @return the update response
+     */
     @POST
     @Consumes("application/json")
     public Response postCustomer(String json) {
@@ -57,6 +82,11 @@ public class CustomerResource {
         }
     }
 
+    /**
+     * updates the customer using PUT request
+     * @param json
+     * @return the update response
+     */
     @PUT
     @Consumes("application/json")
     public Response putCustomer(String json) {
@@ -75,6 +105,11 @@ public class CustomerResource {
         }
     }
 
+    /**
+     * deletes the customer using customer id
+     * @param id
+     * @return response about deletion
+     */
     @DELETE
     @Path("{id}")
     public Response deleteCustomer(@PathParam("id") int id) {

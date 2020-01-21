@@ -18,6 +18,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * class transaction adapter used for all sort of transaction reports for customer and merchants
+ */
 public class TransactionAdapter implements ITransactionAdapter {
 
     String baseUrl;
@@ -26,6 +29,14 @@ public class TransactionAdapter implements ITransactionAdapter {
         this.baseUrl = baseUrl;
     }
 
+    /**
+     * gives the monthly report for all customer transactions
+     * @param customerId
+     * @param month
+     * @param year
+     * @return list of transactions
+     * @throws TransactionException
+     */
     @Override
     public List<TransactionCustomer> getMonthlyCustomerReport(int customerId, int month, int year) throws TransactionException {
         try {
@@ -62,6 +73,14 @@ public class TransactionAdapter implements ITransactionAdapter {
         }
     }
 
+    /**
+     * gives the monthly report for all merchant transactions
+     * @param merchantId
+     * @param month
+     * @param year
+     * @return list of transactions
+     * @throws TransactionException
+     */
     @Override
     public List<TransactionMerchant> getMonthlyMerchantReport(int merchantId, int month, int year) throws TransactionException {
         try {
@@ -98,6 +117,16 @@ public class TransactionAdapter implements ITransactionAdapter {
         }
     }
 
+    /**
+     * registers all sort of transactions between customer and merchant
+     * @param timestamp
+     * @param fromId
+     * @param toId
+     * @param tokenId
+     * @param amount
+     * @param isRefund
+     * @throws TransactionException
+     */
     @Override
     public void registerTransaction(Timestamp timestamp, int fromId, int toId, int tokenId, BigDecimal amount, boolean isRefund) throws TransactionException {
         try {

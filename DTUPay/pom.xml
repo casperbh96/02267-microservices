@@ -178,6 +178,4 @@
             <artifactId>webservices</artifactId>
         </dependency>
     </dependencies>
-
-
 </project>

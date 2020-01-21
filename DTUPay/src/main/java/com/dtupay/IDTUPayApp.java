@@ -14,6 +14,9 @@ import com.dtupay.adapters.transaction.model.TransactionMerchant;
 import java.math.BigDecimal;
 import java.util.List;
 
+/**
+ * interface for DTUPayApp containing all its funtionalities
+ */
 public interface IDTUPayApp {
     // customer methods
     Customer createCustomer(String cpr, String name) throws CustomerException ;
