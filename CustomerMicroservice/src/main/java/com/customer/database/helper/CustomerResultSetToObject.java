@@ -7,7 +7,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * defined class which contains functions to get a new customer with information from result sets.
+ */
+
 public class CustomerResultSetToObject {
+
+    /**
+     * gives information about customer from result set
+     * @param set
+     * @return new customer
+     * @throws SQLException
+     */
     public Customer resultSetToCustomer(ResultSet set) throws SQLException {
         set.beforeFirst();
         set.next();
@@ -19,6 +30,12 @@ public class CustomerResultSetToObject {
         return new Customer(id, cpr, name);
     }
 
+    /**
+     * gives list which consists information in result set
+     * @param set
+     * @return list of customers
+     * @throws SQLException
+     */
     public List<Customer> resultSetToListOfCustomers(ResultSet set) throws SQLException {
         List<Customer> customerList = new ArrayList<>();
 

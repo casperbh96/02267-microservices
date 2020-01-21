@@ -9,7 +9,11 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 
+/**
+ * defines interface for Transaction manager which contains three functions about transaction information
+ */
 public interface ITransactionManager {
+
     List<TransactionCustomer> getCustomerMonthlyReport(int customerId, int month, int year) throws CustomerDoesNotExist;
 
     List<TransactionMerchant> getMerchantMonthlyReport(int merchantId, int month, int year);

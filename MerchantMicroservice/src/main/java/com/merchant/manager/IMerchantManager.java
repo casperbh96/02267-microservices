@@ -6,7 +6,11 @@ import com.merchant.database.exceptions.NoMerchants;
 
 import java.util.List;
 
-public interface IMerchantManager {
+/**
+ * interface for business logic for merchant
+ */
+
+public interface IBusinessLogicForMerchant {
     List<Merchant> getAllMerchants() throws NoMerchants;
 
     Merchant getMerchantByMerchantId(int id) throws MerchantDoesNotExist;

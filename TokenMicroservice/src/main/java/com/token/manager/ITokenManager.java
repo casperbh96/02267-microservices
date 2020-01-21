@@ -6,6 +6,9 @@ import com.token.database.exceptions.*;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * interface for token management
+ */
 public interface ITokenManager {
     Token getUnusedTokenByCustomerId(int customerId) throws CustomerHasNoUnusedToken;
 

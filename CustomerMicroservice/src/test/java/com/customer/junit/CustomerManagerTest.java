@@ -10,13 +10,26 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+/**
+ * Junit testing class for customer manager
+ */
+
 public class CustomerManagerTest {
     ICustomerManager c;
+
+    /**
+     * setup a new customer manager variable
+     */
 
     @Before
     public void Setup() {
         c = new CustomerManager();
     }
+
+    /**
+     * test for create customer
+     * @throws CustomerDoesNotExist
+     */
 
     @Test
     public void CreateCustomerTest() throws CustomerDoesNotExist {
@@ -25,6 +38,11 @@ public class CustomerManagerTest {
         Assert.assertEquals(cpr, newCustomer.getCpr());
     }
 
+    /**
+     * test for deletion of customer
+     * @throws CustomerDoesNotExist
+     */
+
     @Test(expected = CustomerDoesNotExist.class)
     public void DeleteCustomerTest() throws CustomerDoesNotExist {
         Customer newCustomer = c.CreateCustomer("56", "Test");
@@ -32,6 +50,11 @@ public class CustomerManagerTest {
         c.DeleteCustomerByCustomerId(newCustomer.getId());
         c.GetCustomerByCustomerId(newCustomer.getId());
     }
+
+    /**
+     * update customer test
+     * @throws CustomerDoesNotExist
+     */
 
     @Test
     public void UpdateCustomerTest() throws CustomerDoesNotExist {
@@ -47,6 +70,11 @@ public class CustomerManagerTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+    /**
+     * exception testing
+     * @throws CustomerDoesNotExist
+     */
 
     @Test
     public void ThrowsCustomerDoesNotExist() throws CustomerDoesNotExist {

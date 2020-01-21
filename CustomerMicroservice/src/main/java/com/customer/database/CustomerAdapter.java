@@ -15,9 +15,17 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * class to handle all customer related applications in the database
+ */
 public class CustomerAdapter implements ICustomerAdapter {
     CustomerResultSetToObject converter = new CustomerResultSetToObject();
-    
+
+    /**
+     * shows all the customers in the customer list
+     * @return list of customers
+     * @throws NoCustomers
+     */
     @Override
     public List<Customer> getAllCustomers() throws NoCustomers {
         List<Customer> customers = new ArrayList<>();
@@ -35,6 +43,12 @@ public class CustomerAdapter implements ICustomerAdapter {
         return customers;
     }
 
+    /**
+     * gets customer using customer id
+     * @param id
+     * @return customer
+     * @throws CustomerDoesNotExist
+     */
     @Override
     public Customer getCustomerByCustomerId(int id) throws CustomerDoesNotExist {
         Customer customer = null;
@@ -56,6 +70,12 @@ public class CustomerAdapter implements ICustomerAdapter {
         return customer;
     }
 
+    /**
+     * to create new customer
+     * @param cpr number
+     * @param name customer name
+     * @return customer
+     */
     @Override
     public Customer createCustomer(String cpr, String name) {
         Customer returnCustomer = null;
@@ -84,6 +104,14 @@ public class CustomerAdapter implements ICustomerAdapter {
         return returnCustomer;
     }
 
+    /**
+     * This class updates the customer with new data values
+     * @param id customer id
+     * @param cpr number
+     * @param name customer name
+     * @return customer
+     * @throws CustomerDoesNotExist
+     */
     @Override
     public Customer updateCustomer(int id, String cpr, String name) throws CustomerDoesNotExist {
         Customer returnCustomer = null;
@@ -110,6 +138,11 @@ public class CustomerAdapter implements ICustomerAdapter {
         return returnCustomer;
     }
 
+    /**
+     * deletes customer using customer id
+     * @param id
+     * @throws CustomerDoesNotExist
+     */
     @Override
     public void deleteCustomerByCustomerId(int id) throws CustomerDoesNotExist {
         try (Connection connection = createConnection()) {
@@ -124,6 +157,12 @@ public class CustomerAdapter implements ICustomerAdapter {
         }
     }
 
+    /**
+     * get customer id from database result set
+     * @param stmt prepared statement
+     * @return customer id
+     * @throws SQLException
+     */
     public int getIdFromDbReturn(PreparedStatement stmt) throws SQLException {
         ResultSet rs = stmt.getGeneratedKeys();
         rs.next();

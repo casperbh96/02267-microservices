@@ -4,6 +4,10 @@ import com.dtupay.adapters.bank.exceptions.BankAdapterException;
 
 import java.math.BigDecimal;
 
+/**
+ * represents the interface which to be implemented by back adapter class
+ */
+
 public interface IBankAdapter {
     void createAccount(String name, String cpr, BigDecimal initialBalance) throws BankAdapterException;
 

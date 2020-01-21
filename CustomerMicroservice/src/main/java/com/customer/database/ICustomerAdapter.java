@@ -5,6 +5,9 @@ import com.customer.database.exceptions.*;
 
 import java.util.List;
 
+/**
+ * interface to handle customer adapter class
+ */
 public interface ICustomerAdapter {
     List<Customer> getAllCustomers() throws NoCustomers;
     Customer getCustomerByCustomerId(int id) throws CustomerDoesNotExist;
