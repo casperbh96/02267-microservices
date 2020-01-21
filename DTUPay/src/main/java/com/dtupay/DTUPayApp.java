@@ -33,6 +33,14 @@ public class DTUPayApp implements IDTUPayApp {
     private ITokenAdapter tokens;
     private ITransactionAdapter transactions;
 
+    public DTUPayApp(IBankAdapter bankAdapter, ICustomerAdapter customerAdapter, IMerchantAdapter merchantsAdapter, ITokenAdapter tokensAdapters, ITransactionAdapter transactionsAdapter) {
+        this.bank = bankAdapter;
+        this.customers = customerAdapter;
+        this.merchants = merchantsAdapter;
+        this.tokens = tokensAdapters;
+        this.transactions = transactionsAdapter;
+    }
+
     public DTUPayApp(String customerBaseUrl, String merchantBaseUrl, String transactionBaseUrl, String tokenBaseUrl) {
         this.bank = new BankAdapter();
         this.customers = new CustomerAdapter(customerBaseUrl);
@@ -42,7 +50,7 @@ public class DTUPayApp implements IDTUPayApp {
     }
 
     @Override
-    public Customer createCustomer(String cpr, String name)  throws CustomerException {
+    public Customer createCustomer(String cpr, String name) throws CustomerException {
         return customers.createCustomer(cpr, name);
     }
 
@@ -95,7 +103,7 @@ public class DTUPayApp implements IDTUPayApp {
 
         bank.makeTransaction(customerCpr, merchantCvr, amount, description);
 
-        transactions.registerTransaction(new Timestamp(System.currentTimeMillis()), customerToken.getId(), merchantId, customerToken.getId(), amount, false);
+        transactions.registerTransaction(new Timestamp(System.currentTimeMillis()), customerToken.getCustomerId(), merchantId, customerToken.getId(), amount, false);
     }
 
     @Override
