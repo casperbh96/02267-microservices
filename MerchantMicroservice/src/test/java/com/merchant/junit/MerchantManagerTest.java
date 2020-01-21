@@ -10,14 +10,25 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+/**
+ * Junit testing class for merchant manager
+ */
+
 public class MerchantManagerTest {
     IMerchantManager m;
 
+    /**
+     * setup a new merchant manager variable
+     */
     @Before
     public void Setup() {
         m = new MerchantManager();
     }
 
+    /**
+     * test for create merchant
+     * @throws MerchantDoesNotExist
+     */
     @Test
     public void CreateMerchantTest() throws MerchantDoesNotExist {
         String cvr = "57";
@@ -25,6 +36,10 @@ public class MerchantManagerTest {
         Assert.assertEquals(cvr, newMerchant.getCvr());
     }
 
+    /**
+     * test for deletion of merchant
+     * @throws MerchantDoesNotExist
+     */
     @Test(expected = MerchantDoesNotExist.class)
     public void DeleteMerchantTest() throws MerchantDoesNotExist {
         Merchant newMerchant = m.createMerchant("57", "Test");
@@ -33,6 +48,10 @@ public class MerchantManagerTest {
         m.getMerchantByMerchantId(newMerchant.getId());
     }
 
+    /**
+     * update merchant test
+     * @throws MerchantDoesNotExist
+     */
     @Test
     public void UpdateMerchantTest() throws MerchantDoesNotExist {
         String newName = "UpdatedMerchant";
@@ -48,6 +67,10 @@ public class MerchantManagerTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
+    /**
+     * exception testing
+     * @throws CustomerDoesNotExist
+     */
     @Test
     public void throwsMerchantDoesNotExist() throws MerchantDoesNotExist {
         thrown.expect(MerchantDoesNotExist.class);

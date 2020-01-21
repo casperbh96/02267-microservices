@@ -185,7 +185,7 @@ public class BasicRestPointSteps {
     }
 
     /**
-     * asserts true if update operation is working
+     * asserts true if update operation is working fine
      * @throws IOException
      */
     @Then("^the rest service updates customer correctly$")

@@ -7,7 +7,7 @@ import com.merchant.database.exceptions.NoMerchants;
 import java.util.List;
 
 /**
- * interface for business logic for merchant
+ * interface to handle merchant manager class
  */
 
 public interface IBusinessLogicForMerchant {

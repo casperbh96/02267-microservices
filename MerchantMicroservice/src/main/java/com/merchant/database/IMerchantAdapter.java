@@ -5,6 +5,10 @@ import com.merchant.database.exceptions.*;
 
 import java.util.List;
 
+/**
+ * interface to handle merchant adapter class
+ */
+
 public interface IMerchantAdapter {
     List<Merchant> getAllMerchants() throws NoMerchants;
     Merchant getMerchantByMerchantId(int id) throws MerchantDoesNotExist;

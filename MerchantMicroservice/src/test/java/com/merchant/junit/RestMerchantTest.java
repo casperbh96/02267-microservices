@@ -11,39 +11,64 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * junit testing for merchant rest services
+ */
+
 public class RestMerchantTest {
 
     IMerchantManager m = new MerchantManager();
     MerchantResource mr = new MerchantResource();
     Merchant merchant;
 
+    /**
+     * set up the merchant
+     */
     @Before
     public void Setup() {
         merchant = m.createMerchant("12345678", "Ismaa");
     }
 
+    /**
+     * delete the merchant by merchant id
+     * @throws MerchantDoesNotExist
+     */
     @After
     public void cleanUp() throws MerchantDoesNotExist {
         m.deleteMerchantByMerchantId(merchant.getId());
     }
 
+    /**
+     * test for getting all the merchant on call
+     */
+
     @Test
-    public void GetAllCustomersWithNoException() {
+    public void GetAllMercahntsWithNoException() {
         mr.getMerchants();
     }
 
+    /**
+     * test for getting a merchant on call
+     */
     @Test
-    public void GetCustomerWithNoException() {
+    public void GetMerchantWithNoException() {
         mr.getMerchant(merchant.getId());
     }
 
+    /**
+     * checks if it asserts for bad request when asking for merchant with wrong id
+     * @throws CustomerResourceException
+     */
     @Test
-    public void ChecksIfThereIsThrownAnExceptionWhenGivingWrongIDToGetCustomers() throws MerchantResourceException {
+    public void ChecksIfThereIsThrownAnExceptionWhenGivingWrongIDToGetMerchants() throws MerchantResourceException {
         Assert.assertEquals(400, mr.getMerchant(1111111111).getStatus());
     }
 
+    /**
+     * checks for the post request for merchant
+     */
     @Test
-    public void PostCustomerWithNoException() {
+    public void PostMerchantWithNoException() {
         String merchantName = "Merchant Manolo";
         String merchantCVR = "merchant-999999";
         final String POST_PARAMS = "{\n" + "\"name\": \""+merchantName+"\",\r\n" +
@@ -51,8 +76,11 @@ public class RestMerchantTest {
         mr.postMerchant(POST_PARAMS);
     }
 
+    /**
+     * checks for the put request for merchant
+     */
     @Test
-    public void PutCustomerWithNoException() {
+    public void PutMerchantWithNoException() {
         String merchantName = "Updated Merchant Manolo";
         String merchantCVR = "update-merchant-999999";
         final String PUT_PARAMS = "{\n" + "\"name\": \""+merchantName+"\",\r\n" +
@@ -61,8 +89,11 @@ public class RestMerchantTest {
         mr.putMerchant(PUT_PARAMS);
     }
 
+    /**
+     * checks for deletion of merchant using rest service
+     */
     @Test
-    public void DeleteCustomerWithNoException() {
+    public void DeleteMerchantWithNoException() {
         mr.deleteMerchant(merchant.getId());
     }
 }

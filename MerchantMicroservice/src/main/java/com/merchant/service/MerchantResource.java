@@ -7,13 +7,27 @@ import org.json.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
-
+/**
+ * defines path for merchant
+ */
 @Path("/merchant")
+
+/**
+ * to produce file in json format
+ */
 @Produces("application/json")
+
+/**
+ * class to handle merchant using rest services
+ */
 public class MerchantResource {
 
     private static IMerchantManager m = new MerchantManager();
 
+    /**
+     * shows response about retrieval of information for all merchants using GET request
+     * @return response
+     */
     @GET
     public Response getMerchants() {
         try {
@@ -24,6 +38,12 @@ public class MerchantResource {
                     e.getMessage()).build();
         }
     }
+
+    /**
+     * shows information about merchant of a particular id using GET request
+     * @param id
+     * @return response for a merchant
+     */
 
     @GET
     @Path("{id}")
@@ -41,6 +61,12 @@ public class MerchantResource {
             return Response.status(400).build();
         }
     }
+
+    /**
+     * updates the merchant using POST request
+     * @param json
+     * @return the update response
+     */
 
     @POST
     @Consumes("application/json")
@@ -62,6 +88,11 @@ public class MerchantResource {
         }
     }
 
+    /**
+     * updates the merchant using PUT request
+     * @param json
+     * @return the update response
+     */
     @PUT
     @Consumes("application/json")
     public Response putMerchant(String json) {
@@ -81,6 +112,11 @@ public class MerchantResource {
         }
     }
 
+    /**
+     * deletes the merchant using merchant id
+     * @param id
+     * @return response about deletion
+     */
     @DELETE
     @Path("{id}")
     public Response deleteMerchant(@PathParam("id") int id) {

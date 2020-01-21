@@ -52,6 +52,7 @@ public class BusinessLogicForMerchant implements IBusinessLogicForMerchant {
      * @return merchant object with name and cpr number
      * @throws MerchantDoesNotExist
      */
+
     public Merchant getMerchantByMerchantId(int id) throws MerchantDoesNotExist {
         return merchantAdapter.getMerchantByMerchantId(id);
     }
@@ -59,6 +60,7 @@ public class BusinessLogicForMerchant implements IBusinessLogicForMerchant {
     /**
      * @return alist of all the merchants
      * @throws NoMerchants
+     */
      */
     public List<Merchant> getAllMerchants() throws NoMerchants {
         return merchantAdapter.getAllMerchants();
