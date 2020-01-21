@@ -1,6 +1,5 @@
 package com.token.manager;
 
-import com.token.app.Customer;
 import com.token.database.ITokenAdapter;
 import com.token.app.Token;
 import com.token.database.TokenAdapter;
@@ -45,9 +44,7 @@ public class TokenManager implements ITokenManager {
 
     @Override
     public UUID getToken() {
-        UUID token = UUID.randomUUID();
-        //database.system_tokens.add(token);
-        return token;
+        return UUID.randomUUID();
     }
 
     @Override
