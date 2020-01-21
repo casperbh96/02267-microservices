@@ -26,7 +26,6 @@ public class TransactionMerchant extends Transaction {
      * @param amount
      * @param tokenId
      * @param isRefund
-     * @param toId
      */
     public TransactionMerchant(int id, Timestamp timestamp, BigDecimal amount, int tokenId, boolean isRefund) {
         super(id, timestamp, amount, tokenId, isRefund);

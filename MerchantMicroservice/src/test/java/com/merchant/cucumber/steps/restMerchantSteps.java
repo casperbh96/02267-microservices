@@ -53,7 +53,7 @@ public class restMerchantSteps {
     /**
      * given that merchant has id
      *
-     * @param customerID
+     * @param merchant_id
      * @throws MalformedURLException
      */
     @Given("^merchant with ID (\\d+)$")
@@ -191,7 +191,7 @@ public class restMerchantSteps {
     /**
      * checks connection for merchant update using CPR
      *
-     * @param cpr
+     * @param cvr
      * @param merchant_name
      * @throws Throwable
      */

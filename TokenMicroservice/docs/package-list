@@ -1,8 +1,0 @@
-com.token.app
-com.token.cucumber
-com.token.cucumber.steps
-com.token.database
-com.token.database.exceptions
-com.token.database.helper
-com.token.manager
-com.token.service

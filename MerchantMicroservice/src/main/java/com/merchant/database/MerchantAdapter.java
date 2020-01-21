@@ -144,7 +144,6 @@ public class MerchantAdapter implements IMerchantAdapter {
     /**
      * deletes merchant using merchant id
      * @param id
-     * @throws merchantDoesNotExist
      */
     @Override
     public void deleteMerchantByMerchantId(int id) throws MerchantDoesNotExist {

@@ -58,7 +58,7 @@ public class BankAdapter implements IBankAdapter {
     /**
      * function to make transactions by customer and merchants
      * @param customerCpr
-     * @param merchantCpr
+     * @param merchantCvr
      * @param amount to be transferred
      * @param comment about the transaction
      * @throws BankAdapterException

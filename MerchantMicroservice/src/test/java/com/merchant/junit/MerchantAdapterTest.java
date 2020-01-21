@@ -74,7 +74,7 @@ public class MerchantAdapterTest {
     /**
      * exception testing
      *
-     * @throws CustomerDoesNotExist
+     * @throws MerchantDoesNotExist
      */
     @Test
     public void throwsMerchantDoesNotExist() throws MerchantDoesNotExist {
