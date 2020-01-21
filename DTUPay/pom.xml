@@ -173,6 +173,10 @@
             <artifactId>mockito-scala-specs2_2.12</artifactId>
             <version>1.10.4</version>
         </dependency>
+        <dependency>
+            <groupId>io.thorntail</groupId>
+            <artifactId>webservices</artifactId>
+        </dependency>
     </dependencies>
 
 
