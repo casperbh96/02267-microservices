@@ -15,7 +15,7 @@ try {
 
         stage ('Wait for the server to start up') {
             def container_output
-            ['token', 'customer'].each {
+            ['token', 'customer', 'merchant'].each {
                 container_output = ""
                 while (!container_output.contains("Thorntail is Ready")) {
                     sh "sleep 2"
