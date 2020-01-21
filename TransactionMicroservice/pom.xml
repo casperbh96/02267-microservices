@@ -5,12 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>group17</groupId>
-    <artifactId>dtupay</artifactId>
+    <artifactId>transaction-microservice</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>TransactionMicroservice</module>
-    </modules>
-    <packaging>pom</packaging>
+    <packaging>war</packaging>
 
     <properties>
         <!-- https://maven.apache.org/general.html#encoding-warning -->
@@ -46,53 +43,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>7</source>
-                    <target>7</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.9</version>
-                <executions>
-                    <execution>
-                        <id>add-source</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>./generated/wsdl-bank-classes</source>
-                            </sources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>jaxws-maven-plugin</artifactId>
-                <version>2.5</version>
-                <executions>
-                    <execution>
-                        <id>wsimport-from-jdk</id>
-                        <goals>
-                            <goal>wsimport</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <wsdlUrls>
-                        <wsdlUrl>
-                            http://fastmoney-00.compute.dtu.dk/BankService.wsdl.xml
-                        </wsdlUrl>
-                    </wsdlUrls>
-                    <keep>true</keep>
-                    <!-- Package name -->
-                    <packageName>dtu.ws.fastmoney</packageName>
-                    <!-- generated source files destination-->
-                    <sourceDestDir>generated/wsdl-bank-classes</sourceDestDir>
-                    <sei/>
+                    <source>8</source>
+                    <target>8</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -168,6 +120,7 @@
             <version>20190722</version>
         </dependency>
     </dependencies>
+
 
 
 </project>
