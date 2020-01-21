@@ -1,12 +1,10 @@
 try {
+    def CONTAINER_NAMES = ['token', 'customer', 'transaction', 'merchant', 'dtupay']
+
     node {
         stage ('Build Application') {
             checkout scm
-            sh 'mvn -f CustomerMicroservice/pom.xml -D maven.test.skip=true install'
-            sh 'mvn -f MerchantMicroservice/pom.xml -D maven.test.skip=true install'
-            sh 'mvn -f TokenMicroservice/pom.xml -D maven.test.skip=true install'
-            sh 'mvn -f TransactionMicroservice/pom.xml -D maven.test.skip=true install'
-            sh 'mvn -f DTUPay/pom.xml -D maven.test.skip=true install'
+            sh './mvn_install_all.sh'
         }
 
         stage ('Build Docker Images') {
@@ -17,7 +15,7 @@ try {
 
         stage ('Wait for the server to start up') {
             def container_output
-            ['token', 'customer', 'transaction', 'merchant', 'dtupay'].each {
+            CONTAINER_NAMES.each {
                 container_output = ""
                 while (!container_output.contains("Thorntail is Ready")) {
                     sh "sleep 2"
