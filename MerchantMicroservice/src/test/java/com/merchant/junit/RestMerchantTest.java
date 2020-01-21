@@ -60,7 +60,7 @@ public class RestMerchantTest {
     /**
      * checks if it asserts for bad request when asking for merchant with wrong id
      *
-     * @throws CustomerResourceException
+     * @throws MerchantResourceException
      */
     @Test
     public void ChecksIfThereIsThrownAnExceptionWhenGivingWrongIDToGetMerchants() throws MerchantResourceException {

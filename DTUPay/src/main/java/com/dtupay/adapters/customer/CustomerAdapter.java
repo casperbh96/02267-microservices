@@ -62,7 +62,7 @@ public class CustomerAdapter implements ICustomerAdapter {
 
     /**
      * This class updates the customer with new data values
-     * @param id customer id
+     * @param customerId customer id
      * @param cpr number
      * @param name customer name
      * @return customer
@@ -98,7 +98,7 @@ public class CustomerAdapter implements ICustomerAdapter {
 
     /**
      * gets customer using customer id
-     * @param id
+     * @param customerId
      * @return customer
      * @throws CustomerException
      */

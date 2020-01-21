@@ -61,11 +61,11 @@ public class MerchantAdapter implements IMerchantAdapter {
 
     /**
      * This class updates the merchant with new data values
-     * @param id merchant id
-     * @param cpr number
+     * @param merchantId id
+     * @param cvr number
      * @param name merchant name
      * @return merchant
-     * @throws MerchantDoesNotExist
+     * @throws MerchantException
      */
     @Override
     public Merchant updateMerchant(int merchantId, String cvr, String name) throws MerchantException {
@@ -97,9 +97,9 @@ public class MerchantAdapter implements IMerchantAdapter {
 
     /**
      * gets merchant using merchant id
-     * @param id
+     * @param merchantId
      * @return merchant
-     * @throws MerchantDoesNotExist
+     * @throws MerchantException
      */
     @Override
     public Merchant getMerchantById(int merchantId) throws MerchantException {

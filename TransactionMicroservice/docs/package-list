@@ -1,8 +1,0 @@
-com.transaction.app
-com.transaction.cucumber
-com.transaction.cucumber.steps
-com.transaction.database
-com.transaction.database.exceptions
-com.transaction.database.helper
-com.transaction.manager
-com.transaction.service

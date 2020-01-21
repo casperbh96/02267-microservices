@@ -74,8 +74,6 @@ public class TokenAdapter implements ITokenAdapter {
      * checks for token if it is valid or not
      * @param tokenId
      * @return boolean value i.e. true or false
-     * @throws FakeToken
-     * @throws TokenAlreadyUsed
      */
     @Override
     public boolean isTokenValid(int tokenId) throws TokenException {
@@ -99,8 +97,6 @@ public class TokenAdapter implements ITokenAdapter {
     /**
      * makes the token a used token for the customer if it is unused
      * @param tokenId
-     * @throws FakeToken
-     * @throws TokenAlreadyUsed
      */
     @Override
     public void markTokenAsUsed(int tokenId) throws TokenException {
