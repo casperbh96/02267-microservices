@@ -13,6 +13,7 @@ import java.util.Scanner;
 
 
 /**
+ * @author Dumitru
  * class to handle all customer related applications in the database
  */
 

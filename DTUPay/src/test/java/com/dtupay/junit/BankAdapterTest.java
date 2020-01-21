@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 import static org.junit.Assert.assertEquals;
 
 /**
+ * @author Ionela
  * Junit testing class for bank adapter
  */
 public class BankAdapterTest {

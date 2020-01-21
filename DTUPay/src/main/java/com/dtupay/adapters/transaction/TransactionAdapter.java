@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * @author Dumitru
  * class transaction adapter used for all sort of transaction reports for customer and merchants
  */
 public class TransactionAdapter implements ITransactionAdapter {

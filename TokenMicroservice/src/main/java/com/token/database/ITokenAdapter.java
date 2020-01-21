@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
+ * @author Casper
  * interface to handle token adapter class
  */
 public interface ITokenAdapter {

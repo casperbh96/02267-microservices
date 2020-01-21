@@ -6,6 +6,7 @@ import com.merchant.database.exceptions.*;
 import java.util.List;
 
 /**
+ * @author Danial
  * interface to handle merchant adapter class
  */
 

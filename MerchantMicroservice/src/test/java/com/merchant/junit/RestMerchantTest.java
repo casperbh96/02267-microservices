@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
+ * @author Ismael
  * junit testing for merchant rest services
  */
 
@@ -31,6 +32,7 @@ public class RestMerchantTest {
 
     /**
      * delete the merchant by merchant id
+     *
      * @throws MerchantDoesNotExist
      */
     @After
@@ -57,6 +59,7 @@ public class RestMerchantTest {
 
     /**
      * checks if it asserts for bad request when asking for merchant with wrong id
+     *
      * @throws CustomerResourceException
      */
     @Test
@@ -71,8 +74,8 @@ public class RestMerchantTest {
     public void PostMerchantWithNoException() {
         String merchantName = "Merchant Manolo";
         String merchantCVR = "merchant-999999";
-        final String POST_PARAMS = "{\n" + "\"name\": \""+merchantName+"\",\r\n" +
-                "    \"cvr\": \""+merchantCVR+"\"" + "\n}";
+        final String POST_PARAMS = "{\n" + "\"name\": \"" + merchantName + "\",\r\n" +
+                "    \"cvr\": \"" + merchantCVR + "\"" + "\n}";
         mr.postMerchant(POST_PARAMS);
     }
 
@@ -83,9 +86,9 @@ public class RestMerchantTest {
     public void PutMerchantWithNoException() {
         String merchantName = "Updated Merchant Manolo";
         String merchantCVR = "update-merchant-999999";
-        final String PUT_PARAMS = "{\n" + "\"name\": \""+merchantName+"\",\r\n" +
-                "    \"id\": "+merchant.getId()+",\r\n" +
-                "    \"cvr\": \""+merchantCVR+"\"" + "\n}";
+        final String PUT_PARAMS = "{\n" + "\"name\": \"" + merchantName + "\",\r\n" +
+                "    \"id\": " + merchant.getId() + ",\r\n" +
+                "    \"cvr\": \"" + merchantCVR + "\"" + "\n}";
         mr.putMerchant(PUT_PARAMS);
     }
 

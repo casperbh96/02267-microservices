@@ -12,6 +12,10 @@ import org.junit.Before;
 import org.junit.Test;
 import java.util.UUID;
 
+/**
+ * @author Danial
+ *
+ */
 public class TokenAdapterTest {
 
     ITokenAdapter tokenAdapter;

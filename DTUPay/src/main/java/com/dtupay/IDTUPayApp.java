@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
+ * @author Dumitru
  * interface for DTUPayApp containing all its funtionalities
  */
 public interface IDTUPayApp {

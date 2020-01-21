@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * @author Casper
  * defined class which contains functions to get a new customer with information from result sets.
  */
 

@@ -4,6 +4,7 @@ import com.dtupay.adapters.merchant.exceptions.MerchantException;
 import com.dtupay.adapters.merchant.model.Merchant;
 
 /**
+ * @author Dumitru
  * interface to handle merchant adapter class
  */
 

@@ -5,6 +5,7 @@ package com.token.app;
 import java.util.UUID;
 
 /**
+ * @author Casper
  * Created a token class to handle all the tokens in the system
  */
 public class Token {

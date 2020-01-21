@@ -11,6 +11,7 @@ import java.sql.*;
 import java.text.MessageFormat;
 
 /**
+ * @author Casper
  * new connector class which handles database information and connects database with app
  */
 public class Connector {

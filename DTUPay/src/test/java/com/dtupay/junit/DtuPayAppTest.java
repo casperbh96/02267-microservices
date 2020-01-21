@@ -28,6 +28,7 @@ import java.util.List;
 
 
 /**
+ * @author Dumitru
  * tests for dtuPayApp
  */
 public class DtuPayAppTest {

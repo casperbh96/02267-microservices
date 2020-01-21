@@ -7,6 +7,7 @@ import cucumber.api.SnippetType;
 import cucumber.api.junit.Cucumber;
 
 /**
+ * @author Casper
  * runs all the test with cucumber class
  */
 @RunWith(Cucumber.class)

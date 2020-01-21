@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 /**
+ * @author Dumitru
  * interface for transaction adapter
  */
 public interface ITransactionAdapter {

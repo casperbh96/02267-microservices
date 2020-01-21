@@ -6,7 +6,6 @@ import com.dtupay.adapters.customer.model.Customer;
 import com.dtupay.adapters.merchant.model.Merchant;
 import com.dtupay.adapters.token.model.Token;
 import cucumber.api.java.After;
-import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -20,9 +19,11 @@ import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
+/**
+ * @author Dumitru
+ *
+ */
 public class BasicRestPointSteps {
     private URL url;
     HttpURLConnection connection;

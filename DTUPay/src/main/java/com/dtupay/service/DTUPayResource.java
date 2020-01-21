@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 
 
 /**
+ * @author Dumitru
  * class for DTUPay using rest services
  */
 @Path("/")

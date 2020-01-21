@@ -9,6 +9,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
+/**
+ * @author Ionela
+ *
+ */
 public class TransactionResultSetToObject {
 
     public Transaction resultSetToTransaction(ResultSet set) throws SQLException {

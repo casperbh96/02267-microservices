@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 import static com.transaction.database.Connector.createConnection;
 
 /**
+ * @author Ionela
  * Transaction adapter class controls all the transactions
  */
 public class TransactionAdapter implements ITransactionAdapter {

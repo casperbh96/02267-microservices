@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * @author Danial
  * defined class which contains functions to get a new merchant with information from result sets.
  */
 

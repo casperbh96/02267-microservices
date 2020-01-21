@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 /**
+ * @author Ionela
  * creates a transaction class
  */
 public class Transaction {

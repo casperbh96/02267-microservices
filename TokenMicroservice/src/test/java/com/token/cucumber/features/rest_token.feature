@@ -1,3 +1,5 @@
+# @author Casper
+
 Feature: REST API calls for Token
 
   Scenario: Get unused token SUCCESS

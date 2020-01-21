@@ -9,6 +9,7 @@ import com.merchant.database.exceptions.NoMerchants;
 import java.util.List;
 
 /**
+ * @author Anshul
  * provided business logic for merchant. basically, from where we are accessing all the data from database
  */
 public class MerchantManager implements IMerchantManager {

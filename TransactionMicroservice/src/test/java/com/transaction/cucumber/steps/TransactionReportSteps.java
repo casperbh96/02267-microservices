@@ -14,6 +14,10 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.*;
 
+/**
+ * @author Ionela
+ *
+ */
 public class TransactionReportSteps {
 
     Set<Integer> customerIds;

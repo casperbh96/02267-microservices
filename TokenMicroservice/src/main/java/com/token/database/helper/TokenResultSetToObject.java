@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
+ * @author Casper
  * defined class which contains functions to get a new token with information from result sets.
  */
 

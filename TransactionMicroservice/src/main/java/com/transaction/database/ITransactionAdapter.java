@@ -11,6 +11,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 /**
+ * @author Ionela
  * interface for transaction adapter
  */
 public interface ITransactionAdapter {

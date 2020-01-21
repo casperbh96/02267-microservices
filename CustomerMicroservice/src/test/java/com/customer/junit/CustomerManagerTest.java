@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 /**
+ * @author Ismael
  * Junit testing class for customer manager
  */
 

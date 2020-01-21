@@ -8,6 +8,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
 /**
+ * @author Danial
  * defines path for customer
  */
 @Path("/customer")
