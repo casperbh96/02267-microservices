@@ -19,7 +19,8 @@ public class CustomerResource {
         try {
             return Response.ok(c.GetAllCustomers()).build();
         } catch (Exception e) {
-            return Response.serverError().build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(
+                    e.getMessage()).build();
         }
     }
 
@@ -51,7 +52,8 @@ public class CustomerResource {
             // String response = sendMessage(message);
             return Response.ok(c.CreateCustomer(cpr, name)).build();
         } catch (Exception e) {
-            return Response.serverError().build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(
+                    e.getMessage()).build();
         }
     }
 

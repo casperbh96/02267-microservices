@@ -32,7 +32,8 @@ public class TransactionResource {
         try {
             return Response.ok(transactions.getCustomerMonthlyReport(id, month, year)).build();
         } catch (Exception e) {
-            return Response.serverError().build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(
+                    e.getMessage()).build();
         }
     }
 
@@ -52,7 +53,8 @@ public class TransactionResource {
         try {
             return Response.ok(transactions.getMerchantMonthlyReport(id, month, year)).build();
         } catch (Exception e) {
-            return Response.serverError().build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(
+                    e.getMessage()).build();
         }
     }
 
@@ -74,7 +76,8 @@ public class TransactionResource {
         try {
             return Response.ok(transactions.registerTransaction(timestamp, fromId, toId, tokenId, amount, isRefund)).build();
         } catch (Exception e) {
-            return Response.serverError().build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(
+                    e.getMessage()).build();
         }
     }
 

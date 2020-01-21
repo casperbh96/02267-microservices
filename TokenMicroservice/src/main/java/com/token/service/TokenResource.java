@@ -19,7 +19,8 @@ public class TokenResource {
         try {
             return Response.ok(tokens.getAllTokens()).build();
         } catch (Exception e) {
-            return Response.serverError().build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(
+                    e.getMessage()).build();
         }
     }
 
@@ -34,7 +35,8 @@ public class TokenResource {
         try {
             return Response.ok(tokens.getTokensForCustomer(customerId, numberOfTokens)).build();
         } catch (Exception e) {
-            return Response.serverError().build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(
+                    e.getMessage()).build();
         }
     }
 
@@ -48,7 +50,8 @@ public class TokenResource {
         try {
             return Response.ok(tokens.getUnusedTokenByCustomerId(customerId)).build();
         } catch (Exception e) {
-            return Response.serverError().build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(
+                    e.getMessage()).build();
         }
     }
 
@@ -61,7 +64,8 @@ public class TokenResource {
         try {
             return Response.ok(tokens.isTokenValid(tokenId)).build();
         } catch (Exception e) {
-            return Response.serverError().build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(
+                    e.getMessage()).build();
         }
     }
 
@@ -75,7 +79,8 @@ public class TokenResource {
             tokens.markTokenAsUsed(tokenId);
             return Response.ok().build();
         } catch (Exception e) {
-            return Response.serverError().build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(
+                    e.getMessage()).build();
         }
     }
 
@@ -94,7 +99,8 @@ public class TokenResource {
         try {
             return Response.ok(tokens.createToken(customerId, uuid, used)).build();
         } catch (Exception e) {
-            return Response.serverError().build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(
+                    e.getMessage()).build();
         }
     }
 

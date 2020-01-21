@@ -33,7 +33,8 @@ public class DTUPayResource {
             return Response.ok(dtuPayApp.createCustomer(cpr, name)).build();
         } catch (Exception e) {
             e.printStackTrace();
-            return Response.serverError().build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(
+                    e.getMessage()).build();
         }
     }
 
@@ -67,7 +68,8 @@ public class DTUPayResource {
         try {
             return Response.ok(dtuPayApp.getMoreTokens(customerId, numberOfTokens)).build();
         } catch (Exception e) {
-            return Response.serverError().build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(
+                    e.getMessage()).build();
         }
     }
 
@@ -87,9 +89,7 @@ public class DTUPayResource {
         try {
             return Response.ok(dtuPayApp.generateMonthlyCustomerReport(id, month, year)).build();
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(
-                    e.getMessage()).build();
-            //return Response.serverError().build();
+            return Response.serverError().build();
         }
     }
 
@@ -138,7 +138,6 @@ public class DTUPayResource {
 
         int merchantId = json.getInt("merchantId");
         Token token = new Token(json.getJSONObject("token"));
-        //Token token = new Token(new JSONObject(json.getString("token")));
         BigDecimal amount = json.getBigDecimal("amount");
         String description = json.getString("description");
 
@@ -170,7 +169,8 @@ public class DTUPayResource {
         try {
             return Response.ok(dtuPayApp.generateMonthlyMerchantReport(id, month, year)).build();
         } catch (Exception e) {
-            return Response.serverError().build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(
+                    e.getMessage()).build();
         }
     }
 }
