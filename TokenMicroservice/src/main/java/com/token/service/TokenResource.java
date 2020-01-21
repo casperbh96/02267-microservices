@@ -23,7 +23,7 @@ public class TokenResource {
         }
     }
 
-    @GET
+    @POST
     @Path("newTokens")
     @Consumes("application/json")
     public Response getTokens(String jsonRaw) {
