@@ -48,7 +48,7 @@ customer, merchant, token = setup()
 last_input = ''
 
 while last_input != "q":
-    print('Your options are')
+    print('\nYour options are')
     print('q: Exit the program                                      \n' + 
           '1: Update the merchant                                   \n' +
           '2: Transfer money from customer to merchant              \n' )

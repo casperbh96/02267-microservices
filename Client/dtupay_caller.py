@@ -4,9 +4,9 @@ import json
 class DtuPayCaller():
 
     def __init__(self):
-        self.customer_url = 'http://localhost:8080/service/rest/customer'
-        self.tokens_url = 'http://localhost:8080/service/rest/newTokens'
-        self.merchant_url = 'http://localhost:8080/service/rest/merchant'
+        self.customer_url = 'http://localhost:8080/customer'
+        self.tokens_url = 'http://localhost:8080/newTokens'
+        self.merchant_url = 'http://localhost:8080/merchant'
 
     def createCustomer(self, customer_json):
         response = requests.post(self.customer_url, json=customer_json)
