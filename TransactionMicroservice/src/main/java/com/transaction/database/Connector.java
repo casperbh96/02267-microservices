@@ -15,7 +15,7 @@ public class Connector {
             dataSource.setPassword("1234");
             dataSource.setServerName("64.225.70.110");
             dataSource.setPort(5000);
-            dataSource.setDatabaseName("DTUPay");
+            dataSource.setDatabaseName("TransactionDb");
             dataSource.setCreateDatabaseIfNotExist(true);
 
             createTablesIfNotExists(dataSource);
