@@ -3,6 +3,7 @@ package com.dtupay.adapters.merchant.model;
 import org.json.JSONObject;
 
 /**
+ * @author Dumitru
  * merchant class
  */
 public class Merchant {

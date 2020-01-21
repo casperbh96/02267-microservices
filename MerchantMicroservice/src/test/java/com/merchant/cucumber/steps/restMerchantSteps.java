@@ -18,8 +18,8 @@ import java.net.URL;
 
 import static org.junit.Assert.assertEquals;
 
-
 /**
+ * @author Ismael
  * this class asserts the basic rest operations using cucumber testing
  */
 
@@ -42,6 +42,7 @@ public class restMerchantSteps {
 
     /**
      * checks for deletion of merchant
+     *
      * @throws MerchantDoesNotExist
      */
     @After
@@ -51,6 +52,7 @@ public class restMerchantSteps {
 
     /**
      * given that merchant has id
+     *
      * @param customerID
      * @throws MalformedURLException
      */
@@ -61,6 +63,7 @@ public class restMerchantSteps {
 
     /**
      * given that a new merchant is created
+     *
      * @throws MalformedURLException
      */
 
@@ -77,6 +80,7 @@ public class restMerchantSteps {
 
     /**
      * checks if it returns the requested merchant
+     *
      * @throws IOException
      */
     @When("^the merchant is requested$")
@@ -87,6 +91,7 @@ public class restMerchantSteps {
 
     /**
      * asserts if rest service is giving the right merchant
+     *
      * @throws IOException
      */
     @Then("^the rest service returns the merchant associated$")
@@ -98,6 +103,7 @@ public class restMerchantSteps {
 
     /**
      * checks if rest service is returning an error response
+     *
      * @throws IOException
      */
     @Then("^the rest service returns an error response$")
@@ -109,6 +115,7 @@ public class restMerchantSteps {
 
     /**
      * checks for the deletion request for merchant
+     *
      * @throws IOException
      */
     @When("^the merchant is requested to be deleted$")
@@ -119,6 +126,7 @@ public class restMerchantSteps {
 
     /**
      * checks if rest service is deleting the merchant correctly
+     *
      * @throws IOException
      */
     @Then("^the rest service deletes it correctly$")
@@ -129,6 +137,7 @@ public class restMerchantSteps {
 
     /**
      * given a merchant with cpr
+     *
      * @param cvr
      * @param merchant_name
      * @throws Throwable
@@ -142,12 +151,13 @@ public class restMerchantSteps {
 
     /**
      * checks if the POST request is working to update the merchant
+     *
      * @throws IOException
      */
     @When("^the merchant is posted to the service$")
     public void theMerchantIsPostedToTheService() throws IOException {
-        final String POST_PARAMS = "{\n" + "\"name\": \""+merchant_name+"\",\r\n" +
-                "    \"cvr\": \""+cvr+"\"" + "\n}";
+        final String POST_PARAMS = "{\n" + "\"name\": \"" + merchant_name + "\",\r\n" +
+                "    \"cvr\": \"" + cvr + "\"" + "\n}";
         con = (HttpURLConnection) url2.openConnection();
         con.setRequestMethod("POST");
         con.setRequestProperty("Content-Type", "application/json");
@@ -158,6 +168,7 @@ public class restMerchantSteps {
 
     /**
      * asserts true if update operation is working fine using POST request
+     *
      * @throws IOException
      */
     @Then("^the rest service posts it correctly$")
@@ -168,6 +179,7 @@ public class restMerchantSteps {
 
     /**
      * asserts true if update operation is working fine
+     *
      * @throws IOException
      */
     @Then("^the rest service updates it correctly$")
@@ -178,15 +190,16 @@ public class restMerchantSteps {
 
     /**
      * checks connection for merchant update using CPR
+     *
      * @param cpr
      * @param merchant_name
      * @throws Throwable
      */
     @When("^the merchant is updated with CVR \"([^\"]*)\", name \"([^\"]*)\"$")
     public void theMerchantIsUpdatedWithCVRName(String cvr, String merchant_name) throws Throwable {
-        final String PUT_PARAMS = "{\n" + "\"name\": \""+merchant_name+"\",\r\n" +
-                "    \"id\": "+merchant.getId()+",\r\n" +
-                "    \"cvr\": \""+cvr+"\"" + "\n}";
+        final String PUT_PARAMS = "{\n" + "\"name\": \"" + merchant_name + "\",\r\n" +
+                "    \"id\": " + merchant.getId() + ",\r\n" +
+                "    \"cvr\": \"" + cvr + "\"" + "\n}";
         con = (HttpURLConnection) url2.openConnection();
         con.setRequestMethod("PUT");
         con.setRequestProperty("Content-Type", "application/json");
@@ -197,6 +210,7 @@ public class restMerchantSteps {
 
     /**
      * checks for given condition about merchant being in database
+     *
      * @throws MalformedURLException
      */
     @Given("^we have some merchants in the database$")
@@ -206,6 +220,7 @@ public class restMerchantSteps {
 
     /**
      * checks for when we request to see all the merchants
+     *
      * @throws IOException
      */
     @When("^we request to see all the merchants$")
@@ -216,6 +231,7 @@ public class restMerchantSteps {
 
     /**
      * checks for assertion condition if rest service is returning all the merchants or not
+     *
      * @throws IOException
      */
     @Then("^the service returns a list with all the merchants$")

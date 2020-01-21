@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 /**
+ * @author Dumitru
  * transaction class holds all sort of transactions
  */
 public class Transaction {

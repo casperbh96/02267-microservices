@@ -5,6 +5,7 @@ import com.dtupay.adapters.bank.exceptions.BankAdapterException;
 import java.math.BigDecimal;
 
 /**
+ * @author Dumitru
  * represents the interface which to be implemented by back adapter class
  */
 

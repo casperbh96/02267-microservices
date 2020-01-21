@@ -6,6 +6,10 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.SnippetType;
 import cucumber.api.junit.Cucumber;
 
+/**
+ * @author Dumitru
+ *
+ */
 @RunWith(Cucumber.class)
 @CucumberOptions(features = {"src/test/java/com/dtupay/cucumber/features"},
         snippets = SnippetType.CAMELCASE,

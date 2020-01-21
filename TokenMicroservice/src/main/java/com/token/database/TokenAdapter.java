@@ -15,6 +15,7 @@ import java.util.UUID;
 import static com.token.database.Connector.createConnection;
 
 /**
+ * @author Casper
  * class to handle all token related applications in the database
  */
 public class TokenAdapter implements ITokenAdapter {

@@ -1,12 +1,13 @@
+# @author Dumitru
 Feature: Rest operations
 
   Scenario: create a customer
-    When we create a customer with name "Dmitry" and cpr "112233-4455"
-    Then the customer with name "Dmitry" and cpr "112233-4455" is successfully created
+    When we create a customer with name "Dumitru" and cpr "112233-4455"
+    Then the customer with name "Dumitru" and cpr "112233-4455" is successfully created
 
   Scenario: update a customer
-    Given we create a customer with name "Dmitry" and cpr "112233-4455"
-    And the customer with name "Dmitry" and cpr "112233-4455" is successfully created
+    Given we create a customer with name "Dumitru" and cpr "112233-4455"
+    And the customer with name "Dumitru" and cpr "112233-4455" is successfully created
     When we update a customer to name "Ib" and cpr "122333-4455"
     Then the customer is successfully updated to name "Ib" and cpr "122333-4455"
 

@@ -2,17 +2,19 @@ package com.transaction.app;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+
 /**
-/**
+ * @author Ionela
  * created a transaction merchant class which holds the transactions for merchant
  */
 public class TransactionMerchant extends Transaction {
 
     /**
      * function for merchant transactions
+     *
      * @param id
      * @param timestamp
-     * @param amount to be transferred
+     * @param amount    to be transferred
      * @param tokenId
      * @param isRefund
      */

@@ -3,6 +3,7 @@ package com.merchant.app;
 import java.util.UUID;
 
 /**
+ * @author Ismael
  * Created a token class to handle all the tokens in the system
  */
 public class Token {

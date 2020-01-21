@@ -7,6 +7,7 @@ import com.merchant.database.exceptions.NoMerchants;
 import java.util.List;
 
 /**
+ * @author Anshul
  * interface to handle merchant manager class
  */
 

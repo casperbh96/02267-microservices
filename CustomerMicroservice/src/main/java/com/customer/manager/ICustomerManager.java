@@ -7,6 +7,7 @@ import com.customer.database.exceptions.NoCustomers;
 import java.util.List;
 
 /**
+ * @author Anshul
  * interface to handle customer manager class
  */
 public interface ICustomerManager {

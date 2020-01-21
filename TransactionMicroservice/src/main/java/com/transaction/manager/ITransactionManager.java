@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 /**
+ * @author Anshul
  * defines interface for Transaction manager which contains three functions about transaction information
  */
 public interface ITransactionManager {

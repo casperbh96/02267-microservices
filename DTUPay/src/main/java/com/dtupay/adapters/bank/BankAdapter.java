@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * @author Ionela
  * created a bank adapter class to handle the accounts of users
  */
 public class BankAdapter implements IBankAdapter {

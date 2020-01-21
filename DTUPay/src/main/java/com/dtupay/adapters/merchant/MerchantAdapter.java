@@ -12,6 +12,7 @@ import java.net.URL;
 import java.util.Scanner;
 
 /**
+ * @author Dumitru
  * class to handle all merchant related applications in the database
  */
 

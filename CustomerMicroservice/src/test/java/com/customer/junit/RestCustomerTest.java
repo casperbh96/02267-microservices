@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
+ * @author Ismael
  * junit testing for customer rest services
   */
 public class RestCustomerTest {

@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 /**
+ * @author Ismael
  * Junit testing class for merchant manager
  */
 
@@ -27,6 +28,7 @@ public class MerchantManagerTest {
 
     /**
      * test for create merchant
+     *
      * @throws MerchantDoesNotExist
      */
     @Test
@@ -38,6 +40,7 @@ public class MerchantManagerTest {
 
     /**
      * test for deletion of merchant
+     *
      * @throws MerchantDoesNotExist
      */
     @Test(expected = MerchantDoesNotExist.class)
@@ -50,6 +53,7 @@ public class MerchantManagerTest {
 
     /**
      * update merchant test
+     *
      * @throws MerchantDoesNotExist
      */
     @Test
@@ -69,6 +73,7 @@ public class MerchantManagerTest {
 
     /**
      * exception testing
+     *
      * @throws CustomerDoesNotExist
      */
     @Test

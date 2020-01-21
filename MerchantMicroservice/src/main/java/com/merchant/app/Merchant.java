@@ -1,11 +1,7 @@
 package com.merchant.app;
 
-
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
+ * @author Ismael
  * Created a merchant class to define customer and its attributes
  */
 

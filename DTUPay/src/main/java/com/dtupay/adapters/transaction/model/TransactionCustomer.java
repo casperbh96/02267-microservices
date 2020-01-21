@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import java.util.UUID;
 
 /**
+ * @author Dumitru
  * class for customer transactions
  */
 public class TransactionCustomer extends Transaction {

@@ -16,6 +16,7 @@ import java.net.URL;
 import static org.junit.Assert.assertEquals;
 
 /**
+ * @author Casper
  * this class asserts the basic rest operations using cucumber testing
  */
 public class RestTokenSteps {
@@ -43,6 +44,7 @@ public class RestTokenSteps {
 
     /**
      * given a customer with some customer id
+     *
      * @param customerId
      * @throws Throwable
      */
@@ -53,6 +55,7 @@ public class RestTokenSteps {
 
     /**
      * checks for the connection when token is requested by the customer and uses GET request
+     *
      * @throws Throwable
      */
     @When("^the token is requested$")
@@ -63,6 +66,7 @@ public class RestTokenSteps {
 
     /**
      * given a token with some token id
+     *
      * @param tokenId
      * @throws Throwable
      */
@@ -73,6 +77,7 @@ public class RestTokenSteps {
 
     /**
      * checks for the validity of token with GET request
+     *
      * @throws Throwable
      */
     @When("^the validity check of a token is requested$")
@@ -83,6 +88,7 @@ public class RestTokenSteps {
 
     /**
      * checks if the rest service succeeds and returns the status code
+     *
      * @param statusCode
      * @throws Throwable
      */
@@ -94,6 +100,7 @@ public class RestTokenSteps {
 
     /**
      * test for another token id
+     *
      * @param tokenId
      * @throws Throwable
      */
@@ -104,6 +111,7 @@ public class RestTokenSteps {
 
     /**
      * checks if udpate the token to used method is working
+     *
      * @throws Throwable
      */
     @When("^the update to used is requested$")
@@ -114,6 +122,7 @@ public class RestTokenSteps {
 
     /**
      * given that we have one customer with customer id and one unused token
+     *
      * @param customerId
      * @param uuid
      * @param unusedStr
@@ -129,16 +138,17 @@ public class RestTokenSteps {
 
     /**
      * checks if creation of new token function is working using rest
+     *
      * @throws Throwable
      */
     @When("^the creating of a new token is requested$")
     public void the_creating_of_a_new_token_is_requested() throws Throwable {
         final String POST_PARAMS =
                 "{\n" +
-                "\r" + "\"customerId\": \""     + customerId    + "\",\n" +
-                "\r" + "\"uuid\": \""           + uuid          + "\",\n" +
-                "\r" + "\"used\": \""           + used     + "\"" +
-                "\n}";
+                        "\r" + "\"customerId\": \"" + customerId + "\",\n" +
+                        "\r" + "\"uuid\": \"" + uuid + "\",\n" +
+                        "\r" + "\"used\": \"" + used + "\"" +
+                        "\n}";
         con = (HttpURLConnection) url2.openConnection();
         con.setRequestMethod("POST");
         con.setRequestProperty("Content-Type", "application/json");
@@ -149,6 +159,7 @@ public class RestTokenSteps {
 
     /**
      * asserts that rest service is returning the object and accepted status code
+     *
      * @param statusCode
      * @throws Throwable
      */

@@ -6,6 +6,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Dumitru
+ *
+ */
 public class Customer {
     int id;
     String cpr;

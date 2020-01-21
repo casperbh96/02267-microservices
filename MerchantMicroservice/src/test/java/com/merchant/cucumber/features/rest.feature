@@ -1,4 +1,7 @@
+# @author Ismael
+
 Feature: Basic rest operations
+
   Scenario: get all merchants
     Given we have some merchants in the database
     When we request to see all the merchants

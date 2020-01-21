@@ -15,6 +15,7 @@ import java.util.List;
 import static com.merchant.database.Connector.createConnection;
 
 /**
+ * @author Danial
  * class to handle all merchant related applications in the database
  */
 

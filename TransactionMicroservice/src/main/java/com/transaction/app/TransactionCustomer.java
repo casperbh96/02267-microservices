@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 /**
+ * @author Ionela
  * created a transaction customer class which holds the transactions for customers
  */
 public class TransactionCustomer extends Transaction {

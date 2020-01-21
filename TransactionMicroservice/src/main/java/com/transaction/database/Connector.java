@@ -4,6 +4,7 @@ import com.mysql.cj.jdbc.MysqlDataSource;
 import java.sql.*;
 
 /**
+ * @author Ionela
  * new connector class which handles database information and connects database with app
  */
 public class Connector {

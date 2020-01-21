@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import java.util.UUID;
 
 /**
+ * @author Dumitru
  * Created a token class to handle all the tokens in the system
  */
 

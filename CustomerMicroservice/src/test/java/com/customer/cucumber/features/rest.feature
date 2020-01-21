@@ -1,4 +1,7 @@
+# @author Danial
+
 Feature: Basic rest operations
+
   Scenario: get all customers
     Given we have some customers in the database
     When we request to see all the customers

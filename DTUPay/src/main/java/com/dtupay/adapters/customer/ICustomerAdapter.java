@@ -4,6 +4,7 @@ import com.dtupay.adapters.customer.exceptions.CustomerException;
 import com.dtupay.adapters.customer.model.Customer;
 
 /**
+ * @author Dumitru
  * interface to handle customer adapter class
  */
 public interface ICustomerAdapter {

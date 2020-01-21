@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 /**
+ * @author Casper
  * Junit testing class for customer adapter
  */
 public class CustomerAdapterTest {

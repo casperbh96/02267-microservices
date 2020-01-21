@@ -6,6 +6,7 @@ import com.customer.database.exceptions.*;
 import java.util.List;
 
 /**
+ * @author Dumitru
  * interface to handle customer adapter class
  */
 public interface ICustomerAdapter {

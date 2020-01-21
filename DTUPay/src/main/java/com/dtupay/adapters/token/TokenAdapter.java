@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
+ * @author Dumitru
  * class to handle all token related applications in the database
  */
 

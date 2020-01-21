@@ -26,6 +26,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 /**
+ * @author Dumitru
  * DTUPayApp class
  */
 public class DTUPayApp implements IDTUPayApp {

@@ -9,6 +9,7 @@ import com.customer.database.exceptions.NoCustomers;
 import java.util.List;
 
 /**
+ * @author Anshul
  * Customer manager links the database to DtuPayApp. Acts as an intermediate between both
  */
 public class CustomerManager implements ICustomerManager {

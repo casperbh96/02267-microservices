@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * @author Dumitru
  * class to handle all customer related applications in the database
  */
 public class CustomerAdapter implements ICustomerAdapter {

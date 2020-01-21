@@ -6,6 +6,7 @@ import com.dtupay.adapters.token.model.Token;
 import java.util.List;
 
 /**
+ * @author Dumitru
  * interface to handle token adapter class
  */
 

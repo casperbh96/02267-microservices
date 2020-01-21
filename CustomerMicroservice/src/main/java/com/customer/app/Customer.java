@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * @author Casper
  * Created a customer class to define customer and its attributes
  */
 

@@ -11,6 +11,10 @@ import org.junit.Test;
 
 import java.util.UUID;
 
+/**
+ * @author Danial
+ *
+ */
 public class TokenManagerTest {
 
     ITokenManager tokenLogic;

@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 /**
+ * @author Dumitru
  * class for merchant transactions
  */
 public class TransactionMerchant extends Transaction {
