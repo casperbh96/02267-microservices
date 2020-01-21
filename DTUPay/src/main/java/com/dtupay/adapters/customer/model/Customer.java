@@ -59,4 +59,13 @@ public class Customer {
         return tokens;
     }
 
+    public Token getUnusedToken() {
+        for (Token t : getTokens()) {
+            if (!t.getUsed()){
+                return t;
+            }
+        }
+        return null;
+    }
+
 }

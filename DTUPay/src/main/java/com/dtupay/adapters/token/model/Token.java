@@ -57,6 +57,10 @@ public class Token {
         return used;
     }
 
+    public String toJsonString() {
+        return "{\"id\":" + this.id + ",\"customerId\":" + this.customerId + ",\"uuid\":\"" + this.uuid + "\",\"used\":" + this.used + "}";
+    }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
