@@ -42,6 +42,7 @@ public class Transaction {
     /**
      * @return timestamp
      */
+     */
     public Timestamp getTimestamp() {
         return timestamp;
     }

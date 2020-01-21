@@ -16,16 +16,30 @@ import java.util.stream.Collectors;
 
 import static com.transaction.database.Connector.createConnection;
 
+/**
+ * Transaction adapter class controls all the transactions
+ */
 public class TransactionAdapter implements ITransactionAdapter {
 
     private List<Transaction> transactions;
     TransactionResultSetToObject converter = new TransactionResultSetToObject();
 
+    /**
+     * initialize transaction adapter
+     */
     public TransactionAdapter() {
         transactions = new ArrayList<>();
         //add some sample transactions here if needed
     }
 
+    /**
+     * gives monthly record of transaction by customer id
+     * @param customerId
+     * @param month
+     * @param year
+     * @return list of transactions
+     * @throws CustomerDoesNotExist
+     */
     @Override
     public List<TransactionCustomer> getMonthlyTransactionsByCustomerId(int customerId, int month, int year) throws CustomerDoesNotExist {
         List<TransactionCustomer> customerTransactions = new ArrayList<>();
@@ -59,6 +73,13 @@ public class TransactionAdapter implements ITransactionAdapter {
         return customerTransactions;
     }
 
+    /**
+     * gives monthly record of transaction by customer id
+     * @param merchantId
+     * @param month
+     * @param year
+     * @return list of transactions
+     */
     @Override
     public List<TransactionMerchant> getMonthlyTransactionsByMerchantId(int merchantId, int month, int year) {
         List<TransactionMerchant> merchantTransactions = new ArrayList<>();
@@ -92,6 +113,16 @@ public class TransactionAdapter implements ITransactionAdapter {
         return merchantTransactions;
     }
 
+    /**
+     * adds transaction in the report
+     * @param timestamp
+     * @param fromId
+     * @param toId
+     * @param tokenId
+     * @param amount
+     * @param isRefund
+     * @return transaction
+     */
     @Override
     public Transaction addTransaction(Timestamp timestamp, int fromId, int toId, int tokenId, BigDecimal amount, boolean isRefund) {
 
@@ -125,6 +156,12 @@ public class TransactionAdapter implements ITransactionAdapter {
         return returnTransaction;
     }
 
+    /**
+     * gives transaction by transaction id
+     * @param id
+     * @return transaction
+     * @throws TransactionDoesNotExist
+     */
     @Override
     public Transaction getTransactionByTransactionId(int id) throws TransactionDoesNotExist {
         Transaction transaction = null;
@@ -147,6 +184,12 @@ public class TransactionAdapter implements ITransactionAdapter {
         return transaction;
     }
 
+    /**
+     * gives transaction id from the result set of current transaction
+     * @param stmt
+     * @return transaction id
+     * @throws SQLException
+     */
     public int getIdFromDbReturn(PreparedStatement stmt) throws SQLException {
         ResultSet rs = stmt.getGeneratedKeys();
         rs.next();

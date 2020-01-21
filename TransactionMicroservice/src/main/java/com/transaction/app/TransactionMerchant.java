@@ -2,7 +2,7 @@ package com.transaction.app;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-
+/**
 /**
  * created a transaction merchant class which holds the transactions for merchant
  */

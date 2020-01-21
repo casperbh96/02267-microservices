@@ -3,10 +3,18 @@ package com.transaction.database;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import java.sql.*;
 
+/**
+ * new connector class which handles database information and connects database with app
+ */
 public class Connector {
 
     public static MysqlDataSource dataSource;
 
+    /**
+     * create connection using MySql server
+     * @return connection response
+     * @throws SQLException
+     */
     public static Connection createConnection() throws SQLException {
         dataSource = new MysqlDataSource();
 
@@ -26,9 +34,21 @@ public class Connector {
         return getConnection(dataSource);
     }
 
+    /**
+     * function to check connection
+     * @param db data source
+     * @return connection response
+     * @throws SQLException
+     */
     public static Connection getConnection(MysqlDataSource db) throws SQLException {
         return db.getConnection();
     }
+
+    /**
+     * generates tables if there isn't any.
+     * @param db
+     * @throws SQLException
+     */
 
     private static void createTablesIfNotExists(MysqlDataSource db) throws SQLException {
         try (Connection connection = getConnection(db)) {

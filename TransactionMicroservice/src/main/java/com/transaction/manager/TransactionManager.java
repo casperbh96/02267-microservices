@@ -13,6 +13,7 @@ import java.util.List;
 /**
  * created a transaction manager class to hold all the transactions
  */
+
 public class TransactionManager implements ITransactionManager {
 
     private ITransactionAdapter transactionAdapter;

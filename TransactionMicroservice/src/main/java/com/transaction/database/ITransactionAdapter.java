@@ -10,6 +10,9 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 
+/**
+ * interface for transaction adapter
+ */
 public interface ITransactionAdapter {
     Transaction addTransaction(Timestamp timestamp, int from, int to, int tokenId, BigDecimal amount, boolean isRefund);
     Transaction getTransactionByTransactionId(int id) throws TransactionDoesNotExist;

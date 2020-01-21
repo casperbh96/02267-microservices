@@ -10,15 +10,32 @@ import javax.ws.rs.core.Response;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
+/**
+ * defining path for transaction
+ */
 @Path("/transaction")
+
+/**
+ * to produce file in json format
+ */
 @Produces("application/json")
 @Consumes("application/json")
+
+/**
+ * class for transaction using rest services
+ */
 public class TransactionResource {
     ITransactionManager transactions = new TransactionManager(new TransactionAdapter());
 
+    /**
+     * gives monthly report of transactions for customer
+     * @param jsonRaw
+     * @return response with list of transactions
+     */
     @POST
     @Path("customer")
     @Consumes("application/json")
+
     public Response getMonthlyReportForCustomer(String jsonRaw) {
         JSONObject json = new JSONObject(jsonRaw);
 
@@ -37,6 +54,11 @@ public class TransactionResource {
         }
     }
 
+    /**
+     * gives monthly report of transactions for merchant
+     * @param jsonRaw
+     * @return response with list of transactions
+     */
     @POST
     @Path("merchant")
     @Consumes("application/json")
@@ -58,6 +80,11 @@ public class TransactionResource {
         }
     }
 
+    /**
+     * add up the new transactions
+     * @param jsonRaw
+     * @return response with registering new transaction
+     */
     @POST
     @Consumes("application/json")
     public Response postNewTransaction(String jsonRaw) {
