@@ -18,4 +18,4 @@ mvn -D maven.test.skip=true install
 
 cd ../DTUPay
 mvn clean compile
-mvn -D maven.test.skip=true installc
+mvn -D maven.test.skip=true install
