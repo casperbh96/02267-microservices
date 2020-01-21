@@ -9,21 +9,11 @@ from dtupay_caller import DtuPayCaller
 
 caller = DtuPayCaller()
 
-create_customer_json = {
-    'cpr': str(randrange(9999999999)),
-    'name': 'Test Customer Client'
-}
-
-create_merchant_json = {
-    'cvr': str(randrange(9999999999)),
-    'name': 'Test Merchant Client'
-}
-
 def setup():
     print('Setting up the client... (wait)\n')
     
-    customer = caller.createCustomer(create_customer_json)
-    merchant = caller.createMerchant(create_merchant_json)
+    customer = caller.getCustomer()
+    merchant = caller.getMerchant()
 
     create_token_json = {
         'customerId': customer['id'],
@@ -65,4 +55,9 @@ while last_input != "q":
         merchant = caller.updateMerchant(merchant_id, name, cvr)
 
     elif last_input == '2':
-        print('Making transaction')
+        merchant_id = merchant['id']
+        single_token = token[0]
+        amount = 0.0
+        description = "A nice client in Python"
+
+        caller.makeTransaction(merchant_id, single_token, amount, description)

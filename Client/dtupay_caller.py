@@ -7,32 +7,19 @@ class DtuPayCaller():
         self.customer_url = 'http://localhost:8080/customer'
         self.tokens_url = 'http://localhost:8080/newTokens'
         self.merchant_url = 'http://localhost:8080/merchant'
+        self.transaction_url = 'http://localhost:8080/transaction'
 
-    def createCustomer(self, customer_json):
-        response = requests.post(self.customer_url, json=customer_json)
+    def getCustomer(self):
+        customer = {'id': 7668, 'cpr': '4564377324', 'name': 'Test Customer Client', 'tokens': []}
+        print('Customer: ' + str(customer))
+        
+        return customer
 
-        if response.status_code in (200, 202):
-            customer = json.loads(response.text)
-            print('Customer: ' + str(customer))
-
-            return customer
-        else:
-            print('Setup failed')
-            print(response.status_code)
-            print(response.text)
-
-    def createMerchant(self, merchant_json):
-        response = requests.post(self.merchant_url, json=merchant_json)
-
-        if response.status_code in (200, 202):
-            merchant = json.loads(response.text)
-            print('Merchant: ' + str(merchant))
-
-            return merchant
-        else:
-            print('Setup failed')
-            print(response.status_code)
-            print(response.text)
+    def getMerchant(self):
+        merchant = {'id': 3830, 'cvr': '3750925552', 'name': 'Test Merchant Client'}
+        print('Merchant: ' + str(merchant))
+        
+        return merchant
 
     def createTokens(self, token_json):
         response = requests.post(self.tokens_url, json=token_json)
@@ -65,3 +52,24 @@ class DtuPayCaller():
             print('Update failed')
             print(response.status_code)
             print(response.text)
+
+    def makeTransaction(self, merchant_id, single_token, amount, description):
+        transaction_json = {
+            'merchantId': str(merchant_id),
+            'token': single_token,
+            'amount': str(amount),
+            'description': description
+        }
+
+        print(json.dumps(transaction_json))
+        
+        response = requests.post(self.transaction_url, json=transaction_json)
+
+        if response.status_code in (200, 202):
+            print('Made Transaction!!!')
+        else:
+            print('Transaction failed')
+            print(response.status_code)
+            print(response.text)
+        
+        

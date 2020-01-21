@@ -87,7 +87,9 @@ public class DTUPayResource {
         try {
             return Response.ok(dtuPayApp.generateMonthlyCustomerReport(id, month, year)).build();
         } catch (Exception e) {
-            return Response.serverError().build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(
+                    e.getMessage()).build();
+            //return Response.serverError().build();
         }
     }
 
@@ -128,7 +130,6 @@ public class DTUPayResource {
         }
     }
 
-
     @POST
     @Path("transaction")
     @Consumes("application/json")
@@ -136,7 +137,8 @@ public class DTUPayResource {
         JSONObject json = new JSONObject(jsonRaw);
 
         int merchantId = json.getInt("merchantId");
-        Token token = new Token(new JSONObject(json.getString("token")));
+        Token token = new Token(json.getJSONObject("token"));
+        //Token token = new Token(new JSONObject(json.getString("token")));
         BigDecimal amount = json.getBigDecimal("amount");
         String description = json.getString("description");
 
@@ -147,7 +149,8 @@ public class DTUPayResource {
             dtuPayApp.transferMoney(merchantId, token, amount, description);
             return Response.ok().build();
         } catch (Exception e) {
-            return Response.serverError().build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(
+                    e.getMessage()).build();
         }
     }
 
