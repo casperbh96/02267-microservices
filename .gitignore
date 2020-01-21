@@ -39,3 +39,6 @@ TokenMicroservice/target/surefire-reports/TEST-com.token.cucumber.CucumberTest.x
 TokenMicroservice/target/surefire-reports/com.token.cucumber.CucumberTest.txt
 TokenMicroservice/target/maven-archiver/pom.properties
 *.pyc
+DTUPay/target
+DTUPay/generated
+DTUPay/.idea
