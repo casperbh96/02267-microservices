@@ -8,7 +8,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * defined class which contains functions to get a new token with information from result sets.
+ */
+
+
 public class TokenResultSetToObject {
+
+    /**
+     * gives information about token from result set
+     * @param set
+     * @return new token
+     * @throws SQLException
+     */
+
     public Token resultSetToToken(ResultSet set) throws SQLException {
         set.beforeFirst();
         set.next();
@@ -21,6 +34,12 @@ public class TokenResultSetToObject {
         return new Token(id, customerId, name, used);
     }
 
+    /**
+     * gives list which consists information in result set
+     * @param set
+     * @return list of tokens
+     * @throws SQLException
+     */
     public List<Token> resultSetToListOfTokens(ResultSet set) throws SQLException {
         List<Token> tokenList = new ArrayList<>();
 

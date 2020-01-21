@@ -14,12 +14,20 @@ import java.util.UUID;
 
 import static com.token.database.Connector.createConnection;
 
+/**
+ * class to handle all token related applications in the database
+ */
 public class TokenAdapter implements ITokenAdapter {
     TokenResultSetToObject converter = new TokenResultSetToObject();
 
     public TokenAdapter() {
     }
 
+    /**
+     * gives token by token id
+     * @param tokenId
+     * @return token
+     */
     private Token getTokenByTokenId(int tokenId) {
         Token token = null;
         try (Connection connection = createConnection()) {
@@ -36,6 +44,12 @@ public class TokenAdapter implements ITokenAdapter {
         return token;
     }
 
+    /**
+     * gives unused tokens for the customers by customer id
+     * @param customerId
+     * @return token
+     * @throws CustomerHasNoUnusedToken
+     */
     @Override
     public Token getUnusedTokenByCustomerId(int customerId) throws CustomerHasNoUnusedToken {
         Token token = null;
@@ -58,6 +72,10 @@ public class TokenAdapter implements ITokenAdapter {
         return token;
     }
 
+    /**
+     * shows all the tokens in the token list
+     * @return list of tokens
+     */
     @Override
     public List<Token> getAllTokens() {
         List<Token> tokens = new ArrayList<>();
@@ -75,6 +93,13 @@ public class TokenAdapter implements ITokenAdapter {
         return tokens;
     }
 
+    /**
+     * creates new token
+     * @param customerId
+     * @param uuid
+     * @param used
+     * @return token
+     */
     @Override
     public Token createToken(int customerId, UUID uuid, boolean used) {
         if (customerId == 0) throw new NullPointerException("customerId == 0");
@@ -99,6 +124,13 @@ public class TokenAdapter implements ITokenAdapter {
         return getTokenByTokenId(autoGenId);
     }
 
+    /**
+     * checks for token if it is valid or not
+     * @param tokenId
+     * @return boolean value i.e. true or false
+     * @throws FakeToken
+     * @throws TokenAlreadyUsed
+     */
     @Override
     public boolean isTokenValid(int tokenId) throws FakeToken, TokenAlreadyUsed {
         try (Connection connection = createConnection()) {
@@ -121,6 +153,12 @@ public class TokenAdapter implements ITokenAdapter {
         return true;
     }
 
+    /**
+     * makes the token a used token for the customer if it is unused
+     * @param tokenId
+     * @throws FakeToken
+     * @throws TokenAlreadyUsed
+     */
     @Override
     public void markTokenAsUsed(int tokenId) throws FakeToken, TokenAlreadyUsed {
         try (Connection connection = createConnection()) {
@@ -137,6 +175,12 @@ public class TokenAdapter implements ITokenAdapter {
         }
     }
 
+    /**
+     * get token id from database result set
+     * @param stmt prepared statement
+     * @return token id
+     * @throws SQLException
+     */
     public int getIdFromDbReturn(PreparedStatement stmt) throws SQLException {
         ResultSet rs = stmt.getGeneratedKeys();
         rs.next();
