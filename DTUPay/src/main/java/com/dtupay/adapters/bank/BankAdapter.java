@@ -1,7 +1,10 @@
 package com.dtupay.adapters.bank;
 
 import com.dtupay.adapters.bank.exceptions.BankAdapterException;
-import dtu.ws.fastmoney.*;
+import dtu.ws.fastmoney.BankService;
+import dtu.ws.fastmoney.BankServiceException_Exception;
+import dtu.ws.fastmoney.BankServiceService;
+import dtu.ws.fastmoney.User;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
