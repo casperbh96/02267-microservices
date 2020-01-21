@@ -19,6 +19,7 @@ services:
       - "8082:8080"
   merchant:
     image: merchant:0.1
+    container_name: merchant
     build:
       context: .
       dockerfile: ./docker/Dockerfile.merchant
