@@ -22,8 +22,8 @@ public class TokenAdapterTest {
     @Before
     public void Setup() {
         tokenAdapter = new TokenAdapter();
-        customer = new Customer(12345,"1", "Test1");
-        customerNoToken = new Customer(12341234,"2", "Test2");
+        customer = new Customer(12345, "1", "Test1");
+        customerNoToken = new Customer(12341234, "2", "Test2");
         token = tokenAdapter.createToken(customer.getId(), UUID.randomUUID(), false);
     }
 
