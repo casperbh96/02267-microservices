@@ -1,0 +1,12 @@
+FROM adoptopenjdk:8-jre-hotspot
+
+WORKDIR /app
+
+COPY ./DTUPay/target/dtupay-thorntail.jar ./src/dtupay.jar
+
+CMD [ "java", \
+      "-Xmx128m", \
+      "-Djava.net.preferIPv4Stack=true", \
+      "-Djava.net.preferIPv4Addresses=true", \
+      "-jar", \
+      "./src/dtupay.jar" ]

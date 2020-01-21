@@ -33,3 +33,11 @@ services:
       dockerfile: ./docker/Dockerfile.merchant
     ports:
       - "8084:8080"
+  dtupay:
+    image: dtupay:0.1
+    container_name: dtupay
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.dtupay
+    ports:
+      - "8080:8080"
