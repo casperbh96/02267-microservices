@@ -177,19 +177,5 @@
             <groupId>io.thorntail</groupId>
             <artifactId>webservices</artifactId>
         </dependency>
-        <dependency>
-            <groupId>group17</groupId>
-            <artifactId>dtupay</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>group17</groupId>
-            <artifactId>dtupay</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
-
-
 </project>

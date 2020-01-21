@@ -9,15 +9,13 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.math.BigDecimal;
 
-@Path("/")
- * to produce file in json format
- */
-@Produces("application/json")
 
 
 /**
  * class for DTUPay using rest services
  */
+@Path("/")
+@Produces("application/json")
 public class DTUPayResource {
 
     private static IDTUPayApp dtuPayApp = new DTUPayApp("http://customer:8080/customer/",

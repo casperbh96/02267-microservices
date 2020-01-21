@@ -10,7 +10,7 @@ import java.util.List;
  * interface to handle merchant manager class
  */
 
-public interface IBusinessLogicForMerchant {
+public interface IMerchantManager {
     List<Merchant> getAllMerchants() throws NoMerchants;
 
     Merchant getMerchantByMerchantId(int id) throws MerchantDoesNotExist;

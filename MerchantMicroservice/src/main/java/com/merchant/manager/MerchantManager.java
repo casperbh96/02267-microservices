@@ -11,13 +11,13 @@ import java.util.List;
 /**
  * provided business logic for merchant. basically, from where we are accessing all the data from database
  */
-public class BusinessLogicForMerchant implements IBusinessLogicForMerchant {
+public class MerchantManager implements IMerchantManager {
 
     IMerchantAdapter merchantAdapter = new MerchantAdapter();
 
     /**
      * create new merchant
-     * @param cpr
+     * @param cvr
      * @param name
      * @return merchant object with name and cpr number
      */
@@ -28,7 +28,7 @@ public class BusinessLogicForMerchant implements IBusinessLogicForMerchant {
     /**
      * Update information existing merchant
      * @param id
-     * @param cpr
+     * @param cvr
      * @param name
      * @return merchant object with updated values
      * @throws MerchantDoesNotExist
@@ -60,7 +60,6 @@ public class BusinessLogicForMerchant implements IBusinessLogicForMerchant {
     /**
      * @return alist of all the merchants
      * @throws NoMerchants
-     */
      */
     public List<Merchant> getAllMerchants() throws NoMerchants {
         return merchantAdapter.getAllMerchants();

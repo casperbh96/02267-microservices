@@ -13,7 +13,6 @@ import java.util.List;
 /**
  * created a bank adapter class to handle the accounts of users
  */
- */
 public class BankAdapter implements IBankAdapter {
     private List<String> createdAccounts = new ArrayList<>();
     BankService bank = new BankServiceService().getBankServicePort();
