@@ -114,6 +114,10 @@
             <artifactId>jaxrs</artifactId>
         </dependency>
         <dependency>
+            <groupId>io.thorntail</groupId>
+            <artifactId>webservices</artifactId>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>

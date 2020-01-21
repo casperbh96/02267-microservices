@@ -39,7 +39,7 @@ public class CustomerAdapter implements ICustomerAdapter {
             String jsonRaw = "";
             String line;
             while ((line = in.readLine()) != null) {
-                jsonRaw += "/n" + line;
+                jsonRaw += line + "/n";
             }
             return new Customer(new JSONObject(jsonRaw));
         } catch (Exception e) {

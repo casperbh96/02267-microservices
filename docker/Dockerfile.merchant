@@ -4,6 +4,8 @@ WORKDIR /app
 
 COPY ./MerchantMicroservice/target/merchant-microservice-thorntail.jar ./src/merchant-microservice.jar
 
+EXPOSE 8080
+
 CMD [ "java", \
       "-Xmx64m", \
       "-Djava.net.preferIPv4Stack=true", \

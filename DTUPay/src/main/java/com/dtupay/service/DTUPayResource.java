@@ -10,14 +10,14 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.math.BigDecimal;
 
-
+@Path("/rest")
 @Produces("application/json")
 public class DTUPayResource {
 
-    private static IDTUPayApp dtuPayApp = new DTUPayApp("http://localhost:8081/customer/",
-            "http://localhost:8084/merchant/",
-            "http://localhost:8083/transaction/",
-            "http://localhost:8082/token/");
+    private static IDTUPayApp dtuPayApp = new DTUPayApp("http://customer:8080/customer/",
+            "http://merchant:8080/merchant/",
+            "http://transaction:8080/transaction/",
+            "http://token:8080/token/");
 
     @POST
     @Path("customer")
@@ -33,6 +33,7 @@ public class DTUPayResource {
         try {
             return Response.ok(dtuPayApp.createCustomer(cpr, name)).build();
         } catch (Exception e) {
+            e.printStackTrace();
             return Response.serverError().build();
         }
     }

@@ -4,6 +4,8 @@ WORKDIR /app
 
 COPY ./DTUPay/target/dtupay-thorntail.jar ./src/dtupay.jar
 
+EXPOSE 8080
+
 CMD [ "java", \
       "-Xmx128m", \
       "-Djava.net.preferIPv4Stack=true", \

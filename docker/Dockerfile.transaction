@@ -4,6 +4,8 @@ WORKDIR /app
 
 COPY ./TransactionMicroservice/target/transaction-microservice-thorntail.jar ./src/transaction-microservice.jar
 
+EXPOSE 8080
+
 CMD [ "java", \
       "-Xmx64m", \
       "-Djava.net.preferIPv4Stack=true", \

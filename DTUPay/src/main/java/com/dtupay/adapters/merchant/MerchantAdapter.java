@@ -39,7 +39,7 @@ public class MerchantAdapter implements IMerchantAdapter {
             String jsonRaw = "";
             String line;
             while ((line = in.readLine()) != null) {
-                jsonRaw += "/n" + line;
+                jsonRaw += line + "\n";
             }
             return new Merchant(new JSONObject(jsonRaw));
         } catch (Exception e) {
@@ -67,7 +67,7 @@ public class MerchantAdapter implements IMerchantAdapter {
             String jsonRaw = "";
             String line;
             while ((line = in.readLine()) != null) {
-                jsonRaw += "/n" + line;
+                jsonRaw += line + "\n";
             }
             return new Merchant(new JSONObject(jsonRaw));
         } catch (Exception e) {

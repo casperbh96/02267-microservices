@@ -4,9 +4,9 @@ import json
 class DtuPayCaller():
 
     def __init__(self):
-        self.customer_url = 'http://localhost:8081/customer'
-        self.token_url = 'http://localhost:8082/token'
-        self.merchant_url = 'http://localhost:8084/merchant'
+        self.customer_url = 'http://localhost:8080/service/rest/customer'
+        self.tokens_url = 'http://localhost:8080/service/rest/newTokens'
+        self.merchant_url = 'http://localhost:8080/service/rest/merchant'
 
     def createCustomer(self, customer_json):
         response = requests.post(self.customer_url, json=customer_json)
@@ -35,7 +35,7 @@ class DtuPayCaller():
             print(response.text)
 
     def createTokens(self, token_json):
-        response = requests.post(self.token_url, json=token_json)
+        response = requests.post(self.tokens_url, json=token_json)
 
         if response.status_code in (200, 202):
             token = json.loads(response.text)
@@ -54,7 +54,7 @@ class DtuPayCaller():
             'cvr': str(cvr)
         }
 
-        response = requests.post(self.merchant_url, json=merchant_json)
+        response = requests.put(self.merchant_url, json=merchant_json)
 
         if response.status_code in (200, 202):
             merchant = json.loads(response.text)

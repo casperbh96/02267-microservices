@@ -25,16 +25,9 @@ def setup():
     customer = caller.createCustomer(create_customer_json)
     merchant = caller.createMerchant(create_merchant_json)
 
-    '''
     create_token_json = {
         'customerId': customer['id'],
-        'numOfTokens': str(1)
-    }
-    '''
-    create_token_json = {
-        'customerId': customer['id'],
-        'uuid': str(uuid.uuid4()),
-        'used': 'false'
+        'numberOfTokens': str(1)
     }
 
     token = caller.createTokens(create_token_json)
