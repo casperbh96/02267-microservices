@@ -65,8 +65,8 @@ public class TransactionAdapter implements ITransactionAdapter {
         try (Connection connection = createConnection()) {
             PreparedStatement query = connection.prepareStatement(
                     "SELECT * FROM transaction  " +
-                            "WHERE ((fromId=? AND isRefund=1) "+
-                            "OR (toId=? AND isRefund=0)) "+
+                            "WHERE (fromId=? AND isRefund=1) "+
+                            "OR (toId=? AND isRefund=0) "+
                             "AND YEAR(timestamp)=? " +
                             "&& MONTH(timestamp)=? ",
                     Statement.RETURN_GENERATED_KEYS);

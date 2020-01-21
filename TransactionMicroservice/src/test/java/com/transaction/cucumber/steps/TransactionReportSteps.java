@@ -40,7 +40,9 @@ public class TransactionReportSteps {
             boolean isRefund = Boolean.parseBoolean(d.get("isRefund"));
             if (!isRefund) {
                 customerIds.add(Integer.parseInt(d.get("from")));
+                merchantIds.add(Integer.parseInt(d.get("to")));
             } else {
+                customerIds.add(Integer.parseInt(d.get("to")));
                 merchantIds.add(Integer.parseInt(d.get("from")));
             }
             transactions.add(transactionManager.registerTransaction(
@@ -60,28 +62,56 @@ public class TransactionReportSteps {
         }
     }
 
+    @Then("^the following customer transactions are in the reports:$")
+    public void the_following_customer_transactions_are_in_the_reports(DataTable arg1) throws Throwable {
+        List<Map<String, String>> expectedDetails = arg1.asMaps(String.class, String.class);
+        expectedDetails.forEach(d -> {
+            int id = Integer.parseInt(d.get("customerId"));
+            Assert.assertTrue(customerReports.get(id).stream().anyMatch(
+                    t -> t.getTimestamp().equals(Timestamp.valueOf(d.get("timestamp"))) &&
+                            t.getToId()==Integer.parseInt(d.get("to"))
+            ));
+        });
+    }
+
+    @Then("^the following customer transactions are not in the reports:$")
+    public void the_following_customer_transactions_are_not_in_the_reports(DataTable arg1) {
+        List<Map<String, String>> expectedDetails = arg1.asMaps(String.class, String.class);
+        expectedDetails.forEach(d -> {
+            int id = Integer.parseInt(d.get("customerId"));
+            Assert.assertFalse(customerReports.get(id).stream().anyMatch(
+                    t -> t.getTimestamp().equals(Timestamp.valueOf(d.get("timestamp")))
+            ));
+        });
+    }
+
     @When("^transaction manager generates monthly merchant reports for (\\d+) (\\d+)$")
-    public void transaction_manager_generates_monthly_merchant_reports_for(int arg1, int arg2) throws Throwable {
+    public void transaction_manager_generates_monthly_merchant_reports_for(int arg1, int arg2) {
         for (int id : merchantIds){
             merchantReports.put(id, transactionManager.getMerchantMonthlyReport(id, arg1, arg2));
         }
     }
 
-    @Then("^the following customer reports will be generated:$")
-    public void the_following_customer_reports_will_be_generated(DataTable arg1) throws Throwable {
-        List<Map<String, String>> reportDetails = arg1.asMaps(String.class, String.class);
-        reportDetails.forEach(d -> {
-            int id = Integer.parseInt(d.get("customerId"));
-            Assert.assertEquals(Integer.parseInt(d.get("transactionsInReport")), customerReports.get(id).size());
+    @Then("^the following merchant transactions are in the reports:$")
+    public void the_following_merchant_transactions_are_in_the_reports(DataTable arg1) {
+        List<Map<String, String>> expectedDetails = arg1.asMaps(String.class, String.class);
+        expectedDetails.forEach(d -> {
+            int id = Integer.parseInt(d.get("merchantId"));
+            Assert.assertTrue(merchantReports.get(id).stream().anyMatch(
+                    t -> t.getTimestamp().equals(Timestamp.valueOf(d.get("timestamp"))) &&
+                            t.getTokenId()==Integer.parseInt(d.get("tokenId"))
+            ));
         });
     }
 
-    @Then("^the following merchant reports will be generated:$")
-    public void the_following_merchant_reports_will_be_generated(DataTable arg1) throws Throwable {
-        List<Map<String, String>> reportDetails = arg1.asMaps(String.class, String.class);
-        reportDetails.forEach(d -> {
+    @Then("^the following merchant transactions are not in the reports:$")
+    public void the_following_merchant_transactions_are_not_in_the_reports(DataTable arg1) {
+        List<Map<String, String>> expectedDetails = arg1.asMaps(String.class, String.class);
+        expectedDetails.forEach(d -> {
             int id = Integer.parseInt(d.get("merchantId"));
-            Assert.assertEquals(Integer.parseInt(d.get("transactionsInReport")), merchantReports.get(id).size());
+            Assert.assertFalse(merchantReports.get(id).stream().anyMatch(
+                    t -> t.getTimestamp().equals(Timestamp.valueOf(d.get("timestamp")))
+            ));
         });
     }
 
