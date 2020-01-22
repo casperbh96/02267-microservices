@@ -2,25 +2,16 @@
 
 ## For running in IntelliJ
 
-1. Go To File -> Project Structure and choose SDK and Project language as 8.
-2. Open the Maven sidebar in the top right. Click the M icon for Maven and execute the following
+1. Right click on the POM.xml file in each Microservice and DTUPay, and click +Add as Maven project.
+2. Go To File -> Project Structure and choose SDK and Project language as 8.
+3. Open the Maven sidebar in the top right, and do the following commands for each Microservice and DTUPay
     - `mvn clean compile`
     - `mvn install`
-3. When done, press the left-most button, that looks like a sync button.
-    
-## For running a service in Terminal
+4. When done, press the left-most button, that looks like a sync button.
 
-1. `java -jar target/calculator-artifact-thorntail.jar`
+## For running in Terminal
 
-## For running docker from Terminal
-
-1. `docker-compose build`
-2. `docker-compose up`
-
-## Running docker in Jenkins
-
-This assumes that the user "jenkins" is the user running Jenkins on the VM.
-
-1. `sudo usermod -aG docker jenkins`
-2. `systemctl restart docker`
-3. `systemctl restart jenkins`
+1. In the root of the project, run the bash file `sh mvn_install_all.sh`.
+2. Run `docker-compose build`
+3. Run `docker-compose up`
+4. When step 3 is done, you can run tests or access the service through the exposed APIs. See Javadocs for implementation.
